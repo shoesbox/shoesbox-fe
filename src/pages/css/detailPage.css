@@ -1,0 +1,19 @@
+.detail-container {
+    margin-top: 50px;
+}
+
+.detail-titlebox {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.detail-modal {
+    width: 100vw;
+}
+
+.detail-comments {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
