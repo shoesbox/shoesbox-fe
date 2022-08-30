@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import classes from './Login.module.css';
+import './Login.css';
 // import apis from '../api/index';
 // import { setCookie } from '../shared/Cookie';
 
@@ -32,7 +32,7 @@ const Login = ({ login, handleCloseLogin }) => {
         </Modal.Header>
         <Modal.Body>
           <br />
-          <div className={classes.social}>
+          <div className="social">
             <button>네이버</button>
             <button>카카오톡</button>
             <button>구글</button>

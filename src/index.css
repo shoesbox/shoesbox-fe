@@ -17,7 +17,7 @@
   color: #212529;
 }
 .btn-primary:hover {
-  background-color: #cbc0d3;
+  background: #cbc0d3;
   box-shadow: #feeafa;
 }
 .form-check-input:checked {

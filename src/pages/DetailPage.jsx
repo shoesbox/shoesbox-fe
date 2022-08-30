@@ -1,50 +1,50 @@
-import * as React from "react";
-import Container from "react-bootstrap/Container";
-import { useRef, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Carousel from "react-bootstrap/Carousel";
-import "./css/detailPage.css";
-import CommentList from "../components/CommentList";
+import * as React from 'react';
+import Container from 'react-bootstrap/Container';
+import { useRef, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Carousel from 'react-bootstrap/Carousel';
+import './css/detailPage.css';
+import CommentList from '../components/CommentList';
 
 const DetailPage = () => {
-  const nickname = "Sunny";
-  const title = "일기도 제목이  있다";
-  const date = "2022-08-30";
+  const nickname = 'Sunny';
+  const title = '일기도 제목이  있다';
+  const date = '2022-08-30';
   const images = [
-    "./images/h1.jpg",
-    "./images/h2.jpg",
-    "./images/h3.jpg",
-    "./images/h4.jpg",
-    "./images/h5.jpg",
-    "./images/h6.jpg",
-    "./images/h7.jpg",
-    "./images/h8.jpg",
-    "./images/h9.jpg",
-    "./images/h10.jpg",
+    './images/h1.jpg',
+    './images/h2.jpg',
+    './images/h3.jpg',
+    './images/h4.jpg',
+    './images/h5.jpg',
+    './images/h6.jpg',
+    './images/h7.jpg',
+    './images/h8.jpg',
+    './images/h9.jpg',
+    './images/h10.jpg',
   ];
-  const content = "ㅋㅋㅋㅋㅋㅋ".repeat(100);
+  const content = 'ㅋㅋㅋㅋㅋㅋ'.repeat(50);
   const comments = [
     {
       postId: 1,
       commentId: 1,
-      nickname: "hey",
-      content: "lolololozzzzzzzzzz",
-      createdAt: "22-08-30 15:33",
+      nickname: 'hey',
+      content: 'lolololozzzzzzzzzz',
+      createdAt: '22-08-30 15:33',
     },
     {
       postId: 1,
       commentId: 2,
-      nickname: "hey",
-      content: "lolololozzzzzzzzzz",
-      createdAt: "22-08-30 15:33",
+      nickname: 'hey',
+      content: 'lolololozzzzzzzzzz',
+      createdAt: '22-08-30 15:33',
     },
     {
       postId: 1,
       commentId: 3,
-      nickname: "hey",
-      content: "lolololozzzzzzzzzz",
-      createdAt: "22-08-30 15:33",
+      nickname: 'hey',
+      content: 'lolololozzzzzzzzzz',
+      createdAt: '22-08-30 15:33',
     },
   ];
   const commentRef = useRef();

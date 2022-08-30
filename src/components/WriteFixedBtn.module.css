@@ -1,0 +1,14 @@
+.writeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 8%;
+  left: 8%;
+  width: 100px;
+  height: 100px;
+  border-radius: 15px;
+  background-color: #dee2ff;
+  border: none;
+  cursor: PointerEvent
+}
