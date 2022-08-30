@@ -16,7 +16,7 @@
 - 개발기간 : 22년 8월 26일 ~ 9월 17일
 - 개발환경 : React, React-Redux, Material UI, axios, Spring Boot 2.7.3, JDK 11, AWS EC2, S3, RDS
 
-## 팀 소개
+## 팀 소개👨‍🦱️
 
    |이름|담당|
    |---|---|
@@ -27,7 +27,7 @@
    |김동규|`FE`|
    |황선하|`FE`|
 
-## 프로젝트 요구사항 분석
+## 프로젝트 요구사항 분석🤔️
 
 * 회원가입, 로그인
   * 소셜 로그인 기능
@@ -45,7 +45,7 @@
 
 ![text](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5fcea7f9-36a1-48b6-b2d6-a6a74476f174/diagram-export-2022._8._28._%EC%98%A4%ED%9B%84_1_25_31.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220830%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220830T022020Z&X-Amz-Expires=86400&X-Amz-Signature=708bc29eea75e87e737c16a2ed8484e80dbf4f15590d6fd0e97481a2a286955f&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22diagram-export-2022.%25208.%252028.%2520%25EC%2598%25A4%25ED%259B%2584%25201_25_31.png%22&x-id=GetObject)
 
-## [API 리스트](https://docs.google.com/spreadsheets/d/1dcklk9kokyyetILSsMEEXjBK4Dze_PM0FJTWmKkGX-o/edit#gid=0)
+## [API 리스트](https://docs.google.com/spreadsheets/d/1dcklk9kokyyetILSsMEEXjBK4Dze_PM0FJTWmKkGX-o/edit#gid=0)📃️
 
 ## 기술 아키텍쳐🧩️
 
