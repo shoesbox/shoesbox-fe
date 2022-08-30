@@ -48,6 +48,6 @@
 ## [API 리스트](https://docs.google.com/spreadsheets/d/1dcklk9kokyyetILSsMEEXjBK4Dze_PM0FJTWmKkGX-o/edit#gid=0)
 
 ## 기술 아키텍쳐
-
+기
 ## Trouble Shooting 💡️
 
