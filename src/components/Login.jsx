@@ -1,37 +1,14 @@
 import { useRef, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import classes from './Login.module.css';
 // import apis from '../api/index';
 // import { setCookie } from '../shared/Cookie';
 
 const Login = ({ login, handleCloseLogin }) => {
-  const [state, setState] = useState({
-    username: '',
-    password: '',
-  });
-
-  const handleChangeState = (event) => {
-    // console.log(event.target.name);
-    // console.log(event.target.value);
-    setState({
-      ...state,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleClose = () => {
-    handleCloseLogin(); // 실제 모달 닫는 함수
-    setState({
-      username: '',
-      password: '',
-    }); // 인풋 초기화
-  };
-
-  // const idRef = useRef();
-  // const passwordRef = useRef();
+  const [signup, setSignup] = useState(false);
 
   const handleLogin = async (event) => {
     // event.preventDefault();
-
     // const res = await apis.loginUser(state, { withCredentials: true });
     // try {
     //   const token = res.data.data.token;
@@ -49,45 +26,45 @@ const Login = ({ login, handleCloseLogin }) => {
 
   return (
     <>
-      <Modal show={login} onHide={handleClose}>
+      <Modal show={login} onHide={handleCloseLogin}>
         <Modal.Header closeButton>
-          <Modal.Title>로그인</Modal.Title>
+          <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className='mb-3' controlId='username'>
-              <Form.Label>아이디</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='아이디를 입력하세요'
-                autoFocus
-                name='username'
-                value={state.username}
-                onChange={handleChangeState}
-                // ref={idRef}
-              />
-            </Form.Group>
-            <Form.Group className='mb-3' controlId='password'>
-              <Form.Label>비밀번호</Form.Label>
-              <Form.Control
-                type='password'
-                placeholder='비밀번호를 입력하세요'
-                autoFocus
-                name='password'
-                value={state.password}
-                onChange={handleChangeState}
-                // ref={passwordRef}
-              />
-            </Form.Group>
-          </Form>
+          <br />
+          <div className={classes.social}>
+            <button>네이버</button>
+            <button>카카오톡</button>
+            <button>구글</button>
+          </div>
+          <br />
+          <span>
+            {!signup ? '아직 회원이 아니신가요?' : '계정이 이미 있으신가요?'}
+          </span>
+          <span
+            style={{
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              color: '#8e9aaf',
+            }}
+            onClick={() => setSignup(!signup)}
+          >
+            {!signup ? ' 회원가입' : ' 로그인'}
+          </span>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
+          <Button variant="secondary" onClick={handleCloseLogin}>
             Close
           </Button>
-          <Button variant='primary' onClick={handleLogin}>
-            Log In
-          </Button>
+          {!signup ? (
+            <Button variant="primary" onClick={handleLogin}>
+              Log In
+            </Button>
+          ) : (
+            <Button variant="primary" onClick={handleLogin}>
+              Sign Up
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </>

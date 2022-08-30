@@ -1,0 +1,17 @@
+.social {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.social > button {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border: none;
+  background: #dee2ff;
+}
+
+.social > button:hover {
+  background: #8e9aaf;
+  color: #fff;
+}
