@@ -10,7 +10,7 @@
 
 월간 스케줄러처럼 표시되는 이미지 캘린더에서 일별 친구의 근황을 확인하세요!
 
-## 프로젝트 개요 🌐️
+## 프로젝트 개요 🌐
 - 프로젝트명 : ShoesBox
 - 개발인원 : 프론트(React) 3명, 백엔드(Spring) 3명
 - 개발기간 : 22년 8월 26일 ~ 9월 17일
@@ -41,13 +41,13 @@
   * 프로필 이미지, 자기소개 문구, 일기장 제목 수정
 
 
-## 와이어프레임
+## 와이어프레임🏛️
 
 ![text](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5fcea7f9-36a1-48b6-b2d6-a6a74476f174/diagram-export-2022._8._28._%EC%98%A4%ED%9B%84_1_25_31.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220830%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220830T022020Z&X-Amz-Expires=86400&X-Amz-Signature=708bc29eea75e87e737c16a2ed8484e80dbf4f15590d6fd0e97481a2a286955f&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22diagram-export-2022.%25208.%252028.%2520%25EC%2598%25A4%25ED%259B%2584%25201_25_31.png%22&x-id=GetObject)
 
 ## [API 리스트](https://docs.google.com/spreadsheets/d/1dcklk9kokyyetILSsMEEXjBK4Dze_PM0FJTWmKkGX-o/edit#gid=0)
 
-## 기술 아키텍쳐
-기
+## 기술 아키텍쳐🧩️
+
 ## Trouble Shooting 💡️
 
