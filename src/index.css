@@ -1,13 +1,42 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*::-webkit-scrollbar {
+  width: 15px; /* scroll width */
+}
+*::-webkit-scrollbar-thumb {
+  height: 30%; /* scrollbar height*/
+  background: #dee2ff; /* scrollbar color */
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: none; /*scollbar background color*/
+}
+.btn {
+  border: none;
+}
+.btn-primary {
+  background-color: #feeafa;
+  color: #212529;
+}
+.btn-primary:hover {
+  background-color: #cbc0d3;
+  box-shadow: #feeafa;
+}
+.form-check-input:checked {
+  background-color: #cbc0d3;
+  border-color: #cbc0d3;
+}
+.form-check-input.is-valid:checked,
+.was-validated .form-check-input:valid:checked {
+  background-color: #8e9aaf;
+}
+.form-check-input.is-valid,
+.was-validated .form-check-input:valid {
+  border-color: #8e9aaf;
+}
+.form-check-input.is-valid ~ .form-check-label,
+.was-validated .form-check-input:valid ~ .form-check-label {
+  color: #212529;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
