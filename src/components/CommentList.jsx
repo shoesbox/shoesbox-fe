@@ -14,15 +14,15 @@ const CommentList = ({ comments }) => {
   }
 
   return (
-    <div>
+    <div className="detail-comments-wrap">
       {comments.map((comment, idx) => (
         <div key={idx} className="detail-comments">
-          <div>
-            <span>{comment.nickname}</span> <span>{comment.content}</span>
+          <div className="detail-comment-contents">
+            <span><strong>{comment.nickname}</strong> {comment.content}</span>
           </div>
-          <div>
+          {/* <div>
             <span className="detail-comment-time">{comment.createdAt}</span>
-          </div>
+          </div> */}
         </div>
       ))}
       <hr />

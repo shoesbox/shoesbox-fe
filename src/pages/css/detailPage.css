@@ -1,3 +1,7 @@
+.modal {
+
+}
+
 .detail-container {
     margin-top: 50px;
 }
@@ -5,20 +9,34 @@
 .detail-titlebox {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     text-align: center;
 }
 
 .detail-modal {
     width: 100vw;
+    --bs-modal-margin: 0px;
+    /* padding: 30px; */
+}
+
+.detail-comments-wrap {
+width: 100%;
+
 }
 
 .detail-comments {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-}
+    word-break: break-word;
+    text-align: justify;
+  }
 
-.detail-comment-time {
-    font-size: x-small;
-}
+  .detail-comment-contents {
+    width: 90%;
+
+  }
+
+  .detail-comment-time {
+    font-size: smaller;
+  }

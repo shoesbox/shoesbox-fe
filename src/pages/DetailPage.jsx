@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import './css/detailPage.css';
 import CommentList from '../components/CommentList';
+import { BsFillTelephoneForwardFill } from "react-icons/bs";
 
 const DetailPage = () => {
   const nickname = 'Sunny';
@@ -77,7 +78,7 @@ const DetailPage = () => {
         <Modal.Body>
           <div className="detail-titlebox">
             <span>
-              <strong>{nickname}</strong>
+              <strong>{nickname}</strong> <Button> <BsFillTelephoneForwardFill /> </Button>
             </span>
             <span> {date}</span>
           </div>
