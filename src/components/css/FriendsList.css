@@ -1,14 +1,13 @@
 .friends {
   border: 1px solid green;
-  width: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
   position: fixed;
-  bottom: 25%;
-  right: 5%;
+  bottom: 20%;
+  right: 15%;
 }
 .friends > button {
   border: none;
