@@ -13,7 +13,18 @@
 }
 
 .detail-comments {
+<<<<<<< HEAD
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+=======
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-comment-time {
+    font-size: x-small;
+}
+>>>>>>> issue-8
