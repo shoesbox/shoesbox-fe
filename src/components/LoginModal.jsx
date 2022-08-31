@@ -4,7 +4,7 @@ import './css/Login.css';
 // import apis from '../api/index';
 // import { setCookie } from '../shared/Cookie';
 
-const Login = ({ login, handleCloseLogin }) => {
+const LoginModal = ({ login, handleCloseLogin }) => {
   const [signup, setSignup] = useState(false);
 
   const handleLogin = async (event) => {
@@ -71,4 +71,4 @@ const Login = ({ login, handleCloseLogin }) => {
   );
 };
 
-export default Login;
+export default LoginModal;

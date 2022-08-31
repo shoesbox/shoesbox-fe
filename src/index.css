@@ -20,6 +20,11 @@
   background: #cbc0d3;
   box-shadow: #feeafa;
 }
+.btn-primary:focus {
+  background: #cbc0d3;
+  box-shadow: #feeafa;
+}
+
 .form-check-input:checked {
   background-color: #cbc0d3;
   border-color: #cbc0d3;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Login from './Login';
+import LoginModal from './LoginModal';
 // import { getCookie, deleteCookie } from '../shared/Cookie';
 
 function Header() {
@@ -87,7 +87,7 @@ function Header() {
         </Container>
       </Navbar>
 
-      <Login login={login} handleCloseLogin={handleCloseLogin} />
+      <LoginModal login={login} handleCloseLogin={handleCloseLogin} />
     </>
   );
 }

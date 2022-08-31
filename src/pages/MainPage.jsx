@@ -40,13 +40,6 @@ const MainPage = () => {
             </Col>
           ))}
         </Row>
-        {/* <div className="friends">
-          <button>친구1</button>
-          <button>친구2</button>
-          <button>친구3</button>
-          <button>친구4</button>
-          <button>+</button>
-        </div> */}
         <FriendsList />
       </div>
 
