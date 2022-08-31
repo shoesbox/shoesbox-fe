@@ -26,8 +26,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* white-space: pre-wrap; */
   word-break: break-word;
+  /* overflow: scroll; */
+  /* text-overflow: ellipsis; */
   text-align: justify;
+}
+
+.detail-comment-contents {
+  width: 80%;
+}
+
+.detail-comment-time {
+  font-size: small;
+
 }
 
 .detail-comment-contents {
