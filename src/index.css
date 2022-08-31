@@ -29,6 +29,9 @@
   --bs-btn-disabled-border-color: #6b9080;
 }
 
+/* 색상표 */
+/* #6b9080, #a4c3b2, #cce3de, #eaf4f4, #f6fff8 */
+
 .form-control:focus {
   color: #212529;
   background-color: #fff;
@@ -57,3 +60,9 @@
 * {
   font-family: 'IBM Plex Sans KR', sans-serif;
 }
+
+/* body {
+  background-image: url(../public/images/blob-haikei.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+} */

@@ -1,10 +1,10 @@
 .wrap {
   display: flex;
   margin: 1%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .calendar {
-  border: 3px solid pink;
+  /* border: 3px solid pink; */
   max-width: 1000px;
   margin: 0 auto;
 }

@@ -12,16 +12,18 @@
   /* border: 1px solid green; */
 }
 .year-month {
-  font-size: 30px;
+  font-size: 26px;
+  font-weight: 500;
 }
 .nav {
   display: flex;
-  border: 1px solid #333333;
+  /* border: 1px solid #6b9080; */
   border-radius: 5px;
+  background-color: #eaf3ec;
 }
 .nav-btn {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border: none;
   font-size: 16px;
   line-height: 35px;
@@ -32,9 +34,10 @@
   align-items: center;
 }
 .go-today {
-  width: 70px;
-  border-left: 1px solid #333333;
-  border-right: 1px solid #333333;
+  width: 85px;
+  /* border-left: 1px solid #6b9080;
+  border-right: 1px solid #6b9080; */
+  background-color: #f6fff8;
 }
 .days {
   display: flex;
@@ -43,20 +46,21 @@
 .day {
   width: calc(100% / 7);
   text-align: center;
+  font-weight: 500;
 }
 .dates {
   display: flex;
   flex-flow: row wrap;
   height: 700px;
-  border-top: 1px solid #333333;
-  border-right: 1px solid #333333;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
 }
 .date {
   width: calc(100% / 7);
   padding: 15px;
   text-align: right;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #333333;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
 }
 .day:nth-child(7n + 1),
 .date:nth-child(7n + 1) {

@@ -1,4 +1,5 @@
 import './css/calender.css';
+import { Button } from 'react-bootstrap';
 
 const Calendar = () => {
   const date = new Date();
@@ -31,32 +32,40 @@ const Calendar = () => {
 
   const dates = prevDates.concat(thisDates, nextDates);
 
+  const img =
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
+
   return (
     <div className="calender-container">
-      <div class="calendar">
-        <div class="header">
-          <div class="year-month">
-            {viewYear}년 {viewMonth}월
+      <div className="calendar">
+        <div className="header">
+          <div className="year-month">
+            {viewYear}년 🍸 {viewMonth + 1}월
           </div>
-          <div class="nav">
-            <button class="nav-btn go-prev">&lt;</button>
-            <button class="nav-btn go-today">Today</button>
-            <button class="nav-btn go-next">&gt;</button>
+          <div className="nav">
+            <button className="nav-btn go-prev">&lt;</button>
+            <button className="nav-btn go-today">Today</button>
+            <button className="nav-btn go-next">&gt;</button>
+            {/* <Button className="nav-btn go-next">&gt;</Button> */}
           </div>
         </div>
-        <div class="main">
-          <div class="days">
-            <div class="day">일</div>
-            <div class="day">월</div>
-            <div class="day">화</div>
-            <div class="day">수</div>
-            <div class="day">목</div>
-            <div class="day">금</div>
-            <div class="day">토</div>
+        <div className="main">
+          <div className="days">
+            <div className="day">일</div>
+            <div className="day">월</div>
+            <div className="day">화</div>
+            <div className="day">수</div>
+            <div className="day">목</div>
+            <div className="day">금</div>
+            <div className="day">토</div>
           </div>
-          <div class="dates">
+          <div className="dates">
             {dates.map((date, idx) => (
-              <div class="date" key={idx}>
+              <div
+                className="date"
+                key={idx}
+                style={{ background: `url(${img})`, backgroundSize: 'cover' }}
+              >
                 {date}
               </div>
             ))}
