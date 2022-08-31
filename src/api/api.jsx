@@ -10,10 +10,9 @@ const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
-
-  },
-  credentials: true,
-})
+    credentials: true,
+  }
+  })
 
 const apiForm = axios.create({
   baseURL: BASE_URL,
