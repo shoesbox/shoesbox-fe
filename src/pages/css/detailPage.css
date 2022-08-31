@@ -1,5 +1,3 @@
-.modal {}
-
 .detail-container {
   margin-top: 50px;
 }
@@ -9,6 +7,11 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
+}
+
+.detail-fix-del-btns {
+  display: flex;
+  justify-content: right;
 }
 
 .detail-modal {
@@ -26,15 +29,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* white-space: pre-wrap; */
-  word-break: break-word;
-  /* overflow: scroll; */
-  /* text-overflow: ellipsis; */
-  text-align: justify;
+  word-break: break-all;
 }
 
 .detail-comment-contents {
-  width: 80%;
+  width: 85%;
 }
 
 .detail-comment-time {
