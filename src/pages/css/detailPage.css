@@ -1,3 +1,5 @@
+.modal {}
+
 .detail-container {
   margin-top: 50px;
 }
@@ -5,11 +7,19 @@
 .detail-titlebox {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-align: center;
 }
 
 .detail-modal {
   width: 100vw;
+  --bs-modal-margin: 0px;
+  padding: none;
+}
+
+.detail-comments-wrap {
+  width: 100%;
+
 }
 
 .detail-comments {
@@ -29,4 +39,19 @@
 
 .detail-comment-time {
   font-size: small;
+
+}
+
+.detail-comment-contents {
+  width: 80%;
+}
+
+.detail-comment-time {
+  font-size: smaller;
+}
+
+.detail-comment-btns > button {
+  padding-left: 5px;
+  width: 20px;
+  font-size: x-small;
 }
