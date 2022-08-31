@@ -29,7 +29,7 @@ const DetailPage = () => {
       postId: 1,
       commentId: 1,
       nickname: "hey",
-      content: "lolololozzzzzzzzzz",
+      content: "lolololozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
       createdAt: "22-08-30 15:33",
     },
     {
@@ -47,7 +47,6 @@ const DetailPage = () => {
       createdAt: "22-08-30 15:33",
     },
   ];
-  const commentRef = useRef();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

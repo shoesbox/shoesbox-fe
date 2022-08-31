@@ -25,7 +25,10 @@ const detailSlice = createSlice({
   name: 'detail',
   initialState,
   reducers: {
-    
+    loadPost : (state, action) => {
+        state.post = action.payload;
+    }
+
   },
   extraReducers: (builder) => {
     builder.addCase(getDetailThunk.fulfilled, (state, action)=>{
@@ -34,4 +37,5 @@ const detailSlice = createSlice({
   }
 })
 
+export const {loadPost} = detailSlice.actions;
 export default detailSlice.reducer;

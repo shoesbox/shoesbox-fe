@@ -7,6 +7,12 @@ import Form from "react-bootstrap/Form";
 const CommentList = ({ comments }) => {
   const commentRef = useRef();
 
+  const onClickBtn = () =>{
+    console.log(commentRef.current.value);
+    commentRef.current.value = '';
+    commentRef.autoFucus();
+  }
+
   return (
     <div>
       {comments.map((comment, idx) => (
@@ -26,7 +32,7 @@ const CommentList = ({ comments }) => {
             ref={commentRef}
             placeholder="일기에 대한 감상을 적어주세요"
           />
-          <Button variant="outline-secondary">등록</Button>
+          <Button variant="outline-secondary" onClick={onClickBtn}>등록</Button>
         </InputGroup>
       </div>
     </div>
