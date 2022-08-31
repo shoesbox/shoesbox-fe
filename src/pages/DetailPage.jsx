@@ -91,6 +91,11 @@ const DetailPage = () => {
           <hr />
           <div>{content}</div>
           <hr />
+          <div className='detail-fix-del-btns'>
+            <Button>수정하기</Button>
+            <Button>삭제하기</Button>
+          </div>
+          <hr />
           <CommentList comments={comments} />
         </Modal.Body>
         <Modal.Footer>
@@ -104,6 +109,9 @@ const DetailPage = () => {
     <>
       <Button variant="primary" onClick={handleShow}>
         해당날짜를 클릭할 것 입니당
+      </Button>
+      <Button>
+        친구추가 버튼을 클릭할 것 입니당
       </Button>
       <DetailModal
         show={show}

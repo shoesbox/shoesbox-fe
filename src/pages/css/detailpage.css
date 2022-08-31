@@ -9,8 +9,12 @@
   text-align: center;
 }
 
+
 .detail-titlebox > span > strong {
-  margin-right: 10px;
+  margin-right: 10px;}
+.detail-fix-del-btns {
+  display: flex;
+  justify-content: right;
 }
 
 .detail-modal {
@@ -28,10 +32,10 @@
   justify-content: space-between;
   align-items: center;
   /* white-space: pre-wrap; */
-  word-break: break-word;
   text-align: justify;
   /* border: 1px solid rebeccapurple; */
   margin-bottom: 10px;
+  word-break: break-all;
 }
 
 .detail-comment-contents {
