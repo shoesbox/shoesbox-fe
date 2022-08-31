@@ -9,9 +9,13 @@ const CommentList = ({ comments }) => {
   const commentRef = useRef();
 
   const onClickBtn = () =>{
+    if(
+    commentRef.current.value.trim()!==''
+    ){
     console.log(commentRef.current.value);
     commentRef.current.value = '';
     commentRef.current.focus();
+    }
   }
 
   return (
