@@ -4,8 +4,9 @@ import { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
-import './css/detailPage.css';
+import './css/detailpage.css';
 import CommentList from '../components/CommentList';
+import { BsFillTelephoneForwardFill } from "react-icons/bs";
 
 const DetailPage = () => {
   const nickname = 'Sunny';
@@ -28,9 +29,9 @@ const DetailPage = () => {
     {
       postId: 1,
       commentId: 1,
-      nickname: 'hey',
-      content: 'lolololozzzzzzzzzz',
-      createdAt: '22-08-30 15:33',
+      nickname: "hey",
+      content: "lolololozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+      createdAt: "22-08-30 15:33",
     },
     {
       postId: 1,
@@ -47,7 +48,6 @@ const DetailPage = () => {
       createdAt: '22-08-30 15:33',
     },
   ];
-  const commentRef = useRef();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -78,7 +78,7 @@ const DetailPage = () => {
         <Modal.Body>
           <div className="detail-titlebox">
             <span>
-              <strong>{nickname}</strong>
+              <strong>{nickname}</strong> <Button> <BsFillTelephoneForwardFill /> </Button>
             </span>
             <span> {date}</span>
           </div>
@@ -86,6 +86,11 @@ const DetailPage = () => {
           <ImageCarousel />
           <hr />
           <div>{content}</div>
+          <hr />
+          <div className='detail-fix-del-btns'>
+            <Button>수정하기</Button>
+            <Button>삭제하기</Button>
+          </div>
           <hr />
           <CommentList comments={comments} />
         </Modal.Body>
@@ -100,6 +105,9 @@ const DetailPage = () => {
     <>
       <Button variant="primary" onClick={handleShow}>
         해당날짜를 클릭할 것 입니당
+      </Button>
+      <Button>
+        친구추가 버튼을 클릭할 것 입니당
       </Button>
       <DetailModal
         show={show}

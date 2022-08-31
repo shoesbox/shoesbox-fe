@@ -1,8 +1,10 @@
-import './css/pages.css';
+import './css/mainpage.css';
 import { Card, Col, Row } from 'react-bootstrap';
 import DiaryItem from '../components/DiaryItem';
+import Calendar from '../components/Calendar';
 import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const MainPage = () => {
   // const cookie = getCookie('accessToken');
@@ -14,42 +16,30 @@ const MainPage = () => {
   //   }
   // }, []);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="wrap">
-        {/* <div className="calendar row row-cols-6 g-1">
-          <DiaryItem />
-          <DiaryItem />
-          <DiaryItem />
-          <DiaryItem />
-          <DiaryItem />
-          <DiaryItem />
-          <DiaryItem />
-          <DiaryItem />
-        </div> */}
-        <Row xs={2} sm={3} md={6} className="g-2 calendar">
+        {/* <Row xs={2} sm={3} md={6} className="g-2 calendar">
           {Array.from({ length: 28 }).map((_, idx) => (
             <Col>
               <Card>
                 <Card.Img
                   variant="top"
-                  src="https://i.pinimg.com/474x/51/1b/1c/511b1cbbc78f45680ff80f34bd162b93.jpg"
-                  style={{ borderRadius: '5px' }}
+                  className="img-card"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU"
+                  onClick={() => {
+                    navigate('/detail');
+                  }}
                 />
               </Card>
             </Col>
           ))}
-        </Row>
-        {/* <div className="friends">
-          <button>친구1</button>
-          <button>친구2</button>
-          <button>친구3</button>
-          <button>친구4</button>
-          <button>+</button>
-        </div> */}
+        </Row> */}
+        <Calendar/>
         <FriendsList />
       </div>
-
       <WriteFixedBtn />
     </>
   );
