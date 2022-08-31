@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
-import './css/detailPage.css';
+import './css/detailpage.css';
 import CommentList from '../components/CommentList';
 import { BsFillTelephoneForwardFill } from "react-icons/bs";
 

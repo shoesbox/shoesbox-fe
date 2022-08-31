@@ -32,11 +32,19 @@
   justify-content: space-between;
   align-items: center;
   word-break: break-all;
-  text-align: justify;
 }
 
 .detail-comment-contents {
   width: 85%;
+}
+
+.detail-comment-time {
+  font-size: small;
+
+}
+
+.detail-comment-contents {
+  width: 80%;
 }
 
 .detail-comment-time {

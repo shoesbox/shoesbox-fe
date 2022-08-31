@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import './css/login.css';
+import './css/loginmodal.css';
 // import apis from '../api/index';
 // import { setCookie } from '../shared/Cookie';
 
-const Login = ({ login, handleCloseLogin }) => {
+const LoginModal = ({ login, handleCloseLogin }) => {
   const [signup, setSignup] = useState(false);
 
   const handleLogin = async (event) => {
@@ -41,14 +41,7 @@ const Login = ({ login, handleCloseLogin }) => {
           <span>
             {!signup ? '아직 회원이 아니신가요?' : '계정이 이미 있으신가요?'}
           </span>
-          <span
-            style={{
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              color: '#8e9aaf',
-            }}
-            onClick={() => setSignup(!signup)}
-          >
+          <span className="change-login" onClick={() => setSignup(!signup)}>
             {!signup ? ' 회원가입' : ' 로그인'}
           </span>
         </Modal.Body>
@@ -71,4 +64,4 @@ const Login = ({ login, handleCloseLogin }) => {
   );
 };
 
-export default Login;
+export default LoginModal;

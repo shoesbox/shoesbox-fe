@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import './css/friendsList.css';
+import './css/friendslist.css';
+import { BsPlusLg } from 'react-icons/bs';
 // import { getCookie } from '../shared/Cookie';
 
 const FriendsList = () => {
@@ -15,11 +16,14 @@ const FriendsList = () => {
 
   return (
     <div className="friends">
-      <Button>친구1</Button>
-      <Button>친구2</Button>
-      <Button>친구3</Button>
-      <Button>친구4</Button>
-      <Button>+</Button>
+      <Button>선하</Button>
+      <Button>찬호</Button>
+      <Button>동규</Button>
+      <Button>인영</Button>
+      <Button>명백</Button>
+      <Button>
+        <BsPlusLg />
+      </Button>
     </div>
   );
 };

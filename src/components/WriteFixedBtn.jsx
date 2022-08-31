@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import './css/writefixedbtn.css';
+import { BsBrush } from 'react-icons/bs';
 // import { getCookie } from '../shared/Cookie';
 
 const WriteFixedBtn = () => {
@@ -19,12 +21,12 @@ const WriteFixedBtn = () => {
       <Button
         className="writeBtn"
         onClick={() => {
-          isLoggedIn
-            ? navigate('/postwrite')
-            : alert('로그인 사용자만 접근이 가능합니다');
+          navigate('/posts/write');
         }}
       >
-        <span className="material-icons">일기쓰기</span>
+        <h4>
+          <BsBrush />
+        </h4>
       </Button>
     </div>
   );
