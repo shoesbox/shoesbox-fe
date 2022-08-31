@@ -26,7 +26,9 @@ const WriteFixedBtn = () => {
             : alert('로그인 사용자만 접근이 가능합니다');
         }}
       >
-        <BsBrush />
+        <h4>
+          <BsBrush />
+        </h4>
       </Button>
     </div>
   );

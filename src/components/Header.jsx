@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import LoginModal from './LoginModal';
+import LoginModal from '../pages/LoginModal';
 // import { getCookie, deleteCookie } from '../shared/Cookie';
 
 function Header() {
@@ -31,7 +31,7 @@ function Header() {
         collapseOnSelect
         expand="lg"
         style={{
-          backgroundColor: '#efd3d7',
+          backgroundColor: '#cce3de',
           fontWeight: '600',
         }}
         // variant='dark'
@@ -53,14 +53,14 @@ function Header() {
                   navigate('/');
                 }}
               >
-                My Memory
+                My Moments
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
-                  navigate('/hiphop');
+                  navigate('/aboutus');
                 }}
               >
-                Friends
+                About us
               </Nav.Link>
             </Nav>
             <Nav>
@@ -79,7 +79,10 @@ function Header() {
               ) : (
                 <>
                   {/* 비로그인시 */}
-                  <Nav.Link onClick={handleShowLogin}>Log In</Nav.Link>
+                  <Nav.Link onClick={handleShowLogin}>
+                    {/* <Button>Log In</Button> */}
+                    Log In
+                  </Nav.Link>
                 </>
               )}
             </Nav>

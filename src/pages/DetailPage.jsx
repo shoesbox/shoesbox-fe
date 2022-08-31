@@ -29,7 +29,7 @@ const DetailPage = () => {
       postId: 1,
       commentId: 1,
       nickname: 'hey',
-      content: 'lolololozzzzzzzzzz',
+      content: 'lolololozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz123',
       createdAt: '22-08-30 15:33',
     },
     {

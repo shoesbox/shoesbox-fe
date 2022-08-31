@@ -4,11 +4,11 @@
   align-items: center;
   position: fixed;
   bottom: 15%;
-  left: 15%;
+  left: 5%;
   width: 70px;
   height: 70px;
   border-radius: 15px;
-  background-color: #dee2ff;
+  background-color: #cce3de;
   border: none;
   cursor: PointerEvent
 }
