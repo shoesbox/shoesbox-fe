@@ -33,9 +33,9 @@ const Login = ({ login, handleCloseLogin }) => {
         <Modal.Body>
           <br />
           <div className="social">
-            <button>네이버</button>
-            <button>카카오톡</button>
-            <button>구글</button>
+            <button className='social__button social__button--naver'></button>
+            <button className='social__button social__button--kakao'></button>
+            <button className='social__button social__button--google'></button>
           </div>
           <br />
           <span>

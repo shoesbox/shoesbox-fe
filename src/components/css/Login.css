@@ -1,17 +1,63 @@
 .social {
   display: flex;
-  justify-content: space-evenly;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.social > button {
-  width: 70px;
-  height: 70px;
-  border-radius: 100%;
+.social__button {
+  width: 18rem;
+  height: 3rem;
   border: none;
-  background: #dee2ff;
+  border-radius: 12px;
+  outline: none;
+  margin: 0.5rem;
 }
 
-.social > button:hover {
-  background: #8e9aaf;
-  color: #fff;
+.social__button--google{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/google-btn.png');
+  background-size: cover;
+}
+
+.social__button--google:hover{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/google-btn.png');
+  background-color: rgba(0, 0, 0, 0.25);
+  background-size: cover;
+  background-blend-mode: darken;
+}
+
+.social__button--naver{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/naver-btn.png');
+  background-size: cover;
+}
+
+.social__button--naver:hover{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/naver-btn.png');
+  background-color: rgba(0, 0, 0, 0.25);
+  background-size: cover;
+  background-blend-mode: darken;
+}
+
+.social__button--kakao{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/kakao-btn.png');
+  background-size: contain;
+}
+
+.social__button--kakao:hover{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/kakao-btn.png');
+  background-color: rgba(0, 0, 0, 0.25);
+  background-size: contain;
+  background-blend-mode: darken;
 }

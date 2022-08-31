@@ -9,7 +9,6 @@ const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
-
   }
 })
 
@@ -45,7 +44,7 @@ const auth = axios.create({
 
 export const apis = {
   // 로그인, 회원가입
-  login: () => {},
+  login: () => {api.get('/')},
   signup: () => {},
 
   // ... 나머지 ...
