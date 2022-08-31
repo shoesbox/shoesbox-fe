@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import './FriendsList.css';
+import './css/FriendsList.css';
 // import { getCookie } from '../shared/Cookie';
 
 const FriendsList = () => {

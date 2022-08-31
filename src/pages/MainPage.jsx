@@ -1,10 +1,10 @@
-import './pages.css';
+import './css/pages.css';
 import { Card, Col, Row } from 'react-bootstrap';
 import DiaryItem from '../components/DiaryItem';
 import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
 
-const Main = () => {
+const MainPage = () => {
   // const cookie = getCookie('accessToken');
 
   // useEffect(() => {
@@ -55,4 +55,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;

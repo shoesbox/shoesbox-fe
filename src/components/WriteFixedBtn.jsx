@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import classes from './WriteFixedBtn.module.css';
 // import { getCookie } from '../shared/Cookie';
 
 const WriteFixedBtn = () => {
@@ -18,7 +17,7 @@ const WriteFixedBtn = () => {
   return (
     <div>
       <Button
-        className={classes.writeBtn}
+        className="writeBtn"
         onClick={() => {
           isLoggedIn
             ? navigate('/postwrite')
