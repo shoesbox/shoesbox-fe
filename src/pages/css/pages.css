@@ -1,0 +1,25 @@
+/* 메인페이지 */
+.wrap {
+  display: flex;
+  margin: 3%;
+  border: 1px solid red;
+}
+.calendar {
+  border: 3px solid pink;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 404 페이지 */
+.not-found {
+  margin: 30px;
+  height: 500px;
+  border: 1px solid #cbc0d3;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+.not-found > h2 {
+  display: flex;
+  align-items: center;
+}

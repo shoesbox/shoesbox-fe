@@ -30,7 +30,10 @@ function Header() {
       <Navbar
         collapseOnSelect
         expand="lg"
-        style={{ backgroundColor: '#efd3d7', fontWeight: '600' }}
+        style={{
+          backgroundColor: '#efd3d7',
+          fontWeight: '600',
+        }}
         // variant='dark'
       >
         <Container>
@@ -38,6 +41,7 @@ function Header() {
             onClick={() => {
               navigate('/');
             }}
+            style={{ cursor: 'pointer' }}
           >
             SHOES 🍭 BOX
           </Navbar.Brand>
