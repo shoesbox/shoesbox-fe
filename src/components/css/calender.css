@@ -1,0 +1,69 @@
+.calender-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100vh; */
+  margin: 0 auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid green; */
+}
+.year-month {
+  font-size: 30px;
+}
+.nav {
+  display: flex;
+  border: 1px solid #333333;
+  border-radius: 5px;
+}
+.nav-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  font-size: 16px;
+  line-height: 35px;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.go-today {
+  width: 70px;
+  border-left: 1px solid #333333;
+  border-right: 1px solid #333333;
+}
+.days {
+  display: flex;
+  margin: 25px 0 10px;
+}
+.day {
+  width: calc(100% / 7);
+  text-align: center;
+}
+.dates {
+  display: flex;
+  flex-flow: row wrap;
+  height: 700px;
+  border-top: 1px solid #333333;
+  border-right: 1px solid #333333;
+}
+.date {
+  width: calc(100% / 7);
+  padding: 15px;
+  text-align: right;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #333333;
+}
+.day:nth-child(7n + 1),
+.date:nth-child(7n + 1) {
+  color: #d13e3e;
+}
+
+.day:nth-child(7n),
+.date:nth-child(7n) {
+  color: #396ee2;
+}
