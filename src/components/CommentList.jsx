@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
+import { BsFillPenFill, BsXCircle } from "react-icons/bs";
 
 const CommentList = ({ comments }) => {
   const commentRef = useRef();
@@ -10,7 +11,7 @@ const CommentList = ({ comments }) => {
   const onClickBtn = () =>{
     console.log(commentRef.current.value);
     commentRef.current.value = '';
-    commentRef.autoFucus();
+    commentRef.current.focus();
   }
 
   return (
@@ -23,6 +24,9 @@ const CommentList = ({ comments }) => {
           {/* <div>
             <span className="detail-comment-time">{comment.createdAt}</span>
           </div> */}
+          <div className="detail-comment-btns">
+            <Button><BsFillPenFill /></Button>{' '}<Button> <BsXCircle /></Button>
+          </div>
         </div>
       ))}
       <hr />
