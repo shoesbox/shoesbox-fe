@@ -1,0 +1,11 @@
+.addfriend-friend-icon.input-group-text {
+    background-color: white;
+    border: none;
+}
+
+.addfriend-search-icon.input-group-text:hover {
+    background-color: #CCE3DE;
+}
+.addfriend-list {
+    margin-bottom: 20px;
+}
