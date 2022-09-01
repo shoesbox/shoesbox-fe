@@ -16,9 +16,3 @@
     border: 1px solid #ced4da;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-
-.write-content:focus{
- outline: 2px solid #9EC3E6;
- border-color: #86b7fe;
- box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
-}

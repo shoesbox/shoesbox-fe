@@ -54,7 +54,7 @@ const CommentList = ({ comments }) => {
             ref={commentRef}
             placeholder="친구에게 안부를 물어봅시다 :)"
           />
-          <Button variant="outline-secondary" onClick={onClickBtn}>
+          <Button variant="outline-secondary" onClick={onClickComment}>
             등록
           </Button>
         </InputGroup>
