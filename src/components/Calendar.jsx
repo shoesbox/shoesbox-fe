@@ -1,6 +1,8 @@
 import './css/calender.css';
 import { Button } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Calendar = () => {
   const date = new Date();
@@ -32,10 +34,24 @@ const Calendar = () => {
 
   const dates = prevDates.concat(thisDates, nextDates);
 
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  const getAllPosts = async () => {
+    // const res = await axios.get('http://localhost:3030/posts')
+    // console.log('All Posts', res.data);
+    const { data } = await axios.get('http://localhost:3030/posts');
+    console.log('All Posts', data);
+    setPosts(data);
+  };
+
   const img =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
+  // `${posts[0].images[0]}`;
 
-  const navigate = useNavigate();
+  console.log(posts[0]);
+  useEffect(() => {
+    getAllPosts();
+  }, []);
 
   return (
     <div className="calender-container">
