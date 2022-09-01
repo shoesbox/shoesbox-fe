@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './css/writefixedbtn.css';
-import { BsBrush } from 'react-icons/bs';
+import { BsPencil } from 'react-icons/bs';
 // import { getCookie } from '../shared/Cookie';
 
 const WriteFixedBtn = () => {
@@ -21,11 +21,11 @@ const WriteFixedBtn = () => {
       <Button
         className="writeBtn"
         onClick={() => {
-          navigate('/posts/write');
+          navigate('/write');
         }}
       >
         <h4>
-          <BsBrush />
+          <BsPencil />
         </h4>
       </Button>
     </div>

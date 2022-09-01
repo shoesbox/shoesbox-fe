@@ -1,5 +1,6 @@
 import './css/calender.css';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Calendar = () => {
   const date = new Date();
@@ -25,7 +26,6 @@ const Calendar = () => {
       prevDates.unshift(PLDate - i);
     }
   }
-
   for (let i = 1; i < 7 - TLDay; i++) {
     nextDates.push(i);
   }
@@ -34,6 +34,8 @@ const Calendar = () => {
 
   const img =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
+
+  const navigate = useNavigate();
 
   return (
     <div className="calender-container">
@@ -65,6 +67,7 @@ const Calendar = () => {
                 className="date"
                 key={idx}
                 style={{ background: `url(${img})`, backgroundSize: 'cover' }}
+                onClick={() => navigate('/detail')}
               >
                 {date}
               </div>
