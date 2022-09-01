@@ -88,7 +88,7 @@
       "createdAt": "22-08-30 15:33"
     },
     {
-      "postId": 1,
+      "postId": 5,
       "commentId": 3,
       "memberId": "이거 있어야되나?",
       "nickname": "인영",
@@ -97,7 +97,7 @@
       "createdAt": "22-08-30 15:33"
     },
     {
-      "postId": 1,
+      "postId": 5,
       "commentId": 4,
       "memberId": "이거 있어야되나?",
       "nickname": "명백",
