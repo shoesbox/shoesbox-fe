@@ -9,11 +9,7 @@ const DetailPage = () => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  // const handleModal = (postId) => {
-  //   handleShow();
-  //   setPostId(postId);
-  // };
-  
+
   const tempPostId = 5;
 
   const [show2, setShow2] = useState(false);
