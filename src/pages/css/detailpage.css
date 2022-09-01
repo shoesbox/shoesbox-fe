@@ -18,8 +18,7 @@
 }
 
 .detail-modal {
-  width: 100vw;
-  --bs-modal-margin: 0px;
+  margin: 0px;
   padding: none;
 }
 

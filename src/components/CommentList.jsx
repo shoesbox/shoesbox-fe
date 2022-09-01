@@ -7,14 +7,24 @@ import { BsFillEraserFill, BsX } from 'react-icons/bs';
 
 const CommentList = ({ comments }) => {
   const commentRef = useRef();
+  const [commentStatus, setComment] = useState(false);
 
-  const onClickBtn = () => {
-    if (commentRef.current.value.trim() !== '') {
-      console.log(commentRef.current.value);
-      commentRef.current.value = '';
-      commentRef.current.focus();
+  const onClickComment = () =>{
+    if(
+    commentRef.current.value.trim()!==''
+    ){
+    setComment(true);
+    console.log(commentRef.current.value);
+    commentRef.current.value = '';
+    commentRef.current.focus();
     }
   };
+
+  // const onChangeCommentStatus = (e) =>{
+  //   if(e.target.value.trim()!==''){
+  //     setComment(true);
+  //   }
+  // }
 
   return (
     <div className="detail-comments-wrap">
