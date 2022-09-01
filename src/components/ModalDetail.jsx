@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
+// import Container from 'react-bootstrap/Container';
 import { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -63,7 +63,7 @@ const ImageCarousel = () => {
 
 const ModalDetail = (props) => {
     return (
-        <Modal className="detail-modal" {...props} centered size="lg">
+        <Modal {...props} centered size='lg' fullscreen='md-down'>
           <Modal.Header closeButton>
             <Modal.Title>
               <span>
