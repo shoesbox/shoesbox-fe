@@ -61,3 +61,9 @@
   background-size: contain;
   background-blend-mode: darken;
 }
+
+.change-login {
+  color: #6b9080;
+  font-weight: 500;
+  cursor: pointer;
+}

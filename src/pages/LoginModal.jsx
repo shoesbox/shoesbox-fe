@@ -33,9 +33,9 @@ const LoginModal = ({ login, handleCloseLogin }) => {
         <Modal.Body>
           <br />
           <div className="social">
-            <button className='social__button social__button--naver'></button>
-            <button className='social__button social__button--kakao'></button>
-            <button className='social__button social__button--google'></button>
+            <button className="social__button social__button--naver"></button>
+            <button className="social__button social__button--kakao"></button>
+            <button className="social__button social__button--google"></button>
           </div>
           <br />
           <span>
