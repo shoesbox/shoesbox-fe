@@ -63,7 +63,7 @@ const ImageCarousel = () => {
 
 const ModalDetail = (props) => {
     return (
-        <Modal {...props} centered size='lg' fullscreen='md-down'>
+        <Modal {...props} className='detail-modal' centered size='lg' fullscreen='md-down'>
           <Modal.Header closeButton>
             <Modal.Title>
               <span>
