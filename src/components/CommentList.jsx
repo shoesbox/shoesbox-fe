@@ -7,16 +7,24 @@ import { BsFillPenFill, BsXCircle } from "react-icons/bs";
 
 const CommentList = ({ comments }) => {
   const commentRef = useRef();
+  const [commentStatus, setComment] = useState(false);
 
-  const onClickBtn = () =>{
+  const onClickComment = () =>{
     if(
     commentRef.current.value.trim()!==''
     ){
+    setComment(true);
     console.log(commentRef.current.value);
     commentRef.current.value = '';
     commentRef.current.focus();
     }
   }
+
+  // const onChangeCommentStatus = (e) =>{
+  //   if(e.target.value.trim()!==''){
+  //     setComment(true);
+  //   }
+  // }
 
   return (
     <div className="detail-comments-wrap">
@@ -39,8 +47,13 @@ const CommentList = ({ comments }) => {
           <Form.Control
             ref={commentRef}
             placeholder="일기에 대한 감상을 적어주세요"
+            onKeyDown={(e)=>{
+              if(e.key === 'Enter'){
+                onClickComment();
+              }
+            }}
           />
-          <Button variant="outline-secondary" onClick={onClickBtn}>등록</Button>
+          <Button variant="outline-secondary" disabled={commentStatus} onClick={onClickComment}>등록</Button>
         </InputGroup>
       </div>
     </div>
