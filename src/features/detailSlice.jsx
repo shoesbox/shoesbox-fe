@@ -75,10 +75,25 @@ export const postJsonCommentThunk = createAsyncThunk(
                 nickname: 'Sunny',
                 memberId: 3,
                 content: content,
-                createdAt: new Date()
+                // createdAt: new Date()
           }
         );
         // console.log("thunk", data.data, postId);
+        return data.data;
+      } catch (err) {
+        return thunkAPI.rejectWithValue("postCommentThunkErr", err.response.data);
+      }
+    }
+  );
+
+  export const delJsonCommentThunk = createAsyncThunk(
+    "api/posts/comment/del/json",
+    async ({postId,commentId}, thunkAPI) => {
+      try {
+        const data = await axios.delete(
+          `http://localhost:3030/comments/${commentId}`
+        );
+        console.log("thunk", data.data, commentId);
         return data.data;
       } catch (err) {
         return thunkAPI.rejectWithValue("postCommentThunkErr", err.response.data);
@@ -111,6 +126,15 @@ const detailSlice = createSlice({
         // console.log('extraReducers', action.payload);
         const newComment = action.payload;
         state.commentList = [...state.commentList, newComment]
+    })
+    builder.addCase(delJsonCommentThunk.fulfilled, (state, action)=>{
+        console.log('extraReducers', action.payload);
+        const commentId = action.payload;
+        // const newCommentList = state.commentList.filter(
+        //    const state.commentList.map((comment, idx)=>{
+        //      comment.id
+        //    })
+        // )
     })
   },
 });

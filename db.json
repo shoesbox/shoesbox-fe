@@ -106,100 +106,39 @@
       "createdAt": "22-08-30 15:33"
     },
     {
-      "id": "2022-09-02T00:24:11.351Z",
+      "id": "2022-09-02T04:06:09.701Z",
       "postId": 5,
       "nickname": "Sunny",
       "memberId": 3,
-      "content": "ㅋㅋㅋㅋ",
-      "createdAt": "2022-09-02T00:24:11.351Z"
+      "content": "데이터 문제 심각하당 진짜...."
     },
     {
-      "id": "2022-09-02T00:30:32.122Z",
+      "id": "2022-09-02T04:30:42.093Z",
       "postId": 5,
       "nickname": "Sunny",
       "memberId": 3,
-      "content": "이제는 등록이 됩니까?",
-      "createdAt": "2022-09-02T00:30:32.122Z"
+      "content": "입력은 되는데 지우면 다날라가...."
     },
     {
-      "id": "2022-09-02T00:31:22.125Z",
+      "id": "2022-09-02T04:31:04.835Z",
       "postId": 5,
       "nickname": "Sunny",
       "memberId": 3,
-      "content": "이게 뭐야 ㅠㅠㅠ",
-      "createdAt": "2022-09-02T00:31:22.125Z"
+      "content": "Mock API 설정 때문에 시간이 더 쏟는 거 같은뎅..."
     },
     {
-      "id": "2022-09-02T00:32:29.664Z",
+      "id": "2022-09-02T07:17:47.219Z",
       "postId": 5,
       "nickname": "Sunny",
       "memberId": 3,
-      "content": "ㅜ",
-      "createdAt": "2022-09-02T00:32:29.664Z"
+      "content": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
     },
     {
-      "id": "2022-09-02T00:34:44.366Z",
+      "id": "2022-09-02T07:18:54.088Z",
       "postId": 5,
       "nickname": "Sunny",
       "memberId": 3,
-      "content": "ㅂ",
-      "createdAt": "2022-09-02T00:34:44.366Z"
-    },
-    {
-      "id": "2022-09-02T00:34:52.907Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "",
-      "createdAt": "2022-09-02T00:34:52.907Z"
-    },
-    {
-      "id": "2022-09-02T00:35:41.025Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "",
-      "createdAt": "2022-09-02T00:35:41.025Z"
-    },
-    {
-      "id": "2022-09-02T00:36:42.224Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "왜 제대로 등록이안되지",
-      "createdAt": "2022-09-02T00:36:42.224Z"
-    },
-    {
-      "id": "2022-09-02T00:36:47.442Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "으엥?",
-      "createdAt": "2022-09-02T00:36:47.442Z"
-    },
-    {
-      "id": "2022-09-02T00:36:54.486Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "이제되넹....",
-      "createdAt": "2022-09-02T00:36:54.486Z"
-    },
-    {
-      "id": "2022-09-02T00:41:48.479Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "댓글을 편하게 등록해봅시당",
-      "createdAt": "2022-09-02T00:41:48.479Z"
-    },
-    {
-      "id": "2022-09-02T00:41:52.449Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "웋히히힝",
-      "createdAt": "2022-09-02T00:41:52.449Z"
+      "content": "입력은 잘됩니당"
     }
   ]
 }

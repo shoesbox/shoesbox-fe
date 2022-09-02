@@ -5,13 +5,12 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { BsFillEraserFill, BsX } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { postJsonCommentThunk } from "../features/detailSlice";
+import { delJsonCommentThunk, postJsonCommentThunk } from "../features/detailSlice";
 
 const CommentList = ({ postId, comments }) => {
   const dispatch = useDispatch();
   const commentRef = useRef();
   const [commentStatus, setComment] = useState(true);
-  
 
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== "") {
@@ -23,6 +22,11 @@ const CommentList = ({ postId, comments }) => {
     }
   };
 
+  const onClickDelBtn = ({commentId, e}) => {
+    // console.log(commentId);
+    dispatch(delJsonCommentThunk(commentId))
+  }
+
   const onChangeCommentStatus = (e) => {
     if (e.target.value.trim() !== "") {
       setComment(false);
@@ -30,9 +34,7 @@ const CommentList = ({ postId, comments }) => {
   };
 
   // comment를 get하는 건 상위 컴포넌트
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="detail-comments-wrap">
@@ -50,7 +52,11 @@ const CommentList = ({ postId, comments }) => {
               <Button>
                 <BsFillEraserFill />
               </Button>
-              <Button>
+              <Button
+              // jsondb 때문에 이렇게 설정
+                // commentId={comment.commentId ? comment.commentId : comment.id}
+                onClick={(e)=>onClickDelBtn({commentId : (comment.commentId ? comment.commentId : comment.id), e})}
+              >
                 <BsX />
               </Button>
             </div>
@@ -66,8 +72,8 @@ const CommentList = ({ postId, comments }) => {
             ref={commentRef}
             placeholder="친구에게 안부를 물어봅시다 :)"
             onChange={onChangeCommentStatus}
-            onKeyDown={(e)=>{
-              if(e.key==='Enter'&&!commentStatus) {
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !commentStatus) {
                 onClickComment();
               }
             }}
