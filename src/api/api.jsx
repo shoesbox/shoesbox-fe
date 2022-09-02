@@ -44,7 +44,7 @@ apiJson.interceptors.request.use((config) => {
 
 export const apis = {
   // 로그인, 회원가입
-  loginGoogle: () => {},
+  loginGoogle: () => {api.get('/')},
   loginNaver: () => {},
   loginKakao: () => {},
   signup: () => {},
