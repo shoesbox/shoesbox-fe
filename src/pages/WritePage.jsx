@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
-import "./css/writePage.css";
+import "./css/writepage.css";
 
 const WritePage = () => {
+  const dispatch = useDispatch();
   // formdata
   let formData = new FormData();
   // input validation check
@@ -25,16 +27,20 @@ const WritePage = () => {
   const fileValidation = (obj) => {
     const fileTypes = ["image/gif", "image/jpeg", "image/png"];
     if (obj.name.length > 100) {
-      alert("파일명이 100자 이상인 파일은 제외되었습니다.");
+      alert("파일명이 100자 이상인 파일은 등록할 수 없습니다.");
+      imageRef.current.value='';
       return false;
     } else if (obj.size > 100 * 1024 * 1024) {
-      alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
+      alert("최대 파일 용량인 100MB를 초과한 파일은 등록할 수 없습니다.");
+      imageRef.current.value='';
       return false;
     } else if (obj.name.lastIndexOf(".") == -1) {
-      alert("확장자가 없는 파일은 제외되었습니다.");
+      alert("확장자가 없는 파일은 등록할 수 없습니다.");
+      imageRef.current.value='';
       return false;
     } else if (!fileTypes.includes(obj.type)) {
-      alert("첨부가 불가능한 파일은 제외되었습니다.");
+      alert("첨부가 불가능한 파일은 등록할 수 없습니다.");
+      imageRef.current.value='';
       return false;
     } else {
       return true;
@@ -48,7 +54,7 @@ const WritePage = () => {
       event.stopPropagation();
     } else {
       event.preventDefault();
-      console.log(form.value);
+      // console.log(form);
       setValidated(true);
     }
   };
@@ -67,16 +73,18 @@ const WritePage = () => {
   // 2. onChange에서 바로 처리
   const onChangePic = (e) => {
     const imageList = e.target.files;
-    // setBase64s([]);
+    setBase64s([]);
     if (imageList.length !== 0) {
       setFiles(imageList);
       for (var i = 0; i < imageList.length; i++) {
         if (fileValidation(imageList[i])) {
           const reader = new FileReader();
           reader.readAsDataURL(imageList[i]);
-          reader.onloadend = () => {
-            setBase64s((prev) => [...prev, reader.result]);
-          };
+          reader.onload = () =>{
+            if(reader.readyState===2){
+              setBase64s((prev) => [...prev, reader.result]);
+            }
+          }
         }
       }
     }
@@ -166,11 +174,12 @@ const WritePage = () => {
           <Form.Control
             className="write-content"
             type="text"
+            as ="textarea"
             placeholder="오늘은 무슨 일이 있었나요?"
             required
             value={inputValue}
-            hidden
-            readOnly
+            // hidden
+            // readOnly
             onKeyDown={(e) => onKeyPrevent(e)}
           />
           <textarea
