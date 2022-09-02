@@ -83,7 +83,7 @@ const ModalDetail = ({ postId, ...props }) => {
           <Button>삭제하기</Button>
         </div>
         <hr />
-        <CommentList comments={comments} />
+        <CommentList postId={postId} comments={comments} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>

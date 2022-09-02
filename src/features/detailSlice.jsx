@@ -48,7 +48,7 @@ export const getJsonDetailThunk = createAsyncThunk(
 );
 
 export const getJsonCommentThunk = createAsyncThunk(
-  "api/posts/comment/json",
+  "api/posts/comment/get/json",
   async (postId, thunkAPI) => {
     try {
       const data = await axios.get(
@@ -61,6 +61,31 @@ export const getJsonCommentThunk = createAsyncThunk(
     }
   }
 );
+
+
+export const postJsonCommentThunk = createAsyncThunk(
+    "api/posts/comment/post/json",
+    async ({postId, content}, thunkAPI) => {
+      try {
+        const data = await axios.post(
+          `http://localhost:3030/comments/?postId=${postId}`, {
+            //jsondb 특성상 post 시 고유 id 값 필요
+                id: new Date(),
+                postId: postId,
+                nickname: 'Sunny',
+                memberId: 3,
+                content: content,
+                createdAt: new Date()
+          }
+        );
+        // console.log("thunk", data.data, postId);
+        return data.data;
+      } catch (err) {
+        return thunkAPI.rejectWithValue("postCommentThunkErr", err.response.data);
+      }
+    }
+  );
+  
 
 const detailSlice = createSlice({
   name: "detail",
@@ -81,6 +106,11 @@ const detailSlice = createSlice({
     builder.addCase(getJsonCommentThunk.fulfilled, (state, action)=>{
       // console.log('extraReducers', action.payload);
       state.commentList = action.payload;
+    })
+    builder.addCase(postJsonCommentThunk.fulfilled, (state, action)=>{
+        // console.log('extraReducers', action.payload);
+        const newComment = action.payload;
+        state.commentList = [...state.commentList, newComment]
     })
   },
 });
