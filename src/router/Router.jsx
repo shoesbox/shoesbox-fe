@@ -4,7 +4,6 @@ import MainPage from '../pages/MainPage';
 import DetailPage from '../pages/DetailPage';
 import WritePage from '../pages/WritePage';
 import NotFoundPage from '../pages/NotFoundPage';
-// import WritePage from '../pages/WritePage';
 
 const Router = () => {
   return (

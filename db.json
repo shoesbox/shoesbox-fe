@@ -88,7 +88,7 @@
       "createdAt": "22-08-30 15:33"
     },
     {
-      "postId": 1,
+      "postId": 5,
       "commentId": 3,
       "memberId": "이거 있어야되나?",
       "nickname": "인영",
@@ -97,13 +97,48 @@
       "createdAt": "22-08-30 15:33"
     },
     {
-      "postId": 1,
+      "postId": 5,
       "commentId": 4,
       "memberId": "이거 있어야되나?",
       "nickname": "명백",
       "content": "혹 미신이라 하실지 모르지만 사실입니다.",
       "profileimages": "https://horang2film.co.kr/common/img/default_profile.png",
       "createdAt": "22-08-30 15:33"
+    },
+    {
+      "id": "2022-09-02T04:06:09.701Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "데이터 문제 심각하당 진짜...."
+    },
+    {
+      "id": "2022-09-02T04:30:42.093Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "입력은 되는데 지우면 다날라가...."
+    },
+    {
+      "id": "2022-09-02T04:31:04.835Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "Mock API 설정 때문에 시간이 더 쏟는 거 같은뎅..."
+    },
+    {
+      "id": "2022-09-02T07:17:47.219Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
+    },
+    {
+      "id": "2022-09-02T07:18:54.088Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "입력은 잘됩니당"
     }
   ]
 }

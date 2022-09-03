@@ -5,13 +5,17 @@ import ModalAddFriend from "../components/ModalAddFriend";
 import ModalDetail from "../components/ModalDetail";
 
 const DetailPage = () => {
+  // const [postId, setPostId] = useState('');
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
+  const tempPostId = 5;
+
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-
+  
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -21,8 +25,7 @@ const DetailPage = () => {
       <ModalDetail
         show={show}
         onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
+        postId={tempPostId}
       />
       <ModalAddFriend
         show={show2}
