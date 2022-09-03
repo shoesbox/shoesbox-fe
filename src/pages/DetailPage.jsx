@@ -25,7 +25,9 @@ const DetailPage = () => {
       <ModalDetail
         show={show}
         onHide={handleClose}
-        postId={tempPostId}
+        // postId={tempPostId}
+        backdrop="static"
+        keyboard={false}
       />
       <ModalAddFriend
         show={show2}
