@@ -82,7 +82,6 @@
 .date:nth-child(7n + 1) {
   color: #d13e3e;
 }
-
 .day:nth-child(7n),
 .date:nth-child(7n) {
   color: #396ee2;

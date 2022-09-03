@@ -64,25 +64,21 @@ const LoginModal = ({ login, handleCloseLogin }) => {
                 type="password"
                 placeholder="비밀번호를 입력하세요"
                 autoFocus
-                name="password"
+                name="password1"
                 value={state.password1}
                 onChange={handleChangeState}
-                // ref={passwordRef}
               />
             </Form.Group>
-            {!signup ? (
-              ''
-            ) : (
+            {!signup ? null : (
               <Form.Group className="mb-3" controlId="password">
                 <Form.Label>비밀번호 확인</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="비밀번호를 한번 더 입력하세요"
                   autoFocus
-                  name="password"
+                  name="password2"
                   value={state.password2}
                   onChange={handleChangeState}
-                  // ref={passwordRef}
                 />
               </Form.Group>
             )}
