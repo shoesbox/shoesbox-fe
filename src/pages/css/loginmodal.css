@@ -1,0 +1,69 @@
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.social__button {
+  width: 18rem;
+  height: 3rem;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  margin: 0.5rem;
+}
+
+.social__button--google{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/google-btn.png');
+  background-size: cover;
+}
+
+.social__button--google:hover{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/google-btn.png');
+  background-color: rgba(0, 0, 0, 0.25);
+  background-size: cover;
+  background-blend-mode: darken;
+}
+
+.social__button--naver{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/naver-btn.png');
+  background-size: cover;
+}
+
+.social__button--naver:hover{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/naver-btn.png');
+  background-color: rgba(0, 0, 0, 0.25);
+  background-size: cover;
+  background-blend-mode: darken;
+}
+
+.social__button--kakao{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/kakao-btn.png');
+  background-size: contain;
+}
+
+.social__button--kakao:hover{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/kakao-btn.png');
+  background-color: rgba(0, 0, 0, 0.25);
+  background-size: contain;
+  background-blend-mode: darken;
+}
+
+.change-login {
+  color: #6b9080;
+  font-weight: 500;
+  cursor: pointer;
+}
