@@ -5,6 +5,20 @@ import './css/loginmodal.css';
 // import { setCookie } from '../shared/Cookie';
 
 const LoginModal = ({ login, handleCloseLogin }) => {
+  const [state, setState] = useState({
+    username: '',
+    password1: '',
+    password2: '',
+  });
+
+  const handleChangeState = (event) => {
+    // console.log(event.target.name);
+    // console.log(event.target.value);
+    setState({
+      ...state,
+      [event.target.name]: event.target.value,
+    });
+  };
   const [signup, setSignup] = useState(false);
 
   const handleLogin = async (event) => {
@@ -31,6 +45,48 @@ const LoginModal = ({ login, handleCloseLogin }) => {
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="username">
+              <Form.Label>아이디</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="아이디를 입력하세요"
+                autoFocus
+                name="username"
+                value={state.username}
+                onChange={handleChangeState}
+                // ref={idRef}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>비밀번호</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="비밀번호를 입력하세요"
+                autoFocus
+                name="password"
+                value={state.password1}
+                onChange={handleChangeState}
+                // ref={passwordRef}
+              />
+            </Form.Group>
+            {!signup ? (
+              ''
+            ) : (
+              <Form.Group className="mb-3" controlId="password">
+                <Form.Label>비밀번호 확인</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="비밀번호를 한번 더 입력하세요"
+                  autoFocus
+                  name="password"
+                  value={state.password2}
+                  onChange={handleChangeState}
+                  // ref={passwordRef}
+                />
+              </Form.Group>
+            )}
+          </Form>
           <br />
           <div className="social">
             <button className="social__button social__button--naver"></button>
