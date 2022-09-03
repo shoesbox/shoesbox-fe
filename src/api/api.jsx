@@ -45,7 +45,9 @@ const auth = axios.create({
 
 export const apis = {
   // 로그인, 회원가입
-  login: () => {},
+  loginGoogle: () => {api.get('/')},
+  loginNaver: () => {},
+  loginKakao: () => {},
   signup: () => {},
 
   // ... 나머지 ...

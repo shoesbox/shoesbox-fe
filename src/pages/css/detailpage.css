@@ -8,10 +8,10 @@
   align-items: center;
   text-align: center;
 }
-
-
 .detail-titlebox > span > strong {
-  margin-right: 10px;}
+  margin-right: 10px;
+}
+
 .detail-fix-del-btns {
   display: flex;
   justify-content: right;
@@ -51,9 +51,6 @@
   font-size: small;
 }
 
-.detail-comment-time {
-  font-size: smaller;
-}
 .detail-comment-btns {
   /* border: 1px solid blue; */
   display: flex;

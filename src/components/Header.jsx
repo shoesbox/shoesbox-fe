@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import LoginModal from '../pages/LoginModal';
+import LoginModal from './LoginModal';
+import './css/loginmodal.css'
 // import { getCookie, deleteCookie } from '../shared/Cookie';
 
 function Header() {
@@ -80,7 +81,6 @@ function Header() {
                 <>
                   {/* 비로그인시 */}
                   <Nav.Link onClick={handleShowLogin}>
-                    {/* <Button>Log In</Button> */}
                     Log In
                   </Nav.Link>
                 </>

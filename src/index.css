@@ -1,13 +1,70 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*::-webkit-scrollbar {
+  width: 15px; /* scroll width */
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*::-webkit-scrollbar-thumb {
+  height: 30%; /* scrollbar height*/
+  background: #EAF4F4; /* scrollbar color */
+  border-radius: 10px;
 }
+*::-webkit-scrollbar-track {
+  background: none; /*scollbar background color*/
+}
+.btn {
+  border: none;
+}
+.btn-primary {
+  --bs-btn-color: #212529;
+  --bs-btn-bg: #EAF4F4;
+  --bs-btn-border-color: #EAF4F4;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #A4C3B2;
+  --bs-btn-hover-border-color: #A4C3B2;
+  --bs-btn-focus-shadow-rgb: 164, 195, 178;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #EAF4F4;
+  --bs-btn-active-border-color: #EAF4F4;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #6B9080;
+  --bs-btn-disabled-border-color: #6B9080;
+}
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #A4C3B2;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(164 195 178 / 25%);
+}
+.write-content:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #A4C3B2;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(164 195 178 / 25%);
+}
+.form-check-input:checked {
+  background-color: #A4C3B2;
+  border-color: #6B9080;
+}
+.form-check-input.is-valid:checked,
+.was-validated .form-check-input:valid:checked {
+  background-color: #A4C3B2;
+}
+.form-check-input.is-valid,
+.was-validated .form-check-input:valid {
+  border-color: #A4C3B2;
+}
+.form-check-input.is-valid ~ .form-check-label,
+.was-validated .form-check-input:valid ~ .form-check-label {
+  color: #212529;
+}
+* {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+/* body {
+  background-image: url(../public/images/blob-haikei.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+} */

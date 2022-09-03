@@ -3,7 +3,8 @@
   justify-content: center;
   align-items: center;
   /* min-height: 100vh; */
-  margin: 0 auto;
+  margin: 10px auto;
+  /* border: 3px solid green; */
 }
 .header {
   display: flex;
@@ -12,14 +13,14 @@
   /* border: 1px solid green; */
 }
 .year-month {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 500;
 }
 .nav {
   display: flex;
-  /* border: 1px solid #6b9080; */
+  /* border: 1px solid #6B9080; */
   border-radius: 5px;
-  background-color: #eaf3ec;
+  background-color: #EAF3EC;
 }
 .nav-btn {
   width: 35px;
@@ -35,40 +36,53 @@
 }
 .go-today {
   width: 85px;
-  /* border-left: 1px solid #6b9080;
-  border-right: 1px solid #6b9080; */
-  background-color: #f6fff8;
+  /* border-left: 1px solid #6B9080;
+  border-right: 1px solid #6B9080; */
+  background-color: #F6FFF8;
 }
 .days {
   display: flex;
-  margin: 25px 0 10px;
+  align-items: center;
+  margin: 20px 0 10px;
+  background-color: #EAF3EC;
+  border-radius: 10px;
+  height: 40px;
 }
 .day {
   width: calc(100% / 7);
   text-align: center;
   font-weight: 500;
 }
+/* .day:hover {
+  background-color: #CCE3DE;
+  border-radius: 10px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
 .dates {
   display: flex;
   flex-flow: row wrap;
-  height: 700px;
+  /* height: 700px; */
   border-top: 3px solid #fff;
   border-right: 3px solid #fff;
 }
 .date {
   width: calc(100% / 7);
-  padding: 15px;
+  height: 140px;
+  padding: 10px;
   text-align: right;
+  border-radius: 10px;
   border-bottom: 3px solid #fff;
   border-left: 3px solid #fff;
   cursor: pointer;
 }
 .day:nth-child(7n + 1),
 .date:nth-child(7n + 1) {
-  color: #d13e3e;
+  color: #D13E3E;
 }
-
 .day:nth-child(7n),
 .date:nth-child(7n) {
-  color: #396ee2;
+  color: #396EE2;
 }

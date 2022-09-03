@@ -1,0 +1,47 @@
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.social__button {
+  width: 17rem;
+  height: 3rem;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  margin: 0.5rem;
+}
+.social__button--naver {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/naver-btn.png');
+  background-size: cover;
+}
+.social__button--kakao {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/kakao-btn.png');
+  background-size: cover;
+}
+.social__button--google {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/public/images/social-login/google-btn.png');
+  background-size: cover;
+}
+.social__button--naver:hover,
+.social__button--kakao:hover,
+.social__button--google:hover {
+  background-color: rgba(131, 131, 131, 0.25);
+  background-blend-mode: darken;
+}
+.change-login {
+  color: #6b9080;
+  font-weight: 500;
+  cursor: pointer;
+}
+.form-title {
+  color: #6b9080;
+  font-weight: 500;
+}
