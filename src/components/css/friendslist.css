@@ -1,0 +1,17 @@
+.friends {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  bottom: 20%;
+  right: 15%;
+}
+.friends > button {
+  border: none;
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+}
