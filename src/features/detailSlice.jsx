@@ -61,8 +61,6 @@ export const getJsonCommentThunk = createAsyncThunk(
     }
   }
 );
-
-
 export const postJsonCommentThunk = createAsyncThunk(
     "api/posts/comment/post/json",
     async ({postId, content}, thunkAPI) => {
@@ -82,6 +80,29 @@ export const postJsonCommentThunk = createAsyncThunk(
         return data.data;
       } catch (err) {
         return thunkAPI.rejectWithValue("postCommentThunkErr", err.response.data);
+
+      }
+    }
+)
+export const postJsonDetailThunk = createAsyncThunk(
+    "api/posts/detail/json/write",
+    async (payload, thunkAPI) => {
+      try {
+        const data = await axios.post(
+          `http://localhost:3030/posts`, {
+            // id : new Date(),
+            // postId : Math.round((Math.random() * 99) + 1),
+            nickname : payload.nickname,
+            // images : payload.images,
+            content : payload.content,
+       
+          }
+        );
+        console.log("thunk", data.data);
+        // return data.data;
+      } catch (err) {
+        return thunkAPI.rejectWithValue("postJsonThunkErr", err.response.data);
+
       }
     }
   );
@@ -101,7 +122,6 @@ export const postJsonCommentThunk = createAsyncThunk(
     }
   );
   
-
 const detailSlice = createSlice({
   name: "detail",
   initialState,
