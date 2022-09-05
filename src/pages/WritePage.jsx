@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/Button";
@@ -7,6 +7,9 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import "./css/writepage.css";
+import { saveImages } from "../features/writeSlice";
+import { Image } from "react-bootstrap";
+import { BsFillBackspaceFill } from "react-icons/bs";
 
 const WritePage = () => {
   const dispatch = useDispatch();
@@ -14,33 +17,32 @@ const WritePage = () => {
   let formData = new FormData();
   // input validation check
   const [validated, setValidated] = useState(false);
-  const [inputValue, setValue] = useState("");
   // refs
   const titleRef = useRef();
   const contentRef = useRef();
   const imageRef = useRef();
   // image states
-  const [files, setFiles] = useState();
+  const [files, setFiles] = useState([]);
   const [base64s, setBase64s] = useState([]);
-
+  const previewImages = useSelector((state) => state.write.images);
   // 첨부 파일 검증
   const fileValidation = (obj) => {
     const fileTypes = ["image/gif", "image/jpeg", "image/png"];
     if (obj.name.length > 100) {
       alert("파일명이 100자 이상인 파일은 등록할 수 없습니다.");
-      imageRef.current.value='';
+      imageRef.current.value = "";
       return false;
-    } else if (obj.size > 100 * 1024 * 1024) {
-      alert("최대 파일 용량인 100MB를 초과한 파일은 등록할 수 없습니다.");
-      imageRef.current.value='';
+    } else if (obj.size > 30 * 1024 * 1024) {
+      alert("최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.");
+      imageRef.current.value = "";
       return false;
     } else if (obj.name.lastIndexOf(".") == -1) {
       alert("확장자가 없는 파일은 등록할 수 없습니다.");
-      imageRef.current.value='';
+      imageRef.current.value = "";
       return false;
     } else if (!fileTypes.includes(obj.type)) {
       alert("첨부가 불가능한 파일은 등록할 수 없습니다.");
-      imageRef.current.value='';
+      imageRef.current.value = "";
       return false;
     } else {
       return true;
@@ -59,46 +61,46 @@ const WritePage = () => {
     }
   };
 
-  const onKeyPrevent = (e) => {
-    if (e.keyCode === 13) {
-      //   console.log("enter가 입력되었습니다.");
-      e.preventDefault();
-    }
+  const deleteImage = (clickedImg) => {
+    const dataTranster = new DataTransfer();
+    // console.log('clickedImg', clickedImg);
+    Array.from(files)
+      .filter((file) => file !== clickedImg)
+      .forEach((file) => {
+        dataTranster.items.add(file);
+      });
+    setFiles(dataTranster.files);
+    imageRef.current.files = dataTranster.files;
   };
 
-  // const onChangePic = (e) => {
-  //   setFiles(e.target.files);
-  // };
-
-  // 2. onChange에서 바로 처리
+  // 2. 응용 방법
   const onChangePic = (e) => {
-    const imageList = e.target.files;
-    setBase64s([]);
-    if (imageList.length !== 0) {
-      setFiles(imageList);
-      for (var i = 0; i < imageList.length; i++) {
-        if (fileValidation(imageList[i])) {
-          const reader = new FileReader();
-          reader.readAsDataURL(imageList[i]);
-          reader.onload = () =>{
-            if(reader.readyState===2){
-              setBase64s((prev) => [...prev, reader.result]);
-            }
-          }
-        }
-      }
-    }
-    console.log("base64s in ChangePic", base64s);
+    setFiles(e.target.files)
   };
 
   useEffect(() => {
-    console.log("files", files);
-    console.log("base64s", base64s);
-  }, [files]);
+    dispatch(saveImages(base64s));
+    // console.log("files", files);
+    // console.log("base64s", base64s);
+    // console.log(previewImages);
+  }, [onChangePic]);
 
-  const onChangeInput = (e) => {
-    setValue(e.target.value);
-  };
+  useEffect(() => {
+    if (files) {
+      setBase64s([]);
+        for (var i = 0; i < files.length; i++) {
+          if (fileValidation(files[i])) {
+            const reader = new FileReader();
+            reader.readAsDataURL(files[i]);
+            reader.onload = () => {
+              if (reader.readyState === 2) {
+                setBase64s((prev) => [...prev, reader.result]);
+              }
+            };
+          }
+        }
+      }
+  }, [files]);
 
   // 1. promise 객체를 이용해서 처리
   // image File을 파라미터로 받아 인코딩하는 코드
@@ -169,25 +171,42 @@ const WritePage = () => {
           </InputGroup>
         </Form.Group>
         <br />
+        <div className="write-preview-wrap">
+          {previewImages &&
+            previewImages.map((image, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <Image
+                    thumbnail
+                    rounded
+                    className="write-preview-image"
+                    src={image}
+                  />
+                  <div
+                    className="write-preview-btn"
+                   
+                  >
+                    <BsFillBackspaceFill 
+                     onClick={
+                      // ()=>console.log((Object.entries(files))[idx][2])
+                      ()=>deleteImage(files[idx])
+                    }/>
+                  </div>
+                </Fragment>
+              );
+            })}
+        </div>
+        <br />
         <Form.Group>
           <Form.Label>일기내용</Form.Label>
           <Form.Control
             className="write-content"
             type="text"
-            as ="textarea"
+            as="textarea"
             placeholder="오늘은 무슨 일이 있었나요?"
-            required
-            value={inputValue}
-            // hidden
-            // readOnly
-            onKeyDown={(e) => onKeyPrevent(e)}
-          />
-          <textarea
-            className="write-content"
-            placeholder="오늘은 무슨 일이 있었나요?"
-            onChange={onChangeInput}
             required
             ref={contentRef}
+            // hidden
           />
           <Form.Control.Feedback type="invalid">
             일기내용을 적어주세요🖋

@@ -27,6 +27,7 @@ const writeSlice = createSlice({
   reducers: {
     saveImages: (state, action) => {
       state.images = action.payload;
+    //   console.log(action.payload);
     },
   },
   extraReducers: (builder) => {
