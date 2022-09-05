@@ -6,17 +6,17 @@ import WritePage from '../pages/WritePage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 const Router = () => {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route exact path="/" element={<MainPage />} />
-        <Route path="/detail" element={<DetailPage />} />
-        <Route path="/write" element={<WritePage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+return (
+<BrowserRouter>
+<Header />
+<Routes>
+<Route exact path="/" element={<MainPage />} />
+<Route path="/detail" element={<DetailPage />} />
+<Route path="/write" element={<WritePage />} />
+<Route path="*" element={<NotFoundPage />} />
+</Routes>
+</BrowserRouter>
+);
 };
 
 export default Router;
