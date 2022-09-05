@@ -10,11 +10,16 @@ import "./css/writepage.css";
 import { saveImages } from "../features/writeSlice";
 import { Image } from "react-bootstrap";
 import { BsFillBackspaceFill } from "react-icons/bs";
+import { postJsonDetailThunk } from "../features/detailSlice";
 
 const WritePage = () => {
   const dispatch = useDispatch();
   // formdata
   let formData = new FormData();
+  let formDataTxt = {};
+  // text data
+  // const [formDataTxt, setFormDataTxt] = useState();
+  const nickname = "Sunny";
   // input validation check
   const [validated, setValidated] = useState(false);
   // refs
@@ -56,7 +61,17 @@ const WritePage = () => {
       event.stopPropagation();
     } else {
       event.preventDefault();
-      // console.log(form);
+      formDataTxt = {
+        id : new Date(),
+        postId : Math.round((Math.random() * 99) + 1),
+        nickname,
+        title : titleRef.current.value,
+        // images : imageRef.current.files,
+        images : base64s,
+        content : contentRef.current.value,
+        date : new Date()
+      }
+      console.log(formDataTxt);
       setValidated(true);
     }
   };
@@ -73,9 +88,8 @@ const WritePage = () => {
     imageRef.current.files = dataTranster.files;
   };
 
-  // 2. 응용 방법
   const onChangePic = (e) => {
-    setFiles(e.target.files)
+    setFiles(e.target.files);
   };
 
   useEffect(() => {
@@ -88,54 +102,25 @@ const WritePage = () => {
   useEffect(() => {
     if (files) {
       setBase64s([]);
-        for (var i = 0; i < files.length; i++) {
-          if (fileValidation(files[i])) {
-            const reader = new FileReader();
-            reader.readAsDataURL(files[i]);
-            reader.onload = () => {
-              if (reader.readyState === 2) {
-                setBase64s((prev) => [...prev, reader.result]);
-              }
-            };
-          }
+      for (var i = 0; i < files.length; i++) {
+        if (fileValidation(files[i])) {
+          const reader = new FileReader();
+          reader.readAsDataURL(files[i]);
+          reader.onload = () => {
+            if (reader.readyState === 2) {
+              setBase64s((prev) => [...prev, reader.result]);
+            }
+          };
         }
       }
+    }
   }, [files]);
 
-  // 1. promise 객체를 이용해서 처리
-  // image File을 파라미터로 받아 인코딩하는 코드
-  // Promise 객체가 반환된다는 것을 유의
-  // resolve: 작업이 성공한 경우 호출할 콜백
-  // reject: 작업이 실패한 경우 호출할 콜백
-  // const encodeFileToBase64 = (image) => {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     // *base64로 인코딩한 문자열을 FileReader 인스턴스의 속성에 담아 state안에
-  //     reader.readAsDataURL(image);
-  //     reader.onload = (event) => resolve(event.target.result);
-  //     reader.onerror = (error) => reject(error);
-  //   });
-  // };
-
-  // FileList의 타입인 files의 state가 바뀔 때마다
-  // encodeFileToBase64로 files를 인코딩한 값을 Base64에 넣음
-  // 파일 객체와 Base64 객체 모두 가지고 있음
-  // useEffect(() => {
-  //   if (files) {
-  //     // state 초기화를 시켜주어야 함
-  //     setBase64s([]);
-  //     Array.from(files).forEach((image) => {
-  //       if(fileValidation(image)){
-  //       encodeFileToBase64(image).then((data) =>
-  //         setBase64s((prev) => [...prev, { image: image, url: data }])
-  //       );
-  //       }
-  //     });
-  //   }
-  //   console.log('files', files);
-  //   console.log('base64s', base64s);
-
-  // }, [files]);
+  useEffect(() => {
+    if(formData!==(null||undefined)){
+    dispatch(postJsonDetailThunk({formDataTxt}));
+    }
+  }, []);
 
   return (
     <Container fluid className="write-wrap">
@@ -182,15 +167,13 @@ const WritePage = () => {
                     className="write-preview-image"
                     src={image}
                   />
-                  <div
-                    className="write-preview-btn"
-                   
-                  >
-                    <BsFillBackspaceFill 
-                     onClick={
-                      // ()=>console.log((Object.entries(files))[idx][2])
-                      ()=>deleteImage(files[idx])
-                    }/>
+                  <div className="write-preview-btn">
+                    <BsFillBackspaceFill
+                      onClick={
+                        // ()=>console.log((Object.entries(files))[idx][2])
+                        () => deleteImage(files[idx])
+                      }
+                    />
                   </div>
                 </Fragment>
               );

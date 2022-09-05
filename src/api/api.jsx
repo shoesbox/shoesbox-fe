@@ -35,8 +35,8 @@ const apiJson = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  // const accessToken = '';
-  // config.headers['Authorization'] = `Bearer ${accessToken}`;
+  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyMzU4OTcyfQ.AamPPjtqMoUtlu9VwextcSOM0t21KwSf26107-ynRnbKUk-1x0T35_qMpNuxQcKVo-8AnYHVb8IQB4l-qUen6A';
+  config.headers['Authorization'] = `Bearer ${accessToken}`;
   return config;
 });
 
