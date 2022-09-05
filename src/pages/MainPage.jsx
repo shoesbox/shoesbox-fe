@@ -5,6 +5,7 @@ import Calendar from '../components/Calendar';
 import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { Calender2 } from '../components/Calendar2';
 
 const MainPage = () => {
   // const cookie = getCookie('accessToken');
@@ -21,7 +22,7 @@ const MainPage = () => {
   return (
     <>
       <div className="wrap">
-        {/* <Row xs={2} sm={3} md={6} className="g-2 calendar">
+        <Row xs={2} sm={3} md={6} className="g-2 calendar">
           {Array.from({ length: 28 }).map((_, idx) => (
             <Col>
               <Card>
@@ -36,10 +37,18 @@ const MainPage = () => {
               </Card>
             </Col>
           ))}
-        </Row> */}
-        <Calendar/>
-        <FriendsList />
+        </Row>
       </div>
+
+      <div className="wrap">
+        <Calendar />
+      </div>
+      
+      {/* <div className="wrap">
+        <Calender2 />
+      </div> */}
+
+      <FriendsList />
       <WriteFixedBtn />
     </>
   );
