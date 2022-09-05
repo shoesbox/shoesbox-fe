@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import Container from 'react-bootstrap/Container';
 import { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -7,45 +7,29 @@ import Carousel from 'react-bootstrap/Carousel';
 import { BsFillTelephoneForwardFill } from "react-icons/bs";
 import CommentList from './CommentList';
 import '../pages/css/detailpage.css';
-const nickname = 'Sunny';
-const title = '일기도 제목이  있다';
-const date = '2022-08-30';
-const images = [
-  './images/h1.jpg',
-  './images/h2.jpg',
-  './images/h3.jpg',
-  './images/h4.jpg',
-  './images/h5.jpg',
-  './images/h6.jpg',
-  './images/h7.jpg',
-  './images/h8.jpg',
-  './images/h9.jpg',
-  './images/h10.jpg',
-];
-const content = 'ㅋㅋㅋㅋㅋㅋ'.repeat(50);
-const comments = [
-  {
-    postId: 1,
-    commentId: 1,
-    nickname: "hey",
-    content: "lolololozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
-    createdAt: "22-08-30 15:33",
-  },
-  {
-    postId: 1,
-    commentId: 2,
-    nickname: 'hey',
-    content: 'lolololozzzzzzzzzz',
-    createdAt: '22-08-30 15:33',
-  },
-  {
-    postId: 1,
-    commentId: 3,
-    nickname: 'hey',
-    content: 'lolololozzzzzzzzzz',
-    createdAt: '22-08-30 15:33',
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { getDetailThunk, getJsonCommentThunk, getJsonDetailThunk, getCommentThunk } from '../features/detailSlice';
+import { apis } from '../api';
+const ModalDetail = ({ postId, ...props }) => {
+  //   console.log(postId);
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.detail.post);
+  const commentList = useSelector((state) => state.detail.commentList);
+
+  useEffect(() => {
+    dispatch(getJsonDetailThunk(postId));
+    // dispatch(getDetailThunk(postId));
+    // dispatch(getJsonCommentThunk(postId));
+    dispatch(getCommentThunk(postId));
+  }, []);
+
+  const nickname = post.nickname;
+  const title = post.title;
+  const date = post.date;
+  const images = post.images;
+  const content = post.content;
+  const comments = commentList;
+
 const ImageCarousel = () => {
     return (
       <Carousel>
@@ -57,7 +41,7 @@ const ImageCarousel = () => {
       </Carousel>
     );
   };
-const ModalDetail = (props) => {
+
     return (
         <Modal {...props} className='detail-modal' centered size='lg' fullscreen='md-down'>
           <Modal.Header closeButton>
@@ -84,7 +68,7 @@ const ModalDetail = (props) => {
               <Button>삭제하기</Button>
             </div>
             <hr />
-            <CommentList comments={comments} />
+            <CommentList postId={postId} comments={comments} />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={props.onHide}>Close</Button>
@@ -92,4 +76,5 @@ const ModalDetail = (props) => {
         </Modal>
       );
 }
-export default ModalDetail
+
+export default ModalDetail;

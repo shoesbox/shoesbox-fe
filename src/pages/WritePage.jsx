@@ -10,7 +10,7 @@ import "./css/writepage.css";
 import { saveImages } from "../features/writeSlice";
 import { Image } from "react-bootstrap";
 import { BsFillBackspaceFill } from "react-icons/bs";
-import { postJsonDetailThunk } from "../features/detailSlice";
+import { postJsonDetailThunk } from "../features/writeSlice";
 
 
 const WritePage = () => {

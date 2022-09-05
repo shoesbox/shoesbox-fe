@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { apis } from "../api/api";
+import { apis } from "../api";
 import axios from "axios";
 
 const initialState = {
@@ -19,6 +19,30 @@ const getTmpThunk = createAsyncThunk(
     }
   }
 );
+
+export const postJsonDetailThunk = createAsyncThunk(
+  "api/posts/detail/json/write",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post(
+        `http://localhost:3030/posts`, {
+          // id : new Date(),
+          // postId : Math.round((Math.random() * 99) + 1),
+          nickname : payload.nickname,
+          // images : payload.images,
+          content : payload.content,
+     
+        }
+      );
+      console.log("thunk", data.data);
+      // return data.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue("postJsonThunkErr", err.response.data);
+
+    }
+  }
+);
+
 
 
 const writeSlice = createSlice({

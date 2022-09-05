@@ -5,18 +5,19 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { BsFillEraserFill, BsX } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { delJsonCommentThunk, postJsonCommentThunk } from "../features/detailSlice";
+import { addCommentThunk, delCommentThunk, delJsonCommentThunk, postJsonCommentThunk } from "../features/detailSlice";
 
 const CommentList = ({ postId, comments }) => {
   const dispatch = useDispatch();
   const commentRef = useRef();
   const [commentStatus, setComment] = useState(true);
-
+  
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== "") {
       // console.log(commentRef.current.value);
       const content = commentRef.current?.value;
-      dispatch(postJsonCommentThunk({ postId, content }));
+      // dispatch(postJsonCommentThunk({ postId, content }));
+      dispatch(addCommentThunk({ postId, content }));
       commentRef.current.value = "";
       commentRef.current.focus();
     }
@@ -24,7 +25,8 @@ const CommentList = ({ postId, comments }) => {
 
   const onClickDelBtn = ({commentId, e}) => {
     // console.log(commentId);
-    dispatch(delJsonCommentThunk(commentId))
+    // dispatch(delJsonCommentThunk(commentId))
+    dispatch(delCommentThunk(commentId))
   }
 
   const onChangeCommentStatus = (e) => {
@@ -33,13 +35,12 @@ const CommentList = ({ postId, comments }) => {
     }
   };
 
-  // comment를 get하는 건 상위 컴포넌트
   useEffect(() => {}, []);
 
   return (
     <div className="detail-comments-wrap">
-      {comments.length !== 0 ? (
-        comments.map((comment, idx) => (
+      {comments?.length !== 0 ? (
+        comments?.map((comment, idx) => (
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
               <span>{comment?.nickname}</span>
@@ -53,8 +54,7 @@ const CommentList = ({ postId, comments }) => {
                 <BsFillEraserFill />
               </Button>
               <Button
-              // jsondb 때문에 이렇게 설정
-                // commentId={comment.commentId ? comment.commentId : comment.id}
+              // jsondb 때문에 이렇게 설정 - 임시로 commentId가 존재하면 commentId 값을 불러들이고, 아니면 id  값으로
                 onClick={(e)=>onClickDelBtn({commentId : (comment.commentId ? comment.commentId : comment.id), e})}
               >
                 <BsX />
