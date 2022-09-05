@@ -48,7 +48,8 @@ export const apis = {
   loginGoogle: () => {api.get('/')},
   loginNaver: () => {},
   loginKakao: () => {},
-  signup: () => {},
+  signup: (userData) => {auth.post('/api/members/auth/signup', userData)},
+  loginUser: (userData) => {auth.post('/api/members/auth/login', userData)},
 
   // ... 나머지 ...
 
