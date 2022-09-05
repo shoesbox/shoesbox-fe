@@ -24,54 +24,32 @@ const Calendar = () => {
     const prevLast = new Date(date.getFullYear(), date.getMonth(), 0);
     const thisLast = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-    const PLDate = prevLast.getDate();
-    const PLDay = prevLast.getDay();
+    const prevLastDate = prevLast.getDate();
+    const prevLastDay = prevLast.getDay();
 
-    const TLDate = thisLast.getDate();
-    const TLDay = thisLast.getDay();
+    const thisLastDate = thisLast.getDate();
+    const thisLastDay = thisLast.getDay();
 
     // Dates 기본 배열들
     const prevDates = [];
-    const thisDates = [...Array(TLDate + 1).keys()].slice(1);
+    // Array(n)로는 0부터 n-1까지의 배열이 생성되므로 1부터 n까지로 밀어주기
+    const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
     const nextDates = [];
 
     // prevDates 계산
-    if (PLDay !== 6) {
-      for (let i = 0; i < PLDay + 1; i++) {
-        prevDates.unshift(PLDate - i);
+    if (prevLastDay !== 6) {
+      for (let i = 0; i < prevLastDay + 1; i++) {
+        prevDates.unshift(prevLastDate - i);
       }
     }
     // nextDates 계산
-    for (let i = 1; i < 7 - TLDay; i++) {
+    for (let i = 1; i < 7 - thisLastDay; i++) {
       nextDates.push(i);
     }
 
     // Dates 합치기
     return prevDates.concat(thisDates, nextDates);
   };
-
-  useEffect(() => {
-    setDates(calcDate());
-  }, [date]);
-
-  const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
-  const getAllPosts = async () => {
-    // const res = await axios.get('http://localhost:3030/posts')
-    // console.log('All Posts', res.data);
-    const { data } = await axios.get('http://localhost:3030/posts');
-    console.log('All Posts', data);
-    setPosts(data);
-  };
-
-  const img =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
-  // `${posts[0].images[0]}`;
-
-  console.log(posts[0]);
-  useEffect(() => {
-    getAllPosts();
-  }, []);
 
   const changeMonth = (addMonth) => {
     if (addMonth !== 0) {
@@ -84,6 +62,30 @@ const Calendar = () => {
       setDates(calcDate());
     }
   };
+
+  useEffect(() => {
+    setDates(calcDate());
+  }, [date]);
+
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+
+  const getAllPosts = async () => {
+    // const res = await axios.get('http://localhost:3030/totalPosts')
+    // console.log('All Posts', res.data);
+    const { data } = await axios.get('http://localhost:3030/totalPosts');
+    console.log(data);
+    setPosts(data);
+  };
+
+  const img =
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
+  // `${posts.content[0].thumbnailUrl}`;
+
+  useEffect(() => {
+    getAllPosts();
+  }, []);
+  // console.log(posts);
 
   return (
     <div className="calender-container">

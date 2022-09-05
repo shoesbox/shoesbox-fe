@@ -140,5 +140,55 @@
       "memberId": 3,
       "content": "입력은 잘됩니당"
     }
-  ]
+  ],
+  
+  "totalPosts": {
+    "content": [
+      {
+        "postId": 1,
+        "title": "일기 제목1",
+        "thumbnailUrl": "https://t1.daumcdn.net/cafeattach/1Yeqd/6dfdc2e314027f2d09085d09a4f0501dce31a2fa",
+        "createdAt": "2022년 09월 03일 21:54:42.67",
+        "modifiedAt": "2022년 09월 03일 21:54:42.67",
+        "createdYear": 2022,
+        "createdMonth": 9,
+        "createdDay": 3
+      },
+      {
+        "postId": 2,
+        "title": "일기 제목2",
+        "thumbnailUrl": "https://t1.daumcdn.net/cafeattach/1Yeqd/b2d5bafd4a6012a805e3f8bc3d1fba604129f488",
+        "createdAt": "2022년 09월 04일 21:56:39.03",
+        "modifiedAt": "2022년 09월 04일 21:56:39.03",
+        "createdYear": 2022,
+        "createdMonth": 9,
+        "createdDay": 4
+      }
+    ],
+    "pageable": {
+      "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+      },
+      "offset": 0,
+      "pageNumber": 0,
+      "pageSize": 31,
+      "unpaged": false,
+      "paged": true
+    },
+    "last": true,
+    "totalElements": 2,
+    "totalPages": 1,
+    "size": 31,
+    "number": 0,
+    "sort": {
+      "empty": false,
+      "sorted": true,
+      "unsorted": false
+    },
+    "first": true,
+    "numberOfElements": 2,
+    "empty": false
+  }
 }

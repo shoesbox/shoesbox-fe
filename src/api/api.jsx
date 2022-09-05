@@ -1,31 +1,30 @@
-import axios from "axios";
-
+import axios from 'axios';
 
 // 백엔드 연결 시 수정
-const BASE_URL = "http://localhost:3000";
+// const BASE_URL = "http://localhost:3000";
+const BASE_URL = 'http://13.209.77.207';
 
 // 인스턴스 생성
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
-
-  }
-})
+  },
+});
 
 const apiMulti = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'multipart/form-data'
-  }
-})
+    'Content-Type': 'multipart/form-data',
+  },
+});
 
 const auth = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'application/json'
-  }
-})
+    'Content-Type': 'application/json',
+  },
+});
 
 //인터셉터
 
@@ -45,11 +44,14 @@ const auth = axios.create({
 
 export const apis = {
   // 로그인, 회원가입
-  loginGoogle: () => {api.get('/')},
+  loginGoogle: () => api.get('/'),
   loginNaver: () => {},
   loginKakao: () => {},
   signup: () => {},
 
-  // ... 나머지 ...
-
-}
+  // 메인페이지
+  // getTodayPosts: () => api.get('/api/posts'),
+  getTodayPosts: () => api.get('/totalPosts'),
+  getTargetPosts: (memberId, year, month) =>
+    api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
+};
