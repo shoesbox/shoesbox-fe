@@ -38,6 +38,9 @@ const LoginModal = ({ login, handleCloseLogin }) => {
     //   console.log(err);
     // }
 
+    if (state.email.trim() === '' || state.password.trim() === '') {
+      return alert('입력항목은 공란일 수 없습니다.');
+    }
     apis
       .loginUser(state, { withCredentials: true })
       .then((res) => {
@@ -63,6 +66,9 @@ const LoginModal = ({ login, handleCloseLogin }) => {
 
   const handleSignup = async (event) => {
     event.preventDefault();
+    if (state.email.trim() === '' || state.password.trim() === '') {
+      return alert('입력항목은 공란일 수 없습니다.');
+    }
     if (state.password === state.password1) {
       apis
         .joinUser(state, { withCredentials: true })
