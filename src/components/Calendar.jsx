@@ -20,7 +20,7 @@ const Calendar = () => {
   }, [date]);
 
   // 달력에 쓸 월, 일 계산용
-  const calcDate = (memberId) => {
+  const calcDate = () => {
     // 지난 달 마지막 Date, 이번 달 마지막 Date
     const prevLast = new Date(date.getFullYear(), date.getMonth(), 0);
     const thisLast = new Date(date.getFullYear(), date.getMonth() + 1, 0);
