@@ -2,6 +2,7 @@ import './css/calender.css';
 import { Button, Dropdown } from 'react-bootstrap';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apis } from '../api/api';
 import axios from 'axios';
 
 const Calendar = () => {
@@ -19,7 +20,7 @@ const Calendar = () => {
   }, [date]);
 
   // 달력에 쓸 월, 일 계산용
-  const calcDate = () => {
+  const calcDate = (memberId) => {
     // 지난 달 마지막 Date, 이번 달 마지막 Date
     const prevLast = new Date(date.getFullYear(), date.getMonth(), 0);
     const thisLast = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -36,18 +37,59 @@ const Calendar = () => {
     const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
     const nextDates = [];
 
+    //axios로 저번 달, 이번 달, 다음 달 데이터 받아오기
+    const prevDataTray = apis.getTargetPosts(memberId, viewDate.year, viewDate.month)
+      .then(response => response?.data.data.content);
+
+    const thisDataTray = apis.getTargetPosts(memberId, viewDate.year, (viewDate.month + 1))
+      .then(response => response?.data.data.content);
+
+    const nextDataTray = apis.getTargetPosts(memberId, viewDate.year, (viewDate.month + 2))
+      .then(response => response?.data.data.content);
+
     // prevDates 계산
     if (prevLastDay !== 6) {
       for (let i = 0; i < prevLastDay + 1; i++) {
-        prevDates.unshift(prevLastDate - i);
+        prevDates.unshift(prevLastDate-i)
       }
     }
+    
     // nextDates 계산
     for (let i = 1; i < 7 - thisLastDay; i++) {
       nextDates.push(i);
     }
 
-    // Dates 합치기
+    // prevDates에 tray image데이터 돌려주기
+    prevDates.reduce((arr, v) => {
+      if(v == prevDataTray?.createdDay){
+        arr.push({day:v, image: prevDataTray?.thumbnailUrl})
+      }
+      else{
+        arr.push({day:v})
+      }
+      return arr;
+    }, [])
+    // thisDates에 tray image데이터 돌려주기
+    thisDates.reduce((arr, v) => {
+      if(v == thisDataTray?.createdDay){
+        arr.push({day:v, image: thisDataTray?.thumbnailUrl})
+      }
+      else{
+        arr.push({day:v})
+      }
+    },[])
+    // nextDates에 tray image데이터 돌려주기
+    nextDates.reduce((arr, v) => {
+      if(v == nextDataTray?.createdDay){
+        arr.push({day:v, image: nextDataTray?.thumbnailUrl})
+      }
+      else{
+        arr.push({day:v})
+      }
+      return arr;
+    }, [])
+
+    // Dates 배열 합치기
     return prevDates.concat(thisDates, nextDates);
   };
 
@@ -68,23 +110,34 @@ const Calendar = () => {
   }, [date]);
 
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
 
-  const getAllPosts = async () => {
-    // const res = await axios.get('http://localhost:3030/totalPosts')
-    // console.log('All Posts', res.data);
-    const { data } = await axios.get('http://localhost:3030/totalPosts');
-    console.log(data);
-    setPosts(data);
-  };
+  // const getAllPosts = async () => {
+  //   let postTray = [];
+  //   const copyDate = dates.slice();
+  //   // const res = await axios.get('http://localhost:3030/totalPosts');
+  //   // console.log('All Posts', res.data);
+  //   const response = await axios.get('http://localhost:3030/totalPosts');
+  //   const tray = response?.data.content;
+    
+  //   copyDate.reduce((each, idx) => {
+  //     if(idx == tray.createdDay){
+        
+  //     }
+  //     else{
+        
+  //     }
+  //   }, [])
+  //   setPosts(data);
+  // };
 
-  const img =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
+  // const img =
+  //   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
   // `${posts.content[0].thumbnailUrl}`;
 
-  useEffect(() => {
-    getAllPosts();
-  }, []);
+  // useEffect(() => {
+  //   getAllPosts();
+  // }, []);
   // console.log(posts);
 
   return (
@@ -122,10 +175,10 @@ const Calendar = () => {
               <div
                 className="date"
                 key={idx}
-                style={{ background: `url(${img})`, backgroundSize: 'cover' }}
+                style={{ background: `url(${date.image})`, backgroundSize: 'cover' }}
                 onClick={() => navigate('/detail')}
               >
-                <span>{date}</span>
+                <span>{date.day}</span>
               </div>
             ))}
           </div>
