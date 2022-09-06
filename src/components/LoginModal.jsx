@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import './css/loginmodal.css';
-import { apis } from '../api/api';
+import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
 const LoginModal = ({ login, handleCloseLogin }) => {
@@ -81,6 +81,10 @@ const LoginModal = ({ login, handleCloseLogin }) => {
     }
   };
 
+  const handleSocial = async (event) => {
+    event.preventDefault();
+  };
+
   return (
     <>
       <Modal show={login} onHide={handleCloseLogin}>
@@ -140,9 +144,18 @@ const LoginModal = ({ login, handleCloseLogin }) => {
             )}
             <br />
             <div className="social">
-              <button className="social__button social__button--naver"></button>
-              <button className="social__button social__button--kakao"></button>
-              <button className="social__button social__button--google"></button>
+              <button
+                className="social__button social__button--naver"
+                onClick={handleSocial}
+              />
+              <button
+                className="social__button social__button--kakao"
+                onClick={handleSocial}
+              />
+              <button
+                className="social__button social__button--google"
+                onClick={handleSocial}
+              />
             </div>
             <br />
             <span>
