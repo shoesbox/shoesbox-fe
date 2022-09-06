@@ -41,8 +41,8 @@ const LoginModal = ({ login, handleCloseLogin }) => {
     apis
       .loginUser(state, { withCredentials: true })
       .then((res) => {
-        console.log('res', res);
-        console.log('res.data', res.data);
+        // console.log('res', res);
+        // console.log('res.data', res.data);
         const token = res.data.data;
         setCookie('accessToken', token.accessToken, token.accessTokenExpiresIn);
         setCookie(
@@ -67,10 +67,8 @@ const LoginModal = ({ login, handleCloseLogin }) => {
       apis
         .joinUser(state, { withCredentials: true })
         .then((res) => {
-          console.log('res', res);
-          console.log('res.data', res.data);
-          // alert('로그인 성공');
-          // window.location.reload(true);
+          alert('회원가입이 완료되었습니다.');
+          window.location.reload(true);
         })
         .catch((err) => {
           // console.log(err.response.data.errorDetails.apierror.message);
@@ -114,9 +112,9 @@ const LoginModal = ({ login, handleCloseLogin }) => {
                 autoFocus
                 required
                 name="password"
-                aria-describedby="비밀번호는 8자 이상의 영어 소문자와 대문자, 숫자가 조합된 것이어야 합니다"
-                title="비밀번호는 8자 이상의 영어 소문자와 대문자, 숫자가 조합된 것이어야 합니다"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                // aria-describedby="비밀번호는 8자 이상의 영어 소문자와 대문자, 숫자가 조합된 것이어야 합니다"
+                // title="비밀번호는 8자 이상의 영어 소문자와 대문자, 숫자가 조합된 것이어야 합니다"
+                // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
                 value={state.password}
                 onChange={handleChangeState}
               />
