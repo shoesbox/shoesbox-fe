@@ -43,40 +43,39 @@ const CommentList = ({ postId, comments }) => {
 
   return (
     <div className="detail-comments-wrap">
-      {comments?.length !== 0 ? (
-        comments?.map((comment, idx) => (
-          <div key={idx} className="detail-comments">
-            <div className="detail-comment-contents">
-              <span>{comment?.nickname}</span>
-              <span>{comment?.content}</span>
+      {comments?.length !== 0
+        ? comments?.map((comment, idx) => (
+            <div key={idx} className="detail-comments">
+              <div className="detail-comment-contents">
+                <span>{comment?.nickname}</span>
+                <span>{comment?.content}</span>
+              </div>
+              <div>
+                <span className="detail-comment-time">{comment.createdAt}</span>
+              </div>
+              <div className="detail-comment-btns">
+                <Button>
+                  <BsFillEraserFill />
+                </Button>
+                <Button
+                  // jsondb 때문에 이렇게 설정 - 임시로 commentId가 존재하면 commentId 값을 불러들이고, 아니면 id  값으로
+                  onClick={(e) =>
+                    onClickDelBtn({
+                      commentId: comment.commentId
+                        ? comment.commentId
+                        : comment.id,
+                      e,
+                    })
+                  }
+                >
+                  <BsX />
+                </Button>
+              </div>
+              <hr />
             </div>
-            {/* <div>
-            <span className="detail-comment-time">{comment.createdAt}</span>
-          </div> */}
-            <div className="detail-comment-btns">
-              <Button>
-                <BsFillEraserFill />
-              </Button>
-              <Button
-                // jsondb 때문에 이렇게 설정 - 임시로 commentId가 존재하면 commentId 값을 불러들이고, 아니면 id  값으로
-                onClick={(e) =>
-                  onClickDelBtn({
-                    commentId: comment.commentId
-                      ? comment.commentId
-                      : comment.id,
-                    e,
-                  })
-                }
-              >
-                <BsX />
-              </Button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <div>댓글이 존재하지 않습니다.</div>
-      )}
-      <hr />
+          ))
+        : null}
+
       <div>
         <InputGroup>
           <Form.Control

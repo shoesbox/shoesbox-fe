@@ -57,30 +57,28 @@ const ModalDetail = ({ postId, ...props }) => {
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          <span>
-            <strong>{title}</strong>
-          </span>
+          <div>{title}</div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="detail-titlebox">
           <span>
-            <strong>{nickname}</strong>{' '}
+            <strong>{nickname}</strong>
             <Button>
-              {' '}
-              <BsFillTelephoneForwardFill />{' '}
+              <BsFillTelephoneForwardFill />
             </Button>
           </span>
-          <span> {date}</span>
+          <span>{date}</span>
         </div>
         <hr />
         <ImageCarousel />
         <hr />
-        <div>{content}</div>
-        <hr />
+        <div className="detail-content">{content}</div>
+        {/* <hr /> */}
+        <br />
         <div className="detail-fix-del-btns">
-          <Button>수정하기</Button>
-          <Button>삭제하기</Button>
+          <Button>수정</Button>
+          <Button>삭제</Button>
         </div>
         <hr />
         <CommentList postId={postId} comments={comments} />
