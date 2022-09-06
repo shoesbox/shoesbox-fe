@@ -6,11 +6,15 @@ import Form from "react-bootstrap/Form";
 import { BsFillEraserFill, BsX } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommentThunk, delCommentThunk, delJsonCommentThunk, postJsonCommentThunk } from "../features/detailSlice";
+import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
 
 const CommentList = ({ postId, comments }) => {
   const dispatch = useDispatch();
   const commentRef = useRef();
+  const contentRef = useRef();
+  const fixCommentRef = useRef();
   const [commentStatus, setComment] = useState(true);
+  const [pick, setPick] = useState(false);
   
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== "") {
@@ -24,9 +28,16 @@ const CommentList = ({ postId, comments }) => {
   };
 
   const onClickDelBtn = ({commentId, e}) => {
-    // console.log(commentId);
+    console.log(commentId);
     // dispatch(delJsonCommentThunk(commentId))
     dispatch(delCommentThunk(commentId))
+  }
+
+  const onClickFixBtn = ({commentId, e}) => {
+    console.log(commentId);
+    setPick(!pick)
+    // fixCommentRef.current.style.display('none');
+    // dispatch(putCommentThunk(commentId))
   }
 
   const onChangeCommentStatus = (e) => {
@@ -35,7 +46,15 @@ const CommentList = ({ postId, comments }) => {
     }
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
+  const customSt = {
+    show : {
+      display : 'block'
+    },
+    unShow : {
+      display : 'none'
+    }
+  }
 
   return (
     <div className="detail-comments-wrap">
@@ -44,14 +63,17 @@ const CommentList = ({ postId, comments }) => {
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
               <span>{comment?.nickname}</span>
-              <span>{comment?.content}</span>
+              <span style={!pick ? (customSt.show) : (customSt.unShow)} >{comment?.content}</span>
+              <Form.Control hidden={pick}ref={fixCommentRef} type="text" defaultValue={comment?.content} />
             </div>
             {/* <div>
             <span className="detail-comment-time">{comment.createdAt}</span>
           </div> */}
             <div className="detail-comment-btns">
               <Button>
-                <BsFillEraserFill />
+                <BsFillEraserFill
+                onClick={(e)=>onClickFixBtn({commentId: comment.commentId, e})}
+                />
               </Button>
               <Button
               // jsondb 때문에 이렇게 설정 - 임시로 commentId가 존재하면 commentId 값을 불러들이고, 아니면 id  값으로

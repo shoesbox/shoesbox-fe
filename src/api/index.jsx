@@ -39,7 +39,7 @@ const apiJsonUTF = axios.create({
 
 // header 부분에 추가하여 보낼 수 있음, 매번 수행
 api.interceptors.request.use((config) => {
-  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyMzkxNTkwfQ.in34l_shNk_7oA6d5eqrmdR4Vl1k3EJTGcpkyBGFRItSsSZrVfqktzS4w3AGZqEXEiAWGfJbXPU6NcPg58GSdQ';
+  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyMzk3MDY2fQ.vUNAfH2N8Gt1mlkYPUsE7tzYWAkpsYHcCkRUVW2N31czMwiksmA_X0B23W5l3XRCvmex1jde-L4MpXFxevIh8Q';
   config.headers['Authorization'] = `Bearer ${accessToken}`;
   return config;
 });
@@ -78,5 +78,11 @@ export const apis = {
   showComment : (postId) => api.get(`comments/${postId}`),
   addComment : (postId, content) => api.post(`/comments/${postId}`, content),
   delComment : (commentId) => api.delete(`/comments/${commentId}`),
-  putComment : (commentId, payload) => api.put(`/comments/${commentId}`, payload)
+  putComment : (commentId, payload) => api.put(`/comments/${commentId}`, payload),
+
+  // add freinds
+  acceptFriend : (fromMemberId) => api.put(`friends/${fromMemberId}/accept`),
+  refuseFriend : (fromMemberId) => api.put(`friends/${fromMemberId}/refuse`),
+  deleteFriend : (fromMemberId, payload) => api.put(`friends/${fromMemberId}`, payload)
+
 }
