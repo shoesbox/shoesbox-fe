@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { apis } from "../api/api";
+import { apis } from "../api";
 import axios from "axios";
 
 const initialState = {
@@ -14,14 +14,14 @@ export const getDetailThunk = createAsyncThunk(
     try {
       const data = await apis.getDetail(postId);
       const postDetail = data.data.data;
-      // console.log('thunk',data.data.data)
+      console.log('showthunk',data.data.data)
       return postDetail;
     } catch (err) {
       return thunkAPI.rejectWithValue("getDetailThunkErr", err.response.data);
     }
   }
 );
-
+// jsondb 디테일 페이지 불러오기
 export const getJsonDetailThunk = createAsyncThunk(
   "api/posts/detail/json",
   async (postId, thunkAPI) => {
@@ -35,6 +35,7 @@ export const getJsonDetailThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue("getDetailThunkErr", err.response.data);
     }
   }
+  // then 으로 불러오는 방법 적용
   //   async (postId, thunkAPI) => {
   //     try {
   //       axios
@@ -46,7 +47,7 @@ export const getJsonDetailThunk = createAsyncThunk(
   //     }
   //   }
 );
-
+// jsondb comment 불러오기
 export const getJsonCommentThunk = createAsyncThunk(
   "api/posts/comment/get/json",
   async (postId, thunkAPI) => {
@@ -61,8 +62,6 @@ export const getJsonCommentThunk = createAsyncThunk(
     }
   }
 );
-
-
 export const postJsonCommentThunk = createAsyncThunk(
     "api/posts/comment/post/json",
     async ({postId, content}, thunkAPI) => {
@@ -78,14 +77,14 @@ export const postJsonCommentThunk = createAsyncThunk(
                 // createdAt: new Date()
           }
         );
-        // console.log("thunk", data.data, postId);
+        console.log("thunk", data.data, postId);
         return data.data;
       } catch (err) {
         return thunkAPI.rejectWithValue("postCommentThunkErr", err.response.data);
+
       }
     }
-  );
-
+)
   export const delJsonCommentThunk = createAsyncThunk(
     "api/posts/comment/del/json",
     async ({postId,commentId}, thunkAPI) => {
@@ -93,15 +92,59 @@ export const postJsonCommentThunk = createAsyncThunk(
         const data = await axios.delete(
           `http://localhost:3030/comments/${commentId}`
         );
-        console.log("thunk", data.data, commentId);
+        // console.log("thunk", data.data, commentId);
         return data.data;
       } catch (err) {
-        return thunkAPI.rejectWithValue("postCommentThunkErr", err.response.data);
+        return thunkAPI.rejectWithValue("delCommentThunkErr", err.response.data);
+      }
+    }
+  );
+
+  export const getCommentThunk = createAsyncThunk(
+    "api/commentthunk/get",
+    async (postId, thunkAPI) => {
+      try {
+        const data = await apis.showComment(postId);
+        // console.log("getCommentThunk", data.data.data, postId);
+        return data.data.data;
+      } catch (err) {
+        return thunkAPI.rejectWithValue("getCommentThunkErr", err.response.data);
+
+      }
+    }
+)
+
+  export const addCommentThunk = createAsyncThunk(
+    "api/commentthunk/add",
+    async ({postId, content}, thunkAPI) =>  {
+      try {
+        const data = await apis.addComment(postId, {
+          content
+        });
+       
+        // console.log('addCommentThunk', data.data.data)
+        const comments = data.data.data;
+        return comments;
+      } catch (err) {
+        return thunkAPI.rejectWithValue("addCommentThunkErr", err.response.data);
+      }
+    }
+  );
+
+  export const delCommentThunk = createAsyncThunk(
+    "api/commentthunk/del",
+    async ( commentId, thunkAPI) => {
+      try {
+       const data = await apis.delComment(commentId);
+        console.log("delCommentThunk", data.data.data, commentId);
+        return commentId;
+      } catch (err) {
+        return thunkAPI.rejectWithValue("delCommentThunkErr", err.response.data);
       }
     }
   );
   
-
+  
 const detailSlice = createSlice({
   name: "detail",
   initialState,
@@ -127,14 +170,22 @@ const detailSlice = createSlice({
         const newComment = action.payload;
         state.commentList = [...state.commentList, newComment]
     })
-    builder.addCase(delJsonCommentThunk.fulfilled, (state, action)=>{
-        console.log('extraReducers', action.payload);
-        const commentId = action.payload;
-        // const newCommentList = state.commentList.filter(
-        //    const state.commentList.map((comment, idx)=>{
-        //      comment.id
-        //    })
-        // )
+    builder.addCase(getCommentThunk.fulfilled, (state, action)=>{
+      // console.log('getComment extraReducers', action.payload);
+      state.commentList = action.payload;
+    })
+    builder.addCase(addCommentThunk.fulfilled, (state, action)=>{
+      // console.log('addComment extraReducers', action.payload);
+      state.commentList = [...state.commentList, action.payload];
+    })
+    builder.addCase(delCommentThunk.fulfilled, (state, action)=>{
+      // console.log('delComment extraReducers', action.payload);
+      const commentList = state.commentList;
+      const commentId = action.payload;
+      const newCommentList = commentList.filter((c)=>{
+        return parseInt(c.commentId)!==commentId;
+      })
+      state.commentList = newCommentList;
     })
   },
 });

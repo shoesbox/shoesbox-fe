@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import LoginModal from './LoginModal';
-import './css/loginmodal.css'
-// import { getCookie, deleteCookie } from '../shared/Cookie';
+import './css/loginmodal.css';
+import { getCookie, deleteCookie } from '../shared/cookie';
 
 function Header() {
   const [login, setLogin] = useState(false);
@@ -12,19 +12,22 @@ function Header() {
 
   const navigate = useNavigate();
 
-  // const cookie = getCookie('accessToken');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const cookie = getCookie('accessToken');
+  const [isLoggedin, setisLoggedin] = useState(false);
+  useEffect(() => {
+    if (cookie !== undefined) {
+      setisLoggedin(true);
+    } else {
+      setisLoggedin(false);
+    }
+  }, [cookie]);
 
-  // useEffect(() => {
-  //   console.log(cookie);
-  //   if (cookie !== undefined) {
-  //     return setIsLoggedIn(true);
-  //   } else {
-  //     return setIsLoggedIn(false);
-  //   }
-  // }, []);
-
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    deleteCookie('accessToken');
+    deleteCookie('refreshToken');
+    alert('로그아웃 성공');
+    window.location.replace('/');
+  };
 
   return (
     <>
@@ -49,13 +52,15 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link
-                onClick={() => {
-                  navigate('/');
-                }}
-              >
-                My Moments
-              </Nav.Link>
+              {isLoggedin ? (
+                <Nav.Link
+                  onClick={() => {
+                    navigate('/');
+                  }}
+                >
+                  My Moments
+                </Nav.Link>
+              ) : null}
               <Nav.Link
                 onClick={() => {
                   navigate('/aboutus');
@@ -65,7 +70,7 @@ function Header() {
               </Nav.Link>
             </Nav>
             <Nav>
-              {isLoggedIn ? (
+              {isLoggedin ? (
                 <>
                   {/* 로그인시 */}
                   <Nav.Link
@@ -80,9 +85,7 @@ function Header() {
               ) : (
                 <>
                   {/* 비로그인시 */}
-                  <Nav.Link onClick={handleShowLogin}>
-                    Log In
-                  </Nav.Link>
+                  <Nav.Link onClick={handleShowLogin}>Log In</Nav.Link>
                 </>
               )}
             </Nav>
