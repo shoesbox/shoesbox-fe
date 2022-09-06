@@ -11,6 +11,7 @@ import { saveImages } from '../features/writeSlice';
 import { Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
 import { postJsonDetailThunk } from '../features/writeSlice';
+import { useNavigate } from 'react-router-dom';
 
 const WritePage = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const WritePage = () => {
   const [files, setFiles] = useState([]);
   const [base64s, setBase64s] = useState([]);
   const previewImages = useSelector((state) => state.write.images);
+
   // 첨부 파일 검증
   const fileValidation = (obj) => {
     const fileTypes = ['image/gif', 'image/jpeg', 'image/png'];
@@ -75,6 +77,8 @@ const WritePage = () => {
       setValidated(true);
     }
   };
+
+  const navigate = useNavigate();
 
   const deleteImage = (clickedImg) => {
     const dataTranster = new DataTransfer();
@@ -126,7 +130,7 @@ const WritePage = () => {
     <Container fluid className="write-wrap">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group>
-          <Form.Label>일기주제</Form.Label>
+          <Form.Label className="subtitle">제목 😎</Form.Label>
           <Form.Control
             required
             type="text"
@@ -135,12 +139,12 @@ const WritePage = () => {
             ref={titleRef}
           />
           <Form.Control.Feedback type="invalid">
-            일기주제를 적어주세요📔
+            일기주제를 적어주세요.
           </Form.Control.Feedback>
         </Form.Group>
         <br />
         <Form.Group>
-          <Form.Label>사진추가</Form.Label>
+          <Form.Label className="subtitle">오늘의 포토제닉 📸</Form.Label>
           <InputGroup hasValidation>
             <Form.Control
               type="file"
@@ -151,7 +155,7 @@ const WritePage = () => {
               onChange={onChangePic}
             />
             <Form.Control.Feedback type="invalid">
-              사진을 추가해주세요📷
+              사진을 추가해주세요 :)
             </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
@@ -181,22 +185,32 @@ const WritePage = () => {
         </div>
         <br />
         <Form.Group>
-          <Form.Label>일기내용</Form.Label>
+          <Form.Label className="subtitle">일기 본문 🎠</Form.Label>
           <Form.Control
             className="write-content"
             type="text"
             as="textarea"
-            placeholder="오늘은 무슨 일이 있었나요?"
+            placeholder="오늘의 근황을 친구에게 공유해봅시다."
             required
             ref={contentRef}
             // hidden
           />
           <Form.Control.Feedback type="invalid">
-            일기내용을 적어주세요🖋
+            일기내용을 적어주세요.
           </Form.Control.Feedback>
         </Form.Group>
         <br />
-        <Button type="submit">등록하기</Button>
+        <Button
+          type="button"
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          뒤로 가기
+        </Button>
+        <Button type="submit" className="submitBtn">
+          등록
+        </Button>
       </Form>
     </Container>
   );
