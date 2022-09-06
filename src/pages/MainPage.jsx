@@ -57,7 +57,7 @@ const MainPage = () => {
         </>
       ) : (
         <div className="welcome">
-          <p>You can use it after log in ✨</p>
+          <p>You can use it after Log in ✨</p>
         </div>
       )}
     </>
