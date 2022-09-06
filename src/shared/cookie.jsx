@@ -10,7 +10,7 @@ export const setCookie = (name, value, exp) => {
   // date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
   date.setTime(exp);
   document.cookie = `${name}=${value}; expires=${date.toUTCString()}`;
-  // return cookies.set(name, value, { expires: exp });
+  // return cookies.set(name, value, { expires: date.toUTCString() });
 };
 
 // 쿠키에 저장한 거 쓸 때
