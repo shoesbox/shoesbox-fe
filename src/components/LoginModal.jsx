@@ -47,13 +47,11 @@ const LoginModal = ({ login, handleCloseLogin }) => {
         console.log('res', res);
         console.log('res.data', res.data);
         const token = res.data.data;
-        // setCookie('accessToken', token.accessToken);
         setCookie(
           'accessToken',
           token.accessToken,
           token.accessTokenExpireDate
         );
-        // setCookie('refreshToken', token.refreshToken);
         setCookie(
           'refreshToken',
           token.refreshToken,

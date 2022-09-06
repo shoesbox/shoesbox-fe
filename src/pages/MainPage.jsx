@@ -12,18 +12,18 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const cookie = getCookie('accessToken');
-  const [isLoggedin, setisLoggedin] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (cookie !== undefined) {
-      setisLoggedin(true);
+      setisLoggedIn(true);
     } else {
-      setisLoggedin(false);
+      setisLoggedIn(false);
     }
   }, [cookie]);
 
   return (
     <>
-      {isLoggedin ? (
+      {isLoggedIn ? (
         <>
           {/* <div className="wrap">
             <Row xs={2} sm={3} md={6} className="g-2 calendar">

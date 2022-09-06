@@ -1,17 +1,16 @@
-import React, { useState, useRef, useEffect, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Container from "react-bootstrap/esm/Container";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
-import "./css/writepage.css";
-import { saveImages } from "../features/writeSlice";
-import { Image } from "react-bootstrap";
-import { BsFillBackspaceFill } from "react-icons/bs";
-import { postJsonDetailThunk } from "../features/writeSlice";
-
+import { useState, useRef, useEffect, Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Container from 'react-bootstrap/esm/Container';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Row from 'react-bootstrap/Row';
+import './css/writepage.css';
+import { saveImages } from '../features/writeSlice';
+import { Image } from 'react-bootstrap';
+import { BsFillBackspaceFill } from 'react-icons/bs';
+import { postJsonDetailThunk } from '../features/writeSlice';
 
 const WritePage = () => {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ const WritePage = () => {
   let formDataTxt = {};
   // text data
   // const [formDataTxt, setFormDataTxt] = useState();
-  const nickname = "Sunny";
+  const nickname = 'Sunny';
   // input validation check
   const [validated, setValidated] = useState(false);
   // refs
@@ -33,22 +32,22 @@ const WritePage = () => {
   const previewImages = useSelector((state) => state.write.images);
   // 첨부 파일 검증
   const fileValidation = (obj) => {
-    const fileTypes = ["image/gif", "image/jpeg", "image/png"];
+    const fileTypes = ['image/gif', 'image/jpeg', 'image/png'];
     if (obj.name.length > 100) {
-      alert("파일명이 100자 이상인 파일은 등록할 수 없습니다.");
-      imageRef.current.value = "";
+      alert('파일명이 100자 이상인 파일은 등록할 수 없습니다.');
+      imageRef.current.value = '';
       return false;
     } else if (obj.size > 30 * 1024 * 1024) {
-      alert("최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.");
-      imageRef.current.value = "";
+      alert('최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.');
+      imageRef.current.value = '';
       return false;
-    } else if (obj.name.lastIndexOf(".") == -1) {
-      alert("확장자가 없는 파일은 등록할 수 없습니다.");
-      imageRef.current.value = "";
+    } else if (obj.name.lastIndexOf('.') == -1) {
+      alert('확장자가 없는 파일은 등록할 수 없습니다.');
+      imageRef.current.value = '';
       return false;
     } else if (!fileTypes.includes(obj.type)) {
-      alert("첨부가 불가능한 파일은 등록할 수 없습니다.");
-      imageRef.current.value = "";
+      alert('첨부가 불가능한 파일은 등록할 수 없습니다.');
+      imageRef.current.value = '';
       return false;
     } else {
       return true;
@@ -63,15 +62,15 @@ const WritePage = () => {
     } else {
       event.preventDefault();
       formDataTxt = {
-        id : new Date(),
-        postId : Math.round((Math.random() * 99) + 1),
+        id: new Date(),
+        postId: Math.round(Math.random() * 99 + 1),
         nickname,
-        title : titleRef.current.value,
+        title: titleRef.current.value,
         // images : imageRef.current.files,
-        images : base64s,
-        content : contentRef.current.value,
-        date : new Date()
-      }
+        images: base64s,
+        content: contentRef.current.value,
+        date: new Date(),
+      };
       console.log(formDataTxt);
       setValidated(true);
     }
@@ -118,8 +117,8 @@ const WritePage = () => {
   }, [files]);
 
   useEffect(() => {
-    if(formData!==(null||undefined)){
-    dispatch(postJsonDetailThunk({formDataTxt}));
+    if (formData !== (null || undefined)) {
+      dispatch(postJsonDetailThunk({ formDataTxt }));
     }
   }, []);
 
