@@ -44,14 +44,20 @@ const LoginModal = ({ login, handleCloseLogin }) => {
     apis
       .loginUser(state, { withCredentials: true })
       .then((res) => {
-        // console.log('res', res);
-        // console.log('res.data', res.data);
+        console.log('res', res);
+        console.log('res.data', res.data);
         const token = res.data.data;
-        setCookie('accessToken', token.accessToken, token.accessTokenExpiresIn);
+        // setCookie('accessToken', token.accessToken);
+        setCookie(
+          'accessToken',
+          token.accessToken,
+          token.accessTokenExpireDate
+        );
+        // setCookie('refreshToken', token.refreshToken);
         setCookie(
           'refreshToken',
           token.refreshToken,
-          token.accessTokenExpiresIn
+          token.refreshTokenExpireDate
         );
         setCookie('username', token.username);
         alert('로그인 성공');
