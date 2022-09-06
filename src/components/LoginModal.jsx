@@ -61,7 +61,7 @@ const LoginModal = ({ login, handleCloseLogin }) => {
         );
         setCookie('username', token.username);
         alert('로그인 성공');
-        window.location.reload(true);
+        // window.location.reload(true);
       })
       .catch((err) => {
         // console.log(err.response.data.errorDetails.apierror.message);

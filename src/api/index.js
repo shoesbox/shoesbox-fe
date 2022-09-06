@@ -69,6 +69,10 @@ export const apis = {
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
   loginUser: (userData) => auth.post('/api/members/auth/login', userData),
 
+  //main page
+  getTargetPosts: (memberId, year, month) => api.get(`/api/posts`),
+  //?id=${memberId}&y=${year}&m=${month}
+
   // detail Page
   showDetail: (postId) => api.get(`/posts/${postId}`),
   showComment: (postId) => api.get(`comments/${postId}`),
