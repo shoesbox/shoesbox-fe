@@ -3,7 +3,7 @@ import axios from "axios";
 
 // 백엔드 연결 시 수정
 // const BASE_URL = "http://localhost:3000";
-const BASE_URL = "http://13.209.77.207/api";
+const BASE_URL = "http://13.209.77.207";
 
 
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -67,22 +67,26 @@ api.interceptors.response.use(
 
 export const apis = {
   // 로그인, 회원가입
-  loginGoogle: () => {api.get('/')},
+  loginGoogle: () => api.get('/oauth2/authorization/google'),
   loginNaver: () => {},
   loginKakao: () => {},
   signup: () => {},
 
   // detail Page
-  showDetail : (postId) => api.get(`/posts/${postId}`),
+  showDetail : (postId) => api.get(`/api/posts/${postId}`),
+  showComment : (postId) => api.get(`/apicomments/${postId}`),
+  addComment : (postId, content) => api.post(`/api/comments/${postId}`, content),
+  delComment : (commentId) => api.delete(`/api/comments/${commentId}`),
+  putComment : (commentId, payload) => api.put(`/api/comments/${commentId}`, payload),
 
-  showComment : (postId) => api.get(`comments/${postId}`),
-  addComment : (postId, content) => api.post(`/comments/${postId}`, content),
-  delComment : (commentId) => api.delete(`/comments/${commentId}`),
-  putComment : (commentId, payload) => api.put(`/comments/${commentId}`, payload),
-
+  // write Page
+  writeDaily : (payload) => api.post('/api/posts',payload),
+  
   // add freinds
-  acceptFriend : (fromMemberId) => api.put(`friends/${fromMemberId}/accept`),
-  refuseFriend : (fromMemberId) => api.put(`friends/${fromMemberId}/refuse`),
-  deleteFriend : (fromMemberId, payload) => api.put(`friends/${fromMemberId}`, payload)
+  acceptFriend : (fromMemberId) => api.put(`/api/friends/${fromMemberId}/accept`),
+  refuseFriend : (fromMemberId) => api.put(`/api/friends/${fromMemberId}/refuse`),
+  deleteFriend : (fromMemberId, payload) => api.put(`/api/friends/${fromMemberId}`, payload)
+
+
 
 }

@@ -63,14 +63,11 @@ const WritePage = () => {
     } else {
       event.preventDefault();
       formDataTxt = {
-        id : new Date(),
-        postId : Math.round((Math.random() * 99) + 1),
         nickname,
         title : titleRef.current.value,
         // images : imageRef.current.files,
         images : base64s,
         content : contentRef.current.value,
-        date : new Date()
       }
       console.log(formDataTxt);
       setValidated(true);
@@ -120,7 +117,7 @@ const WritePage = () => {
   }, [files]);
 
   useEffect(() => {
-    if(formData!==(null||undefined)){
+    if(formData!==(null||undefined||{})){
     dispatch(postJsonDetailThunk({formDataTxt}));
     }
   }, []);
