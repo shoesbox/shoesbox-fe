@@ -21,11 +21,8 @@
   background-repeat: no-repeat;
 }
 .welcome > p {
-  /* border: 1px solid rebeccapurple; */
   text-align: center;
   text-shadow: 4px 4px 3px #CCE3DE;
-  /* font-family: 'Gothic A1', sans-serif; */
-  /* font-family: 'Poor Story', cursive; */
   font-family: 'IBM Plex Sans KR', sans-serif;
   font-size: 44px;
   font-weight: 600;
