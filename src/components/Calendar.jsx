@@ -90,7 +90,7 @@ const Calendar = () => {
       <div className="calendar">
         <div className="header">
           <div className="year">{viewDate.year}</div>
-          <span className="month">{viewDate.month + 1}월</span>
+          <span className="month">{viewDate.month + 1}</span>
           <div className="nav">
             <button className="nav-btn" onClick={() => changeMonth(-1)}>
               &lt;

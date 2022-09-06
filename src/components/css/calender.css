@@ -18,11 +18,22 @@
   color: silver;
 }
 .month {
+  width: 55px;
+  height: 55px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 26px;
   font-weight: 500;
   margin-left: 9%;
-  /* border: 1px solid red; */
+  color: #6b9080;
+  background-color: #eaf4f4;
 }
+
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
 .nav {
   display: flex;
   border-radius: 5px;
