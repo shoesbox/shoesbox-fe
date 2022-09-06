@@ -2,8 +2,8 @@ import axios from "axios";
 
 
 // 백엔드 연결 시 수정
-// const BASE_URL = "http://localhost:3000";
-const BASE_URL = "http://13.209.77.207";
+const BASE_URL = "http://localhost:3030";
+// const BASE_URL = "http://13.209.77.207";
 
 
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -39,7 +39,7 @@ const apiJsonUTF = axios.create({
 
 // header 부분에 추가하여 보낼 수 있음, 매번 수행
 api.interceptors.request.use((config) => {
-  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyMzk3MDY2fQ.vUNAfH2N8Gt1mlkYPUsE7tzYWAkpsYHcCkRUVW2N31czMwiksmA_X0B23W5l3XRCvmex1jde-L4MpXFxevIh8Q';
+  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyNTE0ODUzfQ.HsBcFIelZ8OH6BWKKUrD1MViWinaCyb7GXpEl9tgDJ8imkuXxvLI3N_UH1hXAbHrHE9RD4-PLHI15EdL6gcJXA';
   config.headers['Authorization'] = `Bearer ${accessToken}`;
   return config;
 });
@@ -74,7 +74,7 @@ export const apis = {
 
   // detail Page
   showDetail : (postId) => api.get(`/api/posts/${postId}`),
-  showComment : (postId) => api.get(`/apicomments/${postId}`),
+  showComment : (postId) => api.get(`/api/comments/${postId}`),
   addComment : (postId, content) => api.post(`/api/comments/${postId}`, content),
   delComment : (commentId) => api.delete(`/api/comments/${commentId}`),
   putComment : (commentId, payload) => api.put(`/api/comments/${commentId}`, payload),

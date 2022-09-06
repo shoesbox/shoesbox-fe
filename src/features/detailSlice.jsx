@@ -6,6 +6,7 @@ const initialState = {
   post: {},
   commentList: [],
   userInfo: [],
+  pickedCommentId: null,
 };
 
 export const getDetailThunk = createAsyncThunk(
@@ -100,6 +101,24 @@ export const postJsonCommentThunk = createAsyncThunk(
     }
   );
 
+  export const patchJsonCommentThunk = createAsyncThunk(
+    "api/posts/comment/patch/json",
+    async ({commentId, content}, thunkAPI) => {
+      try {
+        const data = await axios.patch(
+          `http://localhost:3030/comments/${commentId}`,{
+              content : content
+          }
+        );
+        console.log("patchJsonCommentThunk", data.data, commentId);
+        return data.data;
+      } catch (err) {
+        return thunkAPI.rejectWithValue("patchCommentThunkErr", err.response.data);
+      }
+    }
+  );
+
+
   export const getCommentThunk = createAsyncThunk(
     "api/commentthunk/get",
     async (postId, thunkAPI) => {
@@ -152,6 +171,9 @@ const detailSlice = createSlice({
     loadPost: (state, action) => {
       state.post = action.payload;
     },
+    updatePicked:(state, action) =>{
+      state.pickedCommentId = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getDetailThunk.fulfilled, (state, action) => {
@@ -170,6 +192,21 @@ const detailSlice = createSlice({
         const newComment = action.payload;
         state.commentList = [...state.commentList, newComment]
     })
+    builder.addCase(patchJsonCommentThunk.fulfilled, (state, action)=>{
+      const commentList = state.commentList;
+      const commentId = action.payload.id;
+      const fixedComment = action.payload.content;
+      // 배열에서 index를 찾아주기
+      const findCommentId = (element) =>{
+       if((element?.id)===commentId) return(true)
+      }
+      const idx = commentList.findIndex(findCommentId);
+      for (var i = 0; i < commentList.length; i++) { // 배열 arr의 모든 요소의 인덱스(index)를 출력함.
+        commentList[idx]['content'] = fixedComment;
+      }
+      // console.log('extraReducers', action.payload.id, 'idx 출력: ', idx);
+
+  })
     builder.addCase(getCommentThunk.fulfilled, (state, action)=>{
       // console.log('getComment extraReducers', action.payload);
       state.commentList = action.payload;
@@ -190,5 +227,5 @@ const detailSlice = createSlice({
   },
 });
 
-export const { loadPost } = detailSlice.actions;
+export const { loadPost, updatePicked} = detailSlice.actions;
 export default detailSlice.reducer;

@@ -14,13 +14,13 @@ const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
   const dispatch = useDispatch();
   const post = useSelector((state) => state.detail.post);
-  const commentList = useSelector((state) => state.detail.commentList);
+  // const commentList = useSelector((state) => state.detail.commentList);
 
   useEffect(() => {
     dispatch(getJsonDetailThunk(postId));
     // dispatch(getDetailThunk(postId));
     // dispatch(getJsonCommentThunk(postId));
-    dispatch(getCommentThunk(postId));
+    // dispatch(getCommentThunk(postId));
   }, []);
 
   const nickname = post.nickname;
@@ -28,7 +28,7 @@ const ModalDetail = ({ postId, ...props }) => {
   const date = post.date;
   const images = post.images;
   const content = post.content;
-  const comments = commentList;
+  // const comments = commentList;
 
 const ImageCarousel = () => {
     return (
@@ -43,7 +43,7 @@ const ImageCarousel = () => {
   };
 
     return (
-        <Modal {...props} className='detail-modal' centered size='lg' fullscreen='md-down'>
+        <Modal {...props} className='detail-modal' centered size='lg' fullscreen='lg-down'>
           <Modal.Header closeButton>
             <Modal.Title>
               <span>
@@ -68,7 +68,7 @@ const ImageCarousel = () => {
               <Button>삭제하기</Button>
             </div>
             <hr />
-            <CommentList postId={postId} comments={comments} />
+            <CommentList postId={postId}/>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={props.onHide}>Close</Button>

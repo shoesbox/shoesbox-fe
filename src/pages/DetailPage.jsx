@@ -15,7 +15,7 @@ const DetailPage = () => {
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-  
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>

@@ -1,86 +1,171 @@
-import React from "react";
-import { useRef, useState, useEffect } from "react";
+import React, { useCallback } from "react";
+import { useRef, useState, useEffect, memo, useMemo } from "react";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import { BsFillEraserFill, BsX } from "react-icons/bs";
+import Spinner from 'react-bootstrap/Spinner';
+import {
+  BsFillEraserFill,
+  BsX,
+  BsArrowReturnLeft,
+  BsFillReplyFill,
+} from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { addCommentThunk, delCommentThunk, delJsonCommentThunk, postJsonCommentThunk } from "../features/detailSlice";
-import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
+import {
+  addCommentThunk,
+  delCommentThunk,
+  delJsonCommentThunk,
+  getCommentThunk,
+  getJsonCommentThunk,
+  patchJsonCommentThunk,
+  postJsonCommentThunk,
+} from "../features/detailSlice";
 
-const CommentList = ({ postId, comments }) => {
+const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
+  const comments = useSelector((state) => state.detail.commentList);
+  // const pickedCommentId = useSelector((state) => state.detail.pickedCommentId)
   const commentRef = useRef();
-  const contentRef = useRef();
-  const fixCommentRef = useRef();
   const [commentStatus, setComment] = useState(true);
-  const [pick, setPick] = useState(false);
-  
+  const [pick, setPick] = useState();
+  const [onEdit, setEdit] = useState(false);
+  const [fixContent, setFixContent] = useState();
+  var tmp = "";
+
+  // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== "") {
       // console.log(commentRef.current.value);
       const content = commentRef.current?.value;
-      // dispatch(postJsonCommentThunk({ postId, content }));
-      dispatch(addCommentThunk({ postId, content }));
+      dispatch(postJsonCommentThunk({ postId, content }));
+      // dispatch(addCommentThunk({ postId, content }));
       commentRef.current.value = "";
       commentRef.current.focus();
     }
   };
 
-  const onClickDelBtn = ({commentId, e}) => {
+  // 댓글 삭제 버튼 눌렀을 때
+  const onClickDelBtn = (commentId) => {
     console.log(commentId);
     // dispatch(delJsonCommentThunk(commentId))
-    dispatch(delCommentThunk(commentId))
-  }
+    // dispatch(delCommentThunk(commentId));
+  };
 
-  const onClickFixBtn = ({commentId, e}) => {
-    console.log(commentId);
-    setPick(!pick)
-    // fixCommentRef.current.style.display('none');
+  // 댓글 수정 버튼 눌렀을 때, 수정 가능
+  const onClickFixBtn = (commentId, content) => {
+    setPick(commentId);
+    setEdit(true);
+    // console.log(pick, commentId, content);
+    // dispatch(updatePicked(commentId))
     // dispatch(putCommentThunk(commentId))
-  }
+  };
 
+  // 댓글 수정 모드 눌렀을 때의 버튼, 수정 입력 가능
+  // 그 전 내용과 일치할 경우 팝업 노출
+  const onClickFixSubmitBtn = (commentId) => {
+    // console.log('변경될 값:', commentId, tmp);
+    if (tmp === "") {
+      alert("댓글 수정을 해주세요!");
+      return null;
+    } else {
+      dispatch(patchJsonCommentThunk({ commentId, content: tmp }));
+      setEdit(false);
+    }
+    //  dispatch(updatePicked(commentId))
+  };
+
+  // 입력 댓글에 아무것도 입력되지 않으면, 버튼 작동하지 않음
   const onChangeCommentStatus = (e) => {
     if (e.target.value.trim() !== "") {
       setComment(false);
     }
   };
 
-  // useEffect(() => {}, []);
-  const customSt = {
-    show : {
-      display : 'block'
-    },
-    unShow : {
-      display : 'none'
+  // tmp에 onChange 될 때 값 저장 - state 사용하면 렌더링 문제 발생
+  const onChangeFixCommentStatus = (e) => {
+    // setFixContent(e.target.value)
+    tmp = e.target.value;
+    // console.log('변경될 값:',  tmp);
+  };
+
+  useEffect(() => {
+    // dispatch(getCommentThunk(postId));
+    dispatch(getJsonCommentThunk(postId));
+  }, []);
+
+  useEffect(()=>{
+
+  },[])
+
+  // 수정 버튼을 클릭하면 노출
+  const FixInput = ({ commentId, content }) => {
+    // if (parseInt(pick) === parseInt(commentId)) {
+    if (onEdit && pick === commentId) {
+      return (
+        <Form.Control
+          className="detail-comment-update"
+          // ref={fixCommentRef}
+          type="text"
+          defaultValue={content}
+          autoFocus
+          onChange={(e) => onChangeFixCommentStatus(e)}
+        />
+      );
     }
-  }
+  };
+
+  // 수정 버튼을 클릭하기전, 클릭 후가 나뉨
+  const FixButton = ({ commentId, content }) => {
+    return !(onEdit && pick === commentId) ? (
+      <Button onClick={() => onClickFixBtn(commentId)}>
+        <BsFillEraserFill />
+      </Button>
+    ) : (
+      <Button
+        onClick={() => onClickFixSubmitBtn(commentId)}
+        // disabled={tmp===''}
+      >
+        <BsArrowReturnLeft />
+      </Button>
+    );
+  };
+
+  // 수정 버튼을 클릭하기전, 클릭 후가 나뉨
+  const DelButton = ({ commentId }) => {
+    return !(onEdit && pick === commentId) ? (
+      <Button onClick={() => onClickDelBtn(commentId)}>
+        <BsX />
+      </Button>
+    ) : (
+      <Button onClick={() => setEdit(false)}>
+        <BsFillReplyFill />
+      </Button>
+    );
+  };
 
   return (
     <div className="detail-comments-wrap">
       {comments?.length !== 0 ? (
         comments?.map((comment, idx) => (
+          // 배열 중 컴포넌트만, 변경해야하는데 클릭했을 시에, 그 컴포넌트와 연결되어야함.
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
               <span>{comment?.nickname}</span>
-              <span style={!pick ? (customSt.show) : (customSt.unShow)} >{comment?.content}</span>
-              <Form.Control hidden={pick}ref={fixCommentRef} type="text" defaultValue={comment?.content} />
+              {/* <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        /> */}
+              {!(onEdit && pick === comment?.id) && (
+                <span>{comment?.content}</span>
+              )}
+              <FixInput commentId={comment?.id} content={comment?.content} />
             </div>
-            {/* <div>
-            <span className="detail-comment-time">{comment.createdAt}</span>
-          </div> */}
             <div className="detail-comment-btns">
-              <Button>
-                <BsFillEraserFill
-                onClick={(e)=>onClickFixBtn({commentId: comment.commentId, e})}
-                />
-              </Button>
-              <Button
-              // jsondb 때문에 이렇게 설정 - 임시로 commentId가 존재하면 commentId 값을 불러들이고, 아니면 id  값으로
-                onClick={(e)=>onClickDelBtn({commentId : (comment.commentId ? comment.commentId : comment.id), e})}
-              >
-                <BsX />
-              </Button>
+              <FixButton commentId={comment?.id} content={comment.content} />
+              <DelButton commentId={comment?.id} />
             </div>
           </div>
         ))
@@ -113,4 +198,5 @@ const CommentList = ({ postId, comments }) => {
   );
 };
 
-export default CommentList;
+// commentList의 상위 컴포넌트인 ModalDetail에서 받는 props가 변경되지 않은 이상 렌더링 되지 않음
+export default memo(CommentList);
