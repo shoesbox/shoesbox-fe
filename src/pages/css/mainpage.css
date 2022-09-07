@@ -21,19 +21,15 @@
   background-repeat: no-repeat;
 }
 .welcome > p {
-  /* border: 1px solid rebeccapurple; */
   text-align: center;
-  text-shadow: 4px 4px 3px #CCE3DE;
-  /* font-family: 'Gothic A1', sans-serif; */
-  /* font-family: 'Poor Story', cursive; */
+  text-shadow: 4px 4px 3px #cce3de;
   font-family: 'IBM Plex Sans KR', sans-serif;
   font-size: 44px;
   font-weight: 600;
   font-style: italic;
-  color: #A4C3B2;
+  color: #a4c3b2;
   margin: 400px auto;
-  white-space: nowrap;
-  /* word-break: keep-all; */
+  padding: 0 20px;
 }
 /* 색상표 */
 /* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */

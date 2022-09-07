@@ -8,13 +8,22 @@
   align-items: center;
   text-align: center;
 }
+
 .detail-titlebox > span > strong {
   margin-right: 10px;
+}
+
+.detail-content {
+  text-align: justify;
+  padding: 0 5px;
 }
 
 .detail-fix-del-btns {
   display: flex;
   justify-content: right;
+}
+.detail-fix-del-btns > button {
+  margin-left: 10px;
 }
 
 .detail-modal {
@@ -47,6 +56,11 @@
   font-weight: 500;
 }
 
+.detail-comment-update {
+  display: inline;
+  width: 90%;
+}
+
 .detail-comment-time {
   font-size: small;
 }
@@ -57,6 +71,7 @@
   flex-direction: row;
   justify-content: center;
 }
+
 .detail-comment-btns > button {
   width: 40px;
   height: 35px;
