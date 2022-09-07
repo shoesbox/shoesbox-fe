@@ -59,7 +59,7 @@ const LoginModal = ({ login, handleCloseLogin }) => {
         );
         setCookie('memberId', token.memberId);
         setCookie('username', 'shoesVillain');
-        alert('로그인 성공');
+        // alert('로그인 성공');
         window.location.reload(true);
       })
       .catch((err) => {

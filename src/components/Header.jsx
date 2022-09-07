@@ -14,12 +14,12 @@ function Header() {
   const navigate = useNavigate();
 
   const cookie = getCookie('accessToken');
-  const [isLoggedin, setisLoggedin] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (cookie !== undefined) {
-      setisLoggedin(true);
+      setisLoggedIn(true);
     } else {
-      setisLoggedin(false);
+      setisLoggedIn(false);
     }
   }, [cookie]);
 
@@ -27,7 +27,8 @@ function Header() {
     deleteCookie('accessToken');
     deleteCookie('refreshToken');
     deleteCookie('memberId');
-    alert('로그아웃 성공');
+    deleteCookie('username');
+    // alert('로그아웃 성공');
     window.location.replace('/');
   };
 
@@ -54,7 +55,7 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              {isLoggedin ? (
+              {isLoggedIn ? (
                 <Nav.Link
                   onClick={() => {
                     navigate('/');
@@ -74,7 +75,7 @@ function Header() {
               </Nav.Link>
             </Nav>
             <Nav>
-              {isLoggedin ? (
+              {isLoggedIn ? (
                 <>
                   {/* 로그인시 */}
                   <Nav.Link
