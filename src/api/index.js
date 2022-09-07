@@ -1,23 +1,25 @@
-import axios from "axios";
-
+import axios from 'axios';
+import { getCookie } from '../shared/cookie';
 
 // 백엔드 연결 시 수정
-// const BASE_URL = "http://localhost:3030";
-const BASE_URL = "http://13.209.77.207";
+// const BASE_URL = "http://localhost:3000";
+const BASE_URL = 'http://13.209.77.207';
 
 
+// 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     credentials: true,
-  }});
+  },
+});
 
 // form-data 형식
 const apiForm = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "Content-Type": "multipart/form-data",
+    'Content-Type': 'multipart/form-data',
   },
 });
 
@@ -25,7 +27,7 @@ const apiForm = axios.create({
 const apiJson = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
@@ -33,16 +35,30 @@ const apiJson = axios.create({
 const apiJsonUTF = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "Content-Type": "application/json;charset=UTF-8",
+    'Content-Type': 'application/json;charset=UTF-8',
   },
 });
 
-// header 부분에 추가하여 보낼 수 있음, 매번 수행
-api.interceptors.request.use((config) => {
-  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyNjEwNDA1fQ.zNbWpViXedFmGKP4zayQtTlPg0f8Hak5QlGxH7LTViyAw4VcM-rpcovvTSMF_fXrsCs1HqJ__2_zTz6L2rD0OQ';
-  config.headers['Authorization'] = `Bearer ${accessToken}`;
-  return config;
+const auth = axios.create({
+  baseURL: BASE_URL,
+
 });
+
+
+// 2. request interceptor
+// 인증이 필요한 요청을 중간에 가로채서 헤더에 토큰 소매넣기 해주기
+api.interceptors.request.use(
+  (config) => {
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    config.headers['Refresh-token'] = refreshToken;
+    return config;
+  },
+  (error) => {
+    console.log(error);
+  }
+);
 
 apiForm.interceptors.request.use((config) => {
   // const accessToken = ;
@@ -56,37 +72,48 @@ apiJson.interceptors.request.use((config) => {
   return config;
 });
 
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    console.log(error);
-  }
-)
 
+// 3. response interceptor
+api.interceptors.response.use(
+  (res) => {
+    return res;
+  },
+  (err) => {
+    console.log(err);
+  }
+);
+
+
+// 4. apis
 export const apis = {
-  // 로그인, 회원가입
-  loginGoogle: () => api.get('/oauth2/authorization/google'),
+  // 로그인, 회원가입 api
+  loginGoogle: () => api.get('/'),
   loginNaver: () => {},
   loginKakao: () => {},
-  signup: () => {},
+  joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
+  loginUser: (userData) => auth.post('/api/members/auth/login', userData),
 
-  // detail Page
-  showDetail : (postId) => api.get(`/api/posts/${postId}`),
-  showComment : (postId) => api.get(`/api/comments/${postId}`),
-  addComment : (postId, content) => api.post(`/api/comments/${postId}`, content),
-  delComment : (commentId) => api.delete(`/api/comments/${commentId}`),
-  putComment : (commentId, payload) => api.put(`/api/comments/${commentId}`, payload),
+  // 메인페이지 일기 조회
+  getTodayMyPosts: () => api.get('/api/posts'),
+  getTargetPosts: (memberId, year, month) =>
+    api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 
-  // write Page
-  writeDaily : (payload) => api.post('/api/posts',payload),
-  
-  // add freinds
-  acceptFriend : (fromMemberId) => api.put(`/api/friends/${fromMemberId}/accept`),
-  refuseFriend : (fromMemberId) => api.put(`/api/friends/${fromMemberId}/refuse`),
-  deleteFriend : (fromMemberId, payload) => api.put(`/api/friends/${fromMemberId}`, payload)
+  // 게시글 상세 및 댓글 api
+  showDetail: (postId) => api.get(`/api/posts/${postId}`),
+  showComment: (postId) => api.get(`/api/comments/${postId}`),
+  addComment: (postId, content) => api.post(`/api/comments/${postId}`, content),
+  delComment: (commentId) => api.delete(`/api/comments/${commentId}`),
+  putComment: (commentId, payload) =>
+    api.put(`/api/comments/${commentId}`, payload),
 
+  // 글작성 api
+  writeDaily: (payload) => api.post('/api/posts', payload),
 
-
-}
+  // 친구 관련 api
+  acceptFriend: (fromMemberId) =>
+    api.put(`/api/friends/${fromMemberId}/accept`),
+  refuseFriend: (fromMemberId) =>
+    api.put(`/api/friends/${fromMemberId}/refuse`),
+  deleteFriend: (fromMemberId, payload) =>
+    api.put(`/api/friends/${fromMemberId}`, payload),
+};

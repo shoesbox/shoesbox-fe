@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 // import Container from 'react-bootstrap/Container';
 import { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
-import { BsFillTelephoneForwardFill } from "react-icons/bs";
+import { BsFillTelephoneForwardFill } from 'react-icons/bs';
 import CommentList from './CommentList';
 import '../pages/css/detailpage.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetailThunk, getJsonCommentThunk, getJsonDetailThunk, getCommentThunk } from '../features/detailSlice';
+import {
+  getDetailThunk,
+  getJsonCommentThunk,
+  getJsonDetailThunk,
+  getCommentThunk,
+} from '../features/detailSlice';
 import { apis } from '../api';
 const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
@@ -30,7 +35,7 @@ const ModalDetail = ({ postId, ...props }) => {
   const content = post.content;
   // const comments = commentList;
 
-const ImageCarousel = () => {
+  const ImageCarousel = () => {
     return (
       <Carousel>
         {images.map((image, idx) => (
@@ -42,39 +47,47 @@ const ImageCarousel = () => {
     );
   };
 
-    return (
-        <Modal {...props} className='detail-modal' centered size='lg' fullscreen='lg-down'>
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <span>
-                <strong>{title}</strong>
-              </span>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="detail-titlebox">
-              <span>
-                <strong>{nickname}</strong> <Button> <BsFillTelephoneForwardFill /> </Button>
-              </span>
-              <span> {date}</span>
-            </div>
-            <hr />
-            <ImageCarousel />
-            <hr />
-            <div>{content}</div>
-            <hr />
-            <div className='detail-fix-del-btns'>
-              <Button>수정하기</Button>
-              <Button>삭제하기</Button>
-            </div>
-            <hr />
-            <CommentList postId={postId}/>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      );
-}
+  return (
+    <Modal
+      {...props}
+      className="detail-modal"
+      centered
+      size="lg"
+      fullscreen="md-down"
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>
+          <div>{title}</div>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="detail-titlebox">
+          <span>
+            <strong>{nickname}</strong>
+            <Button>
+              <BsFillTelephoneForwardFill />
+            </Button>
+          </span>
+          <span>{date}</span>
+        </div>
+        <hr />
+        <ImageCarousel />
+        <hr />
+        <div className="detail-content">{content}</div>
+        {/* <hr /> */}
+        <br />
+        <div className="detail-fix-del-btns">
+          <Button>수정</Button>
+          <Button>삭제</Button>
+        </div>
+        <hr />
+        <CommentList postId={postId} />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
 
 export default ModalDetail;

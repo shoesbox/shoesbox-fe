@@ -9,13 +9,21 @@
   text-align: center;
 }
 
-.detail-titlebox>span>strong {
+.detail-titlebox > span > strong {
   margin-right: 10px;
+}
+
+.detail-content {
+  text-align: justify;
+  padding: 0 5px;
 }
 
 .detail-fix-del-btns {
   display: flex;
   justify-content: right;
+}
+.detail-fix-del-btns > button {
+  margin-left: 10px;
 }
 
 .detail-modal {
@@ -43,7 +51,7 @@
   /* border: 1px solid red; */
 }
 
-.detail-comment-contents>span:nth-child(1) {
+.detail-comment-contents > span:nth-child(1) {
   margin-right: 10px;
   font-weight: 500;
 }
@@ -64,7 +72,7 @@
   justify-content: center;
 }
 
-.detail-comment-btns>button {
+.detail-comment-btns > button {
   width: 40px;
   height: 35px;
   font-size: 18px;

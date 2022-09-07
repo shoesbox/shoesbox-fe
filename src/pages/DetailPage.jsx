@@ -1,8 +1,7 @@
-import * as React from "react";
-import { useRef, useState } from "react";
-import Button from "react-bootstrap/Button";
-import ModalAddFriend from "../components/ModalAddFriend";
-import ModalDetail from "../components/ModalDetail";
+import { useRef, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import ModalAddFriend from '../components/ModalAddFriend';
+import ModalDetail from '../components/ModalDetail';
 
 const DetailPage = () => {
   // const [postId, setPostId] = useState('');

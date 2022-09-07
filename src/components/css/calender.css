@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* min-height: 100vh; */
   margin: 10px auto;
   /* border: 3px solid green; */
 }
@@ -12,19 +11,37 @@
   align-items: center;
   /* border: 1px solid green; */
 }
-.year-month {
-  font-size: 24px;
-  font-weight: 500;
+.year {
+  font-size: 22px;
+  font-weight: 600;
+  font-style: italic;
+  color: silver;
 }
+.month {
+  width: 55px;
+  height: 55px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  font-weight: 500;
+  margin-left: 9%;
+  color: #6b9080;
+  background-color: #eaf4f4;
+}
+
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
 .nav {
   display: flex;
-  /* border: 1px solid #6B9080; */
   border-radius: 5px;
-  background-color: #EAF3EC;
+  background-color: #eaf3ec;
 }
 .nav-btn {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border: none;
   font-size: 16px;
   line-height: 35px;
@@ -36,15 +53,15 @@
 }
 .go-today {
   width: 85px;
-  /* border-left: 1px solid #6B9080;
-  border-right: 1px solid #6B9080; */
-  background-color: #F6FFF8;
+  /* border-left: 1px solid #6B9080; */
+  /* border-right: 1px solid #6B9080; */
+  background-color: #fff;
 }
 .days {
   display: flex;
   align-items: center;
   margin: 20px 0 10px;
-  background-color: #EAF3EC;
+  background-color: #eaf3ec;
   border-radius: 10px;
   height: 40px;
 }
@@ -80,9 +97,9 @@
 }
 .day:nth-child(7n + 1),
 .date:nth-child(7n + 1) {
-  color: #D13E3E;
+  color: #d13e3e;
 }
 .day:nth-child(7n),
 .date:nth-child(7n) {
-  color: #396EE2;
+  color: #396ee2;
 }

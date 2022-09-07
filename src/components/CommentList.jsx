@@ -1,16 +1,16 @@
-import React, { useCallback } from "react";
-import { useRef, useState, useEffect, memo, useMemo } from "react";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
-import Spinner from "react-bootstrap/Spinner";
+import React, { useCallback } from 'react';
+import { useRef, useState, useEffect, memo, useMemo } from 'react';
+import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
 import {
   BsFillEraserFill,
   BsX,
   BsArrowReturnLeft,
   BsFillReplyFill,
-} from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
+} from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addCommentThunk,
   delCommentThunk,
@@ -21,7 +21,7 @@ import {
   postJsonCommentThunk,
   putCommentThunk,
   switchLoading,
-} from "../features/detailSlice";
+} from '../features/detailSlice';
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
@@ -33,16 +33,16 @@ const CommentList = ({ postId }) => {
   const [pick, setPick] = useState();
   const [onEdit, setEdit] = useState(false);
   // const [fixContent, setFixContent] = useState();
-  var tmp = "";
+  var tmp = '';
 
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
-    if (commentRef.current.value.trim() !== "") {
+    if (commentRef.current.value.trim() !== '') {
       // console.log(commentRef.current.value);
       const content = commentRef.current?.value;
       // dispatch(postJsonCommentThunk({ postId, content }));
       dispatch(addCommentThunk({ postId, content }));
-      commentRef.current.value = "";
+      commentRef.current.value = '';
       commentRef.current.focus();
     }
   };
@@ -67,22 +67,22 @@ const CommentList = ({ postId }) => {
   // 그 전 내용과 일치할 경우 팝업 노출
   const onClickFixSubmitBtn = (commentId) => {
     // console.log('변경될 값:', commentId, tmp);
-    if (tmp === "") {
-      alert("내용이 그전과 일치합니다. 댓글 수정을 해주세요!");
+    if (tmp === '') {
+      alert('내용이 그전과 일치합니다. 댓글 수정을 해주세요!');
       return null;
     } else {
       dispatch(switchLoading(true));
       // dispatch(patchJsonCommentThunk({ commentId, content: tmp })).then(
       dispatch(putCommentThunk({ commentId, content: tmp })).then(
         setEdit(false)
-      )
+      );
     }
     //  dispatch(updatePicked(commentId))
   };
 
   // 입력 댓글에 아무것도 입력되지 않으면, 버튼 작동하지 않음
   const onChangeCommentStatus = (e) => {
-    if (e.target.value.trim() !== "") {
+    if (e.target.value.trim() !== '') {
       setComment(false);
     }
   };
@@ -158,7 +158,7 @@ const CommentList = ({ postId }) => {
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
               <span>{comment?.nickname}</span>
-              {loading && ((pick === comment.commentId)) ? (
+              {loading && pick === comment.commentId ? (
                 <Spinner
                   as="span"
                   animation="border"
@@ -172,12 +172,18 @@ const CommentList = ({ postId }) => {
                     commentId={comment?.commentId}
                     content={comment.content}
                   />
-                  <FixInput commentId={comment?.commentId} content={comment.content} />
+                  <FixInput
+                    commentId={comment?.commentId}
+                    content={comment.content}
+                  />
                 </>
               )}
             </div>
             <div className="detail-comment-btns">
-              <FixButton commentId={comment?.commentId} content={comment.content} />
+              <FixButton
+                commentId={comment?.commentId}
+                content={comment.content}
+              />
               <DelButton commentId={comment?.commentId} />
             </div>
           </div>
@@ -193,7 +199,7 @@ const CommentList = ({ postId }) => {
             placeholder="친구에게 안부를 물어봅시다 :)"
             onChange={onChangeCommentStatus}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && !commentStatus) {
+              if (e.key === 'Enter' && !commentStatus) {
                 onClickComment();
               }
             }}
