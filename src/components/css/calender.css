@@ -1,3 +1,6 @@
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
 .calender-container {
   display: flex;
   justify-content: center;
@@ -30,10 +33,6 @@
   color: #6b9080;
   background-color: #eaf4f4;
 }
-
-/* 색상표 */
-/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
-
 .nav {
   display: flex;
   border-radius: 5px;

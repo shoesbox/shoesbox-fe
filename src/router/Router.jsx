@@ -6,6 +6,7 @@ import MainPage from '../pages/MainPage';
 import DetailPage from '../pages/DetailPage';
 import WritePage from '../pages/WritePage';
 import NotFoundPage from '../pages/NotFoundPage';
+import MyPage from '../pages/MyPage';
 
 const Router = () => {
   const cookie = getCookie('accessToken');
@@ -30,6 +31,10 @@ const Router = () => {
         <Route
           path="/write"
           element={isLoggedIn ? <WritePage /> : <Navigate replace to="/" />}
+        />
+        <Route
+          path="/mypage"
+          element={isLoggedIn ? <MyPage /> : <Navigate replace to="/" />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

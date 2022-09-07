@@ -58,6 +58,7 @@ const LoginModal = ({ login, handleCloseLogin }) => {
           token.refreshTokenExpireDate
         );
         setCookie('memberId', token.memberId);
+        setCookie('username', 'shoesVillain');
         alert('로그인 성공');
         window.location.reload(true);
       })

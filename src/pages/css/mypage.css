@@ -1,0 +1,88 @@
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
+.mypage {
+  margin: 50px auto;
+  max-width: 800px;
+  border: 1px solid red;
+}
+.setting-top {
+  display: flex;
+  border: 1px solid rebeccapurple;
+  margin-bottom: 80px;
+}
+.setting-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  border: 1px solid brown;
+}
+.setting-profile > img {
+  width: 150px;
+  border-radius: 100%;
+  margin-bottom: 5px;
+}
+.setting-profile > button {
+  border: none;
+  border-radius: 5px;
+  margin: 5px 0;
+  width: 140px;
+  height: 30px;
+  color: #6B9080;
+  background: none;
+  /* font-weight: 600; */
+}
+.setting-profile > button:nth-child(2) {
+  background: #A4C3B2;
+  color: white;
+}
+.setting-profile > button:nth-child(3):hover {
+  background: #EAF4F4;
+}
+.setting-profile2 {
+  margin: 20px 50px;
+}
+.setting-profile2 > p:nth-child(1) {
+  font-size: 30px;
+  font-weight: 500;
+}
+.setting-profile2 > p:nth-child(3) {
+  color: #6B9080;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.setting-body1 {
+  border: 1px solid pink;
+  margin-bottom: 50px;
+}
+.setting-body1 > div:nth-child(1) {
+  display: flex;
+
+  /* justify-content: space-between; */
+}
+.setting-body1 > div > p:nth-child(1) {
+  font-size: 18px;
+  font-weight: 500;
+  /* border: 1px solid red; */
+  width: 180px;
+}
+.setting-body1 > div > p:nth-child(3) {
+  margin-left: 10px;
+  color: #6B9080;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+.setting-body1 > p {
+  color: gray;
+}
+.setting-body1 > div > button {
+  background: rgb(255, 102, 102);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 100px;
+  height: 30px;
+  font-weight: 500;
+}
