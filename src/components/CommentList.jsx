@@ -8,7 +8,7 @@ import {
   BsFillEraserFill,
   BsX,
   BsArrowReturnLeft,
-  BsFillReplyFill,
+  BsTrash,
 } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -136,11 +136,11 @@ const CommentList = ({ postId }) => {
   const DelButton = ({ commentId }) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickDelBtn(commentId)}>
-        <BsX />
+        <BsTrash />
       </Button>
     ) : (
       <Button onClick={() => setEdit(false)}>
-        <BsFillReplyFill />
+        <BsX />
       </Button>
     );
   };
@@ -189,7 +189,7 @@ const CommentList = ({ postId }) => {
           </div>
         ))
       ) : (
-        <div>댓글이 존재하지 않습니다.</div>
+        <div>첫번째 댓글의 주인공이 되어보세요!</div>
       )}
       <hr />
       <div>
