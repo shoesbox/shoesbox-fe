@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, memo, useMemo } from "react";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 import {
   BsFillEraserFill,
   BsX,
@@ -19,11 +19,13 @@ import {
   getJsonCommentThunk,
   patchJsonCommentThunk,
   postJsonCommentThunk,
+  switchLoading,
 } from "../features/detailSlice";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.detail.commentList);
+  const loading = useSelector((state) => state.detail.loading);
   // const pickedCommentId = useSelector((state) => state.detail.pickedCommentId)
   const commentRef = useRef();
   const [commentStatus, setComment] = useState(true);
@@ -65,11 +67,14 @@ const CommentList = ({ postId }) => {
   const onClickFixSubmitBtn = (commentId) => {
     // console.log('변경될 값:', commentId, tmp);
     if (tmp === "") {
-      alert("댓글 수정을 해주세요!");
+      alert("내용이 그전과 일치합니다. 댓글 수정을 해주세요!");
       return null;
     } else {
-      dispatch(patchJsonCommentThunk({ commentId, content: tmp }));
-      setEdit(false);
+      dispatch(switchLoading(true));
+      dispatch(patchJsonCommentThunk({ commentId, content: tmp })).then(
+        setEdit(false)
+      )
+      
     }
     //  dispatch(updatePicked(commentId))
   };
@@ -93,9 +98,14 @@ const CommentList = ({ postId }) => {
     dispatch(getJsonCommentThunk(postId));
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
+ console.log(loading);
+  }, [loading]);
 
-  },[])
+  // 수정 버튼을 클리하면 비노출
+  const CommentSpan = ({ commentId, content }) => {
+    return !(onEdit && pick === commentId) && <span>{content}</span>;
+  };
 
   // 수정 버튼을 클릭하면 노출
   const FixInput = ({ commentId, content }) => {
@@ -151,17 +161,23 @@ const CommentList = ({ postId }) => {
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
               <span>{comment?.nickname}</span>
-              {/* <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        /> */}
-              {!(onEdit && pick === comment?.id) && (
-                <span>{comment?.content}</span>
+              {loading && ((pick === comment.id)) ? (
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              ) : (
+                <>
+                  <CommentSpan
+                    commentId={comment?.id}
+                    content={comment.content}
+                  />
+                  <FixInput commentId={comment?.id} content={comment.content} />
+                </>
               )}
-              <FixInput commentId={comment?.id} content={comment?.content} />
             </div>
             <div className="detail-comment-btns">
               <FixButton commentId={comment?.id} content={comment.content} />

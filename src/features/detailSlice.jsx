@@ -7,6 +7,7 @@ const initialState = {
   commentList: [],
   userInfo: [],
   pickedCommentId: null,
+  loading:false,
 };
 
 export const getDetailThunk = createAsyncThunk(
@@ -173,6 +174,9 @@ const detailSlice = createSlice({
     },
     updatePicked:(state, action) =>{
       state.pickedCommentId = action.payload;
+    },
+    switchLoading:(state, action) =>{
+      state.loading = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -204,8 +208,10 @@ const detailSlice = createSlice({
       for (var i = 0; i < commentList.length; i++) { // 배열 arr의 모든 요소의 인덱스(index)를 출력함.
         commentList[idx]['content'] = fixedComment;
       }
+      state.loading = false;
+      
       // console.log('extraReducers', action.payload.id, 'idx 출력: ', idx);
-
+      // return('Loading...Finished');
   })
     builder.addCase(getCommentThunk.fulfilled, (state, action)=>{
       // console.log('getComment extraReducers', action.payload);
@@ -227,5 +233,5 @@ const detailSlice = createSlice({
   },
 });
 
-export const { loadPost, updatePicked} = detailSlice.actions;
+export const { loadPost, updatePicked, switchLoading} = detailSlice.actions;
 export default detailSlice.reducer;
