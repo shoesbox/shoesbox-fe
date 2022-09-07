@@ -130,7 +130,7 @@ const WritePage = () => {
 
   return (
     <Container fluid className="write-wrap">
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form validated={validated} onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label className="subtitle">제목 😎</Form.Label>
           <Form.Control
@@ -198,9 +198,9 @@ const WritePage = () => {
             ref={contentRef}
             // hidden
           />
-          <Form.Control.Feedback type="invalid">
+          {/* <Form.Control.Feedback type="invalid">
             일기내용을 적어주세요.
-          </Form.Control.Feedback>
+          </Form.Control.Feedback> */}
         </Form.Group>
         <br />
         <Button

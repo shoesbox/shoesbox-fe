@@ -19,6 +19,20 @@ const getTmpThunk = createAsyncThunk(
   }
 );
 
+const addFriendThunk = createAsyncThunk(
+  '/api/addfriendthunk',
+  async (postId, thunkAPI) => {
+    try {
+      const data = await apis.getDetail(postId);
+      const postDetail = data.data.data;
+      // console.log('thunk',data.data.data)
+      return postDetail;
+    } catch (err) {
+      return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
+    }
+  }
+);
+
 const friendSlice = createSlice({
   name: 'friend',
   initialState,

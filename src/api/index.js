@@ -87,7 +87,7 @@ api.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 로그인, 회원가입 api
-  loginGoogle: () => api.get('/'),
+  loginGoogle: () => api.get('/oauth2/authorization/google'),
   loginNaver: () => {},
   loginKakao: () => {},
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
@@ -110,10 +110,11 @@ export const apis = {
   writeDaily: (payload) => api.post('/api/posts', payload),
 
   // 친구 관련 api
+  addFriend:(payload) => api.post('/api/friends', payload),
   acceptFriend: (fromMemberId) =>
     api.put(`/api/friends/${fromMemberId}/accept`),
   refuseFriend: (fromMemberId) =>
-    api.put(`/api/friends/${fromMemberId}/refuse`),
+    api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (fromMemberId, payload) =>
-    api.put(`/api/friends/${fromMemberId}`, payload),
+    api.delete(`/api/friends/${fromMemberId}`, payload),
 };
