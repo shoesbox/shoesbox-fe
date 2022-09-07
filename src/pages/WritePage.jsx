@@ -69,10 +69,10 @@ const WritePage = () => {
         nickname,
         title: titleRef.current.value,
         // images : imageRef.current.files,
-        images: base64s,
-        content: contentRef.current.value,
-        date: new Date(),
-      };
+        images : base64s,
+        content : contentRef.current.value,
+      }
+
       console.log(formDataTxt);
       setValidated(true);
     }
@@ -103,6 +103,8 @@ const WritePage = () => {
     // console.log(previewImages);
   }, [onChangePic]);
 
+  // 파일이 변경될 때 마다 아래와 같이, 새로 불러들이게 되며
+  // 리렌더링이 진행
   useEffect(() => {
     if (files) {
       setBase64s([]);
@@ -121,8 +123,8 @@ const WritePage = () => {
   }, [files]);
 
   useEffect(() => {
-    if (formData !== (null || undefined)) {
-      dispatch(postJsonDetailThunk({ formDataTxt }));
+    if(formData!==(null||undefined||{})){
+    dispatch(postJsonDetailThunk({formDataTxt}));
     }
   }, []);
 

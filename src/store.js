@@ -1,10 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import detailReducer from './features/detailSlice';
-import writeReducer from './features/writeSlice';
+import friendReducer from "./features/friendSlice";
+import writeReducer from "./features/writeSlice";
+
 
 const rootReducer = combineReducers({
   detail: detailReducer,
   write: writeReducer,
+  friend: friendReducer
 });
 
 const store = configureStore({ reducer: rootReducer });

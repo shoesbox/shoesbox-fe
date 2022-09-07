@@ -110,35 +110,70 @@
       "postId": 5,
       "nickname": "Sunny",
       "memberId": 3,
-      "content": "데이터 문제 심각하당 진짜...."
+      "content": "우엥....잘앙데 뿌엥?"
     },
     {
       "id": "2022-09-02T04:30:42.093Z",
       "postId": 5,
       "nickname": "Sunny",
       "memberId": 3,
-      "content": "입력은 되는데 지우면 다날라가...."
-    },
-    {
-      "id": "2022-09-05T11:19:37.027Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "ㅠㅠ"
-    },
-    {
-      "id": "2022-09-05T11:30:32.535Z",
-      "postId": 5,
-      "nickname": "Sunny",
-      "memberId": 3,
-      "content": "후 이제 되는건강"
+      "content": "뿌에에엥에에에ㅔ케케케켈에ㅔ레엥"
     },
     {
       "id": "2022-09-05T11:30:37.314Z",
       "postId": 5,
       "nickname": "Sunny",
       "memberId": 3,
-      "content": "힝.....된당....."
+      "content": "흐이히히ㅣ히히히ㅣ히이히이ㅣ힝 너무 기부니가 좋자나아ㅛ요용!!!"
+    },
+    {
+      "id": "2022-09-06T15:59:02.998Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "ㄱㄱㄱ손이 많이 갔습니당"
+    },
+    {
+      "id": "2022-09-06T15:59:05.034Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "팻치로 변경 할 수있어서 그나마 다행임니다. 댓글 삭제기능은 js 파일 건드려야해서 손도 안댔지만영 ㅆ_ㅆ"
+    },
+    {
+      "id": "2022-09-06T19:21:53.261Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "글씨를 길게 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
+    },
+    {
+      "id": "2022-09-07T00:14:48.364Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "댓글 검색은 인덱스별로 들어가서"
+    },
+    {
+      "id": "2022-09-07T00:14:57.024Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "잉 아닌가?ㄱㄱㄱㄱㄱㄱㄱㄱㄱ"
+    },
+    {
+      "id": "2022-09-07T00:15:08.783Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "아래로 갈수록 딜레이 있는거 같은데"
+    },
+    {
+      "id": "2022-09-07T00:56:24.009Z",
+      "postId": 5,
+      "nickname": "Sunny",
+      "memberId": 3,
+      "content": "인덱스를 차례대로 탐색하는 것이 맞능강ㅇㅇ???"
     }
   ]
 }

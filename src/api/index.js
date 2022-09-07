@@ -13,6 +13,7 @@ const api = axios.create({
     credentials: true,
   },
 });
+
 // form-data 형식
 const apiForm = axios.create({
   baseURL: BASE_URL,
@@ -20,6 +21,7 @@ const apiForm = axios.create({
     'Content-Type': 'multipart/form-data',
   },
 });
+
 // json data 형식
 const apiJson = axios.create({
   baseURL: BASE_URL,
@@ -27,6 +29,7 @@ const apiJson = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
 // json data -utf 형식
 const apiJsonUTF = axios.create({
   baseURL: BASE_URL,
@@ -52,6 +55,7 @@ api.interceptors.request.use(
     console.log(error);
   }
 );
+
 
 apiForm.interceptors.request.use((config) => {
   // const accessToken = ;
@@ -89,14 +93,19 @@ export const apis = {
   getTargetPosts: (memberId, year, month) =>
     api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 
-  // write Page
-  writeDaily: (payload) => api.post('/api/posts', payload),
+  // detail Page
+  showDetail : (postId) => api.get(`/api/posts/${postId}`),
+  showComment : (postId) => api.get(`/api/comments/${postId}`),
+  addComment : (postId, content) => api.post(`/api/comments/${postId}`, content),
+  delComment : (commentId) => api.delete(`/api/comments/${commentId}`),
+  putComment : (commentId, payload) => api.put(`/api/comments/${commentId}`, payload),
 
+  // write Page
+  writeDaily : (payload) => api.post('/api/posts',payload),
+  
   // add freinds
-  acceptFriend: (fromMemberId) =>
-    api.put(`/api/friends/${fromMemberId}/accept`),
-  refuseFriend: (fromMemberId) =>
-    api.put(`/api/friends/${fromMemberId}/refuse`),
-  deleteFriend: (fromMemberId, payload) =>
-    api.put(`/api/friends/${fromMemberId}`, payload),
+  acceptFriend : (fromMemberId) => api.put(`/api/friends/${fromMemberId}/accept`),
+  refuseFriend : (fromMemberId) => api.put(`/api/friends/${fromMemberId}/refuse`),
+  deleteFriend : (fromMemberId, payload) => api.put(`/api/friends/${fromMemberId}`, payload)
+
 };

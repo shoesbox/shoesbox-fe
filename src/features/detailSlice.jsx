@@ -6,6 +6,8 @@ const initialState = {
   post: {},
   commentList: [],
   userInfo: [],
+  pickedCommentId: null,
+  loading:false,
 };
 
 export const getDetailThunk = createAsyncThunk(
@@ -100,6 +102,24 @@ export const postJsonCommentThunk = createAsyncThunk(
     }
   );
 
+  export const patchJsonCommentThunk = createAsyncThunk(
+    "api/posts/comment/patch/json",
+    async ({commentId, content}, thunkAPI) => {
+      try {
+        const data = await axios.patch(
+          `http://localhost:3030/comments/${commentId}`,{
+              content : content
+          }
+        );
+        console.log("patchJsonCommentThunk", data.data, commentId);
+        return data.data;
+      } catch (err) {
+        return thunkAPI.rejectWithValue("patchCommentThunkErr", err.response.data);
+      }
+    }
+  );
+
+
   export const getCommentThunk = createAsyncThunk(
     "api/commentthunk/get",
     async (postId, thunkAPI) => {
@@ -136,10 +156,24 @@ export const postJsonCommentThunk = createAsyncThunk(
     async ( commentId, thunkAPI) => {
       try {
        const data = await apis.delComment(commentId);
-        console.log("delCommentThunk", data.data.data, commentId);
+        // console.log("delCommentThunk", data.data.data, commentId);
         return commentId;
       } catch (err) {
         return thunkAPI.rejectWithValue("delCommentThunkErr", err.response.data);
+      }
+    }
+  );
+
+  
+  export const putCommentThunk = createAsyncThunk(
+    "api/commentthunk/put",
+    async ( {commentId, content}, thunkAPI) => {
+      try {
+       const data = await apis.putComment(commentId,{content})
+        // console.log("putCommentThunk", data.data.data, commentId);
+        return {commentId, content};
+      } catch (err) {
+        return thunkAPI.rejectWithValue("putCommentThunkErr", err.response.data);
       }
     }
   );
@@ -152,6 +186,12 @@ const detailSlice = createSlice({
     loadPost: (state, action) => {
       state.post = action.payload;
     },
+    updatePicked:(state, action) =>{
+      state.pickedCommentId = action.payload;
+    },
+    switchLoading:(state, action) =>{
+      state.loading = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getDetailThunk.fulfilled, (state, action) => {
@@ -170,6 +210,21 @@ const detailSlice = createSlice({
         const newComment = action.payload;
         state.commentList = [...state.commentList, newComment]
     })
+    builder.addCase(patchJsonCommentThunk.fulfilled, (state, action)=>{
+      const commentList = state.commentList;
+      const commentId = action.payload.id;
+      const fixedComment = action.payload.content;
+      // 배열에서 index를 찾아주기
+      const findCommentId = (element) =>{
+       if((element?.id)===commentId) return(true)
+      }
+      const idx = commentList.findIndex(findCommentId);
+      for (var i = 0; i < commentList.length; i++) { // 배열 arr의 모든 요소의 인덱스(index)를 출력함.
+        commentList[idx]['content'] = fixedComment;
+      }
+      state.loading = false;
+      // console.log('extraReducers', action.payload.id, 'idx 출력: ', idx);
+  })
     builder.addCase(getCommentThunk.fulfilled, (state, action)=>{
       // console.log('getComment extraReducers', action.payload);
       state.commentList = action.payload;
@@ -187,8 +242,23 @@ const detailSlice = createSlice({
       })
       state.commentList = newCommentList;
     })
+    builder.addCase(putCommentThunk.fulfilled, (state, action)=>{
+      const commentList = state.commentList;
+      const commentId = action.payload.commentId;
+      const fixedComment = action.payload.content;
+      // 배열에서 index를 찾아주기
+      const findCommentId = (element) =>{
+       if((element?.commentId)===commentId) return(true)
+      }
+      const idx = commentList.findIndex(findCommentId);
+      for (var i = 0; i < commentList.length; i++) { // 배열 arr의 모든 요소의 인덱스(index)를 출력함.
+        commentList[idx]['content'] = fixedComment;
+      }
+      state.loading = false;
+      // console.log('extraReducers', action.payload.id, 'idx 출력: ', idx);
+  })
   },
 });
 
-export const { loadPost } = detailSlice.actions;
+export const { loadPost, updatePicked, switchLoading} = detailSlice.actions;
 export default detailSlice.reducer;
