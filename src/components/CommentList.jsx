@@ -19,6 +19,7 @@ import {
   getJsonCommentThunk,
   patchJsonCommentThunk,
   postJsonCommentThunk,
+  putCommentThunk,
   switchLoading,
 } from "../features/detailSlice";
 
@@ -31,7 +32,7 @@ const CommentList = ({ postId }) => {
   const [commentStatus, setComment] = useState(true);
   const [pick, setPick] = useState();
   const [onEdit, setEdit] = useState(false);
-  const [fixContent, setFixContent] = useState();
+  // const [fixContent, setFixContent] = useState();
   var tmp = "";
 
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
@@ -39,8 +40,8 @@ const CommentList = ({ postId }) => {
     if (commentRef.current.value.trim() !== "") {
       // console.log(commentRef.current.value);
       const content = commentRef.current?.value;
-      dispatch(postJsonCommentThunk({ postId, content }));
-      // dispatch(addCommentThunk({ postId, content }));
+      // dispatch(postJsonCommentThunk({ postId, content }));
+      dispatch(addCommentThunk({ postId, content }));
       commentRef.current.value = "";
       commentRef.current.focus();
     }
@@ -48,9 +49,9 @@ const CommentList = ({ postId }) => {
 
   // 댓글 삭제 버튼 눌렀을 때
   const onClickDelBtn = (commentId) => {
-    console.log(commentId);
+    // console.log(commentId);
     // dispatch(delJsonCommentThunk(commentId))
-    // dispatch(delCommentThunk(commentId));
+    dispatch(delCommentThunk(commentId));
   };
 
   // 댓글 수정 버튼 눌렀을 때, 수정 가능
@@ -71,10 +72,10 @@ const CommentList = ({ postId }) => {
       return null;
     } else {
       dispatch(switchLoading(true));
-      dispatch(patchJsonCommentThunk({ commentId, content: tmp })).then(
+      // dispatch(patchJsonCommentThunk({ commentId, content: tmp })).then(
+      dispatch(putCommentThunk({ commentId, content: tmp })).then(
         setEdit(false)
       )
-      
     }
     //  dispatch(updatePicked(commentId))
   };
@@ -93,16 +94,7 @@ const CommentList = ({ postId }) => {
     // console.log('변경될 값:',  tmp);
   };
 
-  useEffect(() => {
-    // dispatch(getCommentThunk(postId));
-    dispatch(getJsonCommentThunk(postId));
-  }, []);
-
-  useEffect(() => {
- console.log(loading);
-  }, [loading]);
-
-  // 수정 버튼을 클리하면 비노출
+  // 수정 버튼을 클릭하면 비노출
   const CommentSpan = ({ commentId, content }) => {
     return !(onEdit && pick === commentId) && <span>{content}</span>;
   };
@@ -124,7 +116,7 @@ const CommentList = ({ postId }) => {
     }
   };
 
-  // 수정 버튼을 클릭하기전, 클릭 후가 나뉨
+  // 수정 버튼을 클릭하기전, 클릭 후가 나뉨 - 수정버튼
   const FixButton = ({ commentId, content }) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickFixBtn(commentId)}>
@@ -140,7 +132,7 @@ const CommentList = ({ postId }) => {
     );
   };
 
-  // 수정 버튼을 클릭하기전, 클릭 후가 나뉨
+  // 수정 버튼을 클릭하기전, 클릭 후가 나뉨 - 삭제버튼
   const DelButton = ({ commentId }) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickDelBtn(commentId)}>
@@ -153,15 +145,20 @@ const CommentList = ({ postId }) => {
     );
   };
 
+  // 댓글리스트를 불러옴
+  useEffect(() => {
+    dispatch(getCommentThunk(postId));
+    // dispatch(getJsonCommentThunk(postId));
+  }, []);
+
   return (
     <div className="detail-comments-wrap">
       {comments?.length !== 0 ? (
         comments?.map((comment, idx) => (
-          // 배열 중 컴포넌트만, 변경해야하는데 클릭했을 시에, 그 컴포넌트와 연결되어야함.
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
               <span>{comment?.nickname}</span>
-              {loading && ((pick === comment.id)) ? (
+              {loading && ((pick === comment.commentId)) ? (
                 <Spinner
                   as="span"
                   animation="border"
@@ -172,16 +169,16 @@ const CommentList = ({ postId }) => {
               ) : (
                 <>
                   <CommentSpan
-                    commentId={comment?.id}
+                    commentId={comment?.commentId}
                     content={comment.content}
                   />
-                  <FixInput commentId={comment?.id} content={comment.content} />
+                  <FixInput commentId={comment?.commentId} content={comment.content} />
                 </>
               )}
             </div>
             <div className="detail-comment-btns">
-              <FixButton commentId={comment?.id} content={comment.content} />
-              <DelButton commentId={comment?.id} />
+              <FixButton commentId={comment?.commentId} content={comment.content} />
+              <DelButton commentId={comment?.commentId} />
             </div>
           </div>
         ))
@@ -214,5 +211,4 @@ const CommentList = ({ postId }) => {
   );
 };
 
-// commentList의 상위 컴포넌트인 ModalDetail에서 받는 props가 변경되지 않은 이상 렌더링 되지 않음
 export default memo(CommentList);

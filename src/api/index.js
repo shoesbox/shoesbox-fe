@@ -2,8 +2,8 @@ import axios from "axios";
 
 
 // 백엔드 연결 시 수정
-const BASE_URL = "http://localhost:3030";
-// const BASE_URL = "http://13.209.77.207";
+// const BASE_URL = "http://localhost:3030";
+const BASE_URL = "http://13.209.77.207";
 
 
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -39,7 +39,7 @@ const apiJsonUTF = axios.create({
 
 // header 부분에 추가하여 보낼 수 있음, 매번 수행
 api.interceptors.request.use((config) => {
-  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyNTE0ODUzfQ.HsBcFIelZ8OH6BWKKUrD1MViWinaCyb7GXpEl9tgDJ8imkuXxvLI3N_UH1hXAbHrHE9RD4-PLHI15EdL6gcJXA';
+  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyNjAwNzEyfQ.AFrAUu2303tShr72DijSa_aEIDEQcTMiR8P_QeM8YrKIgnAK9dc1T3FikkFjnCKYuBzmz20yc6vRXry3kpVzjg';
   config.headers['Authorization'] = `Bearer ${accessToken}`;
   return config;
 });
