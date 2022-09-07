@@ -1,8 +1,9 @@
+import './css/loginmodal.css';
+import './css/header.css';
 import { useEffect, useState } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import LoginModal from './LoginModal';
-import './css/loginmodal.css';
 import { getCookie, deleteCookie } from '../shared/cookie';
 
 function Header() {
@@ -25,6 +26,7 @@ function Header() {
   const handleLogout = () => {
     deleteCookie('accessToken');
     deleteCookie('refreshToken');
+    deleteCookie('memberId');
     alert('로그아웃 성공');
     window.location.replace('/');
   };
@@ -45,7 +47,7 @@ function Header() {
             onClick={() => {
               navigate('/');
             }}
-            style={{ cursor: 'pointer' }}
+            className="brand-logo"
           >
             SHOES 🍭 BOX
           </Navbar.Brand>
@@ -57,6 +59,7 @@ function Header() {
                   onClick={() => {
                     navigate('/');
                   }}
+                  className="menu"
                 >
                   My Moments
                 </Nav.Link>
@@ -65,6 +68,7 @@ function Header() {
                 onClick={() => {
                   navigate('/aboutus');
                 }}
+                className="menu"
               >
                 About us
               </Nav.Link>
@@ -77,15 +81,20 @@ function Header() {
                     onClick={() => {
                       navigate('/mypage');
                     }}
+                    className="menu"
                   >
                     My Page
                   </Nav.Link>
-                  <Nav.Link onClick={handleLogout}>Log Out</Nav.Link>
+                  <Nav.Link onClick={handleLogout} className="menu">
+                    Log Out
+                  </Nav.Link>
                 </>
               ) : (
                 <>
                   {/* 비로그인시 */}
-                  <Nav.Link onClick={handleShowLogin}>Log In</Nav.Link>
+                  <Nav.Link onClick={handleShowLogin} className="menu">
+                    Log In
+                  </Nav.Link>
                 </>
               )}
             </Nav>

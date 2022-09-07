@@ -6,16 +6,32 @@ import { getCookie } from '../shared/cookie';
 const BASE_URL = 'http://13.209.77.207';
 
 // 1. Axios instance 생성
+// default, 보내지는 형식에 따라 알아서 content-type이 정해짐
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
+    credentials: true,
   },
 });
-const apiMulti = axios.create({
+// form-data 형식
+const apiForm = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'multipart/form-data',
+  },
+});
+// json data 형식
+const apiJson = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+// json data -utf 형식
+const apiJsonUTF = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json;charset=UTF-8',
   },
 });
 const auth = axios.create({
@@ -37,18 +53,17 @@ api.interceptors.request.use(
   }
 );
 
-apiMulti.interceptors.request.use(
-  (config) => {
-    const accessToken = getCookie('accessToken');
-    const refreshToken = getCookie('refreshToken');
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
-    config.headers['Refresh-token'] = refreshToken;
-    return config;
-  },
-  (error) => {
-    console.log(error);
-  }
-);
+apiForm.interceptors.request.use((config) => {
+  // const accessToken = ;
+  // config.headers['Authorization'] = `Bearer ${accessToken}`;
+  return config;
+});
+
+apiJson.interceptors.request.use((config) => {
+  // const accessToken = ;
+  // config.headers['Authorization'] = `Bearer ${accessToken}`;
+  return config;
+});
 
 // 3. response interceptor
 api.interceptors.response.use(
@@ -69,11 +84,19 @@ export const apis = {
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
   loginUser: (userData) => auth.post('/api/members/auth/login', userData),
 
-  // detail Page
-  showDetail: (postId) => api.get(`/posts/${postId}`),
-  showComment: (postId) => api.get(`comments/${postId}`),
-  addComment: (postId, content) => api.post(`/comments/${postId}`, content),
-  delComment: (commentId) => api.delete(`/comments/${commentId}`),
-  putComment: (commentId, payload) =>
-    api.put(`/comments/${commentId}`, payload),
+  // 메인페이지 일기 조회
+  getTodayMyPosts: () => api.get('/api/posts'),
+  getTargetPosts: (memberId, year, month) =>
+    api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
+
+  // write Page
+  writeDaily: (payload) => api.post('/api/posts', payload),
+
+  // add freinds
+  acceptFriend: (fromMemberId) =>
+    api.put(`/api/friends/${fromMemberId}/accept`),
+  refuseFriend: (fromMemberId) =>
+    api.put(`/api/friends/${fromMemberId}/refuse`),
+  deleteFriend: (fromMemberId, payload) =>
+    api.put(`/api/friends/${fromMemberId}`, payload),
 };

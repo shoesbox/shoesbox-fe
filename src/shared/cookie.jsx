@@ -6,12 +6,12 @@ const cookies = new Cookies();
 // 쿠키에 저장할 때
 // export const setCookie = (name, value, exp = 5) => {
 export const setCookie = (name, value, exp) => {
-  // let date = new Date();
+  let date = new Date();
+  // 백에서 만료시간을 설정하지 않은 경우 저장 시 만료시간 설정
   // date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-  // date.setTime(exp);
-  // document.cookie = `${name}=${value}; expires=${date.toUTCString()}`;
-  document.cookie = `${name}=${value}; expires=${exp}`;
-  // return cookies.set(name, value, { ...option });
+  date.setTime(exp);
+  document.cookie = `${name}=${value}; expires=${date.toUTCString()}`;
+  // return cookies.set(name, value, { expires: date.toUTCString() });
 };
 
 // 쿠키에 저장한 거 쓸 때

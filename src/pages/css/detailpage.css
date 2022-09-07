@@ -12,9 +12,17 @@
   margin-right: 10px;
 }
 
+.detail-content {
+  text-align: justify;
+  padding: 0 5px;
+}
+
 .detail-fix-del-btns {
   display: flex;
   justify-content: right;
+}
+.detail-fix-del-btns > button {
+  margin-left: 10px;
 }
 
 .detail-modal {

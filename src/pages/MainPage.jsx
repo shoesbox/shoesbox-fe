@@ -1,29 +1,30 @@
 import './css/mainpage.css';
+import { useState, useEffect } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import Calendar from '../components/Calendar';
 import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Calender2 } from '../components/Calendar2';
-import { getCookie } from '../shared/cookie';
+// import { getCookie } from '../shared/cookie';
+import Cookies from 'universal-cookie';
 
 const MainPage = () => {
-  const navigate = useNavigate();
+  // const cookie = getCookie('accessToken');
+  const cookies = new Cookies();
+  const cookie = cookies.get('accessToken');
 
-  const cookie = getCookie('accessToken');
-  const [isLoggedin, setisLoggedin] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (cookie !== undefined) {
-      setisLoggedin(true);
+      setisLoggedIn(true);
     } else {
-      setisLoggedin(false);
+      setisLoggedIn(false);
     }
   }, [cookie]);
 
   return (
     <>
-      {isLoggedin ? (
+      {isLoggedIn ? (
         <>
           {/* <div className="wrap">
             <Row xs={2} sm={3} md={6} className="g-2 calendar">
@@ -57,7 +58,7 @@ const MainPage = () => {
         </>
       ) : (
         <div className="welcome">
-          <p>You can use it after log in ✨</p>
+          <p>You can use it after Log in ✨</p>
         </div>
       )}
     </>
