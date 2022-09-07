@@ -39,7 +39,7 @@ const apiJsonUTF = axios.create({
 
 // header 부분에 추가하여 보낼 수 있음, 매번 수행
 api.interceptors.request.use((config) => {
-  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyNjAwNzEyfQ.AFrAUu2303tShr72DijSa_aEIDEQcTMiR8P_QeM8YrKIgnAK9dc1T3FikkFjnCKYuBzmz20yc6vRXry3kpVzjg';
+  const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3MgVG9rZW4iLCJlbWFpbCI6ImFAYSIsInVpZCI6IjYiLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjYyNjEwNDA1fQ.zNbWpViXedFmGKP4zayQtTlPg0f8Hak5QlGxH7LTViyAw4VcM-rpcovvTSMF_fXrsCs1HqJ__2_zTz6L2rD0OQ';
   config.headers['Authorization'] = `Bearer ${accessToken}`;
   return config;
 });
