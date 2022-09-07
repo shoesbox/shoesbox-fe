@@ -143,6 +143,7 @@ const WritePage = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <br />
+        <br />
         <Form.Group>
           <Form.Label className="subtitle">오늘의 포토제닉 📸</Form.Label>
           <InputGroup hasValidation>

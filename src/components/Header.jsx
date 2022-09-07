@@ -26,6 +26,7 @@ function Header() {
   const handleLogout = () => {
     deleteCookie('accessToken');
     deleteCookie('refreshToken');
+    deleteCookie('memberId');
     alert('로그아웃 성공');
     window.location.replace('/');
   };

@@ -25,9 +25,7 @@ const ModalAddFriend = (props) => {
     <Modal className="detail-modal" {...props} centered size="md">
       <Modal.Header closeButton>
         <Modal.Title>
-          <span>
-            <strong>친구추가</strong>
-          </span>
+          <div>친구 추가</div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -44,8 +42,8 @@ const ModalAddFriend = (props) => {
         <AddMemberList />
       </Modal.Body>
       {/* <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
-          </Modal.Footer> */}
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer> */}
     </Modal>
   );
 };
