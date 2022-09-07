@@ -12,7 +12,7 @@ const Calendar = () => {
   // 달력에 그려주는 state
   const [dates, setDates] = useState([]);
   // 달력 데이터 담아두기용
-  const [prevTray, setPrevTray] = useState({});
+  const [prevTray, setPrevTray] = useState();
   const [thisTray, setThisTray] = useState({});
   const [nextTray, setNextTray] = useState({});
 
@@ -24,8 +24,15 @@ const Calendar = () => {
     };
   }, [date]);
 
+  // 임시 테스트용 
+  const prevMonthData = async () => {
+    const response = await axios.get('http://localhost:5001/data');
+    console.log(response?.data.content)
+    setPrevTray(response?.data.content)
+  }
+
   // 달력에 쓸 월, 일 계산용
-  const calcDate = () => {
+  const calcDate = (setPrevTray) => {
     // 지난 달 마지막 Date, 이번 달 마지막 Date
     const prevLast = new Date(date.getFullYear(), date.getMonth(), 0);
     const thisLast = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -42,26 +49,27 @@ const Calendar = () => {
     const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
     const nextDates = [];
 
-    const prevMonthData = async () => {
-      const response = await apis.getTargetPosts(memberId, viewDate.year, viewDate.month);
-      const tray = response?.data.data.content;
-      setPrevTray({prev: response?.data.data.content})
-      console.log('here12', prevTray);
-    };
+    // 백엔드에서 imageurl 받아오기
+    // const prevMonthData = async (memberId) => {
+    //   const response = await apis.getTargetPosts(memberId, viewDate.year, viewDate.month);
+    //   const tray = response?.data.data.content;
+    //   setPrevTray({prev: response?.data.data.content})
+    //   console.log('here12', prevTray);
+    // };
 
-    const thisMonthData = async () => {
-      const response = await apis.getTargetPosts(memberId, viewDate.year, (viewDate.month+1));
-      const tray = response?.data.data.content;
-      setThisTray({this: response?.data.data.content})
-      console.log('here12', thisTray);
-    };
+    // const thisMonthData = async () => {
+    //   const response = await apis.getTargetPosts(memberId, viewDate.year, (viewDate.month+1));
+    //   const tray = response?.data.data.content;
+    //   setThisTray({this: response?.data.data.content})
+    //   console.log('here12', thisTray);
+    // };
 
-    const nextMonthData = async () => {
-      const response = await apis.getTargetPosts(memberId, viewDate.year, (viewDate.month+2));
-      const tray = response?.data.data.content;
-      setNextTray({next: response?.data.data.content})
-      console.log('here12', nextTray);
-    };
+    // const nextMonthData = async () => {
+    //   const response = await apis.getTargetPosts(memberId, viewDate.year, (viewDate.month+2));
+    //   const tray = response?.data.data.content;
+    //   setNextTray({next: response?.data.data.content})
+    //   console.log('here12', nextTray);
+    // };
     
 
     // prevDates 계산
@@ -77,12 +85,17 @@ const Calendar = () => {
     }
 
     // prevDates에 tray image데이터 돌려주기
+
+    for (let i = 0; i < prevDates.length; i++) {
+      
+    }
     let newPrev = prevDates.reduce((arr, v) => {
-      v == prevTray.prev.createdDay 
+      v == prevTray?.createdDay 
       ? arr.push({day:v, image: prevTray?.prev.thumbnailUrl})
       : arr.push({day:v})
       return arr;
     }, [])
+    
 
     // thisDates에 tray image데이터 돌려주기
     // thisDates.reduce((arr, v) => {
@@ -122,6 +135,8 @@ const Calendar = () => {
 
   useEffect(() => {
     setDates(calcDate());
+    prevMonthData();
+    console.log("동기성 테스트1", prevTray)
   }, [date]);
 
   const navigate = useNavigate();
@@ -193,7 +208,7 @@ const Calendar = () => {
                 style={{ background: `url(${date.image})`, backgroundSize: 'cover' }}
                 onClick={() => navigate('/detail')}
               >
-                <span>{date.day}</span>
+                <span>{date}</span>
               </div>
             ))}
           </div>
