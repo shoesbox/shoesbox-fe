@@ -1,17 +1,18 @@
 import './css/mainpage.css';
+import { useState, useEffect } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import Calendar from '../components/Calendar';
 import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Calender2 } from '../components/Calendar2';
-import { getCookie } from '../shared/cookie';
+// import { getCookie } from '../shared/cookie';
+import Cookies from 'universal-cookie';
 
 const MainPage = () => {
-  const navigate = useNavigate();
+  // const cookie = getCookie('accessToken');
+  const cookies = new Cookies();
+  const cookie = cookies.get('accessToken');
 
-  const cookie = getCookie('accessToken');
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (cookie !== undefined) {
