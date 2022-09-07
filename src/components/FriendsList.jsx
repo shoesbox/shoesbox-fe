@@ -1,12 +1,12 @@
 import './css/friendslist.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { BsPlusLg } from 'react-icons/bs';
 import ModalAddFriend from '../components/ModalAddFriend';
 
 const FriendsList = () => {
   const [show, setShow] = useState(false);
-  const handleClose2 = () => setShow(false);
+  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
@@ -21,7 +21,7 @@ const FriendsList = () => {
       </Button>
       <ModalAddFriend
         show={show}
-        onHide={handleClose2}
+        onHide={handleClose}
         backdrop="static"
         keyboard={false}
       />
