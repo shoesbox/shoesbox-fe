@@ -56,10 +56,7 @@
 }
 
 .submitBtn {
-  /* display: flex;
-  justify-content: flex-end; */
   width: 85px;
-  font-weight: 500;
   margin-left: 10px;
 }
 
