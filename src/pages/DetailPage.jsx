@@ -1,6 +1,5 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import ModalAddFriend from '../components/ModalAddFriend';
 import ModalDetail from '../components/ModalDetail';
 
 const DetailPage = () => {
@@ -8,7 +7,7 @@ const DetailPage = () => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  const tempPostId = 5;
+  const tempPostId = 3;
 
   return (
     <>
