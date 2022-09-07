@@ -36,16 +36,17 @@
 }
 .setting-profile > button:nth-child(2) {
   background: #A4C3B2;
-  color: white;
+  color: #fff;
 }
 .setting-profile > button:nth-child(3):hover {
   background: #EAF4F4;
 }
 .setting-profile2 {
   margin: 20px 50px;
+  border: 1px solid black;
 }
-.setting-profile2 > p:nth-child(1) {
-  font-size: 30px;
+.setting-profile2 > div > p:nth-child(1) {
+  font-size: 26px;
   font-weight: 500;
 }
 .setting-profile2 > p:nth-child(3) {

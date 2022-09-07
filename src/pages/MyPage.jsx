@@ -1,43 +1,126 @@
-import { getCookie } from '../shared/cookie';
 import './css/mypage.css';
+import { useEffect, useRef } from 'react';
+import { getCookie } from '../shared/cookie';
+import { apis } from '../api';
+import { useState } from 'react';
+import ModalProfileUpdate from '../components/ModalProfileUpdate';
 
 const MyPage = () => {
   const username = getCookie('username');
+  const memberId = getCookie('memberId');
+
+  const [user, setUser] = useState({});
+  const [state, setState] = useState({
+    email: '',
+    nickname: '',
+    profileImageUrl: '',
+    selfDescription: '',
+  });
+
+  const showData = async () => {
+    const res = await apis.getUserData(memberId, { withCredentials: true });
+    console.log('res', res);
+    const userData = res.data;
+    console.log('userData', userData);
+    try {
+      setUser(userData);
+      // console.log('user', user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    showData();
+  }, []);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [isEdit, setIsEdit] = useState(false);
+  const toggleIsEdit = () => setIsEdit(!isEdit);
+
+  const [localContent, setLocalContent] = useState(user.nickname);
+  console.log('origin nickname', localContent);
+  const localContentInput = useRef();
+
+  const handleEdit = () => {
+    // 닉네임 설정 유효성 검사
+    // if (localContent.length < 3) {
+    //   localContentInput.current.focus();
+    //   return;
+    // }
+
+    // 회원정보 수정 후 업뎃 api
+    apis
+      .updateUserData(memberId, { withCredentials: true })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    // onEdit(id, localContent);
+    toggleIsEdit();
+  };
+
   return (
-      <div className="mypage">
-        <div className="setting-top">
-          <div className="setting-profile">
-            <img
-              src="https://velog.velcdn.com/images/hyexjun/profile/108c8f1a-b604-4881-9906-00270be78272/image.jpg"
-              alt="프로필 사진"
-            />
-            <button>이미지 업로드</button>
-            <button>이미지 제거</button>
-          </div>
-          <div className="setting-profile2">
-            <p>{username}</p>
-            <p>{username}@gmail.com</p>
-            <p>수정</p>
-          </div>
+    <div className="mypage">
+      <div className="setting-top">
+        <div className="setting-profile">
+          <img
+            src="https://velog.velcdn.com/images/hyexjun/profile/108c8f1a-b604-4881-9906-00270be78272/image.jpg"
+            // src={user.profileImageUrl}
+            alt="프로필 사진"
+          />
+          <button onClick={handleShow}>이미지 업로드</button>
+          <button>이미지 제거</button>
+          <ModalProfileUpdate
+            show={show}
+            onHide={handleClose}
+            // backdrop="static"
+            keyboard={false}
+          />
         </div>
-        <div className="setting-body1">
+        <div className="setting-profile2">
           <div>
-            <p>벨로그 제목</p>
-            <p>{username}.Devlog</p>
-            <p>수정</p>
+            {isEdit ? (
+              <>
+                <input
+                  ref={localContentInput}
+                  value={localContent}
+                  onChange={(event) => {
+                    setLocalContent(event.target.value);
+                  }}
+                />
+              </>
+            ) : (
+              <p>{user.nickname}</p>
+            )}
           </div>
-          <p>개인 페이지 좌측 상단에 나타나는 페이지 제목입니다.</p>
-        </div>
-        <div className="setting-body1">
-          <div>
-            <p>회원 탈퇴</p>
-            <button>회원 탈퇴</button>
-          </div>
-          <p>
-            탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.
-          </p>
+          <p>{user.email}</p>
+          {!isEdit ? (
+            <p onClick={toggleIsEdit}>수정</p>
+          ) : (
+            <p onClick={handleEdit}>저장</p>
+          )}
         </div>
       </div>
+      <div className="setting-body1">
+        <div>
+          <p>벨로그 제목</p>
+          <p>{user.nickname}.Devlog</p>
+          <p>수정</p>
+        </div>
+        <p>개인 페이지 좌측 상단에 나타나는 페이지 제목입니다.</p>
+      </div>
+      <div className="setting-body1">
+        <div>
+          <p>회원 탈퇴</p>
+          <button>회원 탈퇴</button>
+        </div>
+        <p>
+          탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.
+        </p>
+      </div>
+    </div>
   );
 };
 

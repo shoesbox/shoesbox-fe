@@ -5,7 +5,6 @@ import { getCookie } from '../shared/cookie';
 // const BASE_URL = "http://localhost:3000";
 const BASE_URL = 'http://13.209.77.207';
 
-
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
 const api = axios.create({
@@ -42,7 +41,6 @@ const auth = axios.create({
   baseURL: BASE_URL,
 });
 
-
 // 2. request interceptor
 // 인증이 필요한 요청을 중간에 가로채서 헤더에 토큰 소매넣기 해주기
 api.interceptors.request.use(
@@ -70,7 +68,6 @@ apiJson.interceptors.request.use((config) => {
   return config;
 });
 
-
 // 3. response interceptor
 api.interceptors.response.use(
   (res) => {
@@ -80,7 +77,6 @@ api.interceptors.response.use(
     console.log(err);
   }
 );
-
 
 // 4. apis
 export const apis = {
@@ -114,4 +110,8 @@ export const apis = {
     api.put(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (fromMemberId, payload) =>
     api.put(`/api/friends/${fromMemberId}`, payload),
+
+  // 마이페이지
+  getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),
+  updateUserData: (memberId) => api.patch(`/api/members/info?m=${memberId}`),
 };
