@@ -1,7 +1,8 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import detailReducer from './features/detailSlice';
 import friendReducer from "./features/friendSlice";
 import writeReducer from "./features/writeSlice";
+
 
 const rootReducer = combineReducers({
   detail: detailReducer,

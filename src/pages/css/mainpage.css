@@ -12,3 +12,24 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.welcome {
+  width: 100vw;
+  height: 94vh;
+  position: fixed;
+  background-image: url(../../../public/images/blob-haikei.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.welcome > p {
+  text-align: center;
+  text-shadow: 4px 4px 3px #cce3de;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  font-style: italic;
+  color: #a4c3b2;
+  margin: 400px auto;
+  padding: 0 20px;
+}
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */

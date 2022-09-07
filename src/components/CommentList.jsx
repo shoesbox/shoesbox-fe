@@ -23,6 +23,7 @@ import {
   switchLoading,
 } from "../features/detailSlice";
 
+
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.detail.commentList);
@@ -37,12 +38,12 @@ const CommentList = ({ postId }) => {
 
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
-    if (commentRef.current.value.trim() !== "") {
+    if (commentRef.current.value.trim() !== '') {
       // console.log(commentRef.current.value);
       const content = commentRef.current?.value;
       // dispatch(postJsonCommentThunk({ postId, content }));
       dispatch(addCommentThunk({ postId, content }));
-      commentRef.current.value = "";
+      commentRef.current.value = '';
       commentRef.current.focus();
     }
   };
@@ -82,7 +83,7 @@ const CommentList = ({ postId }) => {
 
   // 입력 댓글에 아무것도 입력되지 않으면, 버튼 작동하지 않음
   const onChangeCommentStatus = (e) => {
-    if (e.target.value.trim() !== "") {
+    if (e.target.value.trim() !== '') {
       setComment(false);
     }
   };
@@ -193,7 +194,7 @@ const CommentList = ({ postId }) => {
             placeholder="친구에게 안부를 물어봅시다 :)"
             onChange={onChangeCommentStatus}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && !commentStatus) {
+              if (e.key === 'Enter' && !commentStatus) {
                 onClickComment();
               }
             }}

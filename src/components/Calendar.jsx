@@ -89,17 +89,16 @@ const Calendar = () => {
     <div className="calender-container">
       <div className="calendar">
         <div className="header">
-          <div className="year-month">
-            {viewDate.year}년 🍸 {viewDate.month + 1}월
-          </div>
+          <div className="year">{viewDate.year}</div>
+          <span className="month">{viewDate.month + 1}</span>
           <div className="nav">
-            <button className="nav-btn go-prev" onClick={() => changeMonth(-1)}>
+            <button className="nav-btn" onClick={() => changeMonth(-1)}>
               &lt;
             </button>
             <button className="nav-btn go-today" onClick={() => changeMonth(0)}>
               Today
             </button>
-            <button className="nav-btn go-next" onClick={() => changeMonth(+1)}>
+            <button className="nav-btn" onClick={() => changeMonth(+1)}>
               &gt;
             </button>
             {/* <Button className="nav-btn go-next">&gt;</Button> */}
