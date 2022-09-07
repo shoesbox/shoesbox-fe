@@ -122,7 +122,7 @@ const Calendar = () => {
                 style={{ background: `url(${img})`, backgroundSize: 'cover' }}
                 onClick={() => navigate('/detail')}
               >
-                <span>{date}</span>
+                <div>{date}</div>
               </div>
             ))}
           </div>
