@@ -7,22 +7,21 @@ const initialState = {
   requestFriendList: [],
 };
 
-const getTmpThunk = createAsyncThunk(
-  '/api/friend/tmp',
-  async (postId, thunkAPI) => {
+export const getRequestFriendListThunk = createAsyncThunk(
+  '/api/getrequestfriendthunk',
+  async (thunkAPI) => {
     try {
-      const data = await apis.getDetail(postId);
-      const postDetail = data.data.data;
-      // console.log('thunk',data.data.data)
-      return postDetail;
+      const data = await apis.getRequestFriendList();
+      const res = data.data.data;
+      console.log('getRequestFriendthunk',data.data.data)
+      return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
+      return thunkAPI.rejectWithValue('getRequestFriendThunkErr', err.response.data);
     }
   }
 );
 
-
-const addFriendThunk = createAsyncThunk(
+export const addFriendThunk = createAsyncThunk(
   '/api/addfriendthunk',
   async (email, thunkAPI) => {
     try {
@@ -30,10 +29,10 @@ const addFriendThunk = createAsyncThunk(
         email
       });
       const res = data.data.data;
-      // console.log('thunk',data.data.data)
+      // console.log('addFriendthunk',data.data.data)
       return res;
     } catch (err) {
-      return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
+      return thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data);
     }
   }
 );
@@ -48,9 +47,13 @@ const friendSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getTmpThunk.fulfilled, (state, action) => {
-      state.tmp = action.payload;
+    builder.addCase(getRequestFriendListThunk.fulfilled, (state, action) => {
+      state.requestFriendList = action.payload;
     });
+    builder.addCase(addFriendThunk.fulfilled, (state, action) => {
+      // state.tmp = action.payload;
+    });
+    
   },
 });
 
