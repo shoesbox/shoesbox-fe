@@ -6,15 +6,17 @@ import { BsPersonPlusFill, BsSearch } from 'react-icons/bs';
 import './css/modaladdfriend.css';
 
 const ModalAddFriend = (props) => {
-  const addMemberList = ['등록자아', 'hello'];
+  const addMemberList = ['콩순이', 'hello'];
   const AddMemberList = () => {
     return (
       <div className="addfriend-list">
         {addMemberList.map((member, idx) => (
-          <div key={idx}>
-            <span>{member}님이 친구 신청을 하였습니다.</span>
-            &nbsp; &nbsp;
-            <Button>O</Button> <Button>X</Button>
+          <div key={idx} className="friend-item">
+            <div>{member}님이 친구 맺기를 신청했습니다.</div>
+            <div>
+              <Button>O</Button>
+              <Button>X</Button>
+            </div>
           </div>
         ))}
       </div>
@@ -25,7 +27,7 @@ const ModalAddFriend = (props) => {
     <Modal className="detail-modal" {...props} centered size="md">
       <Modal.Header closeButton>
         <Modal.Title>
-          <div>친구 추가</div>
+          <div>친구 신청</div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
