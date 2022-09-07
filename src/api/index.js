@@ -5,6 +5,7 @@ import { getCookie } from '../shared/cookie';
 // const BASE_URL = "http://localhost:3000";
 const BASE_URL = 'http://13.209.77.207';
 
+
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
 const api = axios.create({
@@ -41,6 +42,7 @@ const auth = axios.create({
   baseURL: BASE_URL,
 });
 
+
 // 2. request interceptor
 // 인증이 필요한 요청을 중간에 가로채서 헤더에 토큰 소매넣기 해주기
 api.interceptors.request.use(
@@ -56,7 +58,6 @@ api.interceptors.request.use(
   }
 );
 
-
 apiForm.interceptors.request.use((config) => {
   // const accessToken = ;
   // config.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -69,6 +70,7 @@ apiJson.interceptors.request.use((config) => {
   return config;
 });
 
+
 // 3. response interceptor
 api.interceptors.response.use(
   (res) => {
@@ -79,9 +81,10 @@ api.interceptors.response.use(
   }
 );
 
+
 // 4. apis
 export const apis = {
-  // 로그인, 회원가입
+  // 로그인, 회원가입 api
   loginGoogle: () => api.get('/'),
   loginNaver: () => {},
   loginKakao: () => {},
@@ -93,19 +96,22 @@ export const apis = {
   getTargetPosts: (memberId, year, month) =>
     api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 
-  // detail Page
-  showDetail : (postId) => api.get(`/api/posts/${postId}`),
-  showComment : (postId) => api.get(`/api/comments/${postId}`),
-  addComment : (postId, content) => api.post(`/api/comments/${postId}`, content),
-  delComment : (commentId) => api.delete(`/api/comments/${commentId}`),
-  putComment : (commentId, payload) => api.put(`/api/comments/${commentId}`, payload),
+  // 게시글 상세 및 댓글 api
+  showDetail: (postId) => api.get(`/api/posts/${postId}`),
+  showComment: (postId) => api.get(`/api/comments/${postId}`),
+  addComment: (postId, content) => api.post(`/api/comments/${postId}`, content),
+  delComment: (commentId) => api.delete(`/api/comments/${commentId}`),
+  putComment: (commentId, payload) =>
+    api.put(`/api/comments/${commentId}`, payload),
 
-  // write Page
-  writeDaily : (payload) => api.post('/api/posts',payload),
-  
-  // add freinds
-  acceptFriend : (fromMemberId) => api.put(`/api/friends/${fromMemberId}/accept`),
-  refuseFriend : (fromMemberId) => api.put(`/api/friends/${fromMemberId}/refuse`),
-  deleteFriend : (fromMemberId, payload) => api.put(`/api/friends/${fromMemberId}`, payload)
+  // 글작성 api
+  writeDaily: (payload) => api.post('/api/posts', payload),
 
+  // 친구 관련 api
+  acceptFriend: (fromMemberId) =>
+    api.put(`/api/friends/${fromMemberId}/accept`),
+  refuseFriend: (fromMemberId) =>
+    api.put(`/api/friends/${fromMemberId}/refuse`),
+  deleteFriend: (fromMemberId, payload) =>
+    api.put(`/api/friends/${fromMemberId}`, payload),
 };

@@ -81,7 +81,7 @@ const ModalDetail = ({ postId, ...props }) => {
           <Button>삭제</Button>
         </div>
         <hr />
-        <CommentList postId={postId}/>
+        <CommentList postId={postId} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -89,6 +89,5 @@ const ModalDetail = ({ postId, ...props }) => {
     </Modal>
   );
 };
-
 
 export default ModalDetail;

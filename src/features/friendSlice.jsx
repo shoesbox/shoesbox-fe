@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { apis } from "../api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { apis } from '../api';
 
 const initialState = {
- tmp:{},
+  tmp: {},
 };
 
 const getTmpThunk = createAsyncThunk(
-  "/api/friend/tmp",
+  '/api/friend/tmp',
   async (postId, thunkAPI) => {
     try {
       const data = await apis.getDetail(postId);
@@ -14,25 +14,24 @@ const getTmpThunk = createAsyncThunk(
       // console.log('thunk',data.data.data)
       return postDetail;
     } catch (err) {
-      return thunkAPI.rejectWithValue("getDetailThunkErr", err.response.data);
+      return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
     }
   }
 );
 
 const friendSlice = createSlice({
-  name: "friend",
+  name: 'friend',
   initialState,
   reducers: {
     tmpReducer: (state, action) => {
       state.images = action.payload;
-    //   console.log(action.payload);
+      //   console.log(action.payload);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getTmpThunk.fulfilled, (state, action) => {
       state.tmp = action.payload;
     });
- 
   },
 });
 

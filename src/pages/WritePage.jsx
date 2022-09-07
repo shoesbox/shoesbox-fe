@@ -69,9 +69,9 @@ const WritePage = () => {
         nickname,
         title: titleRef.current.value,
         // images : imageRef.current.files,
-        images : base64s,
-        content : contentRef.current.value,
-      }
+        images: base64s,
+        content: contentRef.current.value,
+      };
 
       console.log(formDataTxt);
       setValidated(true);
@@ -123,8 +123,8 @@ const WritePage = () => {
   }, [files]);
 
   useEffect(() => {
-    if(formData!==(null||undefined||{})){
-    dispatch(postJsonDetailThunk({formDataTxt}));
+    if (formData !== (null || undefined || {})) {
+      dispatch(postJsonDetailThunk({ formDataTxt }));
     }
   }, []);
 
