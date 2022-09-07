@@ -110,6 +110,8 @@ export const apis = {
   writeDaily: (payload) => api.post('/api/posts', payload),
 
   // 친구 관련 api
+  getFriendList : ()=> api.get('/api/friends'),
+  getRequestFriendList : ()=> api.get('/api/friends/request'),
   addFriend:(payload) => api.post('/api/friends', payload),
   acceptFriend: (fromMemberId) =>
     api.put(`/api/friends/${fromMemberId}/accept`),

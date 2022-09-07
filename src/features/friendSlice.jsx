@@ -3,6 +3,8 @@ import { apis } from '../api';
 
 const initialState = {
   tmp: {},
+  friendList : [],
+  requestFriendList: [],
 };
 
 const getTmpThunk = createAsyncThunk(
@@ -19,14 +21,17 @@ const getTmpThunk = createAsyncThunk(
   }
 );
 
+
 const addFriendThunk = createAsyncThunk(
   '/api/addfriendthunk',
-  async (postId, thunkAPI) => {
+  async (email, thunkAPI) => {
     try {
-      const data = await apis.getDetail(postId);
-      const postDetail = data.data.data;
+      const data = await apis.addFriend({
+        email
+      });
+      const res = data.data.data;
       // console.log('thunk',data.data.data)
-      return postDetail;
+      return res;
     } catch (err) {
       return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
     }
