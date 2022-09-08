@@ -1,12 +1,8 @@
-import { useEffect } from 'react';
-// import Container from 'react-bootstrap/Container';
-import { useRef, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Carousel from 'react-bootstrap/Carousel';
+import '../pages/css/detailpage.css';
+import { useRef, useState, useEffect } from 'react';
+import { Button, Carousel, Container, Modal } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
 import CommentList from './CommentList';
-import '../pages/css/detailpage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getDetailThunk,
@@ -15,6 +11,7 @@ import {
   getCommentThunk,
 } from '../features/detailSlice';
 import { apis } from '../api';
+
 const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
   const dispatch = useDispatch();
@@ -52,8 +49,8 @@ const ModalDetail = ({ postId, ...props }) => {
       {...props}
       className="detail-modal"
       centered
-      size="lg"
-      fullscreen="md-down"
+      size="md"
+      fullscreen="sm-down"
     >
       <Modal.Header closeButton>
         <Modal.Title>
