@@ -29,7 +29,6 @@ const CommentList = ({ postId }) => {
   const [commentStatus, setComment] = useState(true);
   const [pick, setPick] = useState();
   const [onEdit, setEdit] = useState(false);
-  // const [fixContent, setFixContent] = useState();
   var tmp = '';
 
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
@@ -56,8 +55,6 @@ const CommentList = ({ postId }) => {
     setPick(commentId);
     setEdit(true);
     // console.log(pick, commentId, content);
-    // dispatch(updatePicked(commentId))
-    // dispatch(putCommentThunk(commentId))
   };
 
   // 댓글 수정 모드 눌렀을 때의 버튼, 수정 입력 가능
@@ -86,7 +83,6 @@ const CommentList = ({ postId }) => {
 
   // tmp에 onChange 될 때 값 저장 - state 사용하면 렌더링 문제 발생
   const onChangeFixCommentStatus = (e) => {
-    // setFixContent(e.target.value)
     tmp = e.target.value;
     // console.log('변경될 값:',  tmp);
   };
@@ -121,7 +117,6 @@ const CommentList = ({ postId }) => {
     ) : (
       <Button
         onClick={() => onClickFixSubmitBtn(commentId)}
-        // disabled={tmp===''}
       >
         <BsArrowReturnLeft />
       </Button>
