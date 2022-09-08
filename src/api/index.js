@@ -99,18 +99,20 @@ export const apis = {
   getTargetPosts: (memberId, year, month) =>
     api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 
-  // 게시글 상세 및 댓글 api
+  // 게시글 상세 api
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
+  
+  // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
   addComment: (postId, content) => api.post(`/api/comments/${postId}`, content),
   delComment: (commentId) => api.delete(`/api/comments/${commentId}`),
   putComment: (commentId, payload) =>
     api.put(`/api/comments/${commentId}`, payload),
 
-  // 글작성 api
+  // 글 작성 api
   writeDaily: (payload) => api.post('/api/posts', payload),
 
-  // 친구 관련 api
+  // 친구 관련 api - delete 빼고 done 
   getFriendList : ()=> api.get('/api/friends'),
   getRequestFriendList : ()=> api.get('/api/friends/request'),
   addFriend:(payload) => api.post('/api/friends', payload),

@@ -8,7 +8,8 @@ import { BsPersonPlusFill, BsSearch } from "react-icons/bs";
 import {
   addFriendThunk,
   getRequestFriendListThunk,
-  acceptFriendThunk
+  acceptFriendThunk,
+  refuseFriendThunk,
 } from "../features/friendSlice";
 import "./css/modaladdfriend.css";
 
@@ -32,7 +33,7 @@ const ModalAddFriend = (props) => {
         //  console.log(addFriendRef.current.value);
         // setEmail(addFriendRef.current.value);
         const email = addFriendRef.current.value;
-        dispatch(addFriendThunk(email))
+        dispatch(addFriendThunk(email));
       } else {
         alert("이메일 형식을 확인해주세요");
       }
@@ -41,16 +42,19 @@ const ModalAddFriend = (props) => {
     }
   };
 
-  const onClickAccept = (fromMemberId) =>{
-    // alert(`수락, fromMemberId:${fromMemberId}`);
+  const onClickAccept = (fromMemberId) => {
     dispatch(acceptFriendThunk(fromMemberId));
-  }
+  };
 
-  const onEnterdown = (e) =>{
-   if(e.key ==='Enter'){
-    onClickAddFriend();
-   }
-  }
+  const onClickRefuse = (fromMemberId) => {
+    dispatch(refuseFriendThunk(fromMemberId));
+  };
+
+  const onEnterdown = (e) => {
+    if (e.key === "Enter") {
+      onClickAddFriend();
+    }
+  };
 
   const RequestFriendList = () => {
     return (
@@ -59,7 +63,10 @@ const ModalAddFriend = (props) => {
           <div key={idx}>
             <span>{member.fromMemberNickname}님이 친구 신청을 하였습니다.</span>
             &nbsp; &nbsp;
-            <Button onClick={()=>onClickAccept(member.fromMemberId)}>O</Button> <Button>X</Button>
+            <Button onClick={() => onClickAccept(member.fromMemberId)}>
+              O
+            </Button>{" "}
+            <Button onClick={()=>onClickRefuse(member.fromMemberId)}>X</Button>
           </div>
         ))}
       </div>
@@ -70,10 +77,6 @@ const ModalAddFriend = (props) => {
     dispatch(getRequestFriendListThunk());
     // console.log(requestFriendList);
   }, []);
-
-  // useEffect(() => {
-  //   dispatch(addFriendThunk(email));
-  // }, [email]);
 
   return (
     <Modal
@@ -97,7 +100,7 @@ const ModalAddFriend = (props) => {
             type="email"
             ref={addFriendRef}
             placeholder="친구 이메일 입력"
-            onKeyDown={(e)=>onEnterdown(e)}
+            onKeyDown={(e) => onEnterdown(e)}
           />
           <InputGroup.Text
             className="addfriend-search-icon"

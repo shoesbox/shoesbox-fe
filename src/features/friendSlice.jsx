@@ -23,9 +23,6 @@ export const getFriendListThunk = createAsyncThunk(
   }
 );
 
-
-
-
 export const getRequestFriendListThunk = createAsyncThunk(
   '/api/getrequestfriendthunk',
   async (thunkAPI) => {
@@ -61,20 +58,39 @@ export const addFriendThunk = createAsyncThunk(
 );
 
 export const acceptFriendThunk = createAsyncThunk(
-  '/api/acceptriendthunk',
+  '/api/acceptfriendthunk',
   async (fromMemberId, thunkAPI) => {
     try {
       const data = await apis.acceptFriend(fromMemberId);
       const res = data.data.data;
       // console.log('acceptFriendthunk', data.data.data);
-      return res;
+      const refuseFriend = res.fromMemberNickname;
+      alert(`${refuseFriend}님을(를) 거절하였습니다.`)
+      return fromMemberId;
     } catch (err) {
-      // console.log(thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data))
+      // console.log(thunkAPI.rejectWithValue('acceptFriendThunkErr', err.response.data))
       alert(err.response.data.errorDetails.apierror.message);
-      // return thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data);
+      // return thunkAPI.rejectWithValue('acceptFriendThunkErr', err.response.data);
     }
   }
 );
+
+export const refuseFriendThunk = createAsyncThunk(
+  '/api/refusefriendthunk',
+  async (fromMemberId, thunkAPI) => {
+    try {
+      const data = await apis.refuseFriend(fromMemberId);
+      const res = data.data.data;
+      // console.log('refuseFriendthunk', res.fromMemberNickname);
+      return res;
+    } catch (err) {
+      // console.log(thunkAPI.rejectWithValue('refuseFriendThunkErr', err.response.data))
+      alert(err.response.data.errorDetails.apierror.message);
+      // return thunkAPI.rejectWithValue('refuseFriendThunkErr', err.response.data);
+    }
+  }
+);
+
 
 const friendSlice = createSlice({
   name: 'friend',
@@ -82,7 +98,6 @@ const friendSlice = createSlice({
   reducers: {
     tmpReducer: (state, action) => {
       state.images = action.payload;
-      //   console.log(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -97,6 +112,14 @@ const friendSlice = createSlice({
       state.friendList = [...state.friendList, action.payload];
       const requestFriendList = state.requestFriendList;
       const requestMemberId = action.payload.fromMemberId;
+      const newRqFriendList = requestFriendList.filter((l) => {
+        return parseInt(l.fromMemberId) !== requestMemberId;
+      });
+      state.requestFriendList = newRqFriendList;
+    });
+    builder.addCase(refuseFriendThunk.fulfilled, (state, action) => {
+      const requestFriendList = state.requestFriendList;
+      const requestMemberId = action.payload;
       const newRqFriendList = requestFriendList.filter((l) => {
         return parseInt(l.fromMemberId) !== requestMemberId;
       });
