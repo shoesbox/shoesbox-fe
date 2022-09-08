@@ -30,31 +30,41 @@
   margin: 5px 0;
   width: 140px;
   height: 30px;
-  color: #6B9080;
+  color: #6b9080;
   background: none;
   /* font-weight: 600; */
 }
 .image-profile > button:nth-child(2) {
-  background: #A4C3B2;
+  background: #a4c3b2;
   color: #fff;
 }
 .image-profile > button:nth-child(3):hover {
-  background: #EAF4F4;
+  background: #eaf4f4;
 }
 .text-profile {
   margin: 20px 50px;
   border: 1px solid black;
 }
-.text-profile > div > p:nth-child(1) {
-  font-size: 26px;
-  font-weight: 500;
+.text-profile > div {
+  width: 300px;
+  height: 50px;
 }
-.text-profile > p:nth-child(3) {
-  color: #6B9080;
+.text-profile > div:nth-child(1) > p {
+  font-size: 20px;
+  font-weight: 500;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.nickname-edit {
+  display: flex;
+  color: #6b9080;
   text-decoration-line: underline;
   cursor: pointer;
 }
-
+.nickname-edit > p {
+  margin-right: 10px;
+}
 .leave-box {
   border: 1px solid pink;
   margin-bottom: 50px;
@@ -72,7 +82,7 @@
 }
 .leave-box > div > p:nth-child(3) {
   margin-left: 10px;
-  color: #6B9080;
+  color: #6b9080;
   text-decoration-line: underline;
   cursor: pointer;
 }

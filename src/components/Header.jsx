@@ -1,9 +1,9 @@
-import './css/loginmodal.css';
+import './css/modallogin.css';
 import './css/header.css';
 import { useEffect, useState } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import LoginModal from './LoginModal';
+import ModalLogin from './ModalLogin';
 import { getCookie, deleteCookie } from '../shared/cookie';
 
 function Header() {
@@ -103,7 +103,7 @@ function Header() {
         </Container>
       </Navbar>
 
-      <LoginModal login={login} handleCloseLogin={handleCloseLogin} />
+      <ModalLogin login={login} handleCloseLogin={handleCloseLogin} />
     </>
   );
 }

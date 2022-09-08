@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import './css/loginmodal.css';
+import './css/modallogin.css';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
-const LoginModal = ({ login, handleCloseLogin }) => {
+const ModalLogin = ({ login, handleCloseLogin }) => {
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -58,7 +58,8 @@ const LoginModal = ({ login, handleCloseLogin }) => {
           token.refreshTokenExpireDate
         );
         setCookie('memberId', token.memberId);
-        setCookie('username', 'shoesVillain');
+        setCookie('email', token.email);
+        setCookie('nickname', token.nickname);
         // alert('로그인 성공');
         window.location.reload(true);
       })
@@ -196,4 +197,4 @@ const LoginModal = ({ login, handleCloseLogin }) => {
     </>
   );
 };
-export default LoginModal;
+export default ModalLogin;
