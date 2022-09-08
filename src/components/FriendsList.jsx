@@ -17,7 +17,7 @@ const FriendsList = () => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  console.log("friendList", friendList);
+  // console.log("friendList", friendList);
   // useEffect(() => {
   //   if (cookie !== undefined) {
   //     return setIsLoggedIn(true);

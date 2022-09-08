@@ -112,7 +112,7 @@ export const apis = {
   // 글 작성 api
   writeDaily: (payload) => api.post('/api/posts', payload),
 
-  // 친구 관련 api - delete 빼고 done 
+  // 친구 관련 api -  done 
   getFriendList : ()=> api.get('/api/friends'),
   getRequestFriendList : ()=> api.get('/api/friends/request'),
   addFriend:(payload) => api.post('/api/friends', payload),

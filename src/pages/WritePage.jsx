@@ -123,8 +123,9 @@ const WritePage = () => {
   }, [files]);
 
   useEffect(() => {
-    if (formData !== (null || undefined || {})) {
-      dispatch(postJsonDetailThunk({ formDataTxt }));
+    if (formDataTxt !== (null || undefined || {})) {
+      // dispatch(postJsonDetailThunk({ formDataTxt }));
+      console.log('데이터 등록 시점!');
     }
   }, []);
 
