@@ -64,9 +64,7 @@ export const acceptFriendThunk = createAsyncThunk(
       const data = await apis.acceptFriend(fromMemberId);
       const res = data.data.data;
       // console.log('acceptFriendthunk', data.data.data);
-      const refuseFriend = res.fromMemberNickname;
-      alert(`${refuseFriend}님을(를) 거절하였습니다.`)
-      return fromMemberId;
+      return res;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('acceptFriendThunkErr', err.response.data))
       alert(err.response.data.errorDetails.apierror.message);
@@ -82,11 +80,31 @@ export const refuseFriendThunk = createAsyncThunk(
       const data = await apis.refuseFriend(fromMemberId);
       const res = data.data.data;
       // console.log('refuseFriendthunk', res.fromMemberNickname);
-      return res;
+      const refuseFriend = res.fromMemberNickname;
+      alert(`${refuseFriend}님을(를) 거절하였습니다.`)
+      return fromMemberId;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('refuseFriendThunkErr', err.response.data))
       alert(err.response.data.errorDetails.apierror.message);
       // return thunkAPI.rejectWithValue('refuseFriendThunkErr', err.response.data);
+    }
+  }
+);
+
+export const delFriendThunk = createAsyncThunk(
+  '/api/delfriendthunk',
+  async (fromMemberId, thunkAPI) => {
+    try {
+      const data = await apis.deleteFriend(fromMemberId);
+      const res = data.data.data;
+      // console.log('delFriendthunk', res.fromMemberNickname);
+      const delFriend = res.fromMemberNickname;
+      alert(`${delFriend}님을(를) 삭제하였습니다.`)
+      return fromMemberId;
+    } catch (err) {
+      // console.log(thunkAPI.rejectWithValue('delFriendThunkErr', err.response.data))
+      alert(err.response.data.errorDetails.apierror.message);
+      // return thunkAPI.rejectWithValue('delFriendThunkErr', err.response.data);
     }
   }
 );
@@ -124,6 +142,14 @@ const friendSlice = createSlice({
         return parseInt(l.fromMemberId) !== requestMemberId;
       });
       state.requestFriendList = newRqFriendList;
+    });
+    builder.addCase(delFriendThunk.fulfilled, (state, action) => {
+      const friendList = state.friendList;
+      const memberId = action.payload;
+      const newFriendList = friendList.filter((l) => {
+        return parseInt(l.fromMemberId) !== memberId;
+      });
+      state.friendList = newFriendList;
     });
    
     

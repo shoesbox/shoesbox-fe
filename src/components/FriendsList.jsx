@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { BsPlusLg } from "react-icons/bs";
 import ModalAddFriend from "./ModalAddFriend";
 // import { getCookie } from '../shared/Cookie';
-import { getFriendListThunk } from "../features/friendSlice";
+import { getFriendListThunk, delFriendThunk } from "../features/friendSlice";
 import "./css/friendslist.css";
 
 const FriendsList = () => {
@@ -28,12 +28,23 @@ const FriendsList = () => {
     dispatch(getFriendListThunk());
   }, []);
 
+  // 임시적으로, 해당 친구의 버튼을 클릭하면, 해당 친구가 삭제 됩니다.
+  const onClickDelFriend = (fromMemberId) => {
+    dispatch(delFriendThunk(fromMemberId));
+  };
   return (
     <>
       <div className="friends">
         {friendList?.length > 0 ? (
           friendList.map((friend, idx) => {
-            return <Button key={idx}>{friend.fromMemberNickname}</Button>;
+            return (
+              <Button
+                key={idx}
+                onClick={() => onClickDelFriend(friend.fromMemberId)}
+              >
+                {friend.fromMemberNickname}
+              </Button>
+            );
           })
         ) : (
           <></>
