@@ -20,7 +20,7 @@ import {
   switchLoading,
 } from '../features/detailSlice';
 
-const CommentList = ({ postId }) => {
+const CommentsList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.detail.commentList);
   const loading = useSelector((state) => state.detail.loading);
@@ -115,9 +115,7 @@ const CommentList = ({ postId }) => {
         <BsFillEraserFill />
       </Button>
     ) : (
-      <Button
-        onClick={() => onClickFixSubmitBtn(commentId)}
-      >
+      <Button onClick={() => onClickFixSubmitBtn(commentId)}>
         <BsArrowReturnLeft />
       </Button>
     );
@@ -212,4 +210,4 @@ const CommentList = ({ postId }) => {
   );
 };
 
-export default memo(CommentList);
+export default memo(CommentsList);

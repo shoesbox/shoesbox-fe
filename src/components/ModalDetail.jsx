@@ -2,7 +2,7 @@ import '../pages/css/detailpage.css';
 import { useRef, useState, useEffect } from 'react';
 import { Button, Carousel, Container, Modal } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
-import CommentList from './CommentList';
+import CommentsList from './CommentsList';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getDetailThunk,
@@ -16,7 +16,7 @@ const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
   const dispatch = useDispatch();
   const post = useSelector((state) => state.detail.post);
-  // const commentList = useSelector((state) => state.detail.commentList);
+  // const CommentsList = useSelector((state) => state.detail.CommentsList);
 
   useEffect(() => {
     dispatch(getJsonDetailThunk(postId));
@@ -30,7 +30,7 @@ const ModalDetail = ({ postId, ...props }) => {
   const date = post.date;
   const images = post.images;
   const content = post.content;
-  // const comments = commentList;
+  // const comments = CommentsList;
 
   const ImageCarousel = () => {
     return (
@@ -78,7 +78,7 @@ const ModalDetail = ({ postId, ...props }) => {
           <Button>삭제</Button>
         </div>
         <hr />
-        <CommentList postId={postId} />
+        <CommentsList postId={postId} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>

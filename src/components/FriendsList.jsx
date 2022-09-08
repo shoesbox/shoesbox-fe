@@ -1,8 +1,11 @@
-import './css/friendslist.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { BsPlusLg } from 'react-icons/bs';
-import ModalAddFriend from '../components/ModalAddFriend';
+import ModalAddFriend from './ModalAddFriend';
+// import { getCookie } from '../shared/Cookie';
+import { getFriendListThunk, delFriendThunk } from '../features/friendSlice';
+import './css/friendslist.css';
 
 const FriendsList = () => {
   // const cookie = getCookie('accessToken');
@@ -14,7 +17,7 @@ const FriendsList = () => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  console.log("friendList", friendList);
+  console.log('friendList', friendList);
   // useEffect(() => {
   //   if (cookie !== undefined) {
   //     return setIsLoggedIn(true);

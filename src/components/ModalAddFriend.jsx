@@ -1,17 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import { BsPersonPlusFill, BsSearch } from "react-icons/bs";
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Form, InputGroup, Modal } from 'react-bootstrap';
+import { BsPersonPlusFill, BsSearch } from 'react-icons/bs';
 import {
   addFriendThunk,
   getRequestFriendListThunk,
   acceptFriendThunk,
   refuseFriendThunk,
-} from "../features/friendSlice";
-import "./css/modaladdfriend.css";
+} from '../features/friendSlice';
+import './css/modaladdfriend.css';
 
 const ModalAddFriend = (props) => {
   const dispatch = useDispatch();
@@ -28,17 +25,17 @@ const ModalAddFriend = (props) => {
     return emailReg.test(email);
   };
   const onClickAddFriend = () => {
-    if (addFriendRef.current.value.trim() !== "") {
+    if (addFriendRef.current.value.trim() !== '') {
       if (validateEmail(addFriendRef.current.value)) {
         //  console.log(addFriendRef.current.value);
         // setEmail(addFriendRef.current.value);
         const email = addFriendRef.current.value;
         dispatch(addFriendThunk(email));
       } else {
-        alert("이메일 형식을 확인해주세요");
+        alert('이메일 형식을 확인해주세요.');
       }
     } else {
-      alert("추가하실 친구 이메일을 입력해주세요");
+      alert('추가하실 친구의 이메일을 입력해주세요.');
     }
   };
 
@@ -51,7 +48,7 @@ const ModalAddFriend = (props) => {
   };
 
   const onEnterdown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onClickAddFriend();
     }
   };
@@ -61,12 +58,14 @@ const ModalAddFriend = (props) => {
       <div className="addfriend-list">
         {requestFriendList.map((member, idx) => (
           <div key={idx}>
-            <span>{member.fromMemberNickname}님이 친구 신청을 하였습니다.</span>
+            <span>{member.fromMemberNickname}님이 친구를 신청했습니다.</span>
             &nbsp; &nbsp;
             <Button onClick={() => onClickAccept(member.fromMemberId)}>
               O
-            </Button>{" "}
-            <Button onClick={()=>onClickRefuse(member.fromMemberId)}>X</Button>
+            </Button>{' '}
+            <Button onClick={() => onClickRefuse(member.fromMemberId)}>
+              X
+            </Button>
           </div>
         ))}
       </div>

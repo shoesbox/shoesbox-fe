@@ -3,8 +3,8 @@ import { apis } from '../api';
 
 const initialState = {
   tmp: {},
-  errorMsg : '',
-  friendList : [],
+  errorMsg: '',
+  friendList: [],
   requestFriendList: [],
 };
 
@@ -14,10 +14,12 @@ export const getFriendListThunk = createAsyncThunk(
     try {
       const data = await apis.getFriendList();
       const res = data.data.data;
-      console.log('getFriendListthunk', data.data.data)
+      console.log('getFriendListthunk', data.data.data);
       return res;
     } catch (err) {
-      console.log(thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data))
+      console.log(
+        thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data)
+      );
       // return thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data);
     }
   }
@@ -29,10 +31,12 @@ export const getRequestFriendListThunk = createAsyncThunk(
     try {
       const data = await apis.getRequestFriendList();
       const res = data.data.data;
-      console.log('getRequestFriendthunk',data.data.data)
+      console.log('getRequestFriendthunk', data.data.data);
       return res;
     } catch (err) {
-      console.log(thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data))
+      console.log(
+        thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data)
+      );
       // return thunkAPI.rejectWithValue('getRequestFriendThunkErr', err.response.data);
     }
   }
@@ -44,7 +48,7 @@ export const addFriendThunk = createAsyncThunk(
   async (email, thunkAPI) => {
     try {
       const data = await apis.addFriend({
-        email
+        email,
       });
       // const res = data.data.data;
       // console.log('addFriendthunk',`email: ${email}`,data.data.data)
@@ -81,7 +85,7 @@ export const refuseFriendThunk = createAsyncThunk(
       const res = data.data.data;
       // console.log('refuseFriendthunk', res.fromMemberNickname);
       const refuseFriend = res.fromMemberNickname;
-      alert(`${refuseFriend}님을(를) 거절하였습니다.`)
+      alert(`${refuseFriend}님의 요청을 거절하였습니다.`);
       return fromMemberId;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('refuseFriendThunkErr', err.response.data))
@@ -99,7 +103,7 @@ export const delFriendThunk = createAsyncThunk(
       const res = data.data.data;
       // console.log('delFriendthunk', res.fromMemberNickname);
       const delFriend = res.fromMemberNickname;
-      alert(`${delFriend}님을(를) 삭제하였습니다.`)
+      alert(`${delFriend}님을 목록에서 삭제하였습니다.`);
       return fromMemberId;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('delFriendThunkErr', err.response.data))
@@ -108,7 +112,6 @@ export const delFriendThunk = createAsyncThunk(
     }
   }
 );
-
 
 const friendSlice = createSlice({
   name: 'friend',
@@ -151,8 +154,6 @@ const friendSlice = createSlice({
       });
       state.friendList = newFriendList;
     });
-   
-    
   },
 });
 
