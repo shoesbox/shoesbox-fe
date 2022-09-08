@@ -38,8 +38,10 @@ const apiJsonUTF = axios.create({
     'Content-Type': 'application/json;charset=UTF-8',
   },
 });
+
 const auth = axios.create({
   baseURL: BASE_URL,
+
 });
 
 
@@ -77,15 +79,16 @@ api.interceptors.response.use(
     return res;
   },
   (err) => {
-    console.log(err);
+    // alert(err.response.data.errorDetails.apierror.message);
+    return Promise.reject(err);
   }
 );
-
+// axios.interceptors.response.eject(api);
 
 // 4. apis
 export const apis = {
   // 로그인, 회원가입 api
-  loginGoogle: () => api.get('/'),
+  loginGoogle: () => api.get('/oauth2/authorization/google'),
   loginNaver: () => {},
   loginKakao: () => {},
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
@@ -96,22 +99,27 @@ export const apis = {
   getTargetPosts: (memberId, year, month) =>
     api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 
-  // 게시글 상세 및 댓글 api
+  // 게시글 상세 api
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
+  
+  // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
   addComment: (postId, content) => api.post(`/api/comments/${postId}`, content),
   delComment: (commentId) => api.delete(`/api/comments/${commentId}`),
   putComment: (commentId, payload) =>
     api.put(`/api/comments/${commentId}`, payload),
 
-  // 글작성 api
+  // 글 작성 api
   writeDaily: (payload) => api.post('/api/posts', payload),
 
-  // 친구 관련 api
+  // 친구 관련 api - delete 빼고 done 
+  getFriendList : ()=> api.get('/api/friends'),
+  getRequestFriendList : ()=> api.get('/api/friends/request'),
+  addFriend:(payload) => api.post('/api/friends', payload),
   acceptFriend: (fromMemberId) =>
     api.put(`/api/friends/${fromMemberId}/accept`),
   refuseFriend: (fromMemberId) =>
-    api.put(`/api/friends/${fromMemberId}/refuse`),
+    api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (fromMemberId, payload) =>
-    api.put(`/api/friends/${fromMemberId}`, payload),
+    api.delete(`/api/friends/${fromMemberId}`, payload),
 };
