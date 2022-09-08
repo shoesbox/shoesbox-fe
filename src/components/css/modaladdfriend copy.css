@@ -1,0 +1,31 @@
+.addfriend-friend-icon.input-group-text {
+  background-color: white;
+  border: none;
+}
+.addfriend-search-icon.input-group-text:hover {
+  background-color: #cce3de;
+  cursor: pointer;
+}
+.addfriend-list {
+  margin-bottom: 20px;
+  /* border: 1px solid red; */
+}
+.friend-item {
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.friend-item > div {
+  /* border: 1px solid green; */
+  margin: 3px 0;
+  display: flex;
+}
+.friend-item > div > Button {
+  /* width: 30px; */
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}
