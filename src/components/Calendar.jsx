@@ -111,8 +111,8 @@ const Calendar = () => {
 
   useEffect(() => {
     setDates(calcDate())
-  },[calenderData, date])
-
+  },[calenderData])
+// , date
   const navigate = useNavigate();
   // const [posts, setPosts] = useState([]);
 
