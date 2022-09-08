@@ -79,10 +79,11 @@ api.interceptors.response.use(
     return res;
   },
   (err) => {
-    console.log(err);
+    // alert(err.response.data.errorDetails.apierror.message);
+    return Promise.reject(err);
   }
 );
-
+// axios.interceptors.response.eject(api);
 
 // 4. apis
 export const apis = {
