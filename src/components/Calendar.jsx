@@ -7,15 +7,15 @@ import axios from 'axios';
 import { getCookie, setCookie } from '../shared/cookie';
 
 const Calendar = () => {
-
-  const memberId = 12;
-
+  //
+  let memberId = getCookie('accessToken');
+  
   // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state
   const [dates, setDates] = useState([]);
   // axios 통신용 state
-  const [ax, setAx] = useState([]);
+  const [calenderData, setCalenderData] = useState([]);
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -57,49 +57,31 @@ const Calendar = () => {
     }
 
     // Tray 작성
-    let prevT = prevDates.reduce((arr, v) => {
+    let newPrevDates = prevDates.reduce((arr, v) => {
       arr.push({day: v, url:''})
       return arr
     }, [])
 
-    let thisT = [];
+    let newThisDates = [];
 
     for (let i = 0; i < thisDates.length; i++) {
-      if(thisDates[i] == ax[i]?.postId){
-        thisT.push({day:thisDates[i], url:ax[i]?.thumbnailUrl})
+      if(thisDates[i] == calenderData[i]?.postId){
+        newThisDates.push({day:thisDates[i], url:calenderData[i]?.thumbnailUrl})
       }
       else{
-        thisT.push({day:thisDates[i], url: ''})
+        newThisDates.push({day:thisDates[i], url: ''})
       }
     }
-
-    // let thisT = thisDates.reduce((arr, v) => {
-    //     for (let i = 0; i < thisDates.length; i++) {  
-
-    //       v == ax[i]?.postId 
-    //       ? arr.push({day:v, url:ax[i]?.thumbnailUrl})
-    //       : arr.push({day:v, url:''})
-
-    //       // if(v == ax[i]?.postId){
-    //       //   arr.push({day:v, url:ax[i]?.thumbnailUrl})
-    //       // }
-    //     }
-    //     // arr.push({day:v, url:''})
-    //     return arr
-    //     }, [])
-
         
-        let nextT = nextDates.reduce((arr, v) => {
-          arr.push({day: v, url:''})
-          return arr
-        }, [])
-    // Dates 배열 합치기
-    // { prevDates, thisDates, nextDates }
-    console.log("전체배열 한번 보자", prevT.concat(thisT, nextT))
+    let newNextDates = nextDates.reduce((arr, v) => {
+      arr.push({day: v, url:''})
+      return arr
+    }, [])
+
+    console.log("전체배열 한번 보자", newPrevDates.concat(newThisDates, newNextDates))
 
     
-    // return prevDates.concat(thisDates, nextDates);
-    return prevT.concat(thisT, nextT)
+    return newPrevDates.concat(newThisDates, newNextDates)
   };
 
   const changeMonth = (addMonth) => {
@@ -115,19 +97,21 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5001/data')
-      .then(res => res.data.content)
+    apis.getTargetPosts(memberId, viewDate.year, viewDate.month)
+      .then(res => res.data?.data.content)
       .then((data) => {
-          setAx(data)
+        setCalenderData(data)
       })
+    // axios.get('http://localhost:5001/data')
+    //   .then(res => res.data.content)
+    //   .then((data) => {
+    //     setCalenderData(data)
+    //   })
   }, []) 
 
   useEffect(() => {
     setDates(calcDate())
-
-    let print = calcDate()
-    console.log("뿌리기 위한 배열 확인", print)
-    },[ax, date])
+  },[calenderData, date])
 
   const navigate = useNavigate();
   // const [posts, setPosts] = useState([]);
