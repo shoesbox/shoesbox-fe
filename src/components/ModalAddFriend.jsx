@@ -1,9 +1,6 @@
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { BsPersonPlusFill, BsSearch } from 'react-icons/bs';
 import './css/modaladdfriend.css';
+import { Button, Form, InputGroup, Modal } from 'react-bootstrap';
+import { BsPersonPlusFill, BsSearch } from 'react-icons/bs';
 
 const ModalAddFriend = (props) => {
   const addMemberList = ['콩순이', 'hello'];

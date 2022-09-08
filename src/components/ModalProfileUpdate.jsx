@@ -1,6 +1,5 @@
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
 import './css/modaladdfriend.css';
+import { Form, Modal } from 'react-bootstrap';
 
 const ModalProfileUpdate = (props) => {
   return (

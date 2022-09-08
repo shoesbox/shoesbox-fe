@@ -63,8 +63,8 @@ const MyPage = () => {
 
   return (
     <div className="mypage">
-      <div className="setting-top">
-        <div className="setting-profile">
+      <div className="profile-box">
+        <div className="image-profile">
           <img
             src="https://velog.velcdn.com/images/hyexjun/profile/108c8f1a-b604-4881-9906-00270be78272/image.jpg"
             // src={user.profileImageUrl}
@@ -79,7 +79,7 @@ const MyPage = () => {
             keyboard={false}
           />
         </div>
-        <div className="setting-profile2">
+        <div className="text-profile">
           <div>
             {isEdit ? (
               <>
@@ -103,15 +103,7 @@ const MyPage = () => {
           )}
         </div>
       </div>
-      <div className="setting-body1">
-        <div>
-          <p>벨로그 제목</p>
-          <p>{user.nickname}.Devlog</p>
-          <p>수정</p>
-        </div>
-        <p>개인 페이지 좌측 상단에 나타나는 페이지 제목입니다.</p>
-      </div>
-      <div className="setting-body1">
+      <div className="leave-box">
         <div>
           <p>회원 탈퇴</p>
           <button>회원 탈퇴</button>

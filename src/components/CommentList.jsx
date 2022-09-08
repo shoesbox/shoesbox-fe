@@ -1,9 +1,6 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useRef, useState, useEffect, memo, useMemo } from 'react';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Spinner from 'react-bootstrap/Spinner';
+import { Button, Form, InputGroup, Spinner } from 'react-bootstrap';
 import {
   BsFillEraserFill,
   BsX,
