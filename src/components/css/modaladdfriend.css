@@ -1,27 +1,26 @@
 .addfriend-friend-icon.input-group-text {
-  background-color: white;
-  border: none;
+  /* background-color: white; */
+  /* border: none; */
 }
 .addfriend-search-icon.input-group-text:hover {
   background-color: #cce3de;
   cursor: pointer;
 }
 .addfriend-list {
-  margin-bottom: 20px;
-  /* border: 1px solid red; */
-}
-.friend-item {
   /* border: 1px solid blue; */
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.friend-item > div {
+.addfriend-list > div {
   /* border: 1px solid green; */
   margin: 3px 0;
   display: flex;
 }
-.friend-item > div > Button {
+.addfriend-list > div > span {
+  font-weight: 600;
+}
+.addfriend-list > div > Button {
   /* width: 30px; */
   height: 30px;
   display: flex;

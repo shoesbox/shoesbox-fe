@@ -12,6 +12,13 @@
 .friends > button {
   border: none;
   border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 70px;
   height: 70px;
+}
+.friends > button > span {
+  /* border: 1px solid pink; */
+  /* width: 50px; */
 }

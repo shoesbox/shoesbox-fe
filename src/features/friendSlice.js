@@ -50,11 +50,14 @@ export const addFriendThunk = createAsyncThunk(
       const data = await apis.addFriend({
         email,
       });
+      alert('친구 신청이 완료되었습니다.');
       // const res = data.data.data;
-      // console.log('addFriendthunk',`email: ${email}`,data.data.data)
+      // console.log('addFriendthunk', `email: ${email}`, data.data.data);
       // return res;
     } catch (err) {
-      // console.log(thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data))
+      // console.log(
+      //   thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data)
+      // );
       alert(err.response.data.errorDetails.apierror.message);
       // return thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data);
     }
