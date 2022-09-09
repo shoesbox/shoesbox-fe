@@ -60,11 +60,18 @@ api.interceptors.request.use(
   }
 );
 
-apiForm.interceptors.request.use((config) => {
-  // const accessToken = ;
-  // config.headers['Authorization'] = `Bearer ${accessToken}`;
-  return config;
-});
+apiForm.interceptors.request.use(
+  (config) => {
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    config.headers['Refresh-token'] = refreshToken;
+    return config;
+  },
+  (error) => {
+    console.log(error);
+  }
+);
 
 apiJson.interceptors.request.use((config) => {
   // const accessToken = ;
@@ -83,7 +90,16 @@ api.interceptors.response.use(
     return Promise.reject(err);
   }
 );
-// axios.interceptors.response.eject(api);
+
+apiForm.interceptors.response.use(
+  (res) => {
+    return res;
+  },
+  (err) => {
+    // alert(err.response.data.errorDetails.apierror.message);
+    return Promise.reject(err);
+  }
+);
 
 // 4. apis
 export const apis = {
@@ -110,7 +126,7 @@ export const apis = {
     api.put(`/api/comments/${commentId}`, payload),
 
   // 글 작성 api
-  writeDaily: (payload) => api.post('/api/posts', payload),
+  writeDaily: (payload) => apiForm.post('/api/posts', payload),
 
   // 친구 관련 api -  done 
   getFriendList : ()=> api.get('/api/friends'),

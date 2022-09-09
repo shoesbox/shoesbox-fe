@@ -14,12 +14,13 @@ export const getDetailThunk = createAsyncThunk(
   '/api/posts/detail',
   async (postId, thunkAPI) => {
     try {
-      const data = await apis.getDetail(postId);
+      const data = await apis.showDetail(postId);
       const postDetail = data.data.data;
-      console.log('showthunk', data.data.data);
+      // console.log('showthunk', data.data.data);
       return postDetail;
     } catch (err) {
-      return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
+       alert(err.response.data.errorDetails.apierror.message);
+      // return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
     }
   }
 );

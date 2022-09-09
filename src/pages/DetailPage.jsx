@@ -4,33 +4,27 @@ import ModalAddFriend from '../components/ModalAddFriend';
 import ModalDetail from '../components/ModalDetail';
 
 const DetailPage = () => {
-  // const [postId, setPostId] = useState('');
+  const [tmpPostId, setPostId] = useState();
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => 
+  {
+    var res = prompt("조회할 게시물 번호 입력"+"")
+    setPostId(res);
+    // console.log(tmpPostId)
+    setShow(true)
+  };
   const handleClose = () => setShow(false);
 
-  const tempPostId = 5;
-
-  const [show2, setShow2] = useState(false);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
 
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
         해당날짜를 클릭할 것 입니당
       </Button>
-      <Button onClick={handleShow2}>친구추가 버튼을 클릭할 것 입니당</Button>
       <ModalDetail
         show={show}
         onHide={handleClose}
-        postId={tempPostId}
-        backdrop="static"
-        keyboard={false}
-      />
-      <ModalAddFriend
-        show={show2}
-        onHide={handleClose2}
+        postId={tmpPostId}
         backdrop="static"
         keyboard={false}
       />

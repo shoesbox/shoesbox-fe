@@ -10,16 +10,16 @@ import './css/writepage.css';
 import { saveImages } from '../features/writeSlice';
 import { Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
-import { postJsonDetailThunk } from '../features/writeSlice';
+import { postJsonDetailThunk, postDetailThunk } from '../features/writeSlice';
 import { useNavigate } from 'react-router-dom';
 
 const WritePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // formdata
   let formData = new FormData();
-  let formDataTxt = {};
   // text data
-  // const [formDataTxt, setFormDataTxt] = useState();
+  const [formDataTxt, setFormDataTxt] = useState();
   const nickname = 'Sunny';
   // input validation check
   const [validated, setValidated] = useState(false);
@@ -28,9 +28,9 @@ const WritePage = () => {
   const contentRef = useRef();
   const imageRef = useRef();
   // image states
-  const [files, setFiles] = useState([]);
-  const [base64s, setBase64s] = useState([]);
-  const previewImages = useSelector((state) => state.write.images);
+  const [files, setFiles] = useState([]); // files
+  const [base64s, setBase64s] = useState([]); // base64s
+  // const previewImages = useSelector((state) => state.write.images);
 
   // 첨부 파일 검증
   const fileValidation = (obj) => {
@@ -63,22 +63,20 @@ const WritePage = () => {
       event.stopPropagation();
     } else {
       event.preventDefault();
-      formDataTxt = {
-        id: new Date(),
-        postId: Math.round(Math.random() * 99 + 1),
-        nickname,
+      setFormDataTxt({
+        // id: new Date(),
+        // postId: Math.round(Math.random() * 99 + 1),
+        // nickname,
         title: titleRef.current.value,
         // images : imageRef.current.files,
         images: base64s,
         content: contentRef.current.value,
-      };
+      });
+      // console.log(formDataTxt);
 
-      console.log(formDataTxt);
       setValidated(true);
     }
   };
-
-  const navigate = useNavigate();
 
   const deleteImage = (clickedImg) => {
     const dataTranster = new DataTransfer();
@@ -97,7 +95,7 @@ const WritePage = () => {
   };
 
   useEffect(() => {
-    dispatch(saveImages(base64s));
+    // dispatch(saveImages(base64s));
     // console.log("files", files);
     // console.log("base64s", base64s);
     // console.log(previewImages);
@@ -123,11 +121,20 @@ const WritePage = () => {
   }, [files]);
 
   useEffect(() => {
-    if (formDataTxt !== (null || undefined || {})) {
-      // dispatch(postJsonDetailThunk({ formDataTxt }));
-      console.log('데이터 등록 시점!');
+    if (formDataTxt !== undefined) {
+      // dispatch(postJsonDetailThunk(formDataTxt));
+      formData.append('title', titleRef.current.value);
+      formData.append('content', contentRef.current.value);
+      Array.from(files).forEach((file) => {
+        formData.append('imageFiles', file);
+    });
+
+      // console.log('데이터 등록 시점!');
+      dispatch(postDetailThunk(formData)).then(
+        navigate('/detail')
+      );
     }
-  }, []);
+  }, [formDataTxt]);
 
   return (
     <Container fluid className="write-wrap">
@@ -165,8 +172,8 @@ const WritePage = () => {
         </Form.Group>
         <br />
         <div className="write-preview-wrap">
-          {previewImages &&
-            previewImages.map((image, idx) => {
+          {base64s &&
+            base64s.map((image, idx) => {
               return (
                 <Fragment key={idx}>
                   <Image
@@ -199,9 +206,9 @@ const WritePage = () => {
             ref={contentRef}
             // hidden
           />
-          {/* <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type="invalid">
             일기내용을 적어주세요.
-          </Form.Control.Feedback> */}
+          </Form.Control.Feedback>
         </Form.Group>
         <br />
         <Button
