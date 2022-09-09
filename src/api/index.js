@@ -40,7 +40,6 @@ const apiJsonUTF = axios.create({
 
 const auth = axios.create({
   baseURL: BASE_URL,
-
 });
 
 // 2. request interceptor
@@ -85,11 +84,15 @@ api.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 로그인, 회원가입 api
-  loginGoogle: () => api.get('/oauth2/authorization/google'),
-  loginNaver: () => {},
-  loginKakao: () => {},
+  loginGoogle: () => api.get('api/oauth2/authorization/google'),
+  loginNaver: () => api.get('api/oauth2/authorization/naver'),
+  loginKakao: () =>
+    axios.get(
+      'https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://13.209.77.207/oauth2/authorization/kakao&response_type=code'
+    ),
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
   loginUser: (userData) => auth.post('/api/members/auth/login', userData),
+  logoutUser: () => api.get('/api/members/logout'),
 
   // 메인페이지 일기 조회
   getTodayMyPosts: () => api.get('/api/posts'),
@@ -98,7 +101,7 @@ export const apis = {
 
   // 게시글 상세 api
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
-  
+
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
   addComment: (postId, content) => api.post(`/api/comments/${postId}`, content),
@@ -109,10 +112,10 @@ export const apis = {
   // 글 작성 api
   writeDaily: (payload) => api.post('/api/posts', payload),
 
-  // 친구 관련 api - delete 빼고 done 
-  getFriendList : ()=> api.get('/api/friends'),
-  getRequestFriendList : ()=> api.get('/api/friends/request'),
-  addFriend:(payload) => api.post('/api/friends', payload),
+  // 친구 관련 api - delete 빼고 done
+  getFriendList: () => api.get('/api/friends'),
+  getRequestFriendList: () => api.get('/api/friends/request'),
+  addFriend: (payload) => api.post('/api/friends', payload),
   acceptFriend: (fromMemberId) =>
     api.put(`/api/friends/${fromMemberId}/accept`),
   refuseFriend: (fromMemberId) =>
