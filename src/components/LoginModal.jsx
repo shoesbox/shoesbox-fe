@@ -4,6 +4,8 @@ import './css/loginmodal.css';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
+const KAKAO_AUTH_URL=process.env.REACT_APP_KAKAO_AUTH_URL;
+
 const LoginModal = ({ login, handleCloseLogin }) => {
   const [state, setState] = useState({
     email: '',
@@ -93,6 +95,12 @@ const LoginModal = ({ login, handleCloseLogin }) => {
 
   const handleSocial = async (event) => {
     event.preventDefault();
+    window.open('https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=http://13.209.77.207/oauth2/authorization/naveruth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://13.209.77.207/oauth2/authorization/kakao&response_type=code')
+  };
+
+  const handleSocialKakao = async (event) => {
+    event.preventDefault();
+    window.location.href = KAKAO_AUTH_URL;
   };
 
   return (
@@ -160,7 +168,7 @@ const LoginModal = ({ login, handleCloseLogin }) => {
               />
               <button
                 className="social__button social__button--kakao"
-                onClick={handleSocial}
+                onClick={handleSocialKakao}
               />
               <button
                 className="social__button social__button--google"
