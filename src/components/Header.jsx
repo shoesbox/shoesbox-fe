@@ -5,6 +5,7 @@ import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
 import { getCookie, deleteCookie } from '../shared/cookie';
+import { apis } from '../api';
 
 function Header() {
   const [login, setLogin] = useState(false);
@@ -24,12 +25,23 @@ function Header() {
   }, [cookie]);
 
   const handleLogout = () => {
-    deleteCookie('accessToken');
-    deleteCookie('refreshToken');
-    deleteCookie('memberId');
-    deleteCookie('username');
-    // alert('로그아웃 성공');
-    window.location.replace('/');
+    apis
+      .logoutUser()
+      .then((res) => {
+        console.log(res);
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
+        deleteCookie('memberId');
+        deleteCookie('nickname');
+        deleteCookie('email');
+        // alert('로그아웃 성공');
+        window.location.replace('/');
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+        const errMessage = err.response.data.message;
+        alert(errMessage);
+      });
   };
 
   return (
