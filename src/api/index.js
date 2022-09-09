@@ -132,10 +132,10 @@ export const apis = {
   getFriendList : ()=> api.get('/api/friends'),
   getRequestFriendList : ()=> api.get('/api/friends/request'),
   addFriend:(payload) => api.post('/api/friends', payload),
-  acceptFriend: (fromMemberId) =>
-    api.put(`/api/friends/${fromMemberId}/accept`),
-  refuseFriend: (fromMemberId) =>
-    api.delete(`/api/friends/${fromMemberId}/refuse`),
-  deleteFriend: (fromMemberId, payload) =>
-    api.delete(`/api/friends/${fromMemberId}`, payload),
+  acceptFriend: (memberId) =>
+    api.put(`/api/friends/${memberId}/accept`),
+  refuseFriend: (memberId) =>
+    api.delete(`/api/friends/${memberId}/refuse`),
+  deleteFriend: (memberId) =>
+    api.delete(`/api/friends/${memberId}`),
 };

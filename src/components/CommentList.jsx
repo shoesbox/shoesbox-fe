@@ -141,13 +141,15 @@ const CommentList = ({ postId }) => {
 
   // 댓글리스트를 불러옴
   useEffect(() => {
+    if(postId!==(null||undefined)){
     dispatch(getCommentThunk(postId));
+    }
     // dispatch(getJsonCommentThunk(postId));
   }, []);
 
   return (
     <div className="detail-comments-wrap">
-      {comments?.length !== 0 ? (
+      {comments?.length > 0 ? (
         comments?.map((comment, idx) => (
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">

@@ -42,12 +42,12 @@ const ModalAddFriend = (props) => {
     }
   };
 
-  const onClickAccept = (fromMemberId) => {
-    dispatch(acceptFriendThunk(fromMemberId));
+  const onClickAccept = (memberId) => {
+    dispatch(acceptFriendThunk(memberId));
   };
 
-  const onClickRefuse = (fromMemberId) => {
-    dispatch(refuseFriendThunk(fromMemberId));
+  const onClickRefuse = (memberId) => {
+    dispatch(refuseFriendThunk(memberId));
   };
 
   const onEnterdown = (e) => {
@@ -61,12 +61,12 @@ const ModalAddFriend = (props) => {
       <div className="addfriend-list">
         {requestFriendList.map((member, idx) => (
           <div key={idx}>
-            <span>{member.fromMemberNickname}님이 친구 신청을 하였습니다.</span>
+            <span>{member.memberNickname}님이 친구 신청을 하였습니다.</span>
             &nbsp; &nbsp;
-            <Button onClick={() => onClickAccept(member.fromMemberId)}>
+            <Button onClick={() => onClickAccept(member.memberId)}>
               O
             </Button>{" "}
-            <Button onClick={()=>onClickRefuse(member.fromMemberId)}>X</Button>
+            <Button onClick={()=>onClickRefuse(member.memberId)}>X</Button>
           </div>
         ))}
       </div>

@@ -23,18 +23,18 @@ const ModalDetail = ({ postId, ...props }) => {
 
   useEffect(() => {
     // dispatch(getJsonDetailThunk(postId));
+    if(postId!==(null||undefined)){
     dispatch(getDetailThunk(postId));
-    // dispatch(getJsonCommentThunk(postId));
+    }// dispatch(getJsonCommentThunk(postId));
     // dispatch(getCommentThunk(postId));
   }, [postId]);
 
-  // const nickname = post.nickname;
-  const author = post.author;
-  const title = post.title;
-  const date = post.date;
+  const nickname = post?.nickname;
+  const title = post?.title;
+  const date = post?.date;
   // const images = post.images;
-  const urls = post.url;
-  const content = post.content;
+  const urls = post?.url;
+  const content = post?.content;
   // const comments = commentList;
 
   const ImageCarousel = () => {
@@ -72,7 +72,7 @@ const ModalDetail = ({ postId, ...props }) => {
       <Modal.Body>
         <div className="detail-titlebox">
           <span>
-            <strong>{author}</strong>
+            <strong>{nickname}</strong>
             <Button>
               <BsFillTelephoneForwardFill />
             </Button>
