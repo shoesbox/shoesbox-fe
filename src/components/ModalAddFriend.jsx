@@ -31,7 +31,6 @@ const ModalAddFriend = (props) => {
     if (addFriendRef.current.value.trim() !== "") {
       if (validateEmail(addFriendRef.current.value)) {
         //  console.log(addFriendRef.current.value);
-        // setEmail(addFriendRef.current.value);
         const email = addFriendRef.current.value;
         dispatch(addFriendThunk(email));
       } else {
@@ -66,7 +65,7 @@ const ModalAddFriend = (props) => {
             <Button onClick={() => onClickAccept(member.memberId)}>
               O
             </Button>{" "}
-            <Button onClick={()=>onClickRefuse(member.memberId)}>X</Button>
+            <Button onClick={() => onClickRefuse(member.memberId)}>X</Button>
           </div>
         ))}
       </div>
@@ -113,9 +112,6 @@ const ModalAddFriend = (props) => {
         <br />
         <RequestFriendList />
       </Modal.Body>
-      {/* <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer> */}
     </Modal>
   );
 };

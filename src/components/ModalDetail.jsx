@@ -1,19 +1,17 @@
 import { useEffect } from 'react';
-// import Container from 'react-bootstrap/Container';
-import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
-import CommentList from './CommentList';
-import '../pages/css/detailpage.css';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   getDetailThunk,
   getJsonCommentThunk,
   getJsonDetailThunk,
   getCommentThunk,
 } from '../features/detailSlice';
+import CommentList from './CommentList';
+import '../pages/css/detailpage.css';
 
 const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);

@@ -10,7 +10,6 @@ const DetailPage = () => {
   {
     var res = prompt("조회할 게시물 번호 입력"+"")
     setPostId(res);
-    // console.log(tmpPostId)
     setShow(true)
   };
   const handleClose = () => setShow(false);
