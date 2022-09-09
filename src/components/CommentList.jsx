@@ -22,18 +22,20 @@ import {
   putCommentThunk,
   switchLoading,
 } from '../features/detailSlice';
+import { getCookie } from '../shared/cookie';
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.detail.commentList);
   const loading = useSelector((state) => state.detail.loading);
-  // const pickedCommentId = useSelector((state) => state.detail.pickedCommentId)
+  const memberId = getCookie('memberId');
   const commentRef = useRef();
   const [commentStatus, setComment] = useState(true);
   const [pick, setPick] = useState();
   const [onEdit, setEdit] = useState(false);
   var tmp = '';
 
+  console.log(comments);
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== '') {
@@ -141,13 +143,15 @@ const CommentList = ({ postId }) => {
 
   // 댓글리스트를 불러옴
   useEffect(() => {
+    if(postId!==(null||undefined)){
     dispatch(getCommentThunk(postId));
+    }
     // dispatch(getJsonCommentThunk(postId));
   }, []);
 
   return (
     <div className="detail-comments-wrap">
-      {comments?.length !== 0 ? (
+      {comments?.length > 0 ? (
         comments?.map((comment, idx) => (
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
@@ -173,6 +177,8 @@ const CommentList = ({ postId }) => {
                 </>
               )}
             </div>
+            { 
+            (memberId === comment.memberId) &&
             <div className="detail-comment-btns">
               <FixButton
                 commentId={comment?.commentId}
@@ -180,6 +186,7 @@ const CommentList = ({ postId }) => {
               />
               <DelButton commentId={comment?.commentId} />
             </div>
+              }
           </div>
         ))
       ) : (

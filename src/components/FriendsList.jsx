@@ -17,7 +17,7 @@ const FriendsList = () => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  console.log("friendList", friendList);
+  // console.log("friendList", friendList);
   // useEffect(() => {
   //   if (cookie !== undefined) {
   //     return setIsLoggedIn(true);
@@ -29,8 +29,8 @@ const FriendsList = () => {
   }, []);
 
   // 임시적으로, 해당 친구의 버튼을 클릭하면, 해당 친구가 삭제 됩니다.
-  const onClickDelFriend = (fromMemberId) => {
-    dispatch(delFriendThunk(fromMemberId));
+  const onClickDelFriend = (memberId) => {
+    dispatch(delFriendThunk(memberId));
   };
   return (
     <>
@@ -40,9 +40,9 @@ const FriendsList = () => {
             return (
               <Button
                 key={idx}
-                onClick={() => onClickDelFriend(friend.fromMemberId)}
+                onClick={() => onClickDelFriend(friend.memberId)}
               >
-                {friend.fromMemberNickname}
+                {friend.memberNickname}
               </Button>
             );
           })
