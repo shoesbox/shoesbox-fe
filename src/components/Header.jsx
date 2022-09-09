@@ -9,8 +9,8 @@ import { apis } from '../api';
 
 function Header() {
   const [login, setLogin] = useState(false);
-  const handleCloseLogin = () => setLogin(false);
   const handleShowLogin = () => setLogin(true);
+  const handleCloseLogin = () => setLogin(false);
 
   const navigate = useNavigate();
 
@@ -91,6 +91,7 @@ function Header() {
                 <>
                   {/* 로그인시 */}
                   <Nav.Link
+                    handleLogout={handleLogout}
                     onClick={() => {
                       navigate('/mypage');
                     }}

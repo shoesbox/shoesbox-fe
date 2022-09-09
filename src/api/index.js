@@ -125,5 +125,7 @@ export const apis = {
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),
-  updateUserData: (memberId) => api.patch(`/api/members/info?m=${memberId}`),
+  updateUserData: (memberId, payload) =>
+    api.patch(`/api/members/info?m=${memberId}`, payload),
+  removeAccount: (memberId) => api.delete(`/api/members/info?m=${memberId}`),
 };

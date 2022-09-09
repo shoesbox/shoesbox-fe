@@ -1,7 +1,8 @@
 import './css/modaladdfriend.css';
-import { Form, Modal } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 
 const ModalProfileUpdate = (props) => {
+  // console.log(props);
   return (
     <Modal className="detail-modal" {...props} centered size="md">
       <Modal.Header closeButton>
@@ -15,6 +16,14 @@ const ModalProfileUpdate = (props) => {
           <Form.Control type="file" />
         </Form.Group>
       </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={props.onHide}>
+          Close
+        </Button>
+        <Button type="submit" variant="primary">
+          등록
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 };
