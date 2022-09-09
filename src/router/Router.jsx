@@ -9,15 +9,17 @@ import NotFoundPage from '../pages/NotFoundPage';
 import MyPage from '../pages/MyPage';
 
 const Router = () => {
+  const memberId = getCookie('memberId');
   const cookie = getCookie('accessToken');
+  
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
-    if (cookie !== undefined) {
+    if (memberId !== undefined) {
       setisLoggedIn(true);
     } else {
       setisLoggedIn(false);
     }
-  }, [cookie]);
+  }, [memberId]);
 
   return (
     <BrowserRouter>
@@ -34,7 +36,7 @@ const Router = () => {
         />
         <Route
           path="/mypage"
-          element={isLoggedIn ? <MyPage /> : <Navigate replace to="/" />}
+          element={isLoggedIn ? <MyPage memberId={memberId}/> : <Navigate replace to="/" />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

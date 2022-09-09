@@ -6,8 +6,8 @@ import { useState } from 'react';
 import ModalProfileUpdate from '../components/ModalProfileUpdate';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 
-const MyPage = () => {
-  const memberId = getCookie('memberId');
+const MyPage = ({ memberId }) => {
+  // const memberId = getCookie('memberId');
 
   const [state, setState] = useState({
     email: '',
@@ -19,21 +19,22 @@ const MyPage = () => {
   const nicknameRef = useRef();
 
   const showData = async () => {
-    const res = await apis.getUserData(memberId, { withCredentials: true });
-    console.log('res', res);
-    const userData = res.data;
-    console.log('userData', userData);
-    // try {
-    //   setUser(userData);
-    //   console.log('user', user);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    const { data } = await apis.getUserData(memberId, {
+      withCredentials: true,
+    });
+    try {
+      const userData = data?.data;
+      console.log('userData', userData);
+      setState(userData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     showData();
-  }, []);
+  }, [memberId]);
+  // 이거 안해두면 다른 페이지 갔다가 여기 올 때마다 데이터 통신하는 거 맞죠?
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -67,8 +68,8 @@ const MyPage = () => {
       <div className="profile-box">
         <div className="image-profile">
           <img
-            src="https://velog.velcdn.com/images/hyexjun/profile/108c8f1a-b604-4881-9906-00270be78272/image.jpg"
-            // src={user.profileImageUrl}
+            // src="https://velog.velcdn.com/images/hyexjun/profile/108c8f1a-b604-4881-9906-00270be78272/image.jpg"
+            src={state.profileImageUrl}
             alt="프로필 사진"
           />
           <button onClick={handleShow}>이미지 업로드</button>
@@ -85,14 +86,14 @@ const MyPage = () => {
             {isEdit ? (
               <Form.Control
                 ref={nicknameRef}
-                placeholder="원래 닉네임"
+                placeholder={state.nickname}
                 // onChange={onChangeCommentStatus}
               />
             ) : (
-              <p>닉네임</p>
+              <p>{state.nickname}</p>
             )}
           </div>
-          <p>이메일</p>
+          <p>{state.email}</p>
           <div className="nickname-edit">
             {!isEdit ? (
               <p onClick={toggleIsEdit}>수정</p>
