@@ -19,25 +19,34 @@ const ModalDetail = ({ postId, ...props }) => {
   // const CommentsList = useSelector((state) => state.detail.CommentsList);
 
   useEffect(() => {
-    dispatch(getJsonDetailThunk(postId));
-    // dispatch(getDetailThunk(postId));
-    // dispatch(getJsonCommentThunk(postId));
+    // dispatch(getJsonDetailThunk(postId));
+    if (postId !== (null || undefined)) {
+      dispatch(getDetailThunk(postId));
+    } // dispatch(getJsonCommentThunk(postId));
     // dispatch(getCommentThunk(postId));
-  }, []);
+  }, [postId]);
 
-  const nickname = post.nickname;
-  const title = post.title;
-  const date = post.date;
-  const images = post.images;
-  const content = post.content;
-  // const comments = CommentsList;
+  const nickname = post?.nickname;
+  const title = post?.title;
+  const date = post?.date;
+  // const images = post.images;
+  const urls = post?.url;
+  const content = post?.content;
+  // const comments = commentList;
 
   const ImageCarousel = () => {
     return (
+      // <Carousel>
+      //   {images?.map((image, idx) => (
+      //     <Carousel.Item key={idx}>
+      //       <img className="d-block w-100" src={image} alt={idx} />
+      //     </Carousel.Item>
+      //   ))}
+      // </Carousel>
       <Carousel>
-        {images.map((image, idx) => (
+        {urls?.map((url, idx) => (
           <Carousel.Item key={idx}>
-            <img className="d-block w-100" src={image} alt={idx} />
+            <img className="d-block w-100" src={url} alt={idx} />
           </Carousel.Item>
         ))}
       </Carousel>

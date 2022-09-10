@@ -24,7 +24,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    
+
     if (state.email.trim() === '' || state.password.trim() === '') {
       return alert('입력항목은 공란일 수 없습니다.');
     }

@@ -14,12 +14,13 @@ export const getDetailThunk = createAsyncThunk(
   '/api/posts/detail',
   async (postId, thunkAPI) => {
     try {
-      const data = await apis.getDetail(postId);
+      const data = await apis.showDetail(postId);
       const postDetail = data.data.data;
-      console.log('showthunk', data.data.data);
+      // console.log('showthunk', data.data.data);
       return postDetail;
     } catch (err) {
-      return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
+      alert(err.response.data.errorDetails.apierror.message);
+      // return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
     }
   }
 );
@@ -161,7 +162,8 @@ export const delCommentThunk = createAsyncThunk(
       // console.log("delCommentThunk", data.data.data, commentId);
       return commentId;
     } catch (err) {
-      return thunkAPI.rejectWithValue('delCommentThunkErr', err.response.data);
+      alert(err.response.data.errorDetails.apierror.message);
+      // return thunkAPI.rejectWithValue('delCommentThunkErr', err.response.data);
     }
   }
 );
@@ -171,10 +173,11 @@ export const putCommentThunk = createAsyncThunk(
   async ({ commentId, content }, thunkAPI) => {
     try {
       const data = await apis.putComment(commentId, { content });
-      // console.log("putCommentThunk", data.data.data, commentId);
-      return { commentId, content };
+      // console.log("putCommentThunk", data.data.data);
+      return { commentId: data.commentId, content: data.content };
     } catch (err) {
-      return thunkAPI.rejectWithValue('putCommentThunkErr', err.response.data);
+      alert(err.response.data.errorDetails.apierror.message);
+      // return thunkAPI.rejectWithValue('putCommentThunkErr', err.response.data);
     }
   }
 );

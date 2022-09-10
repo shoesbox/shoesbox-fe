@@ -7,7 +7,6 @@ import ModalAddFriend from './ModalAddFriend';
 import { getFriendListThunk, delFriendThunk } from '../features/friendSlice';
 
 const FriendsList = () => {
-  
   const dispatch = useDispatch();
   const friendList = useSelector((state) => state.friend.friendList);
 

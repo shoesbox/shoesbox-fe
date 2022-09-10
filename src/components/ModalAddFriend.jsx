@@ -28,7 +28,6 @@ const ModalAddFriend = (props) => {
     if (addFriendRef.current.value.trim() !== '') {
       if (validateEmail(addFriendRef.current.value)) {
         //  console.log(addFriendRef.current.value);
-        // setEmail(addFriendRef.current.value);
         const email = addFriendRef.current.value;
         dispatch(addFriendThunk(email));
       } else {

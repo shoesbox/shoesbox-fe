@@ -3,11 +3,14 @@ import Button from 'react-bootstrap/Button';
 import ModalDetail from '../components/ModalDetail';
 
 const DetailPage = () => {
-  // const [postId, setPostId] = useState('');
+  const [tmpPostId, setPostId] = useState();
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    var res = prompt('조회할 게시물 번호 입력' + '');
+    setPostId(res);
+    setShow(true);
+  };
   const handleClose = () => setShow(false);
-  const tempPostId = 3;
 
   return (
     <>
@@ -17,7 +20,7 @@ const DetailPage = () => {
       <ModalDetail
         show={show}
         onHide={handleClose}
-        postId={tempPostId}
+        postId={tmpPostId}
         backdrop="static"
         keyboard={false}
       />

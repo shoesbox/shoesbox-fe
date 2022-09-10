@@ -10,8 +10,8 @@ import MyPage from '../pages/MyPage';
 
 const Router = () => {
   const memberId = getCookie('memberId');
-  const cookie = getCookie('accessToken');
-  
+  // const cookie = getCookie('accessToken');
+
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (memberId !== undefined) {
@@ -36,7 +36,13 @@ const Router = () => {
         />
         <Route
           path="/mypage"
-          element={isLoggedIn ? <MyPage memberId={memberId}/> : <Navigate replace to="/" />}
+          element={
+            isLoggedIn ? (
+              <MyPage memberId={memberId} />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
