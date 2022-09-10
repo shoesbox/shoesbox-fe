@@ -91,7 +91,6 @@ function Header() {
                 <>
                   {/* 로그인시 */}
                   <Nav.Link
-                    handleLogout={handleLogout}
                     onClick={() => {
                       navigate('/mypage');
                     }}

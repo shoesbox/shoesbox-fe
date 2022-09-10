@@ -6,10 +6,11 @@ import { useState } from 'react';
 import ModalProfileUpdate from '../components/ModalProfileUpdate';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 
-const MyPage = ({ memberId, handleLogout }) => {
+const MyPage = ({ memberId }) => {
   // const memberId = getCookie('memberId');
   // 여기서 멤버아이디 끌어다 쓰기랑 프롭으로 내려주기랑 차이?
 
+  // 통신해서 가져온 데이터 담아서 사용할 state
   const [state, setState] = useState({
     email: '',
     nickname: '',
@@ -17,6 +18,7 @@ const MyPage = ({ memberId, handleLogout }) => {
     selfDescription: '',
   });
 
+  // 회원정보조회 api 통해 데이터 가져오기 [2]
   const showData = async () => {
     const { data } = await apis.getUserData(memberId, {
       withCredentials: true,
@@ -30,17 +32,21 @@ const MyPage = ({ memberId, handleLogout }) => {
     }
   };
 
+  // 화면 렌더링 시 통신하기 [1]
   useEffect(() => {
     showData();
   }, []);
 
+  // 이미지 업로드 모달
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
+  // 닉네임 수정-저장취소 토글
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
 
+  // 닉네임 input 값 가져올때 ref vs state
   const handleChangeState = (event) => {
     setState({
       ...state,
@@ -48,33 +54,34 @@ const MyPage = ({ memberId, handleLogout }) => {
     });
   };
 
+  // 회원정보 - 닉네임 수정 로직
   const nicknameRef = useRef();
   const handleNicknameEdit = (event) => {
     const newNickname = nicknameRef.current.value;
     // 닉네임 설정 유효성 검사
     if (newNickname.length < 3) {
-    alert('닉네임은 3자 이상으로 수정해주세요.');
-    nicknameRef.current.focus();
-    return;
+      alert('닉네임은 3자 이상으로 수정해주세요.');
+      nicknameRef.current.focus();
+      return;
     }
 
     // setState({ ...state, nickname: newNickname });
     // console.log(state);
 
-    // 회원정보 수정 후 업뎃 api
     apis
       .updateUserData(
         memberId,
         { nickname: newNickname, profileImageUrl: state.profileImageUrl },
         { withCredentials: true }
       )
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        toggleIsEdit();
+      })
       .catch((err) => console.log(err));
-
-    toggleIsEdit();
   };
 
-  // 회원탈퇴
+  // 회원탈퇴 로직
   const handleRemoveAccout = (e) => {
     e.preventDefault();
     let result = window.confirm('정말 탈퇴하시겠습니까?');
@@ -83,7 +90,8 @@ const MyPage = ({ memberId, handleLogout }) => {
         .removeAccount(memberId)
         .then((res) => {
           console.log(res);
-          // handleLogout()
+          alert('회원 탈퇴가 완료되었습니다.')
+          // 회원탈퇴 후 쿠키도 날려주기
         })
         .catch((err) => console.log(err));
     }
