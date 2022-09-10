@@ -16,6 +16,7 @@
 .detail-content {
   text-align: justify;
   padding: 0 5px;
+  white-space: pre;
 }
 
 .detail-fix-del-btns {
