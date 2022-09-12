@@ -198,7 +198,6 @@ export const deleteDetailThunk = createAsyncThunk(
   }
 );
 
-
 const detailSlice = createSlice({
   name: 'detail',
   initialState,

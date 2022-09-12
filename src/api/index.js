@@ -99,13 +99,15 @@ apiForm.interceptors.response.use(
 
 // 4. apis
 export const apis = {
-  // 로그인, 회원가입 api
+  // 소셜 로그인
   loginGoogle: () => api.get('api/oauth2/authorization/google'),
   loginNaver: () => api.get('api/oauth2/authorization/naver'),
   loginKakao: () =>
     axios.get(
       'https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://13.209.77.207/oauth2/authorization/kakao&response_type=code'
     ),
+
+  // jwt 로그인, 회원가입
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
   loginUser: (userData) => auth.post('/api/members/auth/login', userData),
   logoutUser: () => api.get('/api/members/logout'),
@@ -117,7 +119,7 @@ export const apis = {
 
   // 게시글 상세 api
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
-  deleteDetail : (postId) => api.delete(`/api/posts/${postId}`),
+  deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
@@ -144,5 +146,5 @@ export const apis = {
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),
   updateUserData: (memberId, payload) =>
     api.patch(`/api/members/info?m=${memberId}`, payload),
-  removeAccount: (memberId) => api.delete(`/api/members/info?m=${memberId}`),
+  removeAccount: (memberId) => api.delete(`/api/members/delete?m=${memberId}`),
 };

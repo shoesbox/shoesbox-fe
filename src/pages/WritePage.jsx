@@ -39,7 +39,7 @@ const WritePage = () => {
       alert('최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.');
       imageRef.current.value = '';
       return false;
-    } else if (obj.name.lastIndexOf('.') == -1) {
+    } else if (obj.name.lastIndexOf('.') === -1) {
       alert('확장자가 없는 파일은 등록할 수 없습니다.');
       imageRef.current.value = '';
       return false;
@@ -89,8 +89,7 @@ const WritePage = () => {
     setFiles(e.target.files);
   };
 
-  // 파일이 변경될 때 마다 아래와 같이, 새로 불러들이게 되며
-  // 리렌더링이 진행
+  // 파일이 변경될 때 마다 아래와 같이 새로 불러들이게 되며 리렌더링 진행
   useEffect(() => {
     if (files) {
       setBase64s([]);

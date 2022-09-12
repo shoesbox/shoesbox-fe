@@ -1,10 +1,10 @@
 import './css/mypage.css';
-import { useEffect, useRef } from 'react';
-import { getCookie } from '../shared/cookie';
+import { useState, useEffect, useRef } from 'react';
+import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
-import { useState } from 'react';
 import ModalProfileUpdate from '../components/ModalProfileUpdate';
 import { Button, Form, InputGroup } from 'react-bootstrap';
+import axios from 'axios';
 
 const MyPage = ({ memberId }) => {
   // const memberId = getCookie('memberId');
@@ -60,7 +60,7 @@ const MyPage = ({ memberId }) => {
       .catch((err) => console.log(err));
   };
 
-  // 닉네임 수정-저장취소 토글
+  // 닉네임 수정/저장취소 토글 버튼
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
 
@@ -86,12 +86,16 @@ const MyPage = ({ memberId }) => {
     // setState({ ...state, nickname: newNickname });
     // console.log(state);
 
+    const newData = {
+      nickname: newNickname,
+      // imageFile: state.profileImageUrl,
+      // selfDescription: null,
+    };
+
+    console.log(newData);
+
     apis
-      .updateUserData(
-        memberId,
-        { nickname: newNickname, profileImageUrl: state.profileImageUrl },
-        { withCredentials: true }
-      )
+      .updateUserData(memberId, newData)
       .then((res) => {
         console.log(res);
         toggleIsEdit();
@@ -99,17 +103,31 @@ const MyPage = ({ memberId }) => {
       .catch((err) => console.log(err));
   };
 
+  // 회원정보 - 프사 수정 로직
+  const handleUpdateProfile = (e) => {
+    e.preventDefault();
+    console.log('사진 업뎃');
+  };
+
   // 회원탈퇴 로직
   const handleRemoveAccout = (e) => {
     e.preventDefault();
-    let result = window.confirm('정말 탈퇴하시겠습니까?');
+    // console.log(memberId);
+    let result = window.confirm('정말로 탈퇴하시겠습니까?');
     if (result === true) {
+      console.log(memberId);
       apis
         .removeAccount(memberId)
         .then((res) => {
           console.log(res);
           alert('회원 탈퇴가 완료되었습니다.');
           // 회원탈퇴 후 쿠키도 날려주기
+          deleteCookie('accessToken');
+          deleteCookie('refreshToken');
+          deleteCookie('memberId');
+          deleteCookie('nickname');
+          deleteCookie('email');
+          window.location.replace('/');
         })
         .catch((err) => console.log(err));
     }
@@ -127,6 +145,7 @@ const MyPage = ({ memberId }) => {
             onHide={handleClose}
             // backdrop="static"
             keyboard={false}
+            // onSubmit={handleUpdateProfile}
           />
         </div>
         <div className="text-profile">
@@ -162,9 +181,7 @@ const MyPage = ({ memberId }) => {
           <p>회원 탈퇴</p>
           <button onClick={handleRemoveAccout}>회원 탈퇴</button>
         </div>
-        <p>
-          탈퇴 시 작성하신 일기 및 댓글이 모두 삭제되며 복구되지 않습니다.
-        </p>
+        <p>탈퇴 시 작성하신 일기 및 댓글이 모두 삭제되며 복구되지 않습니다.</p>
       </div>
     </div>
   );
