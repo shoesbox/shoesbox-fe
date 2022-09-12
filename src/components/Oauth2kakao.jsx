@@ -9,7 +9,7 @@ const Oauth2kakao = () => {
   const navigate = useNavigate();
 
   let code = new URL(window.location.href).searchParams.get("code");
-  console.log(code);
+  // console.log(code);
   useEffect(async () => {
     if(code){
       const res = await apis.loginKakao(code);
@@ -20,19 +20,19 @@ const Oauth2kakao = () => {
         token.accessToken,
         token.accessTokenExpireDate
         );
-        setCookie(
-          'kakaorefreshToken',
-          token.refreshToken,
-          token.refreshTokenExpireDate
-          );
-          setCookie('memberId', token.memberId);
-          navigate('/');
+      setCookie(
+        'kakaorefreshToken',
+        token.refreshToken,
+        token.refreshTokenExpireDate
+        );
+      setCookie('memberId', token.memberId);
+      navigate('/');
     }
     else{
       alert('카카오 로그인에 실패했습니다.')
     }
   }, [])
-  
+
   return (
     <>
       <Spinner animation="border" />
