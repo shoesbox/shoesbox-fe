@@ -14,15 +14,15 @@ function Header() {
 
   const navigate = useNavigate();
 
-  const cookie = getCookie('accessToken');
+  const nickname = getCookie('nickname');
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
-    if (cookie !== undefined) {
+    if (nickname !== undefined) {
       setisLoggedIn(true);
     } else {
       setisLoggedIn(false);
     }
-  }, [cookie]);
+  }, [nickname]);
 
   const handleLogout = () => {
     apis
