@@ -72,6 +72,8 @@ const MyPage = ({ memberId }) => {
     });
   };
 
+
+  const formData = new FormData();
   // 회원정보 - 닉네임 수정 로직
   const nicknameRef = useRef();
   const handleNicknameEdit = (event) => {
@@ -86,16 +88,16 @@ const MyPage = ({ memberId }) => {
     // setState({ ...state, nickname: newNickname });
     // console.log(state);
 
-    const newData = {
-      nickname: newNickname,
-      // imageFile: state.profileImageUrl,
-      // selfDescription: null,
-    };
+    formData.append('nickname', newNickname)
+    // const newData = {
+    //   nickname: newNickname,
+    //   imageFile: state.profileImageUrl,
+    // };
 
-    console.log(newData);
+    console.log(formData);
 
     apis
-      .updateUserData(memberId, newData)
+      .updateUserData(memberId, formData)
       .then((res) => {
         console.log(res);
         toggleIsEdit();
