@@ -42,6 +42,24 @@ const MyPage = ({ memberId }) => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
+  // 이미지 제거 함수
+  const deleteProfileImg = () => {
+    apis
+      .updateUserData(
+        memberId,
+        {
+          nickname: state.nickname,
+          profileImageUrl: 'https://i.ibb.co/N27FwdP/image.png',
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res);
+        toggleIsEdit();
+      })
+      .catch((err) => console.log(err));
+  };
+
   // 닉네임 수정-저장취소 토글
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
@@ -103,7 +121,7 @@ const MyPage = ({ memberId }) => {
         <div className="image-profile">
           <img src={state.profileImageUrl} alt="프로필 사진" />
           <button onClick={handleShow}>이미지 업로드</button>
-          <button>이미지 제거</button>
+          <button onClick={deleteProfileImg}>이미지 제거</button>
           <ModalProfileUpdate
             show={show}
             onHide={handleClose}
@@ -145,7 +163,7 @@ const MyPage = ({ memberId }) => {
           <button onClick={handleRemoveAccout}>회원 탈퇴</button>
         </div>
         <p>
-          탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.
+          탈퇴 시 작성하신 일기 및 댓글이 모두 삭제되며 복구되지 않습니다.
         </p>
       </div>
     </div>
