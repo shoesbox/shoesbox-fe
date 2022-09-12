@@ -6,6 +6,7 @@ import MainPage from '../pages/MainPage';
 import DetailPage from '../pages/DetailPage';
 import WritePage from '../pages/WritePage';
 import NotFoundPage from '../pages/NotFoundPage';
+import Oauth2kakao from '../components/Oauth2kakao';
 
 const Router = () => {
   const cookie = getCookie('accessToken');
@@ -32,6 +33,7 @@ const Router = () => {
           element={isLoggedIn ? <WritePage /> : <Navigate replace to="/" />}
         />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path='/oauth/callback/kakao' element={<Oauth2kakao />} />
       </Routes>
     </BrowserRouter>
   );
