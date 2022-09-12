@@ -102,7 +102,7 @@ export const apis = {
   // 로그인, 회원가입 api
   loginGoogle: () => api.get("/oauth2/authorization/google"),
   loginNaver: () => {},
-  loginKakao: () => {},
+  loginKakao: (code) => api.get(`/oauth2/authorization/kakao?code=${code}`),
   joinUser: (userData) => auth.post("/api/members/auth/signup", userData),
   loginUser: (userData) => auth.post("/api/members/auth/login", userData),
 
