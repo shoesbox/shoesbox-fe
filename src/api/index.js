@@ -113,6 +113,7 @@ export const apis = {
 
   // 게시글 상세 api
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
+  deleteDetail : (postId) => api.delete(`/api/posts/${postId}`),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),

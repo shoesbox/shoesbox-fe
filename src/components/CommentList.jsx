@@ -34,7 +34,8 @@ const CommentList = ({ postId }) => {
   const [pick, setPick] = useState();
   const [onEdit, setEdit] = useState(false);
   var tmp = '';
-
+ 
+  console.log(memberId);
   console.log(comments);
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
@@ -178,7 +179,7 @@ const CommentList = ({ postId }) => {
               )}
             </div>
             { 
-            (memberId === comment.memberId) &&
+            (parseInt(memberId) === parseInt(comment.memberId)) &&
             <div className="detail-comment-btns">
               <FixButton
                 commentId={comment?.commentId}
