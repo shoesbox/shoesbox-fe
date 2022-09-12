@@ -1,26 +1,22 @@
-import { useState, useRef, useEffect, Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Container from 'react-bootstrap/esm/Container';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
-import './css/writepage.css';
-import { saveImages } from '../features/writeSlice';
-import { Image } from 'react-bootstrap';
-import { BsFillBackspaceFill } from 'react-icons/bs';
-import { postJsonDetailThunk } from '../features/writeSlice';
-import { useNavigate } from 'react-router-dom';
+import { useState, useRef, useEffect, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Container from "react-bootstrap/esm/Container";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import { Image } from "react-bootstrap";
+import { BsFillBackspaceFill } from "react-icons/bs";
+import { postJsonDetailThunk, postDetailThunk } from "../features/writeSlice";
+import "./css/writepage.css";
 
 const WritePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // formdata
   let formData = new FormData();
-  let formDataTxt = {};
   // text data
-  // const [formDataTxt, setFormDataTxt] = useState();
-  const nickname = 'Sunny';
+  const [formDataTxt, setFormDataTxt] = useState();
   // input validation check
   const [validated, setValidated] = useState(false);
   // refs
@@ -28,28 +24,28 @@ const WritePage = () => {
   const contentRef = useRef();
   const imageRef = useRef();
   // image states
-  const [files, setFiles] = useState([]);
-  const [base64s, setBase64s] = useState([]);
-  const previewImages = useSelector((state) => state.write.images);
+  const [files, setFiles] = useState([]); // files
+  const [base64s, setBase64s] = useState([]); // base64s
+  // const previewImages = useSelector((state) => state.write.images);
 
   // 첨부 파일 검증
   const fileValidation = (obj) => {
-    const fileTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    const fileTypes = ["image/gif", "image/jpeg", "image/png"];
     if (obj.name.length > 100) {
-      alert('파일명이 100자 이상인 파일은 등록할 수 없습니다.');
-      imageRef.current.value = '';
+      alert("파일명이 100자 이상인 파일은 등록할 수 없습니다.");
+      imageRef.current.value = "";
       return false;
     } else if (obj.size > 30 * 1024 * 1024) {
-      alert('최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.');
-      imageRef.current.value = '';
+      alert("최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.");
+      imageRef.current.value = "";
       return false;
-    } else if (obj.name.lastIndexOf('.') == -1) {
-      alert('확장자가 없는 파일은 등록할 수 없습니다.');
-      imageRef.current.value = '';
+    } else if (obj.name.lastIndexOf(".") == -1) {
+      alert("확장자가 없는 파일은 등록할 수 없습니다.");
+      imageRef.current.value = "";
       return false;
     } else if (!fileTypes.includes(obj.type)) {
-      alert('첨부가 불가능한 파일은 등록할 수 없습니다.');
-      imageRef.current.value = '';
+      alert("첨부가 불가능한 파일은 등록할 수 없습니다.");
+      imageRef.current.value = "";
       return false;
     } else {
       return true;
@@ -63,26 +59,23 @@ const WritePage = () => {
       event.stopPropagation();
     } else {
       event.preventDefault();
-      formDataTxt = {
-        id: new Date(),
-        postId: Math.round(Math.random() * 99 + 1),
-        nickname,
+      setFormDataTxt({
+        // id: new Date(),
+        // postId: Math.round(Math.random() * 99 + 1),
+        // nickname: 'Sunny',
         title: titleRef.current.value,
         // images : imageRef.current.files,
         images: base64s,
         content: contentRef.current.value,
-      };
+      });
+      // console.log(formDataTxt);
 
-      console.log(formDataTxt);
       setValidated(true);
     }
   };
 
-  const navigate = useNavigate();
-
   const deleteImage = (clickedImg) => {
     const dataTranster = new DataTransfer();
-    // console.log('clickedImg', clickedImg);
     Array.from(files)
       .filter((file) => file !== clickedImg)
       .forEach((file) => {
@@ -95,13 +88,6 @@ const WritePage = () => {
   const onChangePic = (e) => {
     setFiles(e.target.files);
   };
-
-  useEffect(() => {
-    dispatch(saveImages(base64s));
-    // console.log("files", files);
-    // console.log("base64s", base64s);
-    // console.log(previewImages);
-  }, [onChangePic]);
 
   // 파일이 변경될 때 마다 아래와 같이, 새로 불러들이게 되며
   // 리렌더링이 진행
@@ -123,10 +109,16 @@ const WritePage = () => {
   }, [files]);
 
   useEffect(() => {
-    if (formData !== (null || undefined || {})) {
-      dispatch(postJsonDetailThunk({ formDataTxt }));
+    if (formDataTxt !== undefined) {
+      // dispatch(postJsonDetailThunk(formDataTxt));
+      formData.append("title", titleRef.current.value);
+      formData.append("content", contentRef.current.value);
+      Array.from(files).forEach((file) => {
+        formData.append("imageFiles", file);
+      });
+      dispatch(postDetailThunk(formData)).then(navigate("/detail"));
     }
-  }, []);
+  }, [formDataTxt]);
 
   return (
     <Container fluid className="write-wrap">
@@ -164,8 +156,8 @@ const WritePage = () => {
         </Form.Group>
         <br />
         <div className="write-preview-wrap">
-          {previewImages &&
-            previewImages.map((image, idx) => {
+          {base64s &&
+            base64s.map((image, idx) => {
               return (
                 <Fragment key={idx}>
                   <Image
@@ -196,17 +188,16 @@ const WritePage = () => {
             placeholder="오늘의 근황을 친구에게 공유해봅시다."
             required
             ref={contentRef}
-            // hidden
           />
-          {/* <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type="invalid">
             일기내용을 적어주세요.
-          </Form.Control.Feedback> */}
+          </Form.Control.Feedback>
         </Form.Group>
         <br />
         <Button
           type="button"
           onClick={() => {
-            navigate('/');
+            navigate("/");
           }}
         >
           뒤로 가기

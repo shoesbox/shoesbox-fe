@@ -1,20 +1,18 @@
 import { useEffect } from 'react';
-// import Container from 'react-bootstrap/Container';
-import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
-import CommentList from './CommentList';
-import '../pages/css/detailpage.css';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   getDetailThunk,
   getJsonCommentThunk,
   getJsonDetailThunk,
   getCommentThunk,
 } from '../features/detailSlice';
-import { apis } from '../api';
+import CommentList from './CommentList';
+import '../pages/css/detailpage.css';
+
 const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
   const dispatch = useDispatch();
@@ -22,28 +20,37 @@ const ModalDetail = ({ postId, ...props }) => {
   // const commentList = useSelector((state) => state.detail.commentList);
 
   useEffect(() => {
-    dispatch(getJsonDetailThunk(postId));
-    // dispatch(getDetailThunk(postId));
-    // dispatch(getJsonCommentThunk(postId));
+    // dispatch(getJsonDetailThunk(postId));
+    if(postId!==(null||undefined)){
+    dispatch(getDetailThunk(postId));
+    }// dispatch(getJsonCommentThunk(postId));
     // dispatch(getCommentThunk(postId));
-  }, []);
+  }, [postId]);
 
-  const nickname = post.nickname;
-  const title = post.title;
-  const date = post.date;
-  const images = post.images;
-  const content = post.content;
+  const nickname = post?.nickname;
+  const title = post?.title;
+  const date = post?.date;
+  // const images = post.images;
+  const urls = post?.url;
+  const content = post?.content;
   // const comments = commentList;
 
   const ImageCarousel = () => {
     return (
-      <Carousel>
-        {images.map((image, idx) => (
-          <Carousel.Item key={idx}>
-            <img className="d-block w-100" src={image} alt={idx} />
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      // <Carousel>
+      //   {images?.map((image, idx) => (
+      //     <Carousel.Item key={idx}>
+      //       <img className="d-block w-100" src={image} alt={idx} />
+      //     </Carousel.Item>
+      //   ))}
+      // </Carousel>
+            <Carousel>
+            {urls?.map((url, idx) => (
+              <Carousel.Item key={idx}>
+                <img className="d-block w-100" src={url} alt={idx} />
+              </Carousel.Item>
+            ))}
+          </Carousel>
     );
   };
 

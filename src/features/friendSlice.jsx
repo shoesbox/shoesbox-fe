@@ -10,11 +10,11 @@ const initialState = {
 
 export const getFriendListThunk = createAsyncThunk(
   '/api/getfriendlistthunk',
-  async (fromMemberId, thunkAPI) => {
+  async (thunkAPI) => {
     try {
       const data = await apis.getFriendList();
       const res = data.data.data;
-      console.log('getFriendListthunk', data.data.data)
+      // console.log('getFriendListthunk', data.data.data)
       return res;
     } catch (err) {
       console.log(thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data))
@@ -29,10 +29,10 @@ export const getRequestFriendListThunk = createAsyncThunk(
     try {
       const data = await apis.getRequestFriendList();
       const res = data.data.data;
-      console.log('getRequestFriendthunk',data.data.data)
+      // console.log('getRequestFriendthunk',data.data.data)
       return res;
     } catch (err) {
-      console.log(thunkAPI.rejectWithValue('addFriendThunkErr', err.response.data))
+      console.log(thunkAPI.rejectWithValue('getRequestFriendListThunkErr', err.response.data))
       // return thunkAPI.rejectWithValue('getRequestFriendThunkErr', err.response.data);
     }
   }
@@ -59,11 +59,13 @@ export const addFriendThunk = createAsyncThunk(
 
 export const acceptFriendThunk = createAsyncThunk(
   '/api/acceptfriendthunk',
-  async (fromMemberId, thunkAPI) => {
+  async (memberId, thunkAPI) => {
     try {
-      const data = await apis.acceptFriend(fromMemberId);
+      const data = await apis.acceptFriend(memberId);
       const res = data.data.data;
-      // console.log('acceptFriendthunk', data.data.data);
+      const acceptFriend = res.fromMemberNickname;
+      alert(`${acceptFriend}님을(를) 수락하였습니다.`)
+      console.log('acceptFriendthunk', data.data.data);
       return res;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('acceptFriendThunkErr', err.response.data))
@@ -75,14 +77,14 @@ export const acceptFriendThunk = createAsyncThunk(
 
 export const refuseFriendThunk = createAsyncThunk(
   '/api/refusefriendthunk',
-  async (fromMemberId, thunkAPI) => {
+  async (memberId, thunkAPI) => {
     try {
-      const data = await apis.refuseFriend(fromMemberId);
+      const data = await apis.refuseFriend(memberId);
       const res = data.data.data;
-      // console.log('refuseFriendthunk', res.fromMemberNickname);
+      // console.log('refuseFriendthunk', res.memberNickname);
       const refuseFriend = res.fromMemberNickname;
       alert(`${refuseFriend}님을(를) 거절하였습니다.`)
-      return fromMemberId;
+      return memberId;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('refuseFriendThunkErr', err.response.data))
       alert(err.response.data.errorDetails.apierror.message);
@@ -93,14 +95,14 @@ export const refuseFriendThunk = createAsyncThunk(
 
 export const delFriendThunk = createAsyncThunk(
   '/api/delfriendthunk',
-  async (fromMemberId, thunkAPI) => {
+  async (memberId, thunkAPI) => {
     try {
-      const data = await apis.deleteFriend(fromMemberId);
+      const data = await apis.deleteFriend(memberId);
       const res = data.data.data;
-      // console.log('delFriendthunk', res.fromMemberNickname);
-      const delFriend = res.fromMemberNickname;
+      console.log('delFriendthunk', res);
+      const delFriend = res.memberNickname;
       alert(`${delFriend}님을(를) 삭제하였습니다.`)
-      return fromMemberId;
+      return memberId;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('delFriendThunkErr', err.response.data))
       alert(err.response.data.errorDetails.apierror.message);
@@ -127,11 +129,15 @@ const friendSlice = createSlice({
     });
     builder.addCase(acceptFriendThunk.fulfilled, (state, action) => {
       // friendList에 추가, requestFreindList 에서 제거
-      state.friendList = [...state.friendList, action.payload];
+      const newFriend = {
+        memberId : action.payload.fromMemberId,
+        memberNickname : action.payload.fromMemberNickname
+      }
+      state.friendList = [...state.friendList, newFriend];
       const requestFriendList = state.requestFriendList;
       const requestMemberId = action.payload.fromMemberId;
       const newRqFriendList = requestFriendList.filter((l) => {
-        return parseInt(l.fromMemberId) !== requestMemberId;
+        return parseInt(l.memberId) !== requestMemberId;
       });
       state.requestFriendList = newRqFriendList;
     });
@@ -139,7 +145,7 @@ const friendSlice = createSlice({
       const requestFriendList = state.requestFriendList;
       const requestMemberId = action.payload;
       const newRqFriendList = requestFriendList.filter((l) => {
-        return parseInt(l.fromMemberId) !== requestMemberId;
+        return parseInt(l.memberId) !== requestMemberId;
       });
       state.requestFriendList = newRqFriendList;
     });
@@ -147,7 +153,7 @@ const friendSlice = createSlice({
       const friendList = state.friendList;
       const memberId = action.payload;
       const newFriendList = friendList.filter((l) => {
-        return parseInt(l.fromMemberId) !== memberId;
+        return parseInt(l.memberId) !== memberId;
       });
       state.friendList = newFriendList;
     });

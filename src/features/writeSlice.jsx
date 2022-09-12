@@ -6,22 +6,24 @@ const initialState = {
   images: [],
 };
 
-const getTmpThunk = createAsyncThunk(
-  '/api/write/tmp',
-  async (postId, thunkAPI) => {
+export const postDetailThunk = createAsyncThunk(
+  '/api/postdetailthunk',
+  async (payload, thunkAPI) => {
     try {
-      const data = await apis.getDetail(postId);
-      const postDetail = data.data.data;
-      // console.log('thunk',data.data.data)
-      return postDetail;
+      const data = await apis.writeDaily(payload);
+      const res = data.data.data;
+      // console.log('writeDailythunk',res)
+      if(res){
+        alert(`${res}번 게시물, 상세게시물 조회시 활용`)
+      }
     } catch (err) {
-      return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
+      return thunkAPI.rejectWithValue('writeDailyThunkErr', err.response.data);
     }
   }
 );
 
 export const postJsonDetailThunk = createAsyncThunk(
-  'api/posts/detail/json/write',
+  'api/postJsonDetailThunk',
   async (payload, thunkAPI) => {
     try {
       const data = await axios.post(`http://localhost:3030/posts`, {
@@ -49,8 +51,8 @@ const writeSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getTmpThunk.fulfilled, (state, action) => {
-      state.post = action.payload;
+    builder.addCase(postDetailThunk.fulfilled, (state, action) => {
+      // state.post = action.payload;
     });
   },
 });
