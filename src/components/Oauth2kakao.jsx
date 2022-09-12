@@ -4,6 +4,7 @@ import { Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { apis } from "../api";
 import { setCookie } from "../shared/cookie";
+import axios from "axios";
 
 const Oauth2kakao = () => {
   const navigate = useNavigate();
@@ -15,21 +16,21 @@ const Oauth2kakao = () => {
       console.log(code);
 
       // if(code){
-        const res = await apis.loginKakao(code);
-        
+        // const res = await apis.loginKakao(code);
+        const res = await axios.get(`http://13.209.77.207/oauth2/authorization/kakao?code=${code}`)
         const token = res.data?.data;
         setCookie(
           'kakaoToken',
           token.accessToken,
           token.accessTokenExpireDate
           );
-          setCookie(
-            'kakaorefreshToken',
-            token.refreshToken,
-            token.refreshTokenExpireDate
-            );
-            setCookie('memberId', token.memberId);
-            navigate('/');
+        setCookie(
+          'kakaorefreshToken',
+          token.refreshToken,
+          token.refreshTokenExpireDate
+          );
+        setCookie('memberId', token.memberId);
+        navigate('/');
       }
 
       fetchUser();
