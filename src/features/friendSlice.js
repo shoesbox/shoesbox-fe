@@ -106,9 +106,9 @@ export const delFriendThunk = createAsyncThunk(
     try {
       const data = await apis.deleteFriend(memberId);
       const res = data.data.data;
-      // console.log('delFriendthunk', res.memberNickname);
-      const delFriend = res.fromMemberNickname;
-      alert(`${delFriend}님을 목록에서 삭제하였습니다.`);
+      console.log('delFriendthunk', res);
+      const delFriend = res.memberNickname;
+      alert(`${delFriend}님을(를) 삭제하였습니다.`)
       return memberId;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('delFriendThunkErr', err.response.data))

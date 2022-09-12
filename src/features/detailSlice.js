@@ -182,6 +182,23 @@ export const putCommentThunk = createAsyncThunk(
   }
 );
 
+// delete post
+export const deleteDetailThunk = createAsyncThunk(
+  'api/detailthunk/del',
+  async (postId, thunkAPI) => {
+    try {
+      const data = await apis.deleteDetail(postId);
+      // console.log("deleteDetailThunk", data.data.data);
+
+      // return ;
+    } catch (err) {
+      alert(err.response.data.errorDetails.apierror.message);
+      // return thunkAPI.rejectWithValue('putCommentThunkErr', err.response.data);
+    }
+  }
+);
+
+
 const detailSlice = createSlice({
   name: 'detail',
   initialState,
