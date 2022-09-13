@@ -146,17 +146,22 @@ const Calendar = () => {
           </div>
           <div className="dates">
             {dates.map((date, idx) => (
-              <div
-                className="date"
-                key={idx}
-                style={{
-                  background: `url(${date.url})`,
-                  backgroundSize: 'cover',
-                }}
-                onClick={() => navigate('/detail')}
-              >
-                <div>{date.day}</div>
-              </div>
+              <>
+                <div
+                  className="date"
+                  key={idx}
+                  style={{
+                    background: `url(${date.url})`,
+                    backgroundSize: 'cover',
+                  }}
+                  onClick={() => navigate('/detail')}
+                >
+                  {/* {date.url ? (
+                    <img key={idx} src={date.url} alt={date} />
+                  ) : null} */}
+                  <div>{date.day}</div>
+                </div>
+              </>
             ))}
           </div>
         </div>
