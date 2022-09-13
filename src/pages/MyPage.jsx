@@ -15,7 +15,6 @@ const MyPage = ({ memberId }) => {
     email: '',
     nickname: '',
     profileImageUrl: '',
-    selfDescription: '',
   });
 
   // 회원정보조회 api 통해 데이터 가져오기 [2]
@@ -72,8 +71,6 @@ const MyPage = ({ memberId }) => {
     });
   };
 
-
-  const formData = new FormData();
   // 회원정보 - 닉네임 수정 로직
   const nicknameRef = useRef();
   const handleNicknameEdit = (event) => {
@@ -84,31 +81,17 @@ const MyPage = ({ memberId }) => {
       nicknameRef.current.focus();
       return;
     }
-
-    // setState({ ...state, nickname: newNickname });
-    // console.log(state);
-
-    formData.append('nickname', newNickname)
-    // const newData = {
-    //   nickname: newNickname,
-    //   imageFile: state.profileImageUrl,
-    // };
-
-    console.log(formData);
+    const formData = new FormData();
+    formData.append('nickname', newNickname);
 
     apis
       .updateUserData(memberId, formData)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setState({ ...state, nickname: newNickname });
         toggleIsEdit();
       })
       .catch((err) => console.log(err));
-  };
-
-  // 회원정보 - 프사 수정 로직
-  const handleUpdateProfile = (e) => {
-    e.preventDefault();
-    console.log('사진 업뎃');
   };
 
   // 회원탈퇴 로직
@@ -145,9 +128,10 @@ const MyPage = ({ memberId }) => {
           <ModalProfileUpdate
             show={show}
             onHide={handleClose}
-            // backdrop="static"
-            keyboard={false}
-            // onSubmit={handleUpdateProfile}
+            backdrop="static"
+            memberId={memberId}
+            state={state}
+            setState={setState}
           />
         </div>
         <div className="text-profile">
