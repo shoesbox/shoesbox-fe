@@ -34,7 +34,7 @@ const MyPage = ({ memberId }) => {
   // 화면 렌더링 시 통신하기 [1]
   useEffect(() => {
     showData();
-  }, []);
+  }, [state.profileImageUrl]);
 
   // 이미지 업로드 모달
   const [show, setShow] = useState(false);
