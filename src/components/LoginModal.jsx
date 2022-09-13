@@ -59,7 +59,7 @@ const LoginModal = ({ login, handleCloseLogin }) => {
         );
         setCookie('memberId', token.memberId);
         alert('로그인 성공');
-        window.location.reload(true);
+        // window.location.reload(true);
       })
       .catch((err) => {
         // console.log(err.response.data.errorDetails.apierror.message);

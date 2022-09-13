@@ -2,13 +2,20 @@ import './css/calender.css';
 import { Button, Dropdown } from 'react-bootstrap';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apis } from '../api';
 import axios from 'axios';
+import { getCookie, setCookie } from '../shared/cookie';
 
 const Calendar = () => {
+  //
+  let memberId = getCookie('accessToken');
+  
   // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state
   const [dates, setDates] = useState([]);
+  // axios 통신용 state
+  const [calenderData, setCalenderData] = useState([]);
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -24,54 +31,58 @@ const Calendar = () => {
     const prevLast = new Date(date.getFullYear(), date.getMonth(), 0);
     const thisLast = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-    const PLDate = prevLast.getDate();
-    const PLDay = prevLast.getDay();
+    const prevLastDate = prevLast.getDate();
+    const prevLastDay = prevLast.getDay();
 
-    const TLDate = thisLast.getDate();
-    const TLDay = thisLast.getDay();
+    const thisLastDate = thisLast.getDate();
+    const thisLastDay = thisLast.getDay();
 
     // Dates 기본 배열들
     const prevDates = [];
-    const thisDates = [...Array(TLDate + 1).keys()].slice(1);
+    // Array(n)로는 0부터 n-1까지의 배열이 생성되므로 1부터 n까지로 밀어주기
+    const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
     const nextDates = [];
 
+
     // prevDates 계산
-    if (PLDay !== 6) {
-      for (let i = 0; i < PLDay + 1; i++) {
-        prevDates.unshift(PLDate - i);
+    if (prevLastDay !== 6) {
+      for (let i = 0; i < prevLastDay + 1; i++) {
+        prevDates.unshift(prevLastDate-i)
       }
     }
+    
     // nextDates 계산
-    for (let i = 1; i < 7 - TLDay; i++) {
+    for (let i = 1; i < 7 - thisLastDay; i++) {
       nextDates.push(i);
     }
 
-    // Dates 합치기
-    return prevDates.concat(thisDates, nextDates);
+    // Tray 작성
+    let newPrevDates = prevDates.reduce((arr, v) => {
+      arr.push({day: v, url:''})
+      return arr
+    }, [])
+
+    let newThisDates = [];
+
+    for (let i = 0; i < thisDates.length; i++) {
+      if(thisDates[i] == calenderData[i]?.postId){
+        newThisDates.push({day:thisDates[i], url:calenderData[i]?.thumbnailUrl})
+      }
+      else{
+        newThisDates.push({day:thisDates[i], url: ''})
+      }
+    }
+        
+    let newNextDates = nextDates.reduce((arr, v) => {
+      arr.push({day: v, url:''})
+      return arr
+    }, [])
+
+    console.log("전체배열 한번 보자", newPrevDates.concat(newThisDates, newNextDates))
+
+    
+    return newPrevDates.concat(newThisDates, newNextDates)
   };
-
-  useEffect(() => {
-    setDates(calcDate());
-  }, [date]);
-
-  const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
-  const getAllPosts = async () => {
-    // const res = await axios.get('http://localhost:3030/posts')
-    // console.log('All Posts', res.data);
-    const { data } = await axios.get('http://localhost:3030/posts');
-    console.log('All Posts', data);
-    setPosts(data);
-  };
-
-  const img =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
-  // `${posts[0].images[0]}`;
-
-  console.log(posts[0]);
-  useEffect(() => {
-    getAllPosts();
-  }, []);
 
   const changeMonth = (addMonth) => {
     if (addMonth !== 0) {
@@ -84,6 +95,54 @@ const Calendar = () => {
       setDates(calcDate());
     }
   };
+
+  useEffect(() => {
+    apis.getTargetPosts(memberId, viewDate.year, viewDate.month)
+      .then(res => res.data?.data.content)
+      .then((data) => {
+        setCalenderData(data)
+      })
+    // axios.get('http://localhost:5001/data')
+    //   .then(res => res.data.content)
+    //   .then((data) => {
+    //     setCalenderData(data)
+    //   })
+  }, []) 
+
+  useEffect(() => {
+    setDates(calcDate())
+  },[calenderData])
+// , date
+  const navigate = useNavigate();
+  // const [posts, setPosts] = useState([]);
+
+  // const getAllPosts = async () => {
+  //   let postTray = [];
+  //   const copyDate = dates.slice();
+  //   // const res = await axios.get('http://localhost:3030/totalPosts');
+  //   // console.log('All Posts', res.data);
+  //   const response = await axios.get('http://localhost:3030/totalPosts');
+  //   const tray = response?.data.content;
+    
+  //   copyDate.reduce((each, idx) => {
+  //     if(idx == tray.createdDay){
+        
+  //     }
+  //     else{
+        
+  //     }
+  //   }, [])
+  //   setPosts(data);
+  // };
+
+  // const img =
+  //   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
+  // `${posts.content[0].thumbnailUrl}`;
+
+  // useEffect(() => {
+  //   getAllPosts();
+  // }, []);
+  // console.log(posts);
 
   return (
     <div className="calender-container">
@@ -101,7 +160,7 @@ const Calendar = () => {
             <button className="nav-btn" onClick={() => changeMonth(+1)}>
               &gt;
             </button>
-            {/* <Button className="nav-btn go-next">&gt;</Button> */}
+            <Button className="nav-btn go-next">&gt;</Button>
           </div>
         </div>
         <div className="main">
@@ -115,14 +174,14 @@ const Calendar = () => {
             <div className="day">토</div>
           </div>
           <div className="dates">
-            {dates.map((date, idx) => (
+            {dates.map((day, idx) => (
               <div
                 className="date"
                 key={idx}
-                style={{ background: `url(${img})`, backgroundSize: 'cover' }}
+                style={{ background: `url(${day.url})`, backgroundSize: 'cover' }}
                 onClick={() => navigate('/detail')}
               >
-                <span>{date}</span>
+                <span>{day.day}</span>
               </div>
             ))}
           </div>
@@ -133,3 +192,28 @@ const Calendar = () => {
 };
 
 export default Calendar;
+
+// let data = [10, 20, 30];
+// let tray = [
+//     {
+//         postId:10,
+//         url:"url",
+//     },
+//     {
+//         postId:20,
+//         url:"url2"
+//     }
+// ]
+// let image = [];
+
+
+// image = data.reduce((arr, v)=>{
+//     for (let i = 0; i < tray.length; i++) {
+//         if(v == tray[i].postId){
+//             arr.push({day:v, url:tray[i].url})
+//         }
+//     }
+//     return arra
+// },[])
+
+// console.log(image)
