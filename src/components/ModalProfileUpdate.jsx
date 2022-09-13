@@ -1,25 +1,33 @@
 import './css/modaladdfriend.css';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { apis } from '../api';
 
 const ModalProfileUpdate = (props) => {
   // console.log(props);
 
-  // 회원정보 - 프사 수정 로직
-  const imgRef = useRef();
-  const handleUpdateProfile = () => {
-    const newProfile = imgRef.current.value;
+  // const imgRef = useRef();
+  const [imgFile, setImgFile] = useState();
+  const onFileChange = (e) => {
+    setImgFile(e.target.files[0]);
+  };
 
-    console.log(newProfile);
+  // 회원정보 - 프사 수정 로직
+  const handleUpdateProfile = () => {
+    // const newProfile = imgRef.current.value;
+    // console.log('newProfile', newProfile);
+    console.log('imgFile', imgFile);
+
     const formData = new FormData();
-    formData.append('imageFile', newProfile);
+    // formData.append('imageFile', newProfile);
+    formData.append('imageFile', imgFile);
 
     apis
       .updateUserData(props.memberId, formData)
       .then((res) => {
-        // console.log(res);
-        props.setState({ ...props.state, profileImageUrl: newProfile });
+        console.log(res);
+        props.setState({ ...props.state, profileImageUrl: imgFile });
+        props.onHide()
       })
       .catch((err) => console.log(err));
   };
@@ -34,7 +42,13 @@ const ModalProfileUpdate = (props) => {
       <Modal.Body>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>새로운 사진을 업로드해주세요 🍩🍨</Form.Label>
-          <Form.Control type="file" ref={imgRef} />
+          <Form.Control
+            type="file"
+            accept="image/*"
+            encType="multipart/form-data"
+            // ref={imgRef}
+            onChange={(e) => onFileChange(e)}
+          />
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
