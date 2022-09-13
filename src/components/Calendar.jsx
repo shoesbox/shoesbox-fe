@@ -1,10 +1,8 @@
 import './css/calender.css';
-import { Button, Dropdown } from 'react-bootstrap';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
-import axios from 'axios';
-import { getCookie, setCookie } from '../shared/cookie';
+import { getCookie } from '../shared/cookie';
 
 const Calendar = () => {
   let memberId = getCookie('memberId');
@@ -82,10 +80,7 @@ const Calendar = () => {
       return arr;
     }, []);
 
-    console.log(
-      '전체배열 한번 보자',
-      newPrevDates.concat(newThisDates, newNextDates)
-    );
+    console.log('전체 배열', newPrevDates.concat(newThisDates, newNextDates));
 
     return newPrevDates.concat(newThisDates, newNextDates);
   };
@@ -137,7 +132,6 @@ const Calendar = () => {
             <button className="nav-btn" onClick={() => changeMonth(+1)}>
               &gt;
             </button>
-            <Button className="nav-btn go-next">&gt;</Button>
           </div>
         </div>
         <div className="main">
@@ -151,17 +145,17 @@ const Calendar = () => {
             <div className="day">토</div>
           </div>
           <div className="dates">
-            {dates.map((day, idx) => (
+            {dates.map((date, idx) => (
               <div
                 className="date"
                 key={idx}
                 style={{
-                  background: `url(${day.url})`,
+                  background: `url(${date.url})`,
                   backgroundSize: 'cover',
                 }}
                 onClick={() => navigate('/detail')}
               >
-                <span>{day.day}</span>
+                <span>{date.day}</span>
               </div>
             ))}
           </div>
