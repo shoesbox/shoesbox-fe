@@ -1,17 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import { BsPersonPlusFill, BsSearch } from "react-icons/bs";
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Form, InputGroup, Modal } from 'react-bootstrap';
+import { BsPersonPlusFill, BsSearch } from 'react-icons/bs';
 import {
   addFriendThunk,
   getRequestFriendListThunk,
   acceptFriendThunk,
   refuseFriendThunk,
-} from "../features/friendSlice";
-import "./css/modaladdfriend.css";
+} from '../features/friendSlice';
+import './css/modaladdfriend.css';
 
 const ModalAddFriend = (props) => {
   const dispatch = useDispatch();
@@ -28,16 +25,16 @@ const ModalAddFriend = (props) => {
     return emailReg.test(email);
   };
   const onClickAddFriend = () => {
-    if (addFriendRef.current.value.trim() !== "") {
+    if (addFriendRef.current.value.trim() !== '') {
       if (validateEmail(addFriendRef.current.value)) {
         //  console.log(addFriendRef.current.value);
         const email = addFriendRef.current.value;
         dispatch(addFriendThunk(email));
       } else {
-        alert("이메일 형식을 확인해주세요");
+        alert('이메일 형식을 확인해주세요.');
       }
     } else {
-      alert("추가하실 친구 이메일을 입력해주세요");
+      alert('추가하실 친구의 이메일을 입력해주세요.');
     }
   };
 
@@ -50,25 +47,35 @@ const ModalAddFriend = (props) => {
   };
 
   const onEnterdown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onClickAddFriend();
     }
   };
 
   const RequestFriendList = () => {
     return (
-      <div className="addfriend-list">
-        {requestFriendList.map((member, idx) => (
-          <div key={idx}>
-            <span>{member.memberNickname}님이 친구 신청을 하였습니다.</span>
-            &nbsp; &nbsp;
-            <Button onClick={() => onClickAccept(member.memberId)}>
-              O
-            </Button>{" "}
-            <Button onClick={() => onClickRefuse(member.memberId)}>X</Button>
-          </div>
-        ))}
-      </div>
+      <>
+        {requestFriendList.length === 0 ? (
+          <div>현재 요청된 사항이 없습니다.</div>
+        ) : (
+          requestFriendList.map((member, idx) => (
+            <div key={idx} className="addfriend-list">
+              <div>
+                <span>{member.memberNickname}</span>
+                님이 친구 맺기를 요청하였습니다.
+              </div>
+              <div>
+                <Button onClick={() => onClickAccept(member.memberNickname)}>
+                  O
+                </Button>
+                <Button onClick={() => onClickRefuse(member.memberNickname)}>
+                  X
+                </Button>
+              </div>
+            </div>
+          ))
+        )}
+      </>
     );
   };
 
@@ -87,7 +94,7 @@ const ModalAddFriend = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          <div>친구 추가</div>
+          <div>친구 신청</div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -98,7 +105,7 @@ const ModalAddFriend = (props) => {
           <Form.Control
             type="email"
             ref={addFriendRef}
-            placeholder="친구 이메일 입력"
+            placeholder="친구의 이메일 주소를 입력해주세요 :)"
             onKeyDown={(e) => onEnterdown(e)}
           />
           <InputGroup.Text
@@ -112,6 +119,11 @@ const ModalAddFriend = (props) => {
         <br />
         <RequestFriendList />
       </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={props.onHide}>
+          Close
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 };

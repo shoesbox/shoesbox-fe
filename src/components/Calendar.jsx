@@ -1,15 +1,13 @@
 import './css/calender.css';
-import { Button, Dropdown } from 'react-bootstrap';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
-import axios from 'axios';
-import { getCookie, setCookie } from '../shared/cookie';
+import { getCookie } from '../shared/cookie';
 
 const Calendar = () => {
-  //
   let memberId = getCookie('accessToken');
-  
+  const navigate = useNavigate();
+
   // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state
@@ -43,14 +41,13 @@ const Calendar = () => {
     const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
     const nextDates = [];
 
-
     // prevDates 계산
     if (prevLastDay !== 6) {
       for (let i = 0; i < prevLastDay + 1; i++) {
-        prevDates.unshift(prevLastDate-i)
+        prevDates.unshift(prevLastDate - i);
       }
     }
-    
+
     // nextDates 계산
     for (let i = 1; i < 7 - thisLastDay; i++) {
       nextDates.push(i);
@@ -58,30 +55,31 @@ const Calendar = () => {
 
     // Tray 작성
     let newPrevDates = prevDates.reduce((arr, v) => {
-      arr.push({day: v, url:''})
-      return arr
-    }, [])
+      arr.push({ day: v, url: '' });
+      return arr;
+    }, []);
 
     let newThisDates = [];
 
     for (let i = 0; i < thisDates.length; i++) {
-      if(thisDates[i] == calenderData[i]?.postId){
-        newThisDates.push({day:thisDates[i], url:calenderData[i]?.thumbnailUrl})
-      }
-      else{
-        newThisDates.push({day:thisDates[i], url: ''})
+      if (thisDates[i] === calenderData[i]?.postId) {
+        newThisDates.push({
+          day: thisDates[i],
+          url: calenderData[i]?.thumbnailUrl,
+        });
+      } else {
+        newThisDates.push({ day: thisDates[i], url: '' });
       }
     }
-        
+
     let newNextDates = nextDates.reduce((arr, v) => {
-      arr.push({day: v, url:''})
-      return arr
-    }, [])
+      arr.push({ day: v, url: '' });
+      return arr;
+    }, []);
 
-    console.log("전체배열 한번 보자", newPrevDates.concat(newThisDates, newNextDates))
+    console.log('전체 배열', newPrevDates.concat(newThisDates, newNextDates));
 
-    
-    return newPrevDates.concat(newThisDates, newNextDates)
+    return newPrevDates.concat(newThisDates, newNextDates);
   };
 
   const changeMonth = (addMonth) => {
@@ -97,52 +95,17 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    apis.getTargetPosts(memberId, viewDate.year, viewDate.month)
-      .then(res => res.data?.data.content)
+    apis
+      .getTargetPosts(memberId, viewDate.year, viewDate.month)
+      .then((res) => res.data?.data.content)
       .then((data) => {
-        setCalenderData(data)
-      })
-    // axios.get('http://localhost:5001/data')
-    //   .then(res => res.data.content)
-    //   .then((data) => {
-    //     setCalenderData(data)
-    //   })
-  }, []) 
+        setCalenderData(data);
+      });
+  }, []);
 
   useEffect(() => {
-    setDates(calcDate())
-  },[calenderData])
-// , date
-  const navigate = useNavigate();
-  // const [posts, setPosts] = useState([]);
-
-  // const getAllPosts = async () => {
-  //   let postTray = [];
-  //   const copyDate = dates.slice();
-  //   // const res = await axios.get('http://localhost:3030/totalPosts');
-  //   // console.log('All Posts', res.data);
-  //   const response = await axios.get('http://localhost:3030/totalPosts');
-  //   const tray = response?.data.content;
-    
-  //   copyDate.reduce((each, idx) => {
-  //     if(idx == tray.createdDay){
-        
-  //     }
-  //     else{
-        
-  //     }
-  //   }, [])
-  //   setPosts(data);
-  // };
-
-  // const img =
-  //   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
-  // `${posts.content[0].thumbnailUrl}`;
-
-  // useEffect(() => {
-  //   getAllPosts();
-  // }, []);
-  // console.log(posts);
+    setDates(calcDate());
+  }, [calenderData]);
 
   return (
     <div className="calender-container">
@@ -160,7 +123,6 @@ const Calendar = () => {
             <button className="nav-btn" onClick={() => changeMonth(+1)}>
               &gt;
             </button>
-            <Button className="nav-btn go-next">&gt;</Button>
           </div>
         </div>
         <div className="main">
@@ -174,14 +136,17 @@ const Calendar = () => {
             <div className="day">토</div>
           </div>
           <div className="dates">
-            {dates.map((day, idx) => (
+            {dates.map((date, idx) => (
               <div
                 className="date"
                 key={idx}
-                style={{ background: `url(${day.url})`, backgroundSize: 'cover' }}
+                style={{
+                  background: `url(${date.url})`,
+                  backgroundSize: 'cover',
+                }}
                 onClick={() => navigate('/detail')}
               >
-                <span>{day.day}</span>
+                <span>{date.day}</span>
               </div>
             ))}
           </div>
@@ -192,28 +157,3 @@ const Calendar = () => {
 };
 
 export default Calendar;
-
-// let data = [10, 20, 30];
-// let tray = [
-//     {
-//         postId:10,
-//         url:"url",
-//     },
-//     {
-//         postId:20,
-//         url:"url2"
-//     }
-// ]
-// let image = [];
-
-
-// image = data.reduce((arr, v)=>{
-//     for (let i = 0; i < tray.length; i++) {
-//         if(v == tray[i].postId){
-//             arr.push({day:v, url:tray[i].url})
-//         }
-//     }
-//     return arra
-// },[])
-
-// console.log(image)

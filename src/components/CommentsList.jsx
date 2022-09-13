@@ -1,14 +1,11 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useRef, useState, useEffect, memo, useMemo } from 'react';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Spinner from 'react-bootstrap/Spinner';
+import { Button, Form, InputGroup, Spinner } from 'react-bootstrap';
 import {
   BsFillEraserFill,
   BsX,
   BsArrowReturnLeft,
-  BsFillReplyFill,
+  BsTrash,
 } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -24,7 +21,7 @@ import {
 } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 
-const CommentList = ({ postId }) => {
+const CommentsList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.detail.commentList);
   const loading = useSelector((state) => state.detail.loading);
@@ -121,9 +118,7 @@ const CommentList = ({ postId }) => {
         <BsFillEraserFill />
       </Button>
     ) : (
-      <Button
-        onClick={() => onClickFixSubmitBtn(commentId)}
-      >
+      <Button onClick={() => onClickFixSubmitBtn(commentId)}>
         <BsArrowReturnLeft />
       </Button>
     );
@@ -133,19 +128,19 @@ const CommentList = ({ postId }) => {
   const DelButton = ({ commentId }) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickDelBtn(commentId)}>
-        <BsX />
+        <BsTrash />
       </Button>
     ) : (
       <Button onClick={() => setEdit(false)}>
-        <BsFillReplyFill />
+        <BsX />
       </Button>
     );
   };
 
   // 댓글리스트를 불러옴
   useEffect(() => {
-    if(postId!==(null||undefined)){
-    dispatch(getCommentThunk(postId));
+    if (postId !== (null || undefined)) {
+      dispatch(getCommentThunk(postId));
     }
     // dispatch(getJsonCommentThunk(postId));
   }, []);
@@ -156,6 +151,10 @@ const CommentList = ({ postId }) => {
         comments?.map((comment, idx) => (
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu1h9GZH18sUSO-8P_coFOJehZ1KkPo-CUJ2816jM_kaQoascDIj3vWzaBt2wx3X1Wwz8&usqp=CAU"
+                alt="프로필 사진"
+              />
               <span>{comment?.nickname}</span>
               {loading && pick === comment.commentId ? (
                 <Spinner
@@ -191,7 +190,7 @@ const CommentList = ({ postId }) => {
           </div>
         ))
       ) : (
-        <div>댓글이 존재하지 않습니다.</div>
+        <div>첫번째 댓글의 주인공이 되어보세요!</div>
       )}
       <hr />
       <div>
@@ -219,4 +218,4 @@ const CommentList = ({ postId }) => {
   );
 };
 
-export default memo(CommentList);
+export default memo(CommentsList);

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import './css/loginmodal.css';
+import './css/modallogin.css';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
+import axios from 'axios';
 
-const LoginModal = ({ login, handleCloseLogin }) => {
+const ModalLogin = ({ login, handleCloseLogin }) => {
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -23,20 +24,6 @@ const LoginModal = ({ login, handleCloseLogin }) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
-    // const res = await apis.loginUser(state, { withCredentials: true });
-    // console.log('res', res);
-    // console.log('res.data', res.data);
-    // try {
-    //   const token = res.data.data;
-    //   setCookie('accessToken', token.accessToken, token.accessTokenExpiresIn);
-    //   setCookie('refreshToken', token.refreshToken, token.accessTokenExpiresIn);
-    //   setCookie('username', token.username);
-    //   alert('로그인 성공');
-    //   window.location.reload(true);
-    // } catch (err) {
-    //   console.log(err);
-    // }
 
     if (state.email.trim() === '' || state.password.trim() === '') {
       return alert('입력항목은 공란일 수 없습니다.');
@@ -58,11 +45,14 @@ const LoginModal = ({ login, handleCloseLogin }) => {
           token.refreshTokenExpireDate
         );
         setCookie('memberId', token.memberId);
-        alert('로그인 성공');
-        // window.location.reload(true);
+        setCookie('email', token.email);
+        setCookie('nickname', token.nickname);
+        // alert('로그인 성공');
+        window.location.reload(true);
       })
       .catch((err) => {
-        // console.log(err.response.data.errorDetails.apierror.message);
+        console.log(err);
+        console.log(err.response.data.errorDetails.apierror.message);
         const errMessage = err.response.data.errorDetails.apierror.message;
         alert(errMessage);
       });
@@ -93,6 +83,9 @@ const LoginModal = ({ login, handleCloseLogin }) => {
 
   const handleSocial = async (event) => {
     event.preventDefault();
+    window.open(
+      'https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://13.209.77.207/oauth2/authorization/kakao&response_type=code'
+    );
   };
 
   return (
@@ -195,4 +188,4 @@ const LoginModal = ({ login, handleCloseLogin }) => {
     </>
   );
 };
-export default LoginModal;
+export default ModalLogin;

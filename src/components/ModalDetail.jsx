@@ -1,29 +1,28 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Carousel from 'react-bootstrap/Carousel';
+import '../pages/css/detailpage.css';
+import { useRef, useState, useEffect } from 'react';
+import { Button, Carousel, Container, Modal } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
+import CommentsList from './CommentsList';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getDetailThunk,
   getJsonCommentThunk,
   getJsonDetailThunk,
   getCommentThunk,
 } from '../features/detailSlice';
-import CommentList from './CommentList';
-import '../pages/css/detailpage.css';
+import { apis } from '../api';
 
 const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
   const dispatch = useDispatch();
   const post = useSelector((state) => state.detail.post);
-  // const commentList = useSelector((state) => state.detail.commentList);
+  // const CommentsList = useSelector((state) => state.detail.CommentsList);
 
   useEffect(() => {
     // dispatch(getJsonDetailThunk(postId));
-    if(postId!==(null||undefined)){
-    dispatch(getDetailThunk(postId));
-    }// dispatch(getJsonCommentThunk(postId));
+    if (postId !== (null || undefined)) {
+      dispatch(getDetailThunk(postId));
+    } // dispatch(getJsonCommentThunk(postId));
     // dispatch(getCommentThunk(postId));
   }, [postId]);
 
@@ -44,13 +43,13 @@ const ModalDetail = ({ postId, ...props }) => {
       //     </Carousel.Item>
       //   ))}
       // </Carousel>
-            <Carousel>
-            {urls?.map((url, idx) => (
-              <Carousel.Item key={idx}>
-                <img className="d-block w-100" src={url} alt={idx} />
-              </Carousel.Item>
-            ))}
-          </Carousel>
+      <Carousel>
+        {urls?.map((url, idx) => (
+          <Carousel.Item key={idx}>
+            <img className="d-block w-100" src={url} alt={idx} />
+          </Carousel.Item>
+        ))}
+      </Carousel>
     );
   };
 
@@ -59,8 +58,8 @@ const ModalDetail = ({ postId, ...props }) => {
       {...props}
       className="detail-modal"
       centered
-      size="lg"
-      fullscreen="md-down"
+      size="md"
+      fullscreen="sm-down"
     >
       <Modal.Header closeButton>
         <Modal.Title>
@@ -88,7 +87,7 @@ const ModalDetail = ({ postId, ...props }) => {
           <Button>삭제</Button>
         </div>
         <hr />
-        <CommentList postId={postId} />
+        <CommentsList postId={postId} />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
