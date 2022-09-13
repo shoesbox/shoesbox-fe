@@ -63,7 +63,8 @@ const Calendar = () => {
 
     for (let i = 0; i < thisDates.length; i++) {
       for (let j = 0; j < calenderData.length; j++) {
-        if (thisDates[i] == calenderData[j]?.createdDay) {
+        console.log('newThisDates', newThisDates);
+        if (thisDates[i] === calenderData[j]?.createdDay) {
           newThisDates.push({
             day: thisDates[i],
             url: calenderData[j]?.thumbnailUrl,
@@ -72,7 +73,6 @@ const Calendar = () => {
           newThisDates.push({ day: thisDates[i], url: '' });
         }
       }
-      
     }
 
     let newNextDates = nextDates.reduce((arr, v) => {
@@ -99,8 +99,8 @@ const Calendar = () => {
 
   useEffect(() => {
     apis
-      .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
-      .then(res => res.data?.data.content)
+      .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
+      .then((res) => res.data?.data.content)
       .then((data) => {
         setCalenderData(data);
       });
@@ -109,7 +109,7 @@ const Calendar = () => {
     // .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
     // .then(res => console.log(res.data?.data));
 
-    console.log("데이터 잘 집어넣었나?", calenderData)
+    console.log('데이터 잘 집어넣었나?', calenderData);
   }, []);
 
   useEffect(() => {
@@ -155,7 +155,7 @@ const Calendar = () => {
                 }}
                 onClick={() => navigate('/detail')}
               >
-                <span>{date.day}</span>
+                <div>{date.day}</div>
               </div>
             ))}
           </div>
