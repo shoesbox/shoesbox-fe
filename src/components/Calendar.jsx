@@ -7,7 +7,7 @@ import axios from 'axios';
 import { getCookie, setCookie } from '../shared/cookie';
 
 const Calendar = () => {
-  let memberId = getCookie('accessToken');
+  let memberId = getCookie('memberId');
   const navigate = useNavigate();
 
   // 날짜 계산용 state
@@ -64,14 +64,17 @@ const Calendar = () => {
     let newThisDates = [];
 
     for (let i = 0; i < thisDates.length; i++) {
-      if (thisDates[i] == calenderData[i]?.postId) {
-        newThisDates.push({
-          day: thisDates[i],
-          url: calenderData[i]?.thumbnailUrl,
-        });
-      } else {
-        newThisDates.push({ day: thisDates[i], url: '' });
+      for (let j = 0; j < calenderData.length; j++) {
+        if (thisDates[i] == calenderData[j]?.createdDay) {
+          newThisDates.push({
+            day: thisDates[i],
+            url: calenderData[j]?.thumbnailUrl,
+          });
+        } else {
+          newThisDates.push({ day: thisDates[i], url: '' });
+        }
       }
+      
     }
 
     let newNextDates = nextDates.reduce((arr, v) => {
@@ -101,11 +104,17 @@ const Calendar = () => {
 
   useEffect(() => {
     apis
-      .getTargetPosts(memberId, viewDate.year, viewDate.month)
-      .then((res) => res.data?.data.content)
+      .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
+      .then(res => res.data?.data.content)
       .then((data) => {
         setCalenderData(data);
       });
+
+    // apis
+    // .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
+    // .then(res => console.log(res.data?.data));
+
+    console.log("데이터 잘 집어넣었나?", calenderData)
   }, []);
 
   useEffect(() => {
