@@ -17,7 +17,7 @@ import CommentsList from './CommentsList';
 const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const memberId = getCookie('memberId');
   const post = useSelector((state) => state.detail.post);
   
@@ -28,6 +28,10 @@ const ModalDetail = ({ postId, ...props }) => {
   const content = post?.content;
   const writeMemberId = post?.memberId;
   
+  const reWritePost = (post) =>{
+  //  console.log(post);
+   navigate('/rewrite', {state: post});
+  }
 
   const delPost = () =>{
    dispatch(deleteDetailThunk(postId));
@@ -85,7 +89,9 @@ const ModalDetail = ({ postId, ...props }) => {
         <br />
        { parseInt(memberId) === parseInt(writeMemberId) &&
         <div className="detail-fix-del-btns">
-          <Button>수정</Button>
+          <Button
+          onClick={()=>reWritePost(post)}
+          >수정</Button>
           <Button
           onClick={()=>delPost()}
           >삭제</Button>

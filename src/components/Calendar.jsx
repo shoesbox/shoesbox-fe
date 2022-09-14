@@ -109,7 +109,7 @@ const Calendar = () => {
     // .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
     // .then(res => console.log(res.data?.data));
 
-    console.log('데이터 잘 집어넣었나?', calenderData);
+    // console.log('데이터 잘 집어넣었나?', calenderData);
   }, []);
 
   useEffect(() => {
