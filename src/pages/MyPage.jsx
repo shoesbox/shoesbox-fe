@@ -4,11 +4,11 @@ import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
 import ModalProfileUpdate from '../components/ModalProfileUpdate';
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import axios from 'axios';
 
 const MyPage = ({ memberId }) => {
-  // const memberId = getCookie('memberId');
   // 여기서 멤버아이디 끌어다 쓰기랑 프롭으로 내려주기랑 차이?
+  // const MyPage = () => {
+  //   const memberId = getCookie('memberId');
 
   // 통신해서 가져온 데이터 담아서 사용할 state
   const [state, setState] = useState({
@@ -54,7 +54,7 @@ const MyPage = ({ memberId }) => {
       )
       .then((res) => {
         console.log(res);
-        toggleIsEdit();
+        // toggleIsEdit();
       })
       .catch((err) => console.log(err));
   };
@@ -76,8 +76,8 @@ const MyPage = ({ memberId }) => {
   const handleNicknameEdit = (event) => {
     const newNickname = nicknameRef.current.value;
     // 닉네임 설정 유효성 검사
-    if (newNickname.length < 3) {
-      alert('닉네임은 3자 이상으로 수정해주세요.');
+    if (newNickname.length < 2) {
+      alert('닉네임은 한 글자 이상으로 수정해주세요.');
       nicknameRef.current.focus();
       return;
     }

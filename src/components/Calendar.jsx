@@ -63,7 +63,8 @@ const Calendar = () => {
 
     for (let i = 0; i < thisDates.length; i++) {
       for (let j = 0; j < calenderData.length; j++) {
-        if (thisDates[i] == calenderData[j]?.createdDay) {
+        console.log('newThisDates', newThisDates);
+        if (thisDates[i] === calenderData[j]?.createdDay) {
           newThisDates.push({
             day: thisDates[i],
             url: calenderData[j]?.thumbnailUrl,
@@ -72,7 +73,6 @@ const Calendar = () => {
           newThisDates.push({ day: thisDates[i], url: '' });
         }
       }
-      
     }
 
     let newNextDates = nextDates.reduce((arr, v) => {
@@ -101,8 +101,8 @@ const Calendar = () => {
 
   useEffect(() => {
     apis
-      .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
-      .then(res => res.data?.data.content)
+      .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
+      .then((res) => res.data?.data.content)
       .then((data) => {
         setCalenderData(data);
       });
@@ -111,6 +111,7 @@ const Calendar = () => {
     .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
     .then(res => console.log("받는 값 수정하기", res.data?.data));
 
+    console.log('데이터 잘 집어넣었나?', calenderData);
   }, []);
 
   useEffect(() => {
@@ -147,17 +148,22 @@ const Calendar = () => {
           </div>
           <div className="dates">
             {dates.map((date, idx) => (
-              <div
-                className="date"
-                key={idx}
-                style={{
-                  background: `url(${date.url})`,
-                  backgroundSize: 'cover',
-                }}
-                onClick={() => navigate('/detail')}
-              >
-                <span>{date.day}</span>
-              </div>
+              <>
+                <div
+                  className="date"
+                  key={idx}
+                  style={{
+                    background: `url(${date.url})`,
+                    backgroundSize: 'cover',
+                  }}
+                  onClick={() => navigate('/detail')}
+                >
+                  {/* {date.url ? (
+                    <img key={idx} src={date.url} alt={date} />
+                  ) : null} */}
+                  <div>{date.day}</div>
+                </div>
+              </>
             ))}
           </div>
         </div>

@@ -1,7 +1,7 @@
 import './css/modallogin.css';
 import './css/header.css';
 import { useEffect, useState } from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
 import { getCookie, deleteCookie } from '../shared/cookie';
