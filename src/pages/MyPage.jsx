@@ -24,7 +24,7 @@ const MyPage = ({ memberId }) => {
     });
     try {
       const userData = data?.data;
-      console.log('userData', userData);
+      // console.log('userData', userData);
       setState(userData);
     } catch (err) {
       console.log(err);
@@ -46,7 +46,7 @@ const MyPage = ({ memberId }) => {
     apis
       .resetProfileImg()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setState({
           ...state,
           profileImageUrl: 'https://i.ibb.co/N27FwdP/image.png',
