@@ -68,6 +68,7 @@ const Calendar = () => {
           newThisDates.push({
             day: thisDates[i],
             url: calenderData[j]?.thumbnailUrl,
+            postId: calenderData[j]?.postId
           });
         } else {
           newThisDates.push({ day: thisDates[i], url: '' });
