@@ -31,7 +31,7 @@ const CommentsList = ({ postId }) => {
   const [pick, setPick] = useState();
   const [onEdit, setEdit] = useState(false);
   var tmp = '';
- 
+
   // console.log(memberId);
   // console.log(comments);
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
@@ -70,10 +70,10 @@ const CommentsList = ({ postId }) => {
     } else {
       dispatch(switchLoading(true));
       // dispatch(patchJsonCommentThunk({ commentId, content: tmp })).then(
-      dispatch(putCommentThunk({ commentId, content: tmp})).then(
+      dispatch(putCommentThunk({ commentId, content: tmp })).then(
         setEdit(false)
       );
-      setEdit(false)
+      setEdit(false);
     }
     //  dispatch(updatePicked(commentId))
   };
@@ -113,7 +113,7 @@ const CommentsList = ({ postId }) => {
   };
 
   // 수정 버튼을 클릭하기전, 클릭 후가 나뉨 - 수정버튼
-  const FixButton = ({commentId}) => {
+  const FixButton = ({ commentId }) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickFixBtn(commentId)}>
         <BsFillEraserFill />
@@ -157,7 +157,7 @@ const CommentsList = ({ postId }) => {
                 alt="프로필 사진"
               />
               <span>{comment?.nickname}</span>
-              {loading && pick=== comment.commentId ? (
+              {loading && pick === comment.commentId ? (
                 <Spinner
                   as="span"
                   animation="border"
@@ -178,15 +178,12 @@ const CommentsList = ({ postId }) => {
                 </>
               )}
             </div>
-            { 
-            (parseInt(memberId) === parseInt(comment.memberId)) &&
-            <div className="detail-comment-btns">
-              <FixButton
-                commentId={comment?.commentId}
-              />
-              <DelButton commentId={comment?.commentId} />
-            </div>
-              }
+            {parseInt(memberId) === parseInt(comment.memberId) && (
+              <div className="detail-comment-btns">
+                <FixButton commentId={comment?.commentId} />
+                <DelButton commentId={comment?.commentId} />
+              </div>
+            )}
           </div>
         ))
       ) : (
@@ -206,7 +203,7 @@ const CommentsList = ({ postId }) => {
             }}
           />
           <Button
-            variant="outline-secondary"
+            variant="primary"
             disabled={commentStatus}
             onClick={onClickComment}
           >

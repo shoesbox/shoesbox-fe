@@ -15,7 +15,6 @@ import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
 const ModalDetail = ({ postId, ...props }) => {
-  //   console.log(postId);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const memberId = getCookie('memberId');
@@ -29,6 +28,7 @@ const ModalDetail = ({ postId, ...props }) => {
   const writeMemberId = post?.memberId;
 
   const delPost = () => {
+    alert('정말로 일기를 삭제하시겠습니까?');
     dispatch(deleteDetailThunk(postId));
     window.location.reload();
   };
@@ -91,7 +91,9 @@ const ModalDetail = ({ postId, ...props }) => {
         <CommentsList postId={postId} />
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button variant="secondary" onClick={props.onHide}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );
