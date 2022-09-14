@@ -14,7 +14,7 @@ export const getFriendListThunk = createAsyncThunk(
     try {
       const data = await apis.getFriendList();
       const res = data.data.data;
-      console.log('getFriendListthunk', data.data.data);
+      // console.log('getFriendListthunk', data.data.data);
       return res;
     } catch (err) {
       console.log(
@@ -31,7 +31,7 @@ export const getRequestFriendListThunk = createAsyncThunk(
     try {
       const data = await apis.getRequestFriendList();
       const res = data.data.data;
-      console.log('getRequestFriendthunk', data.data.data);
+      // console.log('getRequestFriendthunk', data.data.data);
       return res;
     } catch (err) {
       console.log(
@@ -70,9 +70,10 @@ export const acceptFriendThunk = createAsyncThunk(
     try {
       const data = await apis.acceptFriend(memberId);
       const res = data.data.data;
+      // console.log(res);
       const acceptFriend = res.fromMemberNickname;
       alert(`${acceptFriend}님의 요청을 수락하였습니다.`);
-      console.log('acceptFriendthunk', data.data.data);
+      // console.log('acceptFriendthunk', data.data.data);
       return res;
     } catch (err) {
       // console.log(thunkAPI.rejectWithValue('acceptFriendThunkErr', err.response.data))
