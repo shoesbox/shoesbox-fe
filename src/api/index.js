@@ -131,7 +131,7 @@ export const apis = {
   // 글 작성 api
   writeDaily: (payload) => apiForm.post('/api/posts', payload),
 
-  // 친구 관련 api - delete 빼고 done
+  // 친구 관련 api 
   getFriendList: () => api.get('/api/friends'),
   getRequestFriendList: () => api.get('/api/friends/request'),
   addFriend: (payload) => api.post('/api/friends', payload),
@@ -140,7 +140,7 @@ export const apis = {
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (fromMemberId, payload) =>
-    api.put(`/api/friends/${fromMemberId}`, payload),
+    api.delete(`/api/friends/${fromMemberId}`, payload),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

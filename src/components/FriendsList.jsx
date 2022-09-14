@@ -14,7 +14,7 @@ const FriendsList = () => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  console.log('friendList', friendList);
+  // console.log('friendList', friendList);
 
   useEffect(() => {
     dispatch(getFriendListThunk());
