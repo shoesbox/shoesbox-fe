@@ -16,37 +16,27 @@ const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
   const dispatch = useDispatch();
   const post = useSelector((state) => state.detail.post);
-  // const CommentsList = useSelector((state) => state.detail.CommentsList);
 
   useEffect(() => {
-    // dispatch(getJsonDetailThunk(postId));
     if (postId !== (null || undefined)) {
+      // dispatch(getJsonDetailThunk(postId));
       dispatch(getDetailThunk(postId));
-    } // dispatch(getJsonCommentThunk(postId));
-    // dispatch(getCommentThunk(postId));
+    } 
+
   }, [postId]);
 
   const nickname = post?.nickname;
   const title = post?.title;
   const date = post?.date;
-  // const images = post.images;
-  const urls = post?.url;
+  const images = post?.images;
   const content = post?.content;
-  // const comments = commentList;
 
   const ImageCarousel = () => {
     return (
-      // <Carousel>
-      //   {images?.map((image, idx) => (
-      //     <Carousel.Item key={idx}>
-      //       <img className="d-block w-100" src={image} alt={idx} />
-      //     </Carousel.Item>
-      //   ))}
-      // </Carousel>
       <Carousel>
-        {urls?.map((url, idx) => (
+        {images?.map((image, idx) => (
           <Carousel.Item key={idx}>
-            <img className="d-block w-100" src={url} alt={idx} />
+            <img className="d-block w-100" src={image} alt={idx} />
           </Carousel.Item>
         ))}
       </Carousel>
