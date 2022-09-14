@@ -7,17 +7,20 @@ import DetailPage from '../pages/DetailPage';
 import WritePage from '../pages/WritePage';
 import NotFoundPage from '../pages/NotFoundPage';
 import Oauth2kakao from '../components/Oauth2kakao';
+import MyPage from '../pages/MyPage';
 
 const Router = () => {
-  const cookie = getCookie('accessToken');
+  const memberId = getCookie('memberId');
+  // const cookie = getCookie('accessToken');
+
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
-    if (cookie !== undefined) {
+    if (memberId !== undefined) {
       setisLoggedIn(true);
     } else {
       setisLoggedIn(false);
     }
-  }, [cookie]);
+  }, [memberId]);
 
   return (
     <BrowserRouter>
@@ -31,6 +34,16 @@ const Router = () => {
         <Route
           path="/write"
           element={isLoggedIn ? <WritePage /> : <Navigate replace to="/" />}
+        />
+        <Route
+          path="/mypage"
+          element={
+            isLoggedIn ? (
+              <MyPage memberId={memberId} />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
         />
         <Route path="*" element={<NotFoundPage />} />
         <Route path='/oauth2/authorization/kakao' element={<Oauth2kakao />} />

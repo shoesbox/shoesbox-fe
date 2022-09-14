@@ -1,0 +1,97 @@
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
+.mypage {
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 800px;
+  /* border: 1px solid red; */
+}
+.profile-box {
+  display: flex;
+  /* border: 1px solid rebeccapurple; */
+  margin-bottom: 80px;
+}
+.image-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  /* border: 1px solid brown; */
+}
+.image-profile > img {
+  width: 145px;
+  height: 145px;
+  border-radius: 100%;
+  margin-bottom: 5px;
+}
+.image-profile > button {
+  border: none;
+  border-radius: 5px;
+  margin: 5px 0;
+  width: 140px;
+  height: 30px;
+  color: #6b9080;
+  background: none;
+}
+.image-profile > button:nth-child(2) {
+  background: #a4c3b2;
+  color: #fff;
+}
+.image-profile > button:nth-child(3):hover {
+  background: #eaf4f4;
+}
+.text-profile {
+  margin: 20px 50px;
+  /* border: 1px solid black; */
+}
+.text-profile > div {
+  height: 50px;
+  /* border: 1px solid red; */
+}
+.text-profile > div:nth-child(1) > p {
+  font-size: 20px;
+  font-weight: 500;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.nickname-edit {
+  display: flex;
+  color: #6b9080;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+.nickname-edit > div {
+  margin-right: 10px;
+}
+.leave-box {
+  /* border: 1px solid pink; */
+  margin-bottom: 50px;
+}
+.leave-box > div:nth-child(1) {
+  display: flex;
+}
+.leave-box > div > p:nth-child(1) {
+  font-size: 18px;
+  font-weight: 500;
+  width: 180px;
+}
+.leave-box > div > p:nth-child(3) {
+  margin-left: 10px;
+  color: #6b9080;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+.leave-box > p {
+  color: gray;
+}
+.leave-box > div > button {
+  background: rgb(255, 102, 102);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 100px;
+  height: 30px;
+  font-weight: 500;
+}

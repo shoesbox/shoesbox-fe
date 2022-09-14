@@ -1,34 +1,47 @@
-import './css/loginmodal.css';
+import './css/modallogin.css';
 import './css/header.css';
 import { useEffect, useState } from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import LoginModal from './LoginModal';
+import ModalLogin from './ModalLogin';
 import { getCookie, deleteCookie } from '../shared/cookie';
+import { apis } from '../api';
 
 function Header() {
   const [login, setLogin] = useState(false);
-  const handleCloseLogin = () => setLogin(false);
   const handleShowLogin = () => setLogin(true);
-
+  const handleCloseLogin = () => setLogin(false);
+  //
   const navigate = useNavigate();
 
-  const cookie = getCookie('accessToken');
-  const [isLoggedin, setisLoggedin] = useState(false);
+  const nickname = getCookie('nickname');
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
-    if (cookie !== undefined) {
-      setisLoggedin(true);
+    if (nickname !== undefined) {
+      setisLoggedIn(true);
     } else {
-      setisLoggedin(false);
+      setisLoggedIn(false);
     }
-  }, [cookie]);
+  }, [nickname]);
 
   const handleLogout = () => {
-    deleteCookie('accessToken');
-    deleteCookie('refreshToken');
-    deleteCookie('memberId');
-    alert('로그아웃 성공');
-    window.location.replace('/');
+    apis
+      .logoutUser()
+      .then((res) => {
+        console.log(res);
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
+        deleteCookie('memberId');
+        deleteCookie('nickname');
+        deleteCookie('email');
+        // alert('로그아웃 성공');
+        window.location.replace('/');
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+        const errMessage = err.response.data.message;
+        alert(errMessage);
+      });
   };
 
   return (
@@ -54,7 +67,7 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              {isLoggedin ? (
+              {isLoggedIn ? (
                 <Nav.Link
                   onClick={() => {
                     navigate('/');
@@ -74,7 +87,7 @@ function Header() {
               </Nav.Link>
             </Nav>
             <Nav>
-              {isLoggedin ? (
+              {isLoggedIn ? (
                 <>
                   {/* 로그인시 */}
                   <Nav.Link
@@ -102,7 +115,7 @@ function Header() {
         </Container>
       </Navbar>
 
-      <LoginModal login={login} handleCloseLogin={handleCloseLogin} />
+      <ModalLogin login={login} handleCloseLogin={handleCloseLogin} />
     </>
   );
 }

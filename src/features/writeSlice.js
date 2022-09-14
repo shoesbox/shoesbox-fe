@@ -13,8 +13,8 @@ export const postDetailThunk = createAsyncThunk(
       const data = await apis.writeDaily(payload);
       const res = data.data.data;
       // console.log('writeDailythunk',res)
-      if(res){
-        alert(`${res}번 게시물, 상세게시물 조회시 활용`)
+      if (res) {
+        alert(`${res}번 게시물, 상세게시물 조회시 활용`);
       }
     } catch (err) {
       return thunkAPI.rejectWithValue('writeDailyThunkErr', err.response.data);

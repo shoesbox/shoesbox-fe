@@ -1,14 +1,11 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useRef, useState, useEffect, memo, useMemo } from 'react';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Spinner from 'react-bootstrap/Spinner';
+import { Button, Form, InputGroup, Spinner } from 'react-bootstrap';
 import {
   BsFillEraserFill,
   BsX,
   BsArrowReturnLeft,
-  BsFillReplyFill,
+  BsTrash,
 } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -24,7 +21,7 @@ import {
 } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 
-const CommentList = ({ postId }) => {
+const CommentsList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.detail.commentList);
   const loading = useSelector((state) => state.detail.loading);
@@ -35,8 +32,8 @@ const CommentList = ({ postId }) => {
   const [onEdit, setEdit] = useState(false);
   var tmp = '';
  
-  console.log(memberId);
-  console.log(comments);
+  // console.log(memberId);
+  // console.log(comments);
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== '') {
@@ -66,16 +63,17 @@ const CommentList = ({ postId }) => {
   // 댓글 수정 모드 눌렀을 때의 버튼, 수정 입력 가능
   // 그 전 내용과 일치할 경우 팝업 노출
   const onClickFixSubmitBtn = (commentId) => {
-    // console.log('변경될 값:', commentId, tmp);
+    // console.log('변경될 값:', tmp, commentId);
     if (tmp === '') {
       alert('내용이 그전과 일치합니다. 댓글 수정을 해주세요!');
       return null;
     } else {
       dispatch(switchLoading(true));
       // dispatch(patchJsonCommentThunk({ commentId, content: tmp })).then(
-      dispatch(putCommentThunk({ commentId, content: tmp })).then(
+      dispatch(putCommentThunk({ commentId, content: tmp})).then(
         setEdit(false)
       );
+      setEdit(false)
     }
     //  dispatch(updatePicked(commentId))
   };
@@ -115,15 +113,13 @@ const CommentList = ({ postId }) => {
   };
 
   // 수정 버튼을 클릭하기전, 클릭 후가 나뉨 - 수정버튼
-  const FixButton = ({ commentId, content }) => {
+  const FixButton = ({commentId}) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickFixBtn(commentId)}>
         <BsFillEraserFill />
       </Button>
     ) : (
-      <Button
-        onClick={() => onClickFixSubmitBtn(commentId)}
-      >
+      <Button onClick={() => onClickFixSubmitBtn(commentId)}>
         <BsArrowReturnLeft />
       </Button>
     );
@@ -133,19 +129,19 @@ const CommentList = ({ postId }) => {
   const DelButton = ({ commentId }) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickDelBtn(commentId)}>
-        <BsX />
+        <BsTrash />
       </Button>
     ) : (
       <Button onClick={() => setEdit(false)}>
-        <BsFillReplyFill />
+        <BsX />
       </Button>
     );
   };
 
   // 댓글리스트를 불러옴
   useEffect(() => {
-    if(postId!==(null||undefined)){
-    dispatch(getCommentThunk(postId));
+    if (postId !== (null || undefined)) {
+      dispatch(getCommentThunk(postId));
     }
     // dispatch(getJsonCommentThunk(postId));
   }, []);
@@ -156,8 +152,12 @@ const CommentList = ({ postId }) => {
         comments?.map((comment, idx) => (
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu1h9GZH18sUSO-8P_coFOJehZ1KkPo-CUJ2816jM_kaQoascDIj3vWzaBt2wx3X1Wwz8&usqp=CAU"
+                alt="프로필 사진"
+              />
               <span>{comment?.nickname}</span>
-              {loading && pick === comment.commentId ? (
+              {loading && pick=== comment.commentId ? (
                 <Spinner
                   as="span"
                   animation="border"
@@ -183,7 +183,6 @@ const CommentList = ({ postId }) => {
             <div className="detail-comment-btns">
               <FixButton
                 commentId={comment?.commentId}
-                content={comment.content}
               />
               <DelButton commentId={comment?.commentId} />
             </div>
@@ -191,7 +190,7 @@ const CommentList = ({ postId }) => {
           </div>
         ))
       ) : (
-        <div>댓글이 존재하지 않습니다.</div>
+        <div>첫번째 댓글의 주인공이 되어보세요!</div>
       )}
       <hr />
       <div>
@@ -219,4 +218,4 @@ const CommentList = ({ postId }) => {
   );
 };
 
-export default memo(CommentList);
+export default memo(CommentsList);

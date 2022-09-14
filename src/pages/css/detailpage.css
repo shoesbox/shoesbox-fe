@@ -48,18 +48,26 @@
 }
 
 .detail-comment-contents {
-  width: 85%;
+  width: 100%;
   /* border: 1px solid red; */
 }
 
-.detail-comment-contents > span:nth-child(1) {
-  margin-right: 10px;
+.detail-comment-contents > img {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  margin-right: 7px;
+}
+
+.detail-comment-contents > span:nth-child(2) {
+  margin-right: 7px;
   font-weight: 500;
 }
 
 .detail-comment-update {
   display: inline;
-  width: 90%;
+  margin-top: 10px;
+  /* border: 1px solid red; */
 }
 
 .detail-comment-time {

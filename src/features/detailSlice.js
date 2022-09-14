@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import { apis } from '../api';
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ export const getDetailThunk = createAsyncThunk(
       // console.log('showthunk', data.data.data);
       return postDetail;
     } catch (err) {
-       alert(err.response.data.errorDetails.apierror.message);
+      alert(err.response.data.errorDetails.apierror.message);
       // return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
     }
   }
@@ -173,8 +173,8 @@ export const putCommentThunk = createAsyncThunk(
   async ({ commentId, content }, thunkAPI) => {
     try {
       const data = await apis.putComment(commentId, { content });
-      // console.log("putCommentThunk", data.data.data);
-      return { commentId: data.commentId, content: data.content };
+      // console.log("putCommentThunk", { commentId: data.data.data.commentId, content: data.data.data.content }, data.data.data);
+      return { commentId: data.data.data.commentId, content: data.data.data.content  };
     } catch (err) {
       alert(err.response.data.errorDetails.apierror.message);
       // return thunkAPI.rejectWithValue('putCommentThunkErr', err.response.data);
@@ -188,7 +188,7 @@ export const deleteDetailThunk = createAsyncThunk(
   async (postId, thunkAPI) => {
     try {
       const data = await apis.deleteDetail(postId);
-      // console.log("deleteDetailThunk", data.data.data);
+      console.log("deleteDetailThunk", data.data.data);
 
       // return ;
     } catch (err) {
@@ -197,7 +197,6 @@ export const deleteDetailThunk = createAsyncThunk(
     }
   }
 );
-
 
 const detailSlice = createSlice({
   name: 'detail',
@@ -240,7 +239,6 @@ const detailSlice = createSlice({
       };
       const idx = commentList.findIndex(findCommentId);
       for (var i = 0; i < commentList.length; i++) {
-        // 배열 arr의 모든 요소의 인덱스(index)를 출력함.
         commentList[idx]['content'] = fixedComment;
       }
       state.loading = false;
@@ -267,7 +265,6 @@ const detailSlice = createSlice({
       const commentList = state.commentList;
       const commentId = action.payload.commentId;
       const fixedComment = action.payload.content;
-      // 배열에서 index를 찾아주기
       const findCommentId = (element) => {
         if (element?.commentId === commentId) return true;
       };

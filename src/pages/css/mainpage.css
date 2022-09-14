@@ -1,3 +1,6 @@
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
 .wrap {
   display: flex;
   margin: 1%;
@@ -31,5 +34,3 @@
   margin: 400px auto;
   padding: 0 20px;
 }
-/* 색상표 */
-/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */

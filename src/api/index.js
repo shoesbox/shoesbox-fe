@@ -1,9 +1,9 @@
-import axios from "axios";
-import { getCookie } from "../shared/cookie";
+import axios from 'axios';
+import { getCookie } from '../shared/cookie';
 
 // 백엔드 연결 시 수정
 // const BASE_URL = "http://localhost:3000";
-const BASE_URL = "http://13.209.77.207";
+const BASE_URL = 'http://13.209.77.207';
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -18,7 +18,7 @@ const api = axios.create({
 const apiForm = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "Content-Type": "multipart/form-data",
+    'Content-Type': 'multipart/form-data',
   },
 });
 
@@ -26,7 +26,7 @@ const apiForm = axios.create({
 const apiJson = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
@@ -34,7 +34,7 @@ const apiJson = axios.create({
 const apiJsonUTF = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "Content-Type": "application/json;charset=UTF-8",
+    'Content-Type': 'application/json;charset=UTF-8',
   },
 });
 
@@ -46,10 +46,10 @@ const auth = axios.create({
 // 인증이 필요한 요청을 중간에 가로채서 헤더에 토큰 소매넣기 해주기
 api.interceptors.request.use(
   (config) => {
-    const accessToken = getCookie("accessToken");
-    const refreshToken = getCookie("refreshToken");
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
-    config.headers["Refresh-token"] = refreshToken;
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    config.headers['Refresh-token'] = refreshToken;
     return config;
   },
   (error) => {
@@ -59,10 +59,10 @@ api.interceptors.request.use(
 
 apiForm.interceptors.request.use(
   (config) => {
-    const accessToken = getCookie("accessToken");
-    const refreshToken = getCookie("refreshToken");
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
-    config.headers["Refresh-token"] = refreshToken;
+    const accessToken = getCookie('accessToken');
+    const refreshToken = getCookie('refreshToken');
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    config.headers['Refresh-token'] = refreshToken;
     return config;
   },
   (error) => {
@@ -107,13 +107,13 @@ export const apis = {
   loginUser: (userData) => auth.post("/api/members/auth/login", userData),
 
   // 메인페이지 일기 조회
-  getTodayMyPosts: () => api.get("/api/posts"),
+  getTodayMyPosts: () => api.get('/api/posts'),
   getTargetPosts: (memberId, year, month) =>
     api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 
   // 게시글 상세 api
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
-  deleteDetail : (postId) => api.delete(`/api/posts/${postId}`),
+  deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
@@ -123,15 +123,22 @@ export const apis = {
     api.put(`/api/comments/${commentId}`, payload),
 
   // 글 작성 api
-  writeDaily: (payload) => apiForm.post("/api/posts", payload),
+  writeDaily: (payload) => apiForm.post('/api/posts', payload),
 
-  // 친구 관련 api -  done
-  getFriendList: () => api.get("/api/friends"),
-  getRequestFriendList: () => api.get("/api/friends/request"),
-  addFriend: (payload) => api.post("/api/friends", payload),
+  // 친구 관련 api 
+  getFriendList: () => api.get('/api/friends'),
+  getRequestFriendList: () => api.get('/api/friends/request'),
+  addFriend: (payload) => api.post('/api/friends', payload),
   acceptFriend: (fromMemberId) =>
     api.put(`/api/friends/${fromMemberId}/accept`),
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
-  deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
+  deleteFriend: (fromMemberId, payload) =>
+    api.delete(`/api/friends/${fromMemberId}`, payload),
+
+  // 마이페이지
+  getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),
+  updateUserData: (memberId, payload) =>
+    apiForm.patch(`/api/members/info?m=${memberId}`, payload),
+  removeAccount: (memberId) => api.delete(`/api/members/delete?m=${memberId}`),
 };

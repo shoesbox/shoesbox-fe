@@ -1,11 +1,30 @@
 .addfriend-friend-icon.input-group-text {
-  background-color: white;
-  border: none;
+  /* background-color: white; */
+  /* border: none; */
 }
 .addfriend-search-icon.input-group-text:hover {
   background-color: #cce3de;
+  cursor: pointer;
 }
 .addfriend-list {
-  margin-bottom: 20px;
-  word-break: break-all;
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.addfriend-list > div {
+  /* border: 1px solid green; */
+  margin: 3px 0;
+  display: flex;
+}
+.addfriend-list > div > span {
+  font-weight: 600;
+}
+.addfriend-list > div > Button {
+  /* width: 30px; */
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
 }
