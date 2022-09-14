@@ -4,7 +4,8 @@
 .wrap {
   display: flex;
   margin: 1%;
-  /* border: 1px solid red; */
+  border: 1px solid red;
+  height: 90vh;
 }
 .calendar {
   /* border: 3px solid pink; */

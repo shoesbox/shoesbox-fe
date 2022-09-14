@@ -68,7 +68,7 @@ const Calendar = () => {
           newThisDates.push({
             day: thisDates[i],
             url: calenderData[j]?.thumbnailUrl,
-            postId: calenderData[j]?.postId
+            postId: calenderData[j]?.postId,
           });
         } else {
           newThisDates.push({ day: thisDates[i], url: '' });
@@ -82,9 +82,6 @@ const Calendar = () => {
     }, []);
 
     // console.log('전체 배열', newPrevDates.concat(newThisDates, newNextDates));
-
-
-
     return newPrevDates.concat(newThisDates, newNextDates);
   };
 
@@ -108,15 +105,14 @@ const Calendar = () => {
         setCalenderData(data);
       });
 
-    apis
-    .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
-    .then(res => console.log("받는 값 수정하기", res.data?.data));
-
-    console.log('데이터 잘 집어넣었나?', calenderData);
+    // apis
+    //   .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
+    //   .then((res) => console.log('받는 값 수정하기', res.data?.data));
   }, []);
 
   useEffect(() => {
     setDates(calcDate());
+    console.log('calenderData', calenderData); // 이거 무슨 용도?
   }, [calenderData]);
 
   return (
@@ -152,16 +148,14 @@ const Calendar = () => {
               <>
                 <div
                   className="date"
-                  key={idx}
+                  key={date.postId}
                   style={{
                     background: `url(${date.url})`,
                     backgroundSize: 'cover',
                   }}
                   onClick={() => navigate('/detail')}
                 >
-                  {/* {date.url ? (
-                    <img key={idx} src={date.url} alt={date} />
-                  ) : null} */}
+                  {/* {date.url ? <img src={date.url} alt={date} /> : null} */}
                   <div>{date.day}</div>
                 </div>
               </>

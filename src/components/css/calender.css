@@ -52,8 +52,6 @@
 }
 .go-today {
   width: 85px;
-  /* border-left: 1px solid #6B9080; */
-  /* border-right: 1px solid #6B9080; */
   background-color: #fff;
 }
 .days {
@@ -74,6 +72,7 @@
   flex-flow: row wrap;
   border-top: 3px solid #fff;
   border-right: 3px solid #fff;
+  background-color: #6b90806e;
 }
 .date {
   width: calc(100% / 7);
@@ -87,7 +86,6 @@
   display: flex;
   justify-content: end;
   padding: 5px;
-  /* overflow: hidden; */
 }
 .date > img {
   border: 1px solid blue;
@@ -95,6 +93,7 @@
   height: 100%;
   object-fit: cover;
 }
+/* 달력 숫자 포인트 */
 .date > div {
   background-color: #f6fff87e;
   border-radius: 100%;
@@ -103,9 +102,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
+  /* position: absolute; */
 }
 .date:hover > div {
-  font-weight: 700;
   background-color: #f6fff8;
 }
 .day:nth-child(7n + 1),
