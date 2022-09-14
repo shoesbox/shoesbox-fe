@@ -140,7 +140,7 @@ export const apis = {
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (fromMemberId, payload) =>
-    api.put(`/api/friends/${fromMemberId}`, payload),
+    api.delete(`/api/friends/${fromMemberId}`, payload),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

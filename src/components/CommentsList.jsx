@@ -32,8 +32,8 @@ const CommentsList = ({ postId }) => {
   const [onEdit, setEdit] = useState(false);
   var tmp = '';
  
-  console.log(memberId);
-  console.log(comments);
+  // console.log(memberId);
+  // console.log(comments);
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== '') {
@@ -63,16 +63,17 @@ const CommentsList = ({ postId }) => {
   // 댓글 수정 모드 눌렀을 때의 버튼, 수정 입력 가능
   // 그 전 내용과 일치할 경우 팝업 노출
   const onClickFixSubmitBtn = (commentId) => {
-    // console.log('변경될 값:', commentId, tmp);
+    // console.log('변경될 값:', tmp, commentId);
     if (tmp === '') {
       alert('내용이 그전과 일치합니다. 댓글 수정을 해주세요!');
       return null;
     } else {
       dispatch(switchLoading(true));
       // dispatch(patchJsonCommentThunk({ commentId, content: tmp })).then(
-      dispatch(putCommentThunk({ commentId, content: tmp })).then(
+      dispatch(putCommentThunk({ commentId, content: tmp})).then(
         setEdit(false)
       );
+      setEdit(false)
     }
     //  dispatch(updatePicked(commentId))
   };
@@ -112,7 +113,7 @@ const CommentsList = ({ postId }) => {
   };
 
   // 수정 버튼을 클릭하기전, 클릭 후가 나뉨 - 수정버튼
-  const FixButton = ({ commentId, content }) => {
+  const FixButton = ({commentId}) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickFixBtn(commentId)}>
         <BsFillEraserFill />
@@ -156,7 +157,7 @@ const CommentsList = ({ postId }) => {
                 alt="프로필 사진"
               />
               <span>{comment?.nickname}</span>
-              {loading && pick === comment.commentId ? (
+              {loading && pick=== comment.commentId ? (
                 <Spinner
                   as="span"
                   animation="border"
@@ -182,7 +183,6 @@ const CommentsList = ({ postId }) => {
             <div className="detail-comment-btns">
               <FixButton
                 commentId={comment?.commentId}
-                content={comment?.content}
               />
               <DelButton commentId={comment?.commentId} />
             </div>

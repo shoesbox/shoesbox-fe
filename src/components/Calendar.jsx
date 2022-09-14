@@ -80,7 +80,7 @@ const Calendar = () => {
       return arr;
     }, []);
 
-    console.log('전체 배열', newPrevDates.concat(newThisDates, newNextDates));
+    // console.log('전체 배열', newPrevDates.concat(newThisDates, newNextDates));
 
     return newPrevDates.concat(newThisDates, newNextDates);
   };
