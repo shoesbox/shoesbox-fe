@@ -2,20 +2,23 @@ import '../pages/css/detailpage.css';
 import { useRef, useState, useEffect } from 'react';
 import { Button, Carousel, Container, Modal } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
-import CommentsList from './CommentsList';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getDetailThunk,
   getJsonCommentThunk,
   getJsonDetailThunk,
   getCommentThunk,
+  deleteDetailThunk,
 } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
+import CommentsList from './CommentsList';
 
 const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
-  const memberId = getCookie('memberId');
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  const memberId = getCookie('memberId');
   const post = useSelector((state) => state.detail.post);
   
   const nickname = post?.nickname;
@@ -25,6 +28,12 @@ const ModalDetail = ({ postId, ...props }) => {
   const content = post?.content;
   const writeMemberId = post?.memberId;
   
+
+  const delPost = () =>{
+   dispatch(deleteDetailThunk(postId));
+   window.location.reload();
+  }
+
   useEffect(() => {
     if (postId !== (null || undefined)) {
       // dispatch(getJsonDetailThunk(postId));
@@ -77,7 +86,9 @@ const ModalDetail = ({ postId, ...props }) => {
        { parseInt(memberId) === parseInt(writeMemberId) &&
         <div className="detail-fix-del-btns">
           <Button>수정</Button>
-          <Button>삭제</Button>
+          <Button
+          onClick={()=>delPost()}
+          >삭제</Button>
         </div>
        }
         <hr />
