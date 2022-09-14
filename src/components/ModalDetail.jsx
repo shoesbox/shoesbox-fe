@@ -10,13 +10,21 @@ import {
   getJsonDetailThunk,
   getCommentThunk,
 } from '../features/detailSlice';
-import { apis } from '../api';
+import { getCookie } from '../shared/cookie';
 
 const ModalDetail = ({ postId, ...props }) => {
   //   console.log(postId);
+  const memberId = getCookie('memberId');
   const dispatch = useDispatch();
   const post = useSelector((state) => state.detail.post);
-
+  
+  const nickname = post?.nickname;
+  const title = post?.title;
+  const date = post?.date;
+  const images = post?.images;
+  const content = post?.content;
+  const writeMemberId = post?.memberId;
+  
   useEffect(() => {
     if (postId !== (null || undefined)) {
       // dispatch(getJsonDetailThunk(postId));
@@ -24,12 +32,6 @@ const ModalDetail = ({ postId, ...props }) => {
     } 
 
   }, [postId]);
-
-  const nickname = post?.nickname;
-  const title = post?.title;
-  const date = post?.date;
-  const images = post?.images;
-  const content = post?.content;
 
   const ImageCarousel = () => {
     return (
@@ -72,10 +74,12 @@ const ModalDetail = ({ postId, ...props }) => {
         <div className="detail-content">{content}</div>
         {/* <hr /> */}
         <br />
+       { parseInt(memberId) === parseInt(writeMemberId) &&
         <div className="detail-fix-del-btns">
           <Button>수정</Button>
           <Button>삭제</Button>
         </div>
+       }
         <hr />
         <CommentsList postId={postId} />
       </Modal.Body>
