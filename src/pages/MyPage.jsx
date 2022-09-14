@@ -44,17 +44,13 @@ const MyPage = ({ memberId }) => {
   // 이미지 제거 함수
   const deleteProfileImg = () => {
     apis
-      .updateUserData(
-        memberId,
-        {
-          nickname: state.nickname,
-          profileImageUrl: 'https://i.ibb.co/N27FwdP/image.png',
-        },
-        { withCredentials: true }
-      )
+      .resetProfileImg()
       .then((res) => {
         console.log(res);
-        // toggleIsEdit();
+        setState({
+          ...state,
+          profileImageUrl: 'https://i.ibb.co/N27FwdP/image.png',
+        });
       })
       .catch((err) => console.log(err));
   };

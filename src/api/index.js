@@ -146,5 +146,6 @@ export const apis = {
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),
   updateUserData: (memberId, payload) =>
     apiForm.patch(`/api/members/info?m=${memberId}`, payload),
+  resetProfileImg: () => api.get(`/api/members/reset`),
   removeAccount: (memberId) => api.delete(`/api/members/delete?m=${memberId}`),
 };
