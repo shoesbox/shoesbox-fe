@@ -11,7 +11,7 @@ function Header() {
   const [login, setLogin] = useState(false);
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => setLogin(false);
-
+  //
   const navigate = useNavigate();
 
   const nickname = getCookie('nickname');
