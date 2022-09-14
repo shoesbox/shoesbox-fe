@@ -38,6 +38,14 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
+        
+    # dependency 설치
+    - name: Install Dependencies
+      run: yarn install
+      
+    # build
+    - name: Build
+      run: yarn build
 
     # 빌드 결과물을 S3 버킷에 업로드
     - name: Upload to AWS S3
@@ -46,7 +54,7 @@ jobs:
           --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
           --ignore-hidden-files \
           --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
-          --source .
+          --source /build
 
     # S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
     - name: Deploy to AWS EC2 from S3
