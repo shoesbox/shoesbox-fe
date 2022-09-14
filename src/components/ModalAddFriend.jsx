@@ -65,10 +65,10 @@ const ModalAddFriend = (props) => {
                 님이 친구 맺기를 요청하였습니다.
               </div>
               <div>
-                <Button onClick={() => onClickAccept(member.memberNickname)}>
+                <Button onClick={() => onClickAccept(member.memberId)}>
                   O
                 </Button>
-                <Button onClick={() => onClickRefuse(member.memberNickname)}>
+                <Button onClick={() => onClickRefuse(member.memberId)}>
                   X
                 </Button>
               </div>

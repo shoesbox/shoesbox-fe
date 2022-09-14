@@ -63,7 +63,7 @@ const Calendar = () => {
 
     for (let i = 0; i < thisDates.length; i++) {
       for (let j = 0; j < calenderData.length; j++) {
-        console.log('newThisDates', newThisDates);
+        // console.log('newThisDates', newThisDates);
         if (thisDates[i] === calenderData[j]?.createdDay) {
           newThisDates.push({
             day: thisDates[i],

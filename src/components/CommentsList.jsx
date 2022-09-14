@@ -182,7 +182,7 @@ const CommentsList = ({ postId }) => {
             <div className="detail-comment-btns">
               <FixButton
                 commentId={comment?.commentId}
-                content={comment.content}
+                content={comment?.content}
               />
               <DelButton commentId={comment?.commentId} />
             </div>
