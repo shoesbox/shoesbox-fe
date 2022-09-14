@@ -68,6 +68,7 @@ const Calendar = () => {
           newThisDates.push({
             day: thisDates[i],
             url: calenderData[j]?.thumbnailUrl,
+            postId: calenderData[j]?.postId
           });
         } else {
           newThisDates.push({ day: thisDates[i], url: '' });
@@ -81,6 +82,8 @@ const Calendar = () => {
     }, []);
 
     // console.log('전체 배열', newPrevDates.concat(newThisDates, newNextDates));
+
+
 
     return newPrevDates.concat(newThisDates, newNextDates);
   };
@@ -105,9 +108,9 @@ const Calendar = () => {
         setCalenderData(data);
       });
 
-    // apis
-    // .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
-    // .then(res => console.log(res.data?.data));
+    apis
+    .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
+    .then(res => console.log("받는 값 수정하기", res.data?.data));
 
     // console.log('데이터 잘 집어넣었나?', calenderData);
   }, []);
@@ -146,17 +149,22 @@ const Calendar = () => {
           </div>
           <div className="dates">
             {dates.map((date, idx) => (
-              <div
-                className="date"
-                key={idx}
-                style={{
-                  background: `url(${date.url})`,
-                  backgroundSize: 'cover',
-                }}
-                onClick={() => navigate('/detail')}
-              >
-                <div>{date.day}</div>
-              </div>
+              <>
+                <div
+                  className="date"
+                  key={idx}
+                  style={{
+                    background: `url(${date.url})`,
+                    backgroundSize: 'cover',
+                  }}
+                  onClick={() => navigate('/detail')}
+                >
+                  {/* {date.url ? (
+                    <img key={idx} src={date.url} alt={date} />
+                  ) : null} */}
+                  <div>{date.day}</div>
+                </div>
+              </>
             ))}
           </div>
         </div>

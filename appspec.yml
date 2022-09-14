@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/linux/deploy
+permissions:
+  - object: /home/linux/deploy
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
