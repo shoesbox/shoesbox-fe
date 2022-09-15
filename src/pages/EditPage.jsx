@@ -1,16 +1,13 @@
 import { useState, useRef, useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { Image } from 'react-bootstrap';
+import { Button, Form, InputGroup, Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
 import { postDetailThunk, putDetailThunk } from '../features/writeSlice';
 import './css/writepage.css';
 
-const ReWritePage = () => {
+const EditPage = () => {
   const post = useSelector((state) => state.detail.post);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -111,8 +108,9 @@ const ReWritePage = () => {
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
-      dispatch(putDetailThunk({postId: post.postId, payload: formData}))
-      .then(navigate('/')).then(window.location.reload());
+      dispatch(putDetailThunk({ postId: post.postId, payload: formData }))
+        .then(navigate('/'))
+        .then(window.location.reload());
     }
   }, [formDataTxt]);
 
@@ -130,7 +128,7 @@ const ReWritePage = () => {
             defaultValue={post?.title}
           />
           <Form.Control.Feedback type="invalid">
-            일기주제를 적어주세요.
+            일기 주제를 적어주세요.
           </Form.Control.Feedback>
         </Form.Group>
         <br />
@@ -208,4 +206,4 @@ const ReWritePage = () => {
   );
 };
 
-export default ReWritePage;
+export default EditPage;

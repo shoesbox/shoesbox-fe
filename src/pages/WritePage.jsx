@@ -2,10 +2,7 @@ import { useState, useRef, useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { Image } from 'react-bootstrap';
+import { Button, Form, InputGroup, Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
 import { postJsonDetailThunk, postDetailThunk } from '../features/writeSlice';
 import './css/writepage.css';
@@ -132,7 +129,7 @@ const WritePage = () => {
             ref={titleRef}
           />
           <Form.Control.Feedback type="invalid">
-            일기주제를 적어주세요.
+            일기 주제를 적어주세요.
           </Form.Control.Feedback>
         </Form.Group>
         <br />

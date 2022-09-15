@@ -78,7 +78,7 @@ const CommentsList = ({ postId }) => {
     //  dispatch(updatePicked(commentId))
   };
 
-  // 입력 댓글에 아무것도 입력되지 않으면, 버튼 작동하지 않음
+  // 댓글에 아무것도 입력되지 않으면, 버튼 작동하지 않음
   const onChangeCommentStatus = (e) => {
     if (e.target.value.trim() !== '') {
       setComment(false);
@@ -144,6 +144,7 @@ const CommentsList = ({ postId }) => {
       dispatch(getCommentThunk(postId));
     }
     // dispatch(getJsonCommentThunk(postId));
+    console.log('comments', comments);
   }, []);
 
   return (

@@ -5,7 +5,15 @@
   display: flex;
   margin: 1%;
   border: 1px solid red;
-  height: 90vh;
+  /* height: 90vh; */
+}
+.wrap2 {
+  margin: 1.5%;
+  border: 1px solid red;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .calendar {
   /* border: 3px solid pink; */

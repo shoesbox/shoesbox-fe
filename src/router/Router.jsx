@@ -5,11 +5,12 @@ import Header from '../components/Header';
 import MainPage from '../pages/MainPage';
 import DetailPage from '../pages/DetailPage';
 import WritePage from '../pages/WritePage';
-import ReWritePage from '../pages/ReWritePage';
+import EditPage from '../pages/EditPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import MyPage from '../pages/MyPage';
 
 const Router = () => {
+
   const memberId = getCookie('memberId');
   // const cookie = getCookie('accessToken');
 
@@ -27,6 +28,7 @@ const Router = () => {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
+        {/* detail 페이지는 중간 쿠션으로 이후 사라질 예정 */}
         <Route
           path="/detail"
           element={isLoggedIn ? <DetailPage /> : <Navigate replace to="/" />}
@@ -36,8 +38,8 @@ const Router = () => {
           element={isLoggedIn ? <WritePage /> : <Navigate replace to="/" />}
         />
         <Route
-          path="/rewrite"
-          element={isLoggedIn ? <ReWritePage /> : <Navigate replace to="/" />}
+          path="/edit"
+          element={isLoggedIn ? <EditPage /> : <Navigate replace to="/" />}
         />
         <Route
           path="/mypage"
