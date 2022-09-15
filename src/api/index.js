@@ -117,9 +117,11 @@ export const apis = {
   getTargetPosts: (memberId, year, month) =>
     api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 
-  // 게시글 상세 api
+  // 게시글 상세 api - done
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
+  writeDaily: (payload) => apiForm.post('/api/posts', payload),
   deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
+  reWriteDetail :(postId, payload) => api.put(`/api/posts/${postId}`,payload),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
@@ -128,10 +130,7 @@ export const apis = {
   putComment: (commentId, payload) =>
     api.put(`/api/comments/${commentId}`, payload),
 
-  // 글 작성 api
-  writeDaily: (payload) => apiForm.post('/api/posts', payload),
-
-  // 친구 관련 api 
+  // 친구 관련 api - done
   getFriendList: () => api.get('/api/friends'),
   getRequestFriendList: () => api.get('/api/friends/request'),
   addFriend: (payload) => api.post('/api/friends', payload),

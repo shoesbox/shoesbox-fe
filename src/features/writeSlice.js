@@ -17,6 +17,24 @@ export const postDetailThunk = createAsyncThunk(
         alert(`${res}번 게시물, 상세게시물 조회시 활용`);
       }
     } catch (err) {
+      alert(err.response.data.errorDetails.apierror.message);
+      return thunkAPI.rejectWithValue('writeDailyThunkErr', err.response.data);
+    }
+  }
+);
+
+export const putDetailThunk = createAsyncThunk(
+  '/api/postdetailthunk',
+  async ({postId, payload}, thunkAPI) => {
+    try {
+      const data = await apis.reWriteDetail(postId, payload);
+      const res = data.data.data;
+      console.log('writeDailythunk',postId, payload);
+      if (res) {
+        alert(`${res}번 게시물 수정, 상세게시물 조회시 활용`);
+      }
+    } catch (err) {
+      alert(err.response.data.errorDetails.apierror.message);
       return thunkAPI.rejectWithValue('writeDailyThunkErr', err.response.data);
     }
   }

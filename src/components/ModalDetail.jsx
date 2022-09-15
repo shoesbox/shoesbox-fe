@@ -16,7 +16,7 @@ import CommentsList from './CommentsList';
 
 const ModalDetail = ({ postId, ...props }) => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const memberId = getCookie('memberId');
   const post = useSelector((state) => state.detail.post);
 
@@ -26,6 +26,11 @@ const ModalDetail = ({ postId, ...props }) => {
   const images = post?.images;
   const content = post?.content;
   const writeMemberId = post?.memberId;
+
+  const reWritePost = (post) => {
+    //  console.log(post);
+    navigate('/rewrite', { state: post });
+  };
 
   const delPost = () => {
     alert('정말로 일기를 삭제하시겠습니까?');
@@ -83,7 +88,7 @@ const ModalDetail = ({ postId, ...props }) => {
         <br />
         {parseInt(memberId) === parseInt(writeMemberId) && (
           <div className="detail-fix-del-btns">
-            <Button>수정</Button>
+            <Button onClick={() => reWritePost(post)}>수정</Button>
             <Button onClick={() => delPost()}>삭제</Button>
           </div>
         )}
