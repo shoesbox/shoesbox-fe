@@ -35,7 +35,7 @@ const Router = () => {
           path="/write"
           element={isLoggedIn ? <WritePage /> : <Navigate replace to="/" />}
         />
-         <Route
+        <Route
           path="/rewrite"
           element={isLoggedIn ? <ReWritePage /> : <Navigate replace to="/" />}
         />
