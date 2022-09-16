@@ -114,8 +114,8 @@ const WritePage = () => {
       });
       // dispatch(postDetailThunk(formData)).then(navigate('/detail'));
       dispatch(postDetailThunk(formData))
+      navigate('/')
     }
-    navigate('/')
   }, [formData]);
 
   return (
