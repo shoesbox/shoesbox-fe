@@ -15,8 +15,7 @@ const Oauth2kakao = () => {
       let code = new URL(window.location.href).searchParams.get("code");
       console.log(code);
 
-      // if(code){
-        // const res = await apis.loginKakao(code);
+      if(code){
         const res = await axios.get(`http://13.209.77.207/oauth2/authorization/kakao?code=${code}`)
         const token = res.data?.data;
         setCookie(
@@ -32,14 +31,12 @@ const Oauth2kakao = () => {
         setCookie('memberId', token.memberId);
         navigate('/');
       }
-
+      else {
+        alert('카카오 로그인에 실패했습니다.')
+      }
       fetchUser();
     }
-    // else{
-    //   alert('카카오 로그인에 실패했습니다.')
-    // }
-  // }
-  , [])
+  }, [])
 
   return (
     <>
