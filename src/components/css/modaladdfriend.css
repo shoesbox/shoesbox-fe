@@ -33,6 +33,7 @@
 .addfriend-list > div > Button {
   margin-left: 5px;
   height: 30px;
+  font-size: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
