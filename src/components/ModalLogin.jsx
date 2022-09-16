@@ -105,7 +105,12 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   return (
     <>
-      <Modal show={login} onHide={handleCloseLogin}>
+      <Modal
+        show={login}
+        onHide={handleCloseLogin}
+        backdrop="static"
+        fullscreen="sm-down"
+      >
         <Modal.Header closeButton>
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
         </Modal.Header>
