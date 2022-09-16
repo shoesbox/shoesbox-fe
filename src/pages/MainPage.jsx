@@ -33,7 +33,7 @@ const MainPage = () => {
           {/* <div className="wrap2">
             <Calender2 />
           </div> */}
-          
+
           <FriendsList />
           {/* {오늘일기있으면 ? null : <WriteFixedBtn />} */}
           <WriteFixedBtn />

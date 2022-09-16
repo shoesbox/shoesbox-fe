@@ -90,21 +90,29 @@ const Calendar = () => {
               <>
                 <div
                   className="date"
-                  key={date.postId}
+                  key={idx}
                   style={{
                     background: `url(${date.thumbnailUrl})`,
                     backgroundSize: 'cover',
+                    // border: '3px solid white',
+                    // backgroundColor: '#f0f0f0',
                   }}
                   onClick={() => {
-                    if (date.postId === 0) {
-                      return null;
-                    } else {
+                    // if (date.postId === 0) {
+                    //   return null;
+                    // } else {
+                    //   setPostNumber(date.postId);
+                    //   setIsOpen(true);
+                    // }
+                    if (date.postId !== 0) {
                       setPostNumber(date.postId);
                       setIsOpen(true);
                     }
                   }}
                 >
-                  {/* {date.url ? <img src={date.url} alt={date} /> : null} */}
+                  {/* {date.thumbnailUrl ? (
+                    <img src={date.thumbnailUrl} alt={date} />
+                  ) : null} */}
                   <div>{date.createdDay}</div>
                 </div>
               </>

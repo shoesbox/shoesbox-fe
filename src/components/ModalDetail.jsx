@@ -44,7 +44,7 @@ const ModalDetail = ({ postId, ...props }) => {
     if (postId !== (null || undefined)) {
       // dispatch(getJsonDetailThunk(postId));
       const result = dispatch(getDetailThunk(postId));
-      console.log("result", result)
+      console.log('result', result);
     }
   }, [postId]);
 
