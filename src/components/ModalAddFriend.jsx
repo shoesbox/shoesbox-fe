@@ -75,10 +75,10 @@ const ModalAddFriend = (props) => {
               </div>
               <div>
                 <Button onClick={() => onClickAccept(member.memberId)}>
-                  O
+                  수락
                 </Button>
                 <Button onClick={() => onClickRefuse(member.memberId)}>
-                  X
+                  거절
                 </Button>
               </div>
             </div>
@@ -102,7 +102,7 @@ const ModalAddFriend = (props) => {
               </div>
               <div>
                 <Button onClick={() => onClickCancle(member.memberId)}>
-                  X
+                  취소
                 </Button>
               </div>
             </div>
