@@ -132,14 +132,17 @@ export const apis = {
 
   // 친구 관련 api - done
   getFriendList: () => api.get('/api/friends'),
+  getRequestedFriendList: () => api.get('/api/friends/requested'),
   getRequestFriendList: () => api.get('/api/friends/request'),
   addFriend: (payload) => api.post('/api/friends', payload),
   acceptFriend: (fromMemberId) =>
     api.put(`/api/friends/${fromMemberId}/accept`),
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
-  deleteFriend: (fromMemberId, payload) =>
-    api.delete(`/api/friends/${fromMemberId}`, payload),
+  deleteFriend: (memberId) =>
+    api.delete(`/api/friends/${memberId}`),
+  cancleFriend: (toMemberId) =>
+    api.delete(`/api/friends/${toMemberId}/cancle`),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

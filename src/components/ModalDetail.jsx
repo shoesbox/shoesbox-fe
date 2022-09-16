@@ -29,7 +29,7 @@ const ModalDetail = ({ postId, ...props }) => {
 
   const reWritePost = (post) => {
     //  console.log(post);
-    navigate('/rewrite', { state: post });
+    navigate('/edit');
   };
 
   const delPost = () => {
