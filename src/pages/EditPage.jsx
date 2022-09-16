@@ -108,9 +108,12 @@ const EditPage = () => {
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
-      dispatch(putDetailThunk({ postId: post.postId, payload: formData }))
-        .then(navigate('/'))
-        .then(window.location.reload());
+      dispatch(putDetailThunk({ postId: post.postId, payload: formData })).then(
+        window.location.reload()
+      );
+      // .then(navigate('/'))
+      // 네비로 리액트스럽게 하고 싶으면 메인 달력에서 state에 담고
+      // 썸네일 url 의존성 배열로 바뀔 경우 리렌더 되도록 설정 필요?
     }
   }, [formDataTxt]);
 

@@ -113,10 +113,12 @@ const WritePage = () => {
         formData.append('imageFiles', file);
       });
       // dispatch(postDetailThunk(formData)).then(navigate('/detail'));
-      dispatch(postDetailThunk(formData));
-      navigate('/');
+      dispatch(postDetailThunk(formData)).then(window.location.replace('/'));
+      // navigate('/');
+      // 네비로 리액트스럽게 하고 싶으면 메인 달력에서 state에 담고
+      // 썸네일 url 의존성 배열로 바뀔 경우 리렌더 되도록 설정 필요?
     }
-  }, [formData]);
+  }, [formDataTxt]);
 
   return (
     <Container fluid className="write-wrap">
