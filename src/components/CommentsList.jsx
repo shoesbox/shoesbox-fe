@@ -33,7 +33,7 @@ const CommentsList = ({ postId }) => {
   var tmp = '';
 
   // console.log(memberId);
-  console.log(comments);
+  // console.log(comments);
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== '') {
