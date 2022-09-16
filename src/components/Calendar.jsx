@@ -21,7 +21,7 @@ const Calendar = () => {
   // modal 표시용 state
   const [isopen, setIsOpen] = useState(false);
   // postid 넘기기용 state
-  const [postNumber, setPostNumber] = useState(0);
+  const [postNumber, setPostNumber] = useState();
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -117,7 +117,7 @@ const Calendar = () => {
         onHide={() => {
           setIsOpen(false);
         }}
-        postId={() => {postNumber}}
+        postId={postNumber}
         backdrop="static"
         keyboard={false}
       />
