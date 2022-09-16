@@ -19,7 +19,11 @@ export const getDetailThunk = createAsyncThunk(
       console.log('showthunk', data.data.data);
       return postDetail;
     } catch (err) {
-      alert(err.response.data.errorDetails.apierror.message);
+      return {
+        errorCode: err.response.data.state,
+        errorMessage : err.response.data.errorDetails.apierror.message,
+      }
+      // alert(err.response.data.errorDetails.apierror.message);
       // return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
     }
   }
