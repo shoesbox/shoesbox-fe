@@ -103,10 +103,6 @@ const Calendar = () => {
                       setPostNumber(date.postId)
                       setIsOpen(true);
                     }
-                    // setIsOpen(true)
-                    // console.log("open 값 확인", isopen)
-                    // return ;
-                    // navigate('/detail')
                   }}
                 >
                   {/* {date.url ? <img src={date.url} alt={date} /> : null} */}
