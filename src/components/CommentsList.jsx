@@ -154,7 +154,7 @@ const CommentsList = ({ postId }) => {
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu1h9GZH18sUSO-8P_coFOJehZ1KkPo-CUJ2816jM_kaQoascDIj3vWzaBt2wx3X1Wwz8&usqp=CAU"
+                src={comment?.profileImageUrl}
                 alt="프로필 사진"
               />
               <span>{comment?.nickname}</span>

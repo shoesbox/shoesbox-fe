@@ -31,7 +31,7 @@ const ModalDetail = ({ postId, ...props }) => {
 
   const reWritePost = (post) => {
     //  console.log(post);
-    navigate('/edit', { state: post });
+    navigate('/edit');
   };
 
   const delPost = () => {

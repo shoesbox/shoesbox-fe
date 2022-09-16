@@ -7,11 +7,16 @@ import {
   getRequestFriendListThunk,
   acceptFriendThunk,
   refuseFriendThunk,
+  cancleFriendThunk,
+  getRequestedFriendListThunk,
 } from '../features/friendSlice';
 import './css/modaladdfriend.css';
 
 const ModalAddFriend = (props) => {
   const dispatch = useDispatch();
+  const requestedFriendList = useSelector(
+    (state) => state.friend.requestedFriendList
+  );
   const requestFriendList = useSelector(
     (state) => state.friend.requestFriendList
   );
@@ -29,7 +34,9 @@ const ModalAddFriend = (props) => {
       if (validateEmail(addFriendRef.current.value)) {
         //  console.log(addFriendRef.current.value);
         const email = addFriendRef.current.value;
-        dispatch(addFriendThunk(email));
+        dispatch(addFriendThunk(email)).then(
+          addFriendRef.current.value = ''
+        )
       } else {
         alert('이메일 형식을 확인해주세요.');
       }
@@ -46,19 +53,23 @@ const ModalAddFriend = (props) => {
     dispatch(refuseFriendThunk(memberId));
   };
 
+  const onClickCancle = (toMemberId) => {
+    dispatch(cancleFriendThunk(toMemberId));
+  };
+
   const onEnterdown = (e) => {
     if (e.key === 'Enter') {
       onClickAddFriend();
     }
   };
 
-  const RequestFriendList = () => {
+  const RequestedFriendList = () => {
     return (
       <>
-        {requestFriendList.length === 0 ? (
+        {requestedFriendList.length === 0 ? (
           <div>현재 요청된 사항이 없습니다.</div>
         ) : (
-          requestFriendList.map((member, idx) => (
+          requestedFriendList.map((member, idx) => (
             <div key={idx} className="addfriend-list">
               <div>
                 <span>{member.memberNickname}</span>
@@ -79,7 +90,32 @@ const ModalAddFriend = (props) => {
     );
   };
 
+  const RequestFriendList = () => {
+    return (
+      <>
+        {requestFriendList?.length === 0 ? (
+          <div>현재 요청한 사항이 없습니다.</div>
+        ) : (
+          requestFriendList?.map((member, idx) => (
+            <div key={idx} className="addfriend-list">
+              <div>
+                <span>{member.memberNickname}</span>
+                님에게 친구 맺기를 요청하였습니다.
+              </div>
+              <div>
+                <Button onClick={() => onClickCancle(member.memberId)}>
+                  X
+                </Button>
+              </div>
+            </div>
+          ))
+        )}
+      </>
+    );
+  };
+
   useEffect(() => {
+    dispatch(getRequestedFriendListThunk());
     dispatch(getRequestFriendListThunk());
     // console.log(requestFriendList);
   }, []);
@@ -117,6 +153,10 @@ const ModalAddFriend = (props) => {
           </InputGroup.Text>
         </InputGroup>
         <br />
+        신청 받은 친구목록
+        <RequestedFriendList />
+        <hr/>
+        신청한 친구목록
         <RequestFriendList />
       </Modal.Body>
       <Modal.Footer>
