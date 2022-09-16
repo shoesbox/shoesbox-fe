@@ -70,7 +70,9 @@ const ModalAddFriend = (props) => {
           requestedFriendList.map((member, idx) => (
             <div key={idx} className="addfriend-list">
               <div>
-                <span>{member.memberNickname}</span>
+                {/* <span>{member.memberNickname}</span>
+                님이 친구 맺기를 요청하였습니다. */}
+                {member.memberNickname}
                 님이 친구 맺기를 요청하였습니다.
               </div>
               <div>
@@ -97,7 +99,9 @@ const ModalAddFriend = (props) => {
           requestFriendList?.map((member, idx) => (
             <div key={idx} className="addfriend-list">
               <div>
-                <span>{member.memberNickname}</span>
+                {/* <span>{member.memberNickname}</span>
+                님에게 친구 맺기를 요청하였습니다. */}
+                {member.memberNickname}
                 님에게 친구 맺기를 요청하였습니다.
               </div>
               <div>

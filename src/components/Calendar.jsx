@@ -10,7 +10,7 @@ import { Modal } from 'react-bootstrap';
 
 const Calendar = () => {
   let memberId = getCookie('memberId');
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
@@ -21,7 +21,7 @@ const Calendar = () => {
   // modal 표시용 state
   const [isopen, setIsOpen] = useState(false);
   // postid 넘기기용 state
-  const [postNumber, setPostNumber] = useState(0)
+  const [postNumber, setPostNumber] = useState(0);
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -96,11 +96,10 @@ const Calendar = () => {
                     backgroundSize: 'cover',
                   }}
                   onClick={() => {
-                    if(date.postId === 0){
+                    if (date.postId === 0) {
                       return null;
-                    }
-                    else{
-                      setPostNumber(date.postId)
+                    } else {
+                      setPostNumber(date.postId);
                       setIsOpen(true);
                     }
                   }}
@@ -116,7 +115,7 @@ const Calendar = () => {
       <ModalDetail
         show={isopen}
         onHide={() => {
-          setIsOpen(false)
+          setIsOpen(false);
         }}
         postId={postNumber}
         backdrop="static"
