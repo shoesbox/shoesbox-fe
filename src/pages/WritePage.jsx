@@ -113,9 +113,10 @@ const WritePage = () => {
         formData.append('imageFiles', file);
       });
       // dispatch(postDetailThunk(formData)).then(navigate('/detail'));
-      dispatch(postDetailThunk(formData)).then(window.location.replace('/'));
+      dispatch(postDetailThunk(formData))
     }
-  }, [formDataTxt]);
+    navigate('/')
+  }, [formData]);
 
   return (
     <Container fluid className="write-wrap">
