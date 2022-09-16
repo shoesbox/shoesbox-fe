@@ -100,12 +100,9 @@ apiForm.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 소셜 로그인
+  loginKakao: (code) => api.get(`/oauth2/authorization/kakao?code=${code}`),
   loginGoogle: () => api.get('api/oauth2/authorization/google'),
-  loginNaver: () => api.get('api/oauth2/authorization/naver'),
-  loginKakao: () =>
-    axios.get(
-      'https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://13.209.77.207/oauth2/authorization/kakao&response_type=code'
-    ),
+  loginNaver: () => api.get('https://nid.naver.com/oauth2.0/authorize'),
 
   // jwt 로그인, 회원가입
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
@@ -121,7 +118,7 @@ export const apis = {
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
   writeDaily: (payload) => apiForm.post('/api/posts', payload),
   deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
-  reWriteDetail :(postId, payload) => api.put(`/api/posts/${postId}`,payload),
+  reWriteDetail: (postId, payload) => api.put(`/api/posts/${postId}`, payload),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
@@ -139,10 +136,8 @@ export const apis = {
     api.put(`/api/friends/${fromMemberId}/accept`),
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
-  deleteFriend: (memberId) =>
-    api.delete(`/api/friends/${memberId}`),
-  cancleFriend: (toMemberId) =>
-    api.delete(`/api/friends/${toMemberId}/cancle`),
+  deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
+  cancleFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancle`),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

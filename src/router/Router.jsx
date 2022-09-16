@@ -7,10 +7,10 @@ import DetailPage from '../pages/DetailPage';
 import WritePage from '../pages/WritePage';
 import EditPage from '../pages/EditPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import Oauth2kakao from '../components/Oauth2kakao';
 import MyPage from '../pages/MyPage';
 
 const Router = () => {
-
   const memberId = getCookie('memberId');
   // const cookie = getCookie('accessToken');
 
@@ -52,6 +52,7 @@ const Router = () => {
           }
         />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="/oauth2/authorization/kakao" element={<Oauth2kakao />} />
       </Routes>
     </BrowserRouter>
   );

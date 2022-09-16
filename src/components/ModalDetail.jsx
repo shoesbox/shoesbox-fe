@@ -13,6 +13,8 @@ import {
 } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
+// potal test
+import ReactDOM from 'react-dom';
 
 const ModalDetail = ({ postId, ...props }) => {
   const dispatch = useDispatch();
@@ -41,7 +43,8 @@ const ModalDetail = ({ postId, ...props }) => {
   useEffect(() => {
     if (postId !== (null || undefined)) {
       // dispatch(getJsonDetailThunk(postId));
-      dispatch(getDetailThunk(postId));
+      const result = dispatch(getDetailThunk(postId));
+      console.log('result', result);
     }
   }, [postId]);
 
@@ -57,51 +60,55 @@ const ModalDetail = ({ postId, ...props }) => {
     );
   };
 
-  return (
-    <Modal
-      {...props}
-      className="detail-modal"
-      centered
-      size="md"
-      fullscreen="sm-down"
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>
-          <div>{title}</div>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="detail-titlebox">
-          <span>
-            <strong>{nickname}</strong>
-            <Button>
-              <BsFillTelephoneForwardFill />
-            </Button>
-          </span>
-          <span>{date}</span>
-        </div>
-        <hr />
-        <ImageCarousel />
-        <hr />
-        <div className="detail-content">{content}</div>
-        {/* <hr /> */}
-        <br />
-        {parseInt(memberId) === parseInt(writeMemberId) && (
-          <div className="detail-fix-del-btns">
-            <Button onClick={() => reWritePost(post)}>수정</Button>
-            <Button onClick={() => delPost()}>삭제</Button>
+  return ReactDOM.createPortal(
+    <>
+      <Modal
+        {...props}
+        className="detail-modal"
+        centered
+        size="md"
+        fullscreen="sm-down"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div>{title}</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="detail-titlebox">
+            <span>
+              <strong>{nickname}</strong>
+              <Button>
+                <BsFillTelephoneForwardFill />
+              </Button>
+            </span>
+            <span>{date}</span>
           </div>
-        )}
-        <hr />
-        <CommentsList postId={postId} />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={props.onHide}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
+          <hr />
+          <ImageCarousel />
+          <hr />
+          <div className="detail-content">{content}</div>
+          {/* <hr /> */}
+          <br />
+          {parseInt(memberId) === parseInt(writeMemberId) && (
+            <div className="detail-fix-del-btns">
+              <Button onClick={() => reWritePost(post)}>수정</Button>
+              <Button onClick={() => delPost()}>삭제</Button>
+            </div>
+          )}
+          <hr />
+          <CommentsList postId={postId} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={props.onHide}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>,
+    document.getElementById('potal')
   );
+  // return <div>모달</div>
 };
 
 export default ModalDetail;

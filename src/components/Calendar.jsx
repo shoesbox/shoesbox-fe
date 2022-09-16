@@ -3,6 +3,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
+import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
+// modal
+import ModalDetail from './ModalDetail';
+import { Modal } from 'react-bootstrap';
 
 const Calendar = () => {
   let memberId = getCookie('memberId');
@@ -14,6 +18,10 @@ const Calendar = () => {
   const [dates, setDates] = useState([]);
   // axios 통신용 state
   const [calenderData, setCalenderData] = useState([]);
+  // modal 표시용 state
+  const [isopen, setIsOpen] = useState(false);
+  // postid 넘기기용 state
+  const [postNumber, setPostNumber] = useState();
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -23,95 +31,29 @@ const Calendar = () => {
     };
   }, [date]);
 
-  // 달력에 쓸 월, 일 계산용
-  const calcDate = () => {
-    // 지난 달 마지막 Date, 이번 달 마지막 Date
-    const prevLast = new Date(date.getFullYear(), date.getMonth(), 0);
-    const thisLast = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
-    const prevLastDate = prevLast.getDate();
-    const prevLastDay = prevLast.getDay();
-
-    const thisLastDate = thisLast.getDate();
-    const thisLastDay = thisLast.getDay();
-
-    // Dates 기본 배열들
-    const prevDates = [];
-    // Array(n)로는 0부터 n-1까지의 배열이 생성되므로 1부터 n까지로 밀어주기
-    const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
-    const nextDates = [];
-
-    // prevDates 계산
-    if (prevLastDay !== 6) {
-      for (let i = 0; i < prevLastDay + 1; i++) {
-        prevDates.unshift(prevLastDate - i);
-      }
-    }
-
-    // nextDates 계산
-    for (let i = 1; i < 7 - thisLastDay; i++) {
-      nextDates.push(i);
-    }
-
-    // Tray 작성
-    let newPrevDates = prevDates.reduce((arr, v) => {
-      arr.push({ day: v, url: '' });
-      return arr;
-    }, []);
-
-    let newThisDates = [];
-
-    for (let i = 0; i < thisDates.length; i++) {
-      for (let j = 0; j < calenderData?.length; j++) {
-        // console.log('newThisDates', newThisDates);
-        if (thisDates[i] === calenderData[j]?.createdDay) {
-          newThisDates.push({
-            day: thisDates[i],
-            url: calenderData[j]?.thumbnailUrl,
-            postId: calenderData[j]?.postId,
-          });
-        } else {
-          newThisDates.push({ day: thisDates[i], url: '' });
-        }
-      }
-    }
-
-    let newNextDates = nextDates.reduce((arr, v) => {
-      arr.push({ day: v, url: '' });
-      return arr;
-    }, []);
-
-    // console.log('전체 배열', newPrevDates.concat(newThisDates, newNextDates));
-    return newPrevDates.concat(newThisDates, newNextDates);
-  };
-
   const changeMonth = (addMonth) => {
     if (addMonth !== 0) {
       date.setDate(1);
       date.setMonth(date.getMonth() + addMonth);
       setDate(new Date(date));
-      setDates(calcDate());
+      setDates(calenderData);
     } else {
       setDate(new Date());
-      setDates(calcDate());
+      setDates(calenderData);
     }
   };
 
   useEffect(() => {
     apis
       .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
-      .then((res) => res.data?.data.content)
+      .then((res) => res.data?.data)
       .then((data) => {
         setCalenderData(data);
       });
-
-    // apis
-    //   .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
-    //   .then((res) => console.log('받는 값 수정하기', res.data?.data));
-  }, []);
+  }, [date]);
 
   useEffect(() => {
-    setDates(calcDate());
+    setDates(calenderData);
     console.log('calenderData', calenderData); // 이거 무슨 용도?
   }, [calenderData]);
 
@@ -148,21 +90,45 @@ const Calendar = () => {
               <>
                 <div
                   className="date"
-                  key={date.postId}
+                  key={idx}
                   style={{
-                    background: `url(${date.url})`,
+                    background: `url(${date.thumbnailUrl})`,
                     backgroundSize: 'cover',
+                    // border: '3px solid white',
+                    // backgroundColor: '#f0f0f0',
                   }}
-                  onClick={() => navigate('/detail')}
+                  onClick={() => {
+                    // if (date.postId === 0) {
+                    //   return null;
+                    // } else {
+                    //   setPostNumber(date.postId);
+                    //   setIsOpen(true);
+                    // }
+                    if (date.postId !== 0) {
+                      setPostNumber(date.postId);
+                      setIsOpen(true);
+                    }
+                  }}
                 >
-                  {/* {date.url ? <img src={date.url} alt={date} /> : null} */}
-                  <div>{date.day}</div>
+                  {/* {date.thumbnailUrl ? (
+                    <img src={date.thumbnailUrl} alt={date} />
+                  ) : null} */}
+                  <div>{date.createdDay}</div>
                 </div>
               </>
             ))}
           </div>
         </div>
       </div>
+      <ModalDetail
+        show={isopen}
+        onHide={() => {
+          setIsOpen(false);
+        }}
+        postId={postNumber}
+        backdrop="static"
+        keyboard={false}
+      />
     </div>
   );
 };

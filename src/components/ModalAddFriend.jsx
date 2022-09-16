@@ -34,9 +34,7 @@ const ModalAddFriend = (props) => {
       if (validateEmail(addFriendRef.current.value)) {
         //  console.log(addFriendRef.current.value);
         const email = addFriendRef.current.value;
-        dispatch(addFriendThunk(email)).then(
-          addFriendRef.current.value = ''
-        )
+        dispatch(addFriendThunk(email)).then((addFriendRef.current.value = ''));
       } else {
         alert('이메일 형식을 확인해주세요.');
       }
@@ -72,15 +70,17 @@ const ModalAddFriend = (props) => {
           requestedFriendList?.map((member, idx) => (
             <div key={idx} className="addfriend-list">
               <div>
-                <span>{member.memberNickname}</span>
+                {/* <span>{member.memberNickname}</span>
+                님이 친구 맺기를 요청하였습니다. */}
+                {member.memberNickname}
                 님이 친구 맺기를 요청하였습니다.
               </div>
               <div>
                 <Button onClick={() => onClickAccept(member.memberId)}>
-                  O
+                  수락
                 </Button>
                 <Button onClick={() => onClickRefuse(member.memberId)}>
-                  X
+                  거절
                 </Button>
               </div>
             </div>
@@ -99,12 +99,14 @@ const ModalAddFriend = (props) => {
           requestFriendList?.map((member, idx) => (
             <div key={idx} className="addfriend-list">
               <div>
-                <span>{member.memberNickname}</span>
+                {/* <span>{member.memberNickname}</span>
+                님에게 친구 맺기를 요청하였습니다. */}
+                {member.memberNickname}
                 님에게 친구 맺기를 요청하였습니다.
               </div>
               <div>
                 <Button onClick={() => onClickCancle(member.memberId)}>
-                  X
+                  취소
                 </Button>
               </div>
             </div>
@@ -153,10 +155,10 @@ const ModalAddFriend = (props) => {
           </InputGroup.Text>
         </InputGroup>
         <br />
-        신청 받은 친구목록
+        <div className="addfriend-title">내가 받은 친구 목록 🔮</div>
         <RequestedFriendList />
-        <hr/>
-        신청한 친구목록
+        <hr />
+        <div className="addfriend-title">내가 신청한 친구 목록 💕</div>
         <RequestFriendList />
       </Modal.Body>
       <Modal.Footer>
