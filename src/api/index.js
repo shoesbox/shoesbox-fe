@@ -101,7 +101,7 @@ apiForm.interceptors.response.use(
 export const apis = {
   // 소셜 로그인
   loginGoogle: () => api.get('api/oauth2/authorization/google'),
-  loginNaver: () => api.get('api/oauth2/authorization/naver'),
+  loginNaver: () => auth.get('https://nid.naver.com/oauth2.0/authorize'),
   loginKakao: () =>
     axios.get(
       'https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://13.209.77.207/oauth2/authorization/kakao&response_type=code'
