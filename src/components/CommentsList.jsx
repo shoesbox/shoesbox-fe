@@ -153,10 +153,7 @@ const CommentsList = ({ postId }) => {
         comments?.map((comment, idx) => (
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
-              <img
-                src={comment?.profileImageUrl}
-                alt="프로필 사진"
-              />
+              <img src={comment?.profileImageUrl} alt="프로필 사진" />
               <span>{comment?.nickname}</span>
               {loading && pick === comment.commentId ? (
                 <Spinner

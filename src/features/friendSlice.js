@@ -31,7 +31,7 @@ export const getRequestFriendListThunk = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const data = await apis.getRequestFriendList();
-      const res = data.data;
+      const res = data.data.data;
       // console.log('getRequestFriendthunk', data.data);
       return res;
     } catch (err) {

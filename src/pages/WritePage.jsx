@@ -113,8 +113,8 @@ const WritePage = () => {
         formData.append('imageFiles', file);
       });
       // dispatch(postDetailThunk(formData)).then(navigate('/detail'));
-      dispatch(postDetailThunk(formData))
-      navigate('/')
+      dispatch(postDetailThunk(formData));
+      navigate('/');
     }
   }, [formData]);
 
