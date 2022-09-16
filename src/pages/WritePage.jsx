@@ -112,11 +112,10 @@ const WritePage = () => {
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
-      // dispatch(postDetailThunk(formData)).then(navigate('/detail'));
-      dispatch(postDetailThunk(formData)).then(window.location.replace('/'));
-      // navigate('/');
-      // 네비로 리액트스럽게 하고 싶으면 메인 달력에서 state에 담고
-      // 썸네일 url 의존성 배열로 바뀔 경우 리렌더 되도록 설정 필요?
+      dispatch(postDetailThunk(formData));
+      window.location.reload();
+      // 새로고침 없이 즉각반영 되려면 메인달력 state 설정하고
+      // 그 state 변경 시 useeffect로 재렌더링 필요?
     }
   }, [formDataTxt]);
 
