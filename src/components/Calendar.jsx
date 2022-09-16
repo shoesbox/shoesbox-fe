@@ -117,7 +117,7 @@ const Calendar = () => {
         onHide={() => {
           setIsOpen(false);
         }}
-        postId={postNumber}
+        postId={() => {postNumber}}
         backdrop="static"
         keyboard={false}
       />
