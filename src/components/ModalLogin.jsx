@@ -54,8 +54,8 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
       })
       .catch((err) => {
         console.log(err);
-        console.log(err.response.data.errorDetails.apierror.message);
-        const errMessage = err.response.data.errorDetails.apierror.message;
+        console.log(err.response?.data.errorDetails.apierror.message);
+        const errMessage = err.response?.data.errorDetails.apierror.message;
         alert(errMessage);
       });
   };

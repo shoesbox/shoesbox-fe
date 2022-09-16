@@ -14,8 +14,7 @@ export const postDetailThunk = createAsyncThunk(
       const res = data.data.data;
       // console.log('writeDailythunk',res)
       if (res) {
-        // alert(`${res}번 게시물, 상세게시물 조회시 활용`);
-        alert('등록 완료');
+        alert('등록 완료 // 최종 완성 시 알림 삭제 예정');
       }
     } catch (err) {
       alert(err.response.data.errorDetails.apierror.message);
@@ -32,8 +31,7 @@ export const putDetailThunk = createAsyncThunk(
       const res = data.data.data;
       console.log('writeDailythunk', postId, payload);
       if (res) {
-        // alert(`${res}번 게시물, 상세게시물 조회시 활용`);
-        alert('수정 완료');
+        alert('수정 완료 // 최종 완성 시 알림 삭제 예정');
       }
     } catch (err) {
       alert(err.response.data.errorDetails.apierror.message);

@@ -108,9 +108,10 @@ const EditPage = () => {
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
-      dispatch(putDetailThunk({ postId: post.postId, payload: formData }))
-        .then(navigate('/'))
-        .then(window.location.reload());
+      dispatch(putDetailThunk({ postId: post.postId, payload: formData }));
+      window.location.reload();
+      // 새로고침 없이 즉각반영 되려면 메인달력 state 설정하고
+      // 그 state 변경 시 useeffect로 재렌더링 필요?
     }
   }, [formDataTxt]);
 
