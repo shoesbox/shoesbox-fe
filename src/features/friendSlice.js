@@ -191,12 +191,12 @@ const friendSlice = createSlice({
       state.requestedFriendList = newRqFriendList;
     });
     builder.addCase(refuseFriendThunk.fulfilled, (state, action) => {
-      const requestFriendList = state.requestFriendList;
+      const requestFriendList = state.requestedFriendList;
       const requestMemberId = action.payload;
       const newRqFriendList = requestFriendList.filter((l) => {
         return parseInt(l.memberId) !== requestMemberId;
       });
-      state.requestFriendList = newRqFriendList;
+      state.requestedFriendList = newRqFriendList;
     });
     builder.addCase(delFriendThunk.fulfilled, (state, action) => {
       const friendList = state.friendList;
