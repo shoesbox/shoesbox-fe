@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const KAKAO_AUTH_URL=process.env.REACT_APP_KAKAO_AUTH_URL;
 
-const LoginModal = ({ login, handleCloseLogin }) => {
+const ModalLogin = ({ login, handleCloseLogin }) => {
   const [state, setState] = useState({
     email: '',
     password: '',
