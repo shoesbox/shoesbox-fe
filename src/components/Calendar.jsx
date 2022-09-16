@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
 import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
+// modal
+import ModalDetail from './ModalDetail';
+import { Modal } from 'react-bootstrap';
 
 const Calendar = () => {
   let memberId = getCookie('memberId');
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
   // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
@@ -15,6 +18,10 @@ const Calendar = () => {
   const [dates, setDates] = useState([]);
   // axios 통신용 state
   const [calenderData, setCalenderData] = useState([]);
+  // modal 표시용 state
+  const [isopen, setIsOpen] = useState(false);
+  // postid 넘기기용 state
+  const [postNumber, setPostNumber] = useState(0)
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -88,7 +95,19 @@ const Calendar = () => {
                     background: `url(${date.thumbnailUrl})`,
                     backgroundSize: 'cover',
                   }}
-                  onClick={() => navigate('/detail')}
+                  onClick={() => {
+                    if(date.postId === 0){
+                      navigate('/write')
+                    }
+                    else{
+                      setPostNumber(date.postId)
+                      setIsOpen(true);
+                    }
+                    // setIsOpen(true)
+                    // console.log("open 값 확인", isopen)
+                    // return ;
+                    // navigate('/detail')
+                  }}
                 >
                   {/* {date.url ? <img src={date.url} alt={date} /> : null} */}
                   <div>{date.createdDay}</div>
@@ -98,6 +117,15 @@ const Calendar = () => {
           </div>
         </div>
       </div>
+      <ModalDetail
+        show={isopen}
+        onHide={() => {
+          setIsOpen(false)
+        }}
+        postId={postNumber}
+        backdrop="static"
+        keyboard={false}
+      />
     </div>
   );
 };
