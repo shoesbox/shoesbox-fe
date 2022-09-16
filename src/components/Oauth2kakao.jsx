@@ -13,7 +13,7 @@ const Oauth2kakao = () => {
   useEffect(() => {
     const fetchUser = async () => {
       let code = new URL(window.location.href).searchParams.get("code");
-      console.log(code);
+      console.log("code", code);
 
       if(code){
         const res = await axios.get(`http://13.209.77.207/oauth2/authorization/kakao?code=${code}`)

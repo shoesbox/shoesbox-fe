@@ -1,14 +1,27 @@
 import './css/calender.css';
-import { Button, Dropdown } from 'react-bootstrap';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { apis } from '../api';
+import { getCookie } from '../shared/cookie';
+import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
+// modal
+import ModalDetail from './ModalDetail';
+import { Modal } from 'react-bootstrap';
 
 const Calendar = () => {
+  let memberId = getCookie('memberId');
+  const navigate = useNavigate();  
+
   // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state
   const [dates, setDates] = useState([]);
+  // axios 통신용 state
+  const [calenderData, setCalenderData] = useState([]);
+  // modal 표시용 state
+  const [isopen, setIsOpen] = useState(false);
+  // postid 넘기기용 state
+  const [postNumber, setPostNumber] = useState(0)
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -18,72 +31,31 @@ const Calendar = () => {
     };
   }, [date]);
 
-  // 달력에 쓸 월, 일 계산용
-  const calcDate = () => {
-    // 지난 달 마지막 Date, 이번 달 마지막 Date
-    const prevLast = new Date(date.getFullYear(), date.getMonth(), 0);
-    const thisLast = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
-    const PLDate = prevLast.getDate();
-    const PLDay = prevLast.getDay();
-
-    const TLDate = thisLast.getDate();
-    const TLDay = thisLast.getDay();
-
-    // Dates 기본 배열들
-    const prevDates = [];
-    const thisDates = [...Array(TLDate + 1).keys()].slice(1);
-    const nextDates = [];
-
-    // prevDates 계산
-    if (PLDay !== 6) {
-      for (let i = 0; i < PLDay + 1; i++) {
-        prevDates.unshift(PLDate - i);
-      }
-    }
-    // nextDates 계산
-    for (let i = 1; i < 7 - TLDay; i++) {
-      nextDates.push(i);
-    }
-
-    // Dates 합치기
-    return prevDates.concat(thisDates, nextDates);
-  };
-
-  useEffect(() => {
-    setDates(calcDate());
-  }, [date]);
-
-  const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
-  const getAllPosts = async () => {
-    // const res = await axios.get('http://localhost:3030/posts')
-    // console.log('All Posts', res.data);
-    const { data } = await axios.get('http://localhost:3030/posts');
-    console.log('All Posts', data);
-    setPosts(data);
-  };
-
-  const img =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LHQDLTKqbrymeP5odTzF3X1yLbj0WQI9mg&usqp=CAU';
-  // `${posts[0].images[0]}`;
-
-  console.log(posts[0]);
-  useEffect(() => {
-    getAllPosts();
-  }, []);
-
   const changeMonth = (addMonth) => {
     if (addMonth !== 0) {
       date.setDate(1);
       date.setMonth(date.getMonth() + addMonth);
       setDate(new Date(date));
-      setDates(calcDate());
+      setDates(calenderData);
     } else {
       setDate(new Date());
-      setDates(calcDate());
+      setDates(calenderData);
     }
   };
+
+  useEffect(() => {
+    apis
+      .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
+      .then((res) => res.data?.data)
+      .then((data) => {
+        setCalenderData(data);
+      });
+  }, [date]);
+
+  useEffect(() => {
+    setDates(calenderData);
+    console.log('calenderData', calenderData); // 이거 무슨 용도?
+  }, [calenderData]);
 
   return (
     <div className="calender-container">
@@ -101,7 +73,6 @@ const Calendar = () => {
             <button className="nav-btn" onClick={() => changeMonth(+1)}>
               &gt;
             </button>
-            {/* <Button className="nav-btn go-next">&gt;</Button> */}
           </div>
         </div>
         <div className="main">
@@ -116,18 +87,41 @@ const Calendar = () => {
           </div>
           <div className="dates">
             {dates.map((date, idx) => (
-              <div
-                className="date"
-                key={idx}
-                style={{ background: `url(${img})`, backgroundSize: 'cover' }}
-                onClick={() => navigate('/detail')}
-              >
-                <span>{date}</span>
-              </div>
+              <>
+                <div
+                  className="date"
+                  key={date.postId}
+                  style={{
+                    background: `url(${date.thumbnailUrl})`,
+                    backgroundSize: 'cover',
+                  }}
+                  onClick={() => {
+                    if(date.postId === 0){
+                      return null;
+                    }
+                    else{
+                      setPostNumber(date.postId)
+                      setIsOpen(true);
+                    }
+                  }}
+                >
+                  {/* {date.url ? <img src={date.url} alt={date} /> : null} */}
+                  <div>{date.createdDay}</div>
+                </div>
+              </>
             ))}
           </div>
         </div>
       </div>
+      <ModalDetail
+        show={isopen}
+        onHide={() => {
+          setIsOpen(false)
+        }}
+        postId={postNumber}
+        backdrop="static"
+        keyboard={false}
+      />
     </div>
   );
 };

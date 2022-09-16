@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import { Button, Form, InputGroup, Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
-import { postJsonDetailThunk, postDetailThunk } from '../features/writeSlice';
+import { postDetailThunk, putDetailThunk } from '../features/writeSlice';
 import './css/writepage.css';
 
-const WritePage = () => {
+const EditPage = () => {
+  const post = useSelector((state) => state.detail.post);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // console.log('ReWritePg', post);
   // formdata
   let formData = new FormData();
   // text data
@@ -57,16 +59,10 @@ const WritePage = () => {
     } else {
       event.preventDefault();
       setFormDataTxt({
-        // id: new Date(),
-        // postId: Math.round(Math.random() * 99 + 1),
-        // nickname: 'Sunny',
         title: titleRef.current.value,
-        // images : imageRef.current.files,
         images: base64s,
         content: contentRef.current.value,
       });
-      // console.log(formDataTxt);
-
       setValidated(true);
     }
   };
@@ -112,7 +108,9 @@ const WritePage = () => {
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
-      dispatch(postDetailThunk(formData)).then(navigate('/detail'));
+      dispatch(putDetailThunk({ postId: post.postId, payload: formData }))
+        .then(navigate('/'))
+        .then(window.location.reload());
     }
   }, [formDataTxt]);
 
@@ -127,6 +125,7 @@ const WritePage = () => {
             placeholder="오늘의 요약!"
             autoFocus
             ref={titleRef}
+            defaultValue={post?.title}
           />
           <Form.Control.Feedback type="invalid">
             일기 주제를 적어주세요.
@@ -184,6 +183,7 @@ const WritePage = () => {
             placeholder="오늘의 근황을 친구에게 공유해봅시다."
             required
             ref={contentRef}
+            defaultValue={post?.content}
           />
           <Form.Control.Feedback type="invalid">
             일기내용을 적어주세요.
@@ -206,4 +206,4 @@ const WritePage = () => {
   );
 };
 
-export default WritePage;
+export default EditPage;
