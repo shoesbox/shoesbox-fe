@@ -34,9 +34,7 @@ const ModalAddFriend = (props) => {
       if (validateEmail(addFriendRef.current.value)) {
         //  console.log(addFriendRef.current.value);
         const email = addFriendRef.current.value;
-        dispatch(addFriendThunk(email)).then(
-          addFriendRef.current.value = ''
-        )
+        dispatch(addFriendThunk(email)).then((addFriendRef.current.value = ''));
       } else {
         alert('이메일 형식을 확인해주세요.');
       }
@@ -153,10 +151,10 @@ const ModalAddFriend = (props) => {
           </InputGroup.Text>
         </InputGroup>
         <br />
-        신청 받은 친구목록
+        <div className="addfriend-title">내가 받은 친구 목록 🔮</div>
         <RequestedFriendList />
-        <hr/>
-        신청한 친구목록
+        <hr />
+        <div className="addfriend-title">내가 신청한 친구 목록 💕</div>
         <RequestFriendList />
       </Modal.Body>
       <Modal.Footer>

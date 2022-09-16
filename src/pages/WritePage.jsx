@@ -112,7 +112,8 @@ const WritePage = () => {
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
-      dispatch(postDetailThunk(formData)).then(navigate('/detail'));
+      // dispatch(postDetailThunk(formData)).then(navigate('/detail'));
+      dispatch(postDetailThunk(formData)).then(window.location.replace('/'));
     }
   }, [formDataTxt]);
 
