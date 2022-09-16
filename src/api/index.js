@@ -100,11 +100,16 @@ apiForm.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 로그인, 회원가입 api
-  loginGoogle: () => api.get("/oauth2/authorization/google"),
-  loginNaver: () => {},
   loginKakao: (code) => api.get(`/oauth2/authorization/kakao?code=${code}`),
-  joinUser: (userData) => auth.post("/api/members/auth/signup", userData),
-  loginUser: (userData) => auth.post("/api/members/auth/login", userData),
+  // 소셜 로그인
+  loginGoogle: () => api.get('api/oauth2/authorization/google'),
+  loginNaver: () => auth.get('https://nid.naver.com/oauth2.0/authorize'),
+
+
+  // jwt 로그인, 회원가입
+  joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
+  loginUser: (userData) => auth.post('/api/members/auth/login', userData),
+  logoutUser: () => api.get('/api/members/logout'),
 
   // 메인페이지 일기 조회
   getTodayMyPosts: () => api.get('/api/posts'),

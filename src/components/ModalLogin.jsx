@@ -93,6 +93,14 @@ const LoginModal = ({ login, handleCloseLogin }) => {
     window.location.href = KAKAO_AUTH_URL;
   };
 
+  const handleLoginNaver = async (event) => {
+    event.preventDefault();
+    apis
+      .loginNaver()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Modal show={login} onHide={handleCloseLogin}>
@@ -154,7 +162,7 @@ const LoginModal = ({ login, handleCloseLogin }) => {
             <div className="social">
               <button
                 className="social__button social__button--naver"
-                onClick={handleSocial}
+                onClick={handleLoginNaver}
               />
               <button
                 className="social__button social__button--kakao"

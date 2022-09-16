@@ -6,6 +6,12 @@
   background-color: #cce3de;
   cursor: pointer;
 }
+.addfriend-title {
+  font-size: 16.5px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  /* border: 1px solid red; */
+}
 .addfriend-list {
   /* border: 1px solid blue; */
   display: flex;
