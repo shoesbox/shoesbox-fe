@@ -97,7 +97,7 @@ const Calendar = () => {
                   }}
                   onClick={() => {
                     if(date.postId === 0){
-                      navigate('/write')
+                      return null;
                     }
                     else{
                       setPostNumber(date.postId)
