@@ -98,13 +98,13 @@ const Calendar = () => {
                     // backgroundColor: '#f0f0f0',
                   }}
                   onClick={() => {
-                    // if (date.postId === 0) {
-                    //   return null;
-                    // } else {
-                    //   setPostNumber(date.postId);
-                    //   setIsOpen(true);
-                    // }
-                    if (date.postId !== 0) {
+                    if (date.postId === 0) {
+                      let result =
+                        window.confirm('오늘의 일기를 작성하시겠습니까?');
+                      if (result === true) {
+                        navigate('/write');
+                      }
+                    } else {
                       setPostNumber(date.postId);
                       setIsOpen(true);
                     }

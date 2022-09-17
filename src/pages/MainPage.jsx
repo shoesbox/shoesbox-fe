@@ -35,7 +35,6 @@ const MainPage = () => {
           </div> */}
 
           <FriendsList />
-          {/* {오늘일기있으면 ? null : <WriteFixedBtn />} */}
           <WriteFixedBtn />
         </>
       ) : (
