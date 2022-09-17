@@ -57,9 +57,7 @@ function Header() {
       >
         <Container>
           <Navbar.Brand
-            onClick={() => {
-              navigate('/');
-            }}
+            onClick={() => window.location.reload()}
             className="brand-logo"
           >
             SHOES 🍭 BOX
@@ -68,21 +66,11 @@ function Header() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               {isLoggedIn ? (
-                <Nav.Link
-                  onClick={() => {
-                    navigate('/');
-                  }}
-                  className="menu"
-                >
+                <Nav.Link onClick={() => navigate('/')} className="menu">
                   My Moments
                 </Nav.Link>
               ) : null}
-              <Nav.Link
-                onClick={() => {
-                  navigate('/aboutus');
-                }}
-                className="menu"
-              >
+              <Nav.Link onClick={() => navigate('/aboutus')} className="menu">
                 About us
               </Nav.Link>
             </Nav>
@@ -91,9 +79,7 @@ function Header() {
                 <>
                   {/* 로그인시 */}
                   <Nav.Link
-                    onClick={() => {
-                      navigate('/mypage');
-                    }}
+                    onClick={() => navigate('/mypage')}
                     className="menu"
                   >
                     My Page

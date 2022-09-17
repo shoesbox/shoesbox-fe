@@ -40,16 +40,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* white-space: pre-wrap; */
   text-align: justify;
-  /* border: 1px solid rebeccapurple; */
   margin-bottom: 10px;
   word-break: break-all;
 }
 
 .detail-comment-contents {
   width: 100%;
-  /* border: 1px solid red; */
+  /* border: 1px solid rebeccapurple; */
 }
 
 .detail-comment-contents > img {
@@ -62,12 +60,6 @@
 .detail-comment-contents > span:nth-child(2) {
   margin-right: 7px;
   font-weight: 500;
-}
-
-.detail-comment-update {
-  display: inline;
-  margin-top: 10px;
-  /* border: 1px solid red; */
 }
 
 .detail-comment-time {

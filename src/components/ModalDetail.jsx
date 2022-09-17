@@ -1,4 +1,4 @@
-import '../pages/css/detailpage.css';
+import './css/modaldetail.css';
 import { useRef, useState, useEffect } from 'react';
 import { Button, Carousel, Container, Modal } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
