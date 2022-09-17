@@ -24,6 +24,8 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* 비로그인 시 노출화면 */
 .welcome {
   width: 100vw;
   height: 94vh;

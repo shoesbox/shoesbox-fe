@@ -24,6 +24,7 @@ const FriendsList = () => {
   const onClickDelFriend = (memberId) => {
     dispatch(delFriendThunk(memberId));
   };
+
   return (
     <>
       <div className="friends">
@@ -32,7 +33,7 @@ const FriendsList = () => {
               return (
                 <Button
                   key={idx}
-                  onClick={() => onClickDelFriend(friend.memberId)}
+                  // onClick={() => onClickDelFriend(friend.memberId)}
                 >
                   <span>{friend.memberNickname}</span>
                 </Button>
