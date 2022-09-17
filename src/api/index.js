@@ -110,7 +110,7 @@ export const apis = {
   logoutUser: () => api.get('/api/members/logout'),
 
   // 메인페이지 일기 조회
-  getTodayMyPosts: () => api.get('/api/posts'),
+  // getTodayMyPosts: () => api.get('/api/posts'),
   getTargetPosts: (memberId, year, month) =>
     api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 

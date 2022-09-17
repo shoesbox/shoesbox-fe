@@ -3,10 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
-import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
-// modal
 import ModalDetail from './ModalDetail';
-import { Modal } from 'react-bootstrap';
 
 const Calendar = () => {
   let memberId = getCookie('memberId');
