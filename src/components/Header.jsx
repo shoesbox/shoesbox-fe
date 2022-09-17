@@ -57,7 +57,7 @@ function Header() {
       >
         <Container>
           <Navbar.Brand
-            onClick={() => window.location.reload()}
+            onClick={() => window.location.replace('/')}
             className="brand-logo"
           >
             SHOES 🍭 BOX
