@@ -37,7 +37,10 @@ const ModalDetail = ({ postId, ...props }) => {
   const delPost = () => {
     alert('정말로 일기를 삭제하시겠습니까?');
     dispatch(deleteDetailThunk(postId));
-    window.location.reload();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   useEffect(() => {

@@ -109,7 +109,10 @@ const EditPage = () => {
         formData.append('imageFiles', file);
       });
       dispatch(putDetailThunk({ postId: post.postId, payload: formData }));
-      window.location.reload();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       // 새로고침 없이 즉각반영 되려면 메인달력 state 설정하고
       // 그 state 변경 시 useeffect로 재렌더링 필요?
     }
