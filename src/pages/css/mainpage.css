@@ -33,6 +33,8 @@
   background-image: url(../../../public/images/blob-haikei.png);
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
 }
 .welcome > p {
   text-align: center;
@@ -42,6 +44,6 @@
   font-weight: 600;
   font-style: italic;
   color: #a4c3b2;
-  margin: 400px auto;
   padding: 0 20px;
+  /* border: 1px solid red; */
 }
