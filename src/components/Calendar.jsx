@@ -100,7 +100,7 @@ const Calendar = () => {
                   onClick={() => {
                     if (date.postId === 0) {
                       let result =
-                        window.confirm('오늘의 일기를 작성하시겠습니까?');
+                        window.confirm('선택한 날짜의 일기를 작성하시겠습니까?');
                       if (result === true) {
                         navigate('/write');
                       }
