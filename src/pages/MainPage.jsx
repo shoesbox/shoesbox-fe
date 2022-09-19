@@ -1,18 +1,13 @@
 import './css/mainpage.css';
 import { useState, useEffect } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
 import Calendar from '../components/Calendar';
 import { Calender2 } from '../components/Calendar2';
 import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
-// import { getCookie } from '../shared/cookie';
-import Cookies from 'universal-cookie';
+import { getCookie } from '../shared/cookie';
 
 const MainPage = () => {
-  // const cookie = getCookie('accessToken');
-  const cookies = new Cookies();
-  const cookie = cookies.get('accessToken');
-
+  const cookie = getCookie('accessToken');
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (cookie !== undefined) {
@@ -26,6 +21,7 @@ const MainPage = () => {
     <>
       {isLoggedIn ? (
         <>
+          <FriendsList />
           <div className="wrap">
             <Calendar />
           </div>
@@ -34,8 +30,7 @@ const MainPage = () => {
             <Calender2 />
           </div> */}
 
-          <FriendsList />
-          <WriteFixedBtn />
+          {/* <WriteFixedBtn /> */}
         </>
       ) : (
         <div className="welcome">

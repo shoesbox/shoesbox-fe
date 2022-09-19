@@ -3,7 +3,6 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import './css/modallogin.css';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
-import axios from 'axios';
 
 const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
 

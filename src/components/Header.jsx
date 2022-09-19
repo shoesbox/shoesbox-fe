@@ -48,7 +48,7 @@ function Header() {
     <>
       <Navbar
         collapseOnSelect
-        expand="lg"
+        expand="md"
         style={{
           backgroundColor: '#cce3de',
           fontWeight: '600',

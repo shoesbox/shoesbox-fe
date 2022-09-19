@@ -3,6 +3,7 @@ import { getCookie } from '../shared/cookie';
 
 // 백엔드 연결 시 수정
 // const BASE_URL = "http://localhost:3000";
+// const BASE_URL = 'http://13.209.77.207';
 const BASE_URL = 'http://13.125.161.17';
 
 // 1. Axios instance 생성
@@ -137,7 +138,6 @@ export const apis = {
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
-  cancleFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancle`),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

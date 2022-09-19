@@ -5,11 +5,10 @@
   display: flex;
   margin: 1%;
   /* border: 1px solid red; */
-  /* height: 90vh; */
 }
 .wrap2 {
   margin: 1.5%;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   text-align: center;
   display: flex;
   justify-content: center;
