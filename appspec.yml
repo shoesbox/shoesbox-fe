@@ -2,11 +2,11 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /usr/share/nginx/html/shoesbox-vanilla
+    destination: /home/ubuntu/app/shoesbox-vanilla
     overwrite: yes
 
 permissions:
-  - object: /usr/share/nginx/html/shoesbox-vanilla
+  - object: /home/ubuntu/app/shoesbox-vanilla
     owner: ubuntu
     group: ubuntu
     mode: 755
