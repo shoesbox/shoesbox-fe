@@ -11,8 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code.
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         
       - name: Check node v
         run: node -v
@@ -26,7 +25,8 @@ jobs:
           CI: ""
 
       - name: zip distributions
-        run: zip -qq -r ./shoesbox-fe.zip
+        run: zip -qq -r ./shoesbox-fe.zip .
+        shell: bash
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
