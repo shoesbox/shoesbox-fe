@@ -15,7 +15,7 @@ const Calendar = () => {
   const [dates, setDates] = useState([]);
   // axios 통신용 state //
   const [calenderData, setCalenderData] = useState([]);
-  // modal 표시용 state
+  // modal 표시용 state //
   const [isopen, setIsOpen] = useState(false);
   // postid 넘기기용 state
   const [postNumber, setPostNumber] = useState();
