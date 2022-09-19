@@ -1,35 +1,44 @@
-# sub-branch-deploy-work.yml
-name: Deploy to S3
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy
 
 on:
   push:
-    branches: [ "dev" ]  # sub-branch[branch name] 브랜치에서 push 이벤트가 일어났을 때 실행
+    branches: [ dev ] 
+ 
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout source code
-      - uses: actions/checkout@v3
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: checkout release
+      uses: actions/checkout@v3
 
-      - name: Cache node modules  # node modules 캐싱
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-master-build-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
-      - name: Install Dependencies # node module install
-        run: yarn
-
-      - name: Build # project build
-        run: yarn build
-
-      - name: Deploy 
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws s3 sync ./build s3://shoesbox-bucket
+    # Runs a single command using the runners shell 
+    - name: Clean temp directory
+      run: |
+        rm -rf *
+        cp -r $GITHUB_WORKSPACE . 
+      
+    - name: archive drcloud 
+      run: tar cvfz ./drcloud.tar.gz *
+       
+    - name: AWS configure credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-2
+        
+    - name: upload to S3
+      run: aws s3 cp --region ap-northeast-2 ./drcloud.tar.gz s3://shoesbox-bucket/archive/
+      
+    - name: deploy with AWS codeDeploy
+      run: aws deploy create-deployment
+        --application-name deploy-app
+        --deployment-config-name CodeDeployDefault.AllAtOnce
+        --deployment-group-name deploy-group
+        --s3-location bucket=shoesbox-bucket,bundleType=tgz,key=archive/drcloud.tar.gz
