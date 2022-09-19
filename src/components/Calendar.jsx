@@ -11,7 +11,7 @@ const Calendar = () => {
 
   // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
-  // 달력에 그려주는 state
+  // 달력에 그려주는 state zz
   const [dates, setDates] = useState([]);
   // axios 통신용 state //
   const [calenderData, setCalenderData] = useState([]);
