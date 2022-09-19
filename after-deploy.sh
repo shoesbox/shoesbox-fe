@@ -1,12 +1,5 @@
 #!/bin/bash
-REPOSITORY=/home/ubuntu/shoesbox-vanilla
 
-cd $REPOSITORY
-sudo cp -r dist/* /var/www/html/
-sudo service nginx restart
+echo "> FE 배포"
 
-cd $REPOSITORY
-cd server
-yarn install
-pm2 kill
-yarn prod
+sudo cp -rf /home/ubuntu/deploy-fe/dist/* /var/www/html
