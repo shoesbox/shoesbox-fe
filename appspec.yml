@@ -1,0 +1,20 @@
+  version: 0.0
+  os: linux
+  
+  files:
+    - source: /
+      destination: /home/share/html/build
+      overwrite: yes
+      
+  permissions:
+    - object: /home/share/html/build
+      owner: root
+      group: root
+      mode: 755
+      
+  hooks:
+    AfterInstall:
+      - location: deploy.sh
+        timeout: 60
+        runas: root
+        
