@@ -39,7 +39,7 @@ jobs:
           yarn build
 
       - name: zip distributions
-        run: zip -r blog-vanilla.zip ./client/dist ./server ./appspec.yml ./scripts
+        run: zip -r aws-shoesbox.zip ./client/dist ./server ./appspec.yml ./scripts
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -49,11 +49,11 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./blog-vanilla.zip s3://blog-vanilla-bucket/public/
+        run: aws s3 cp --region ap-northeast-2 ./aws-shoesbox.zip s3://shoesbox-aws-bucket/public/
 
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
-          --application-name blog-vanilla-codedeploy
+          --application-name shoesbox-deploy-app
           --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name deploy-group
-          --s3-location bucket=blog-vanilla-bucket,bundleType=zip,key=public/blog-vanilla.zip
+          --deployment-group-name shoesbox-deploy-group
+          --s3-location bucket=shoesbox-aws-bucket,bundleType=zip,key=public/aws-shoesbox.zip
