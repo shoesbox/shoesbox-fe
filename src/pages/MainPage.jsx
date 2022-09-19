@@ -30,7 +30,7 @@ const MainPage = () => {
             <Calender2 />
           </div> */}
 
-          <WriteFixedBtn />
+          {/* <WriteFixedBtn /> */}
         </>
       ) : (
         <div className="welcome">
