@@ -7,12 +7,12 @@ files:
 
 permissions:
   - object: /usr/share/nginx/html/shoesbox-vanilla
-    owner: root
-    group: root
+    owner: ubuntu
+    group: ubuntu
     mode: 755
 
 hooks:
   AfterInstall:
     - location: after-deploy.sh
       timeout: 180
-      runas: root
+      runas: ubuntu
