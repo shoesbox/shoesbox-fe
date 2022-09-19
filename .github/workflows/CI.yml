@@ -21,8 +21,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout dev
+      - name: Checkout source code
       - uses: actions/checkout@dev
+      
+      - name: Check Node v
+      - run: node -v
 
       - name: Cache node modules  # node modules 캐싱
         uses: actions/cache@v1
@@ -40,13 +43,28 @@ jobs:
         run: yarn build
         env:
           CI: ""
-
-      - name: Deploy
+          
+      - name: zip create
+        run: zip -qq -r ./build-fe.zip .
+        shell: bash
+        
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
+      - name: Upload to S3 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 cp \
-            --recursive \
-            --region ap-northeast-2 \
-            dist s3://shoesbox
+          aws s3 cp --region ap-northeast-2 ./build-fe.zip s3://shoesbox-bucket/build/build-fe.zip
+          
+      - name: Deploy 
+        run: aws deploy create-deployment
+          --application-name deploy-app
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name deploy-group
+          --s3-location bucket=shoesbox-bucket,key=build/build-fe.zip,bundleType=zip
