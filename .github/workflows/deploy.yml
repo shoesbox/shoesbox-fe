@@ -41,6 +41,6 @@ jobs:
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
           --application-name my-codedeploy-app
-          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name codedeployment-group
           --s3-location bucket=shoesbox-aws-bucket,bundleType=zip,key=build/shoesbox-fe.zip
