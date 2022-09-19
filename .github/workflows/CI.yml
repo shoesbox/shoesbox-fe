@@ -21,6 +21,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Checkout dev
       - uses: actions/checkout@dev
 
       - name: Cache node modules  # node modules 캐싱
