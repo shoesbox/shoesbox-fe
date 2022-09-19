@@ -87,6 +87,12 @@ const ModalDetail = ({ postId, ...props }) => {
           <hr />
           <ImageCarousel />
           <hr />
+          {/* {images ? (
+            <>
+              <ImageCarousel />
+              <hr />
+            </>
+          ) : null} */}
           <div className="detail-content">{content}</div>
           {/* <hr /> */}
           <br />
@@ -108,7 +114,6 @@ const ModalDetail = ({ postId, ...props }) => {
     </>,
     document.getElementById('potal')
   );
-  // return <div>모달</div>
 };
 
 export default ModalDetail;
