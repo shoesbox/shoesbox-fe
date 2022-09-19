@@ -10,25 +10,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: client
-      
     steps:
       - name: Checkout source code.
         uses: actions/checkout@v2
         
       - name: Check node v
         run: node -v
+        
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
 
-      - name: build client files
-        run: |
-          yarn install --frozen-lockfile
-          yarn build
+      - name: build
+        run: yarn build
 
       - name: zip distributions
-        run: zip -r aws-shoesbox.zip ./client/dist ./server ./appspec.yml ./scripts
+        run: zip -qq -r ./shoesbox-fe.zip
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -38,11 +34,11 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./aws-shoesbox.zip s3://shoesbox-aws-bucket/public/
+        run: aws s3 cp --region ap-northeast-2 ./shoesbox-fe.zip s3://shoesbox-aws-bucket/buildApp/shoesbox-fe.zip
 
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
           --application-name shoesbox-deploy-app
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name shoesbox-deploy-group
-          --s3-location bucket=shoesbox-aws-bucket,bundleType=zip,key=public/aws-shoesbox.zip
+          --s3-location bucket=shoesbox-aws-bucket,bundleType=zip,key=buildApp/shoesbox-fe.zip
