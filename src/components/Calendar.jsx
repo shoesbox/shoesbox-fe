@@ -5,7 +5,7 @@ import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
 import ModalDetail from './ModalDetail';
 
-const Calendar = () => {
+const Calendar = ({ calMemberId }) => {
   let memberId = getCookie('memberId');
   const navigate = useNavigate();
 
@@ -42,16 +42,16 @@ const Calendar = () => {
 
   useEffect(() => {
     apis
-      .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
+      .getTargetPosts(calMemberId, viewDate.year, viewDate.month + 1)
       .then((res) => res.data?.data)
       .then((data) => {
         setCalenderData(data);
       });
-  }, [date]);
+  }, [calMemberId]);
 
   useEffect(() => {
     setDates(calenderData);
-    console.log('calenderData', calenderData); // 이거 무슨 용도?
+    console.log('calenderData', calenderData);
   }, [calenderData]);
 
   return (
@@ -59,7 +59,7 @@ const Calendar = () => {
       <div className="calendar">
         <div className="header">
           <div className="year">
-            {/* <span>{memberId}님의 ,</span> */}
+            <span>{calMemberId}님의 ,</span>
             <span>{viewDate.year}</span>
           </div>
           <span className="month">{viewDate.month + 1}</span>
@@ -99,11 +99,15 @@ const Calendar = () => {
                   }}
                   onClick={() => {
                     if (date.postId === 0) {
-                      let result = window.confirm(
-                        '선택한 날짜의 일기를 작성하시겠습니까?'
-                      );
-                      if (result === true) {
-                        navigate('/write');
+                      if (memberId === calMemberId) {
+                        let result = window.confirm(
+                          '선택한 날짜의 일기를 작성하시겠습니까?'
+                        );
+                        if (result === true) {
+                          navigate('/write');
+                        }
+                      } else {
+                        return null;
                       }
                     } else {
                       setPostNumber(date.postId);
