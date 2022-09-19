@@ -2,18 +2,17 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/shoesbox-vanilla
+    destination: /usr/share/nginx/html/shoesbox-vanilla
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu/shoesbox-vanilla
-    pattern: '**'
-    owner: ubuntu
-    group: ubuntu
+  - object: /usr/share/nginx/html/shoesbox-vanilla
+    owner: root
+    group: root
     mode: 755
 
 hooks:
   AfterInstall:
     - location: after-deploy.sh
       timeout: 180
-      runas: ubuntu
+      runas: root
