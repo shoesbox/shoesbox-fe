@@ -3,18 +3,12 @@
   
   files:
     - source: /
-      destination: /home/share/html/build
+      destination: /home/ubuntu/build
       overwrite: yes
       
   permissions:
-    - object: /home/share/html/build
-      owner: root
-      group: root
+    - object: /home/ubuntu/build
+      owner: ubuntu
+      group: ubuntu
       mode: 755
       
-  hooks:
-    AfterInstall:
-      - location: deploy.sh
-        timeout: 60
-        runas: root
-        
