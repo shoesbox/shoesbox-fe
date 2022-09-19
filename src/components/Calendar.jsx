@@ -58,7 +58,10 @@ const Calendar = () => {
     <div className="calender-container">
       <div className="calendar">
         <div className="header">
-          <div className="year">{viewDate.year}</div>
+          <div className="year">
+            {/* <span>{memberId}님의 ,</span> */}
+            <span>{viewDate.year}</span>
+          </div>
           <span className="month">{viewDate.month + 1}</span>
           <div className="nav">
             <button className="nav-btn" onClick={() => changeMonth(-1)}>
@@ -96,8 +99,9 @@ const Calendar = () => {
                   }}
                   onClick={() => {
                     if (date.postId === 0) {
-                      let result =
-                        window.confirm('선택한 날짜의 일기를 작성하시겠습니까?');
+                      let result = window.confirm(
+                        '선택한 날짜의 일기를 작성하시겠습니까?'
+                      );
                       if (result === true) {
                         navigate('/write');
                       }
