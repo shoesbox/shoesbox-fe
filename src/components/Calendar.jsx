@@ -13,7 +13,7 @@ const Calendar = () => {
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state
   const [dates, setDates] = useState([]);
-  // axios 통신용 state
+  // axios 통신용 state //
   const [calenderData, setCalenderData] = useState([]);
   // modal 표시용 state
   const [isopen, setIsOpen] = useState(false);
