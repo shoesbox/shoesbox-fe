@@ -9,7 +9,7 @@ const Calendar = () => {
   let memberId = getCookie('memberId');
   const navigate = useNavigate();
 
-  // 날짜 계산용 state zz
+  // 날짜 계산용 state zzzz
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state zz
   const [dates, setDates] = useState([]);
