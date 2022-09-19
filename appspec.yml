@@ -6,10 +6,11 @@ files:
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu
+  - object: /home/ubuntu/shoesbox-vanilla
     pattern: '**'
     owner: ubuntu
     group: ubuntu
+    mode: 775
 
 hooks:
   AfterInstall:
