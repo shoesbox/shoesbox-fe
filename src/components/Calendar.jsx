@@ -47,11 +47,11 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
       .then((data) => {
         setCalenderData(data);
       });
-  }, [calMemberId]);
+  }, [calMemberId, date]);
 
   useEffect(() => {
     setDates(calenderData);
-    console.log('calenderData', calenderData);
+    console.log('달력 전체 데이터', calenderData);
   }, [calenderData]);
 
   return (
