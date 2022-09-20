@@ -7,6 +7,8 @@
   align-items: center;
   margin: 10px auto;
   padding: 10px;
+  width: 100%;
+  height: 70vh;
   /* border: 3px solid green; */
 }
 .header {
@@ -14,6 +16,17 @@
   justify-content: space-between;
   align-items: center;
   /* border: 1px solid green; */
+}
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 500;
+  font-style: oblique;
+  color: rgb(165, 165, 165);
 }
 .year {
   font-size: 22px;
@@ -40,7 +53,6 @@
   font-size: 26px;
   font-weight: 500;
   color: #6b9080;
-  /* margin-left: 5%; */
   background-color: #eaf4f4;
 }
 .nav {
