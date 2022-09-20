@@ -1,5 +1,5 @@
 import './css/calender.css';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
@@ -87,40 +87,38 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
           </div>
           <div className="dates">
             {dates.map((date, idx) => (
-              <>
-                <div
-                  className="date"
-                  key={idx}
-                  style={{
-                    background: `url(${date.thumbnailUrl})`,
-                    backgroundSize: 'cover',
-                    // border: '3px solid white',
-                    // backgroundColor: '#f0f0f0',
-                  }}
-                  onClick={() => {
-                    if (date.postId === 0) {
-                      if (memberId === calMemberId) {
-                        let result = window.confirm(
-                          '선택한 날짜의 일기를 작성하시겠습니까?'
-                        );
-                        if (result === true) {
-                          navigate('/write');
-                        }
-                      } else {
-                        return null;
+              <div
+                className="date"
+                key={idx}
+                style={{
+                  background: `url(${date.thumbnailUrl})`,
+                  backgroundSize: 'cover',
+                  // border: '3px solid white',
+                  // backgroundColor: '#f0f0f0',
+                }}
+                onClick={() => {
+                  if (date.postId === 0) {
+                    if (memberId === calMemberId) {
+                      let result = window.confirm(
+                        '선택한 날짜의 일기를 작성하시겠습니까?'
+                      );
+                      if (result === true) {
+                        navigate('/write');
                       }
                     } else {
-                      setPostNumber(date.postId);
-                      setIsOpen(true);
+                      return null;
                     }
-                  }}
-                >
-                  {/* {date.thumbnailUrl ? (
+                  } else {
+                    setPostNumber(date.postId);
+                    setIsOpen(true);
+                  }
+                }}
+              >
+                {/* {date.thumbnailUrl ? (
                     <img src={date.thumbnailUrl} alt={date} />
                   ) : null} */}
-                  <div>{date.createdDay}</div>
-                </div>
-              </>
+                <div>{date.createdDay}</div>
+              </div>
             ))}
           </div>
         </div>
