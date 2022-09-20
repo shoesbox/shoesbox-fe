@@ -21,7 +21,7 @@ const MainPage = () => {
 
   // 친구목록 리덕스에서 꺼내오든가
   const friendList = useSelector((state) => state.friend.friendList);
-  console.log('friendList', friendList);
+  // console.log('friendList', friendList);
 
   // // 친구 목록 담을 state
   // const [friends, setFriends] = useState([]);
@@ -37,7 +37,6 @@ const MainPage = () => {
   const nickname = getCookie('nickname');
   const [calMemberId, setCalMemberId] = useState(memberId); // 로그인 유저 초기값
   const [calMemberNickname, setCalMemberNickname] = useState(nickname); // 로그인 유저 초기값
-  console.log('calMemberId', calMemberId);
 
   return (
     <>
