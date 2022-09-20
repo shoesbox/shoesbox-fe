@@ -93,8 +93,8 @@ const MyPage = ({ memberId }) => {
   const handleNicknameEdit = () => {
     const newNickname = nicknameRef.current.value;
     // 닉네임 설정 유효성 검사
-    if (newNickname.length < 2 || newNickname.length > 4) {
-      alert('닉네임은 두 글자 이상 네 글자 이하여야 합니다.');
+    if (newNickname.length < 2 || newNickname.length > 6) {
+      alert('닉네임은 두 글자 이상 여섯 글자 이하여야 합니다.');
       nicknameRef.current.focus();
       return;
     }

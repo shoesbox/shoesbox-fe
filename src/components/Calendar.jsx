@@ -5,8 +5,8 @@ import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
 import ModalDetail from './ModalDetail';
 
-const Calendar = ({ calMemberId }) => {
-  let memberId = getCookie('memberId');
+const Calendar = ({ calMemberId, calMemberNickname }) => {
+  let memberId = getCookie('memberId'); // 현재 달력이 로그인 유저인지 친구인지 비교하는 용
   const navigate = useNavigate();
 
   // 날짜 계산용 state
@@ -59,7 +59,7 @@ const Calendar = ({ calMemberId }) => {
       <div className="calendar">
         <div className="header">
           <div className="year">
-            <span>{calMemberId}님의 ,</span>
+            <span>{calMemberNickname} ,</span>
             <span>{viewDate.year}</span>
           </div>
           <span className="month">{viewDate.month + 1}</span>

@@ -6,7 +6,7 @@ import { BsPlusLg } from 'react-icons/bs';
 import ModalAddFriend from './ModalAddFriend';
 import { getFriendListThunk, delFriendThunk } from '../features/friendSlice';
 
-const FriendsList = ({ friendList, setCalMemberId }) => {
+const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
   const dispatch = useDispatch();
   // const friendList = useSelector((state) => state.friend.friendList);
 
@@ -18,8 +18,9 @@ const FriendsList = ({ friendList, setCalMemberId }) => {
     dispatch(getFriendListThunk());
   }, []);
 
-  const changeCalMemberId = (memberId) => {
+  const changeCalMember = (memberId, nickname) => {
     setCalMemberId(memberId);
+    setCalMemberNickname(nickname);
   };
 
   return (
@@ -30,7 +31,9 @@ const FriendsList = ({ friendList, setCalMemberId }) => {
               return (
                 <Button
                   key={idx}
-                  onClick={() => changeCalMemberId(friend.memberId)}
+                  onClick={() =>
+                    changeCalMember(friend.memberId, friend.memberNickname)
+                  }
                 >
                   <span>{friend.memberNickname}</span>
                 </Button>

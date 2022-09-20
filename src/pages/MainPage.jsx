@@ -9,9 +9,7 @@ import { apis } from '../api';
 import { useSelector } from 'react-redux';
 
 const MainPage = () => {
-  const cookie = getCookie('accessToken');
-  const memberId = getCookie('memberId');
-
+  const cookie = getCookie('refreshToken');
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (cookie !== undefined) {
@@ -21,22 +19,25 @@ const MainPage = () => {
     }
   }, [cookie]);
 
-  // 그리는 달력 주인 state
-  const [calMemberId, setCalMemberId] = useState(memberId);
-  console.log('calMemberId', calMemberId);
-
   // 친구목록 리덕스에서 꺼내오든가
   const friendList = useSelector((state) => state.friend.friendList);
   console.log('friendList', friendList);
 
-  // 친구 목록 담을 state
-  const [friends, setFriends] = useState([]);
-  // 친구 조회 api로 데이터 가져오기
-  const showFriends = async () => {
-    const raw = await apis.getFriendList();
-    const friendsList = raw.data.data;
-    setFriends(friendsList);
-  };
+  // // 친구 목록 담을 state
+  // const [friends, setFriends] = useState([]);
+  // // 친구 조회 api로 데이터 가져오기
+  // const showFriends = async () => {
+  //   const raw = await apis.getFriendList();
+  //   const friendsList = raw.data.data;
+  //   setFriends(friendsList);
+  // };
+
+  // 그리는 달력 주인 state
+  const memberId = getCookie('memberId');
+  const nickname = getCookie('nickname');
+  const [calMemberId, setCalMemberId] = useState(memberId); // 로그인 유저 초기값
+  const [calMemberNickname, setCalMemberNickname] = useState(nickname); // 로그인 유저 초기값
+  console.log('calMemberId', calMemberId);
 
   return (
     <>
@@ -45,9 +46,13 @@ const MainPage = () => {
           <FriendsList
             friendList={friendList}
             setCalMemberId={setCalMemberId}
+            setCalMemberNickname={setCalMemberNickname}
           />
           <div className="wrap">
-            <Calendar calMemberId={calMemberId} />
+            <Calendar
+              calMemberId={calMemberId}
+              calMemberNickname={calMemberNickname}
+            />
           </div>
 
           {/* <div className="wrap2">

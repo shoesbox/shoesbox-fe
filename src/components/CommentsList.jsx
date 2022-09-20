@@ -65,7 +65,7 @@ const CommentsList = ({ postId }) => {
   const onClickFixSubmitBtn = (commentId) => {
     // console.log('변경될 값:', tmp, commentId);
     if (tmp === '') {
-      alert('내용이 그전과 일치합니다. 댓글 수정을 해주세요!');
+      alert('내용이 이전과 일치합니다. 댓글을 수정해주세요!');
       return null;
     } else {
       dispatch(switchLoading(true));
@@ -143,7 +143,7 @@ const CommentsList = ({ postId }) => {
       dispatch(getCommentThunk(postId));
     }
     // dispatch(getJsonCommentThunk(postId));
-    // console.log("comments", comments);
+    console.log('comments', comments);
   }, []);
 
   return (
