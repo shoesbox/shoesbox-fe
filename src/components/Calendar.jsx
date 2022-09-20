@@ -9,7 +9,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
   let memberId = getCookie('memberId'); // 현재 달력이 로그인 유저인지 친구인지 비교하는 용
   const navigate = useNavigate();
 
-  // 날짜 계산용 state zzzz
+  // 날짜 계산용 state zzzzz
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state zz
   const [dates, setDates] = useState([]);
