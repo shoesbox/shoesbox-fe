@@ -14,15 +14,15 @@ function Header() {
   //
   const navigate = useNavigate();
 
-  const nickname = getCookie('nickname');
+  const cookie = getCookie('refreshToken');
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
-    if (nickname !== undefined) {
+    if (cookie !== undefined) {
       setisLoggedIn(true);
     } else {
       setisLoggedIn(false);
     }
-  }, [nickname]);
+  }, [cookie]);
 
   const handleLogout = () => {
     apis
@@ -34,7 +34,6 @@ function Header() {
         deleteCookie('memberId');
         deleteCookie('nickname');
         deleteCookie('email');
-        // alert('로그아웃 성공');
         window.location.replace('/');
       })
       .catch((err) => {
@@ -53,7 +52,6 @@ function Header() {
           backgroundColor: '#cce3de',
           fontWeight: '600',
         }}
-        // variant='dark'
       >
         <Container>
           <Navbar.Brand
