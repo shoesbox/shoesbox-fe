@@ -43,8 +43,8 @@ const ModalDetail = ({ postId, ...props }) => {
   useEffect(() => {
     if (postId !== (null || undefined)) {
       // dispatch(getJsonDetailThunk(postId));
-      const result = dispatch(getDetailThunk(postId));
-      console.log('result', result);
+      dispatch(getDetailThunk(postId));
+      // console.log('result', result);
     }
   }, [postId]);
 
