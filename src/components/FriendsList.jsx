@@ -41,7 +41,9 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
             })
           : null}
         <Button onClick={handleShow}>
-          <BsPlusLg />
+          <span>
+            <BsPlusLg />
+          </span>
         </Button>
       </div>
       <ModalAddFriend
