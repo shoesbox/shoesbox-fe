@@ -1,3 +1,10 @@
 #!/bin/bash
 
-echo "> FE 배포"
+REPOSITORY=/home/ubuntu/app/shoesbox-vanilla
+
+echo "> npm install"
+
+npm install express --save
+
+echo "> copy server.js"
+
