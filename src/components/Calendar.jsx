@@ -47,7 +47,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
       .then((data) => {
         setCalenderData(data);
       });
-  }, [calMemberId]);
+  }, [calMemberId, date]);
 
   useEffect(() => {
     setDates(calenderData);

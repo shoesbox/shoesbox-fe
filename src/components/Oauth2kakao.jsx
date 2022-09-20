@@ -17,6 +17,8 @@ const Oauth2kakao = () => {
 
       if (code) {
         const res = await apis.loginKakao(code);
+        
+        console.log('쿼리 스트링', `/oauth2/authorization/kakao?code=${code}`)
         const token = res.data?.data;
         setCookie(
           'accessToken',
@@ -34,8 +36,8 @@ const Oauth2kakao = () => {
         alert('카카오 로그인에 실패했습니다.');
       }
     };
-    fetchUser();
-    navigate('/');
+    // fetchUser();
+    // navigate('/');
   }, []);
 
   return (
