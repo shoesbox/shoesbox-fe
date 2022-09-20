@@ -3,7 +3,6 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import './css/modallogin.css';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
-import axios from 'axios';
 
 const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
 
@@ -54,8 +53,8 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
       })
       .catch((err) => {
         console.log(err);
-        console.log(err.response.data.errorDetails.apierror.message);
-        const errMessage = err.response.data.errorDetails.apierror.message;
+        console.log(err.response?.data.errorDetails.apierror.message);
+        const errMessage = err.response?.data.errorDetails.apierror.message;
         alert(errMessage);
       });
   };
@@ -105,7 +104,12 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   return (
     <>
-      <Modal show={login} onHide={handleCloseLogin}>
+      <Modal
+        show={login}
+        onHide={handleCloseLogin}
+        backdrop="static"
+        fullscreen="sm-down"
+      >
         <Modal.Header closeButton>
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
         </Modal.Header>

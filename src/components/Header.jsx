@@ -11,18 +11,18 @@ function Header() {
   const [login, setLogin] = useState(false);
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => setLogin(false);
-  //
+  
   const navigate = useNavigate();
 
-  const nickname = getCookie('nickname');
+  const cookie = getCookie('refreshToken');
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
-    if (nickname !== undefined) {
+    if (cookie !== undefined) {
       setisLoggedIn(true);
     } else {
       setisLoggedIn(false);
     }
-  }, [nickname]);
+  }, [cookie]);
 
   const handleLogout = () => {
     apis
@@ -34,7 +34,6 @@ function Header() {
         deleteCookie('memberId');
         deleteCookie('nickname');
         deleteCookie('email');
-        // alert('로그아웃 성공');
         window.location.replace('/');
       })
       .catch((err) => {
@@ -48,18 +47,15 @@ function Header() {
     <>
       <Navbar
         collapseOnSelect
-        expand="lg"
+        expand="md"
         style={{
           backgroundColor: '#cce3de',
           fontWeight: '600',
         }}
-        // variant='dark'
       >
         <Container>
           <Navbar.Brand
-            onClick={() => {
-              navigate('/');
-            }}
+            onClick={() => window.location.replace('/')}
             className="brand-logo"
           >
             SHOES 🍭 BOX
@@ -68,21 +64,11 @@ function Header() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               {isLoggedIn ? (
-                <Nav.Link
-                  onClick={() => {
-                    navigate('/');
-                  }}
-                  className="menu"
-                >
+                <Nav.Link onClick={() => navigate('/')} className="menu">
                   My Moments
                 </Nav.Link>
               ) : null}
-              <Nav.Link
-                onClick={() => {
-                  navigate('/aboutus');
-                }}
-                className="menu"
-              >
+              <Nav.Link onClick={() => navigate('/aboutus')} className="menu">
                 About us
               </Nav.Link>
             </Nav>
@@ -91,9 +77,7 @@ function Header() {
                 <>
                   {/* 로그인시 */}
                   <Nav.Link
-                    onClick={() => {
-                      navigate('/mypage');
-                    }}
+                    onClick={() => navigate('/mypage')}
                     className="menu"
                   >
                     My Page

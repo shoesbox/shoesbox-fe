@@ -1,4 +1,4 @@
-import '../pages/css/detailpage.css';
+import './css/modaldetail.css';
 import { useRef, useState, useEffect } from 'react';
 import { Button, Carousel, Container, Modal } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
@@ -37,7 +37,10 @@ const ModalDetail = ({ postId, ...props }) => {
   const delPost = () => {
     alert('정말로 일기를 삭제하시겠습니까?');
     dispatch(deleteDetailThunk(postId));
-    window.location.reload();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   useEffect(() => {
@@ -87,6 +90,12 @@ const ModalDetail = ({ postId, ...props }) => {
           <hr />
           <ImageCarousel />
           <hr />
+          {/* {images ? (
+            <>
+              <ImageCarousel />
+              <hr />
+            </>
+          ) : null} */}
           <div className="detail-content">{content}</div>
           {/* <hr /> */}
           <br />
@@ -108,7 +117,6 @@ const ModalDetail = ({ postId, ...props }) => {
     </>,
     document.getElementById('potal')
   );
-  // return <div>모달</div>
 };
 
 export default ModalDetail;

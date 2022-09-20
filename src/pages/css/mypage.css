@@ -2,7 +2,7 @@
 /* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
 
 .mypage {
-  margin: 50px auto;
+  margin: 30px auto;
   padding: 20px;
   max-width: 800px;
   /* border: 1px solid red; */
@@ -10,7 +10,7 @@
 .profile-box {
   display: flex;
   /* border: 1px solid rebeccapurple; */
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 .image-profile {
   display: flex;
@@ -65,6 +65,32 @@
 .nickname-edit > div {
   margin-right: 10px;
 }
+
+.friends-box {
+  /* border: 1px solid pink; */
+  margin-bottom: 50px;
+}
+.friends-box > p:nth-child(1) {
+  font-size: 18px;
+  font-weight: 500;
+}
+.friends-box > p:nth-child(2) {
+  color: gray;
+}
+.friends-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.friends-list > div {
+  border-radius: 5px;
+  background-color: #eaf4f4;
+  padding: 5px 10px;
+  width: fit-content;
+  cursor: pointer;
+  word-break: keep-all;
+}
+
 .leave-box {
   /* border: 1px solid pink; */
   margin-bottom: 50px;
@@ -72,21 +98,14 @@
 .leave-box > div:nth-child(1) {
   display: flex;
 }
-.leave-box > div > p:nth-child(1) {
+.leave-box > p:nth-child(1) {
   font-size: 18px;
   font-weight: 500;
-  width: 180px;
 }
-.leave-box > div > p:nth-child(3) {
-  margin-left: 10px;
-  color: #6b9080;
-  text-decoration-line: underline;
-  cursor: pointer;
-}
-.leave-box > p {
+.leave-box > p:nth-child(2) {
   color: gray;
 }
-.leave-box > div > button {
+.leave-box > button {
   background: rgb(255, 102, 102);
   border: none;
   border-radius: 5px;

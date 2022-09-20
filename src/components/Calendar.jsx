@@ -3,22 +3,19 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
-import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
-// modal
 import ModalDetail from './ModalDetail';
-import { Modal } from 'react-bootstrap';
 
-const Calendar = () => {
-  let memberId = getCookie('memberId');
+const Calendar = ({ calMemberId, calMemberNickname }) => {
+  let memberId = getCookie('memberId'); // 현재 달력이 로그인 유저인지 친구인지 비교하는 용
   const navigate = useNavigate();
 
-  // 날짜 계산용 state
+  // 날짜 계산용 state zzzzz
   const [date, setDate] = useState(new Date());
-  // 달력에 그려주는 state
+  // 달력에 그려주는 state zz
   const [dates, setDates] = useState([]);
-  // axios 통신용 state
+  // axios 통신용 state //
   const [calenderData, setCalenderData] = useState([]);
-  // modal 표시용 state
+  // modal 표시용 state //
   const [isopen, setIsOpen] = useState(false);
   // postid 넘기기용 state
   const [postNumber, setPostNumber] = useState();
@@ -45,23 +42,26 @@ const Calendar = () => {
 
   useEffect(() => {
     apis
-      .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
+      .getTargetPosts(calMemberId, viewDate.year, viewDate.month + 1)
       .then((res) => res.data?.data)
       .then((data) => {
         setCalenderData(data);
       });
-  }, [date]);
+  }, [calMemberId]);
 
   useEffect(() => {
     setDates(calenderData);
-    console.log('calenderData', calenderData); // 이거 무슨 용도?
+    console.log('calenderData', calenderData);
   }, [calenderData]);
 
   return (
     <div className="calender-container">
       <div className="calendar">
         <div className="header">
-          <div className="year">{viewDate.year}</div>
+          <div className="year">
+            <span>{calMemberNickname} ,</span>
+            <span>{viewDate.year}</span>
+          </div>
           <span className="month">{viewDate.month + 1}</span>
           <div className="nav">
             <button className="nav-btn" onClick={() => changeMonth(-1)}>
@@ -98,13 +98,18 @@ const Calendar = () => {
                     // backgroundColor: '#f0f0f0',
                   }}
                   onClick={() => {
-                    // if (date.postId === 0) {
-                    //   return null;
-                    // } else {
-                    //   setPostNumber(date.postId);
-                    //   setIsOpen(true);
-                    // }
-                    if (date.postId !== 0) {
+                    if (date.postId === 0) {
+                      if (memberId === calMemberId) {
+                        let result = window.confirm(
+                          '선택한 날짜의 일기를 작성하시겠습니까?'
+                        );
+                        if (result === true) {
+                          navigate('/write');
+                        }
+                      } else {
+                        return null;
+                      }
+                    } else {
                       setPostNumber(date.postId);
                       setIsOpen(true);
                     }

@@ -1,0 +1,46 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: deploy
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      - name: Check node v
+        run: node -v
+        
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: build
+        run: yarn build
+        env:
+          CI: ""
+
+      - name: zip distributions
+        run: zip -qq -r shoesbox-fe.zip .
+        shell: bash
+
+      - name: AWS configure credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./shoesbox-fe.zip s3://shoesbox-aws-bucket/build/
+
+      - name: deploy with AWS codeDeploy
+        run: aws deploy create-deployment
+          --application-name my-codedeploy-app
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name codedeployment-group
+          --s3-location bucket=shoesbox-aws-bucket,bundleType=zip,key=build/shoesbox-fe.zip

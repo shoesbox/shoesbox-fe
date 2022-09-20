@@ -132,7 +132,7 @@ const ModalAddFriend = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          <div>친구 신청</div>
+          <div>친구 추가</div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -155,10 +155,10 @@ const ModalAddFriend = (props) => {
           </InputGroup.Text>
         </InputGroup>
         <br />
-        <div className="addfriend-title">내가 받은 친구 목록 🔮</div>
+        <div className="addfriend-title">내가 받은 요청 🔮</div>
         <RequestedFriendList />
         <hr />
-        <div className="addfriend-title">내가 신청한 친구 목록 💕</div>
+        <div className="addfriend-title">내가 보낸 요청 💕</div>
         <RequestFriendList />
       </Modal.Body>
       <Modal.Footer>

@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/app/shoesbox-vanilla
+    overwrite: yes
+
+permissions:
+  - object: /home/ubuntu/app/shoesbox-vanilla
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
+
+hooks:
+  AfterInstall:
+    - location: after-deploy.sh
+      timeout: 180
+      runas: root

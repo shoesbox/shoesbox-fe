@@ -20,6 +20,15 @@
   font-weight: 600;
   font-style: italic;
   color: silver;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+}
+.year > span:nth-child(1) {
+  font-size: 14px;
+  font-weight: 400;
+  color: silver;
+  margin-right: 5px;
 }
 .month {
   width: 55px;
@@ -30,8 +39,8 @@
   align-items: center;
   font-size: 26px;
   font-weight: 500;
-  margin-left: 9%;
   color: #6b9080;
+  /* margin-left: 5%; */
   background-color: #eaf4f4;
 }
 .nav {
@@ -86,7 +95,17 @@
   font-weight: 500;
   display: flex;
   justify-content: end;
-  padding: 5px;
+}
+@media (max-width: 450px) {
+  .date {
+    padding-top: 4%;
+    padding-right: 3%;
+  }
+}
+@media (min-width: 450px) {
+  .date {
+    padding: 5px;
+  }
 }
 .date > img {
   border: 1px solid blue;

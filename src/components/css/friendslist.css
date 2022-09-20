@@ -1,24 +1,46 @@
 .friends {
   /* border: 1px solid green; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   gap: 10px;
-  position: fixed;
+  /* position: fixed;
   bottom: 20%;
-  right: 18%;
+  right: 18%; */
+  margin: 10px 1% -10px 1%;
+  padding: 10px;
 }
-.friends > button {
-  border: none;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70px;
-  height: 70px;
+
+@media (max-width: 1050px) {
+  .friends > button {
+    border: none;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    /* border: 1px solid blue; */
+  }
 }
+@media (min-width: 1050px) {
+  .friends > button {
+    border: none;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 65px;
+    /* border: 1px solid blue; */
+  }
+}
+
 .friends > button > span {
   /* border: 1px solid pink; */
   /* width: 50px; */
+  font-size: 14px;
+  word-break: break-all;
+  /* word-break: keep-all; */
 }

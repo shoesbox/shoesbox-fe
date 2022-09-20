@@ -17,6 +17,9 @@ const MyPage = ({ memberId }) => {
     profileImageUrl: '',
   });
 
+  // 친구 목록 담을 state
+  const [friends, setFriends] = useState([]);
+
   // 회원정보조회 api 통해 데이터 가져오기 [2]
   const showData = async () => {
     const { data } = await apis.getUserData(memberId, {
@@ -31,10 +34,28 @@ const MyPage = ({ memberId }) => {
     }
   };
 
-  // 화면 렌더링 시 통신하기 [1]
+  // 친구 조회 api로 데이터 가져오기 [3]
+  const showFriends = async () => {
+    const raw = await apis.getFriendList();
+    const friendsList = raw.data.data;
+    setFriends(friendsList);
+  };
+
+  // // 화면 렌더링 시 통신하기 [1]
+  // useEffect(() => {
+  //   showData();
+  // }, [state.profileImageUrl]);
+
+  // // useEffect 분리해서 쓰면 잘 되는데
+  // useEffect(() => {
+  //   showFriends();
+  // }, [friends]);
+
+  // 이건 왜 안되냐 - 아니네 잘되네,,
   useEffect(() => {
     showData();
-  }, [state.profileImageUrl]);
+    showFriends();
+  }, [state.profileImageUrl, friends]);
 
   // 이미지 업로드 모달
   const [show, setShow] = useState(false);
@@ -69,17 +90,16 @@ const MyPage = ({ memberId }) => {
 
   // 회원정보 - 닉네임 수정 로직
   const nicknameRef = useRef();
-  const handleNicknameEdit = (event) => {
+  const handleNicknameEdit = () => {
     const newNickname = nicknameRef.current.value;
     // 닉네임 설정 유효성 검사
-    if (newNickname.length < 2) {
-      alert('닉네임은 한 글자 이상으로 수정해주세요.');
+    if (newNickname.length < 2 || newNickname.length > 6) {
+      alert('닉네임은 두 글자 이상 여섯 글자 이하여야 합니다.');
       nicknameRef.current.focus();
       return;
     }
     const formData = new FormData();
     formData.append('nickname', newNickname);
-
     apis
       .updateUserData(memberId, formData)
       .then((res) => {
@@ -90,17 +110,27 @@ const MyPage = ({ memberId }) => {
       .catch((err) => console.log(err));
   };
 
+  // 친구삭제 로직
+  const handleRemoveFriend = (memberId, nickname) => {
+    let result = window.confirm(`정말로 ${nickname}님을 삭제하시겠어요?`);
+    if (result === true) {
+      apis.deleteFriend(memberId);
+    }
+    // .then((res) => console.log(res))
+    // .catch((err) => console.log(err));
+  };
+
   // 회원탈퇴 로직
   const handleRemoveAccout = (e) => {
     e.preventDefault();
     // console.log(memberId);
-    let result = window.confirm('정말로 탈퇴하시겠습니까?');
+    let result = window.confirm('정말로 슈슈박스를 떠나시겠어요? T_T');
     if (result === true) {
       console.log(memberId);
       apis
         .removeAccount(memberId)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           alert('회원 탈퇴가 완료되었습니다.');
           // 회원탈퇴 후 쿠키도 날려주기
           deleteCookie('accessToken');
@@ -158,12 +188,29 @@ const MyPage = ({ memberId }) => {
           </div>
         </div>
       </div>
-      <div className="leave-box">
-        <div>
-          <p>회원 탈퇴</p>
-          <button onClick={handleRemoveAccout}>회원 탈퇴</button>
+      <div className="friends-box">
+        <p>친구 끊기 ⛔</p>
+        <p>친구의 이름을 클릭하면 목록에서 삭제됩니다.</p>
+        <div className="friends-list">
+          {friends.map((friend) => (
+            <div
+              key={friend.memberId}
+              onClick={() =>
+                handleRemoveFriend(friend.memberId, friend.memberNickname)
+              }
+            >
+              {friend.memberNickname}
+            </div>
+          ))}
+          {/* <div>이름엄청긴친구1</div>
+          <div>이름엄청긴친구22222</div>
+          <div>이름엄청긴친구333</div> */}
         </div>
+      </div>
+      <div className="leave-box">
+        <p>회원 탈퇴 😢</p>
         <p>탈퇴 시 작성하신 일기 및 댓글이 모두 삭제되며 복구되지 않습니다.</p>
+        <button onClick={handleRemoveAccout}>회원 탈퇴</button>
       </div>
     </div>
   );

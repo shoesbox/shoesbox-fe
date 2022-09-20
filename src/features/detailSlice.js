@@ -16,7 +16,7 @@ export const getDetailThunk = createAsyncThunk(
     try {
       const data = await apis.showDetail(postId);
       const postDetail = data.data.data;
-      console.log('showthunk', data.data.data);
+      // console.log('showthunk', data.data.data);
       return postDetail;
     } catch (err) {
       return {

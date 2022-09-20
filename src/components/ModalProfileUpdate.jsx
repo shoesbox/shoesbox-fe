@@ -1,6 +1,6 @@
 import './css/modaladdfriend.css';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { apis } from '../api';
 
 const ModalProfileUpdate = (props) => {
