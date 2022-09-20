@@ -9,4 +9,4 @@ npm install express --save
 
 echo "> node.js 배포"
 
-nohup node server.js
+sudo nohup node server.js
