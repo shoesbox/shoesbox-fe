@@ -93,14 +93,13 @@ const MyPage = ({ memberId }) => {
   const handleNicknameEdit = () => {
     const newNickname = nicknameRef.current.value;
     // 닉네임 설정 유효성 검사
-    if (newNickname.length < 2 || newNickname.length > 4) {
-      alert('닉네임은 두 글자 이상 네 글자 이하여야 합니다.');
+    if (newNickname.length < 2 || newNickname.length > 6) {
+      alert('닉네임은 두 글자 이상 여섯 글자 이하여야 합니다.');
       nicknameRef.current.focus();
       return;
     }
     const formData = new FormData();
     formData.append('nickname', newNickname);
-
     apis
       .updateUserData(memberId, formData)
       .then((res) => {
@@ -112,8 +111,11 @@ const MyPage = ({ memberId }) => {
   };
 
   // 친구삭제 로직
-  const handleRemoveFriend = (memberId) => {
-    apis.deleteFriend(memberId);
+  const handleRemoveFriend = (memberId, nickname) => {
+    let result = window.confirm(`정말로 ${nickname}님을 삭제하시겠어요?`);
+    if (result === true) {
+      apis.deleteFriend(memberId);
+    }
     // .then((res) => console.log(res))
     // .catch((err) => console.log(err));
   };
@@ -122,13 +124,13 @@ const MyPage = ({ memberId }) => {
   const handleRemoveAccout = (e) => {
     e.preventDefault();
     // console.log(memberId);
-    let result = window.confirm('정말로 탈퇴하시겠습니까?');
+    let result = window.confirm('정말로 슈슈박스를 떠나시겠어요? T_T');
     if (result === true) {
       console.log(memberId);
       apis
         .removeAccount(memberId)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           alert('회원 탈퇴가 완료되었습니다.');
           // 회원탈퇴 후 쿠키도 날려주기
           deleteCookie('accessToken');
@@ -193,7 +195,9 @@ const MyPage = ({ memberId }) => {
           {friends.map((friend) => (
             <div
               key={friend.memberId}
-              onClick={() => handleRemoveFriend(friend.memberId)}
+              onClick={() =>
+                handleRemoveFriend(friend.memberId, friend.memberNickname)
+              }
             >
               {friend.memberNickname}
             </div>

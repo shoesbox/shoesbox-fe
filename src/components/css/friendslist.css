@@ -41,6 +41,6 @@
   /* border: 1px solid pink; */
   /* width: 50px; */
   font-size: 14px;
-  /* word-break: break-all; */
+  word-break: break-all;
   /* word-break: keep-all; */
 }

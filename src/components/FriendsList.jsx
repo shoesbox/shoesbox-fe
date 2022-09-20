@@ -6,23 +6,21 @@ import { BsPlusLg } from 'react-icons/bs';
 import ModalAddFriend from './ModalAddFriend';
 import { getFriendListThunk, delFriendThunk } from '../features/friendSlice';
 
-const FriendsList = () => {
+const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
   const dispatch = useDispatch();
-  const friendList = useSelector((state) => state.friend.friendList);
+  // const friendList = useSelector((state) => state.friend.friendList);
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  // console.log('friendList', friendList);
-
   useEffect(() => {
     dispatch(getFriendListThunk());
   }, []);
 
-  // 임시적으로, 해당 친구의 버튼을 클릭하면, 해당 친구가 삭제 됩니다.
-  const onClickDelFriend = (memberId) => {
-    dispatch(delFriendThunk(memberId));
+  const changeCalMember = (memberId, nickname) => {
+    setCalMemberId(memberId);
+    setCalMemberNickname(nickname);
   };
 
   return (
@@ -33,7 +31,9 @@ const FriendsList = () => {
               return (
                 <Button
                   key={idx}
-                  // onClick={() => onClickDelFriend(friend.memberId)}
+                  onClick={() =>
+                    changeCalMember(friend.memberId, friend.memberNickname)
+                  }
                 >
                   <span>{friend.memberNickname}</span>
                 </Button>
