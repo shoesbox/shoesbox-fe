@@ -18,6 +18,8 @@ const Oauth2kakao = () => {
       if (code) {
         const res = await apis.loginKakao(code);
 
+        console.log('리스폰스 데이터', res);
+
         const token = res.data?.data;
         setCookie(
           'accessToken',
@@ -37,9 +39,9 @@ const Oauth2kakao = () => {
     };
     fetchUser();
 
-    setTimeout(() => {
-      navigate('/');
-    }, 2000);
+    // setTimeout(() => {
+    //   navigate('/');
+    // }, 2000);
   }, []);
 
   return (
