@@ -2,14 +2,18 @@
 /* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
 
 .calender-container {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
-  margin: 10px auto;
+  margin: 25px auto;
   padding: 10px;
   width: 100%;
-  height: 70vh;
-  /* border: 3px solid green; */
+  /* border: 3px solid red; */
+}
+.calendar {
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid orange; */
 }
 .header {
   display: flex;
@@ -19,14 +23,15 @@
 }
 .loading {
   width: 100%;
-  height: 100%;
+  height: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 22px;
   font-weight: 500;
   font-style: oblique;
-  color: rgb(165, 165, 165);
+  color: #6B9080;
+  /* background-color: rgb(250, 250, 250); */
 }
 .year {
   font-size: 22px;
@@ -42,6 +47,7 @@
   font-weight: 400;
   color: silver;
   margin-right: 5px;
+  /* border: 1px solid rebeccapurple; */
 }
 .month {
   width: 55px;

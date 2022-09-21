@@ -1,10 +1,7 @@
 import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
-// 백엔드 연결 시 수정
-// const BASE_URL = "http://localhost:3000";
-// const BASE_URL = 'http://13.209.77.207';
-const BASE_URL = 'http://13.125.161.17';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -101,7 +98,7 @@ apiForm.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 소셜 로그인
-  loginKakao: (code) => api.get(`/oauth2/authorization/kakao?code=${code}`),
+  loginKakao: (code) => auth.get(`/oauth2/authorization/kakao?code=${code}`),
   loginGoogle: () => api.get('api/oauth2/authorization/google'),
   loginNaver: () => api.get('https://nid.naver.com/oauth2.0/authorize'),
 

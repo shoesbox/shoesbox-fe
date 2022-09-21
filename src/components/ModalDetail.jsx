@@ -29,18 +29,20 @@ const ModalDetail = ({ postId, ...props }) => {
   const content = post?.content;
   const writeMemberId = post?.memberId;
 
-  const reWritePost = (post) => {
-    //  console.log(post);
+  const editPost = (post) => {
+    // console.log(post);
     navigate('/edit');
   };
 
   const delPost = () => {
-    alert('정말로 일기를 삭제하시겠습니까?');
-    dispatch(deleteDetailThunk(postId));
+    const result = window.confirm('정말로 일기를 삭제하시겠어요?');
+    if (result === true) {
+      dispatch(deleteDetailThunk(postId));
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
   };
 
   useEffect(() => {
@@ -51,10 +53,12 @@ const ModalDetail = ({ postId, ...props }) => {
     }
   }, [postId]);
 
+  console.log(post);
+
   const ImageCarousel = () => {
     return (
       <Carousel>
-        {images?.map((image, idx) => (
+        {images.map((image, idx) => (
           <Carousel.Item key={idx}>
             <img className="d-block w-100" src={image} alt={idx} />
           </Carousel.Item>
@@ -88,20 +92,17 @@ const ModalDetail = ({ postId, ...props }) => {
             <span>{date}</span>
           </div>
           <hr />
+
           <ImageCarousel />
+          {/* {images.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />} */}
           <hr />
-          {/* {images ? (
-            <>
-              <ImageCarousel />
-              <hr />
-            </>
-          ) : null} */}
+
           <div className="detail-content">{content}</div>
           {/* <hr /> */}
           <br />
           {parseInt(memberId) === parseInt(writeMemberId) && (
             <div className="detail-fix-del-btns">
-              <Button onClick={() => reWritePost(post)}>수정</Button>
+              <Button onClick={() => editPost(post)}>수정</Button>
               <Button onClick={() => delPost()}>삭제</Button>
             </div>
           )}

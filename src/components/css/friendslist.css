@@ -1,15 +1,13 @@
 .friends {
   /* border: 1px solid green; */
-  /* width: 100vw; */
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   gap: 10px;
   /* position: fixed;
   bottom: 20%;
   right: 18%; */
-  margin: 10px 1% -10px 1%;
+  margin: 20px 1% -10px 1%;
   padding: 10px;
 }
 
@@ -41,6 +39,7 @@
 .friends > button > span {
   /* border: 1px solid pink; */
   font-size: 14px;
-  word-break: break-all;
-  /* word-break: keep-all; */
+  overflow: hidden;
+  word-break: keep-all;
+  /* word-break: break-all; */
 }

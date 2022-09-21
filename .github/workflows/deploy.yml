@@ -6,6 +6,8 @@ name: deploy
 on:
   push:
     branches: [dev]
+  pull_request:
+    branches: [dev]
 
 jobs:
   build:
@@ -13,8 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-      - name: Check node v
-        run: node -v
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "REACT_APP_KAKAO_AUTH_URL=$REACT_APP_KAKAO_AUTH_URL" >> .env
+          echo "REACT_APP_BASE_URL=$REACT_APP_BASE_URL" >> .env
+        env:
+          REACT_APP_KAKAO_AUTH_URL: ${{ secrets.REACT_APP_KAKAO_AUTH_URL }}
+          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
         
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
