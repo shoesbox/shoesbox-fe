@@ -11,7 +11,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
 
   const [loading, setLoading] = useState(true);
 
-  // 날짜 계산용 state zzzzz
+  // 날짜 계산용 state zzzzzz
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state zz
   const [dates, setDates] = useState([]);
