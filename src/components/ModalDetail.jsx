@@ -29,27 +29,31 @@ const ModalDetail = ({ postId, ...props }) => {
   const content = post?.content;
   const writeMemberId = post?.memberId;
 
-  const reWritePost = (post) => {
-    //  console.log(post);
+  const editPost = (post) => {
+    // console.log(post);
     navigate('/edit');
   };
 
   const delPost = () => {
-    alert('정말로 일기를 삭제하시겠습니까?');
-    dispatch(deleteDetailThunk(postId));
+    const result = window.confirm('정말로 일기를 삭제하시겠어요?');
+    if (result === true) {
+      dispatch(deleteDetailThunk(postId));
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
   };
 
   useEffect(() => {
     if (postId !== (null || undefined)) {
       // dispatch(getJsonDetailThunk(postId));
       const result = dispatch(getDetailThunk(postId));
-      // console.log('result', result);
+      console.log('result', result);
     }
   }, [postId]);
+
+  console.log(post);
 
   const ImageCarousel = () => {
     return (
@@ -101,7 +105,7 @@ const ModalDetail = ({ postId, ...props }) => {
           <br />
           {parseInt(memberId) === parseInt(writeMemberId) && (
             <div className="detail-fix-del-btns">
-              <Button onClick={() => reWritePost(post)}>수정</Button>
+              <Button onClick={() => editPost(post)}>수정</Button>
               <Button onClick={() => delPost()}>삭제</Button>
             </div>
           )}
