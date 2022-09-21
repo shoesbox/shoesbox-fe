@@ -58,7 +58,7 @@ const ModalDetail = ({ postId, ...props }) => {
   const ImageCarousel = () => {
     return (
       <Carousel>
-        {images?.map((image, idx) => (
+        {images.map((image, idx) => (
           <Carousel.Item key={idx}>
             <img className="d-block w-100" src={image} alt={idx} />
           </Carousel.Item>
@@ -92,14 +92,10 @@ const ModalDetail = ({ postId, ...props }) => {
             <span>{date}</span>
           </div>
           <hr />
-          <ImageCarousel />
+
+          {images.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />}
           <hr />
-          {/* {images ? (
-            <>
-              <ImageCarousel />
-              <hr />
-            </>
-          ) : null} */}
+
           <div className="detail-content">{content}</div>
           {/* <hr /> */}
           <br />

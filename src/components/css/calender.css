@@ -47,7 +47,7 @@
   font-weight: 400;
   color: silver;
   margin-right: 5px;
-  border: 1px solid rebeccapurple;
+  /* border: 1px solid rebeccapurple; */
 }
 .month {
   width: 55px;

@@ -13,6 +13,10 @@
   margin-right: 10px;
 }
 
+img {
+  width: 100%;
+}
+
 .detail-content {
   text-align: justify;
   padding: 0 5px;
