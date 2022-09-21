@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
-
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // 1. Axios instance 생성
