@@ -9,7 +9,6 @@ import { setCookie } from '../shared/cookie';
 const Oauth2kakao = () => {
   const navigate = useNavigate();
 
-  // console.log(code);
   useEffect(() => {
     const fetchUser = async () => {
       let code = new URL(window.location.href).searchParams.get('code');
@@ -37,7 +36,10 @@ const Oauth2kakao = () => {
       }
     };
     fetchUser();
-    // navigate('/');
+
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   }, []);
 
   return (
