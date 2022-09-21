@@ -1,22 +1,23 @@
+import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
-import axios from 'axios';
 
 const Oauth2kakao = () => {
   const navigate = useNavigate();
 
-  // console.log(code);
   useEffect(() => {
     const fetchUser = async () => {
       let code = new URL(window.location.href).searchParams.get('code');
       console.log('code', code);
+      console.log('쿼리 스트링', `/oauth2/authorization/kakao?code=${code}`)
 
       if (code) {
         const res = await apis.loginKakao(code);
+
         const token = res.data?.data;
         setCookie(
           'accessToken',
@@ -35,7 +36,10 @@ const Oauth2kakao = () => {
       }
     };
     fetchUser();
-    navigate('/');
+
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   }, []);
 
   return (
