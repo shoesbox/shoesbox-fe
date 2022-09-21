@@ -37,7 +37,7 @@ const Oauth2kakao = () => {
         alert('카카오 로그인에 실패했습니다.');
       }
     };
-    fetchUser();
+    // fetchUser();
 
     // setTimeout(() => {
     //   navigate('/');
