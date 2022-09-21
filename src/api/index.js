@@ -39,6 +39,9 @@ const apiJsonUTF = axios.create({
 
 const auth = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    credentials: true,
+  }
 });
 
 // 2. request interceptor
@@ -99,7 +102,7 @@ apiForm.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 소셜 로그인
-  loginKakao: (code) => auth.get(`/oauth2/authorization/kakao?code=${code}`),
+  loginKakao: (code) => api.get(`/oauth2/authorization/kakao?code=${code}`),
   loginGoogle: () => api.get('api/oauth2/authorization/google'),
   loginNaver: () => api.get('https://nid.naver.com/oauth2.0/authorize'),
 
