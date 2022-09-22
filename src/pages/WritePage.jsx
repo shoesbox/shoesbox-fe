@@ -29,19 +29,19 @@ const WritePage = () => {
   const fileValidation = (obj) => {
     const fileTypes = ['image/gif', 'image/jpeg', 'image/png'];
     if (obj.name.length > 100) {
-      alert('파일명이 100자 이상인 파일은 등록할 수 없습니다.');
+      alert('파일명이 100자 이상인 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else if (obj.size > 30 * 1024 * 1024) {
-      alert('최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.');
+      alert('용량이 30MB를 초과한 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else if (obj.name.lastIndexOf('.') === -1) {
-      alert('확장자가 없는 파일은 등록할 수 없습니다.');
+      alert('확장자가 없는 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else if (!fileTypes.includes(obj.type)) {
-      alert('첨부가 불가능한 파일은 등록할 수 없습니다.');
+      alert('해당 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else {
@@ -57,13 +57,13 @@ const WritePage = () => {
     } else {
       event.preventDefault();
       setFormDataTxt({
-        // id: new Date(),
-        // postId: Math.round(Math.random() * 99 + 1),
-        // nickname: 'Sunny',
         title: titleRef.current.value,
+        content: contentRef.current.value,
         // images : imageRef.current.files,
         images: base64s,
-        content: contentRef.current.value,
+        year: 2022,
+        month: 9,
+        day: 1,
       });
       // console.log(formDataTxt);
 
@@ -147,13 +147,13 @@ const WritePage = () => {
               type="file"
               accept="image/gif, image/jpeg, image/png"
               multiple
-              required
+              // required
               ref={imageRef}
               onChange={onChangePic}
             />
-            <Form.Control.Feedback type="invalid">
+            {/* <Form.Control.Feedback type="invalid">
               사진을 추가해주세요 :)
-            </Form.Control.Feedback>
+            </Form.Control.Feedback> */}
           </InputGroup>
         </Form.Group>
         <br />

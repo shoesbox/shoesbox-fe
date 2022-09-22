@@ -14,9 +14,18 @@
 .menu {
   color: #6b9080;
   text-shadow: 2px 2px 3px #eaf4f4;
-  /* font-style: italic; */
 }
 .menu:hover {
   color: #fff;
   text-shadow: 2px 2px 3px #a4c3b2;
+}
+.test {
+  /* border: 1px solid red; */
+  padding: 0 10px;
+  font-size: 20px;
+  color: rgb(252, 252, 252);
+  cursor: pointer;
+}
+.test:hover {
+  color: #a4c3b2;
 }

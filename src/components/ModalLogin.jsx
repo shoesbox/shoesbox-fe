@@ -4,8 +4,10 @@ import './css/modallogin.css';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
-// const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
-const KAKAO_AUTH_URL = "https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://54.180.118.248/oauth2/authorization/kakao&response_type=code";
+const KAKAO_AUTH_URL =
+  'https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://localhost:3000/oauth/callback/kakao&response_type=code';
+const GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth?client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&response_type=code&redirect_uri=http://localhost:3000/oauth/callback/google&scope=email%20profile";
+
 const ModalLogin = ({ login, handleCloseLogin }) => {
   const [state, setState] = useState({
     email: '',
@@ -32,8 +34,8 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
     apis
       .loginUser(state, { withCredentials: true })
       .then((res) => {
-        console.log('res', res);
-        console.log('res.data', res.data);
+        // console.log('res', res);
+        // console.log('res.data', res.data);
         const token = res.data.data;
         setCookie(
           'accessToken',
@@ -52,9 +54,9 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
         window.location.reload(true);
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.response?.data.errorDetails.apierror.message);
+        // console.log(err);
         const errMessage = err.response?.data.errorDetails.apierror.message;
+        // console.log(errMessage);
         alert(errMessage);
       });
   };
@@ -82,11 +84,9 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
     }
   };
 
-  const handleSocial = async (event) => {
+  const handleSocialGoogle = async (event) => {
     event.preventDefault();
-    window.open(
-      'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=http://13.209.77.207/oauth2/authorization/naveruth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://13.209.77.207/oauth2/authorization/kakao&response_type=code'
-    );
+    window.location.href = GOOGLE_AUTH_URL;
   };
 
   const handleSocialKakao = async (event) => {
@@ -96,10 +96,11 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   const handleLoginNaver = async (event) => {
     event.preventDefault();
-    apis
-      .loginNaver()
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    // apis
+    //   .loginNaver()
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
+    window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=http://localhost:3000/oauth/callback/naver'
   };
 
   return (
@@ -176,7 +177,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               />
               <button
                 className="social__button social__button--google"
-                onClick={handleSocial}
+                onClick={handleSocialGoogle}
               />
             </div>
             <br />

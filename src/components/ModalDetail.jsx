@@ -13,8 +13,6 @@ import {
 } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
-// potal test
-import ReactDOM from 'react-dom';
 
 const ModalDetail = ({ postId, postDate,...props }) => {
   const dispatch = useDispatch();
@@ -67,7 +65,7 @@ const ModalDetail = ({ postId, postDate,...props }) => {
     );
   };
 
-  return ReactDOM.createPortal(
+  return (
     <>
       <Modal
         {...props}
@@ -93,8 +91,7 @@ const ModalDetail = ({ postId, postDate,...props }) => {
           </div>
           <hr />
 
-          <ImageCarousel />
-          {/* {images.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />} */}
+          {images?.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />}
           <hr />
 
           <div className="detail-content">{content}</div>
@@ -115,8 +112,7 @@ const ModalDetail = ({ postId, postDate,...props }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>,
-    document.getElementById('potal')
+    </>
   );
 };
 
