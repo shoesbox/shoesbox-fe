@@ -8,29 +8,31 @@
   margin: 25px auto;
   padding: 10px;
   width: 100%;
-  /* border: 3px solid red; */
 }
 .calendar {
   width: 100%;
   height: 100%;
-  /* border: 1px solid orange; */
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid green; */
+}
+.loading-container {
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  align-items: center;
 }
 .loading {
   width: 100%;
-  height: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 22px;
   font-weight: 500;
   font-style: oblique;
-  color: #6B9080;
+  color: #6b9080;
   /* background-color: rgb(250, 250, 250); */
 }
 .year {
@@ -38,7 +40,6 @@
   font-weight: 600;
   font-style: italic;
   color: silver;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
 }
@@ -47,7 +48,6 @@
   font-weight: 400;
   color: silver;
   margin-right: 5px;
-  /* border: 1px solid rebeccapurple; */
 }
 .month {
   width: 55px;
