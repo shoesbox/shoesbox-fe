@@ -32,8 +32,8 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
     apis
       .loginUser(state, { withCredentials: true })
       .then((res) => {
-        console.log('res', res);
-        console.log('res.data', res.data);
+        // console.log('res', res);
+        // console.log('res.data', res.data);
         const token = res.data.data;
         setCookie(
           'accessToken',
@@ -52,9 +52,9 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
         window.location.reload(true);
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.response?.data.errorDetails.apierror.message);
+        // console.log(err);
         const errMessage = err.response?.data.errorDetails.apierror.message;
+        // console.log(errMessage);
         alert(errMessage);
       });
   };
