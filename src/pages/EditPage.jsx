@@ -113,8 +113,6 @@ const EditPage = () => {
       setTimeout(() => {
         window.location.reload();
       }, 1000);
-      // 새로고침 없이 즉각반영 되려면 메인달력 state 설정하고
-      // 그 state 변경 시 useeffect로 재렌더링 필요?
     }
   }, [formDataTxt]);
 
@@ -139,18 +137,18 @@ const EditPage = () => {
         <br />
         <Form.Group>
           <Form.Label className="subtitle">오늘의 포토제닉 📸</Form.Label>
-          <InputGroup hasValidation>
+          <InputGroup>
             <Form.Control
               type="file"
               accept="image/gif, image/jpeg, image/png"
               multiple
-              required
+              // required
               ref={imageRef}
               onChange={onChangePic}
             />
-            <Form.Control.Feedback type="invalid">
+            {/* <Form.Control.Feedback type="invalid">
               사진을 추가해주세요 :)
-            </Form.Control.Feedback>
+            </Form.Control.Feedback> */}
           </InputGroup>
         </Form.Group>
         <br />

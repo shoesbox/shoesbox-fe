@@ -29,7 +29,7 @@ export const putDetailThunk = createAsyncThunk(
     try {
       const data = await apis.reWriteDetail(postId, payload);
       const res = data.data.data;
-      console.log('writeDailythunk', postId, payload);
+      // console.log('writeDailythunk', postId, payload);
       if (res) {
         alert('수정 완료 // 최종 완성 시 알림 삭제 예정');
       }

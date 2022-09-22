@@ -14,7 +14,7 @@ import {
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
-const ModalDetail = ({ postId, ...props }) => {
+const ModalDetail = ({ postId,...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const memberId = getCookie('memberId');
@@ -46,12 +46,11 @@ const ModalDetail = ({ postId, ...props }) => {
   useEffect(() => {
     if (postId !== (null || undefined)) {
       // dispatch(getJsonDetailThunk(postId));
-      const result = dispatch(getDetailThunk(postId));
-      console.log('result', result);
+      dispatch(getDetailThunk(postId));
+      // console.log('result', result);
     }
   }, [postId]);
 
-  console.log(post);
 
   const ImageCarousel = () => {
     return (
@@ -92,7 +91,7 @@ const ModalDetail = ({ postId, ...props }) => {
           <hr />
 
           {images?.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />}
-          <hr />
+          {images?.length > 1 && <hr />}
 
           <div className="detail-content">{content}</div>
           {/* <hr /> */}

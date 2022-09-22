@@ -7,7 +7,7 @@ import { setCookie } from '../shared/cookie';
 
 
 const Oauth2Naver = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   let code = new URL(window.location.href).searchParams.get('code');
   console.log('code', code);
 

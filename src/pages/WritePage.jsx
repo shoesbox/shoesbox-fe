@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import { Button, Form, InputGroup, Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
@@ -8,6 +8,8 @@ import { postJsonDetailThunk, postDetailThunk } from '../features/writeSlice';
 import './css/writepage.css';
 
 const WritePage = () => {
+  const postDate = useLocation().state;
+  // console.log('postDate', postDate);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // formdata
@@ -107,18 +109,20 @@ const WritePage = () => {
   useEffect(() => {
     if (formDataTxt !== undefined) {
       // dispatch(postJsonDetailThunk(formDataTxt));
+      formData.append('year', postDate.year)
+      formData.append('month', postDate.month)
+      formData.append('day', postDate.day)
       formData.append('title', titleRef.current.value);
       formData.append('content', contentRef.current.value);
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
+
       dispatch(postDetailThunk(formData));
 
       setTimeout(() => {
         window.location.reload();
       }, 1000);
-      // 새로고침 없이 즉각반영 되려면 메인달력 state 설정하고
-      // 그 state 변경 시 useeffect로 재렌더링 필요?
     }
   }, [formDataTxt]);
 
