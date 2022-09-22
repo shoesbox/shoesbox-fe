@@ -2,7 +2,9 @@ import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = 'http://13.125.161.17';
+const URL = 'http://13.125.161.17';
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -122,7 +124,7 @@ export const apis = {
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
   writeDaily: (payload) => apiForm.post('/api/posts', payload),
   deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
-  reWriteDetail: (postId, payload) => api.put(`/api/posts/${postId}`, payload),
+  reWriteDetail: (postId, payload) => api.patch(`/api/posts/${postId}`, payload),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
@@ -141,6 +143,8 @@ export const apis = {
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
+  cancleFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancle`),
+  
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

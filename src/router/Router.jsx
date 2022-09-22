@@ -9,6 +9,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 import Oauth2kakao from '../components/Oauth2kakao';
 import MyPage from '../pages/MyPage';
 import Oauth2Naver from '../components/Oauth2Naver';
+import Oauth2Google from '../components/Oauth2Google';
 
 const Router = () => {
   const memberId = getCookie('memberId');
@@ -48,6 +49,7 @@ const Router = () => {
         />
         <Route path="/oauth/callback/kakao" element={<Oauth2kakao />} />
         <Route path="/oauth/callback/naver" element={<Oauth2Naver />} />
+        <Route path="/oauth/callback/google" element={<Oauth2Google />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

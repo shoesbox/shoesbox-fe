@@ -32,8 +32,9 @@ const CommentsList = ({ postId }) => {
   const [onEdit, setEdit] = useState(false);
   var tmp = '';
 
-  // console.log(memberId);
-  // console.log(comments);
+  // console.log('로그인한 memberId',memberId);
+  // console.log('해당 post의 comments', comments);
+
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== '') {
@@ -143,7 +144,7 @@ const CommentsList = ({ postId }) => {
       dispatch(getCommentThunk(postId));
     }
     // dispatch(getJsonCommentThunk(postId));
-    console.log('comments', comments);
+    // console.log('comments', comments);
   }, []);
 
   return (
