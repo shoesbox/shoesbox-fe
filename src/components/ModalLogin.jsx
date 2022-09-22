@@ -85,9 +85,9 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   const handleSocial = async (event) => {
     event.preventDefault();
-    window.open(
-      'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=http://13.209.77.207/oauth2/authorization/naveruth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://13.209.77.207/oauth2/authorization/kakao&response_type=code'
-    );
+    // window.open(
+    //   'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=http://localhost:3000/oauth2/authorization/naver'
+    // );
   };
 
   const handleSocialKakao = async (event) => {
@@ -97,10 +97,11 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   const handleLoginNaver = async (event) => {
     event.preventDefault();
-    apis
-      .loginNaver()
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    // apis
+    //   .loginNaver()
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
+    window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=http://localhost:3000/oauth/callback/naver'
   };
 
   return (
