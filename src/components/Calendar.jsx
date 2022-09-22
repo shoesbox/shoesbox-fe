@@ -66,75 +66,73 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
           </div>
         </div>
       ) : (
-        <div className="calender-container">
-          <div className="calendar">
-            <div className="header">
-              <div className="year">
-                <span>{calMemberNickname} ,</span>
-                <span>{viewDate.year}</span>
-              </div>
-              <span className="month">{viewDate.month + 1}</span>
-              <div className="nav">
-                <button className="nav-btn" onClick={() => changeMonth(-1)}>
-                  &lt;
-                </button>
-                <button
-                  className="nav-btn go-today"
-                  onClick={() => changeMonth(0)}
-                >
-                  Today
-                </button>
-                <button className="nav-btn" onClick={() => changeMonth(+1)}>
-                  &gt;
-                </button>
-              </div>
+        <div className="calendar">
+          <div className="header">
+            <div className="year">
+              <span>{calMemberNickname} ,</span>
+              <span>{viewDate.year}</span>
             </div>
-            <div className="main">
-              <div className="days">
-                <div className="day">일</div>
-                <div className="day">월</div>
-                <div className="day">화</div>
-                <div className="day">수</div>
-                <div className="day">목</div>
-                <div className="day">금</div>
-                <div className="day">토</div>
-              </div>
-              <div className="dates">
-                {dates.map((date, idx) => (
-                  <div
-                    className="date"
-                    key={idx}
-                    style={{
-                      background: `url(${date.thumbnailUrl})`,
-                      backgroundSize: 'cover',
-                      // border: '3px solid white',
-                      // backgroundColor: '#f0f0f0',
-                    }}
-                    onClick={() => {
-                      if (date.postId === 0) {
-                        if (memberId === calMemberId) {
-                          let result = window.confirm(
-                            '선택한 날짜의 일기를 작성하시겠습니까?'
-                          );
-                          if (result === true) {
-                            navigate('/write');
-                          }
-                        } else {
-                          return null;
+            <span className="month">{viewDate.month + 1}</span>
+            <div className="nav">
+              <button className="nav-btn" onClick={() => changeMonth(-1)}>
+                &lt;
+              </button>
+              <button
+                className="nav-btn go-today"
+                onClick={() => changeMonth(0)}
+              >
+                Today
+              </button>
+              <button className="nav-btn" onClick={() => changeMonth(+1)}>
+                &gt;
+              </button>
+            </div>
+          </div>
+          <div className="main">
+            <div className="days">
+              <div className="day">일</div>
+              <div className="day">월</div>
+              <div className="day">화</div>
+              <div className="day">수</div>
+              <div className="day">목</div>
+              <div className="day">금</div>
+              <div className="day">토</div>
+            </div>
+            <div className="dates">
+              {dates.map((date, idx) => (
+                <div
+                  className="date"
+                  key={idx}
+                  style={{
+                    background: `url(${date.thumbnailUrl})`,
+                    backgroundSize: 'cover',
+                    // border: '3px solid white',
+                    // backgroundColor: '#f0f0f0',
+                  }}
+                  onClick={() => {
+                    if (date.postId === 0) {
+                      if (memberId === calMemberId) {
+                        let result = window.confirm(
+                          '선택한 날짜의 일기를 작성하시겠습니까?'
+                        );
+                        if (result === true) {
+                          navigate('/write');
                         }
                       } else {
-                        setPostNumber(date.postId);
-                        setIsOpen(true);
+                        return null;
                       }
-                    }}
-                  >
-                    {/* {date.thumbnailUrl ? (
+                    } else {
+                      setPostNumber(date.postId);
+                      setIsOpen(true);
+                    }
+                  }}
+                >
+                  {/* {date.thumbnailUrl ? (
                   <img src={date.thumbnailUrl} alt={date} />
                 ) : null} */}
-                    <div>{date.createdDay}</div>
-                  </div>
-                ))}
-              </div>
+                  <div>{date.createdDay}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
