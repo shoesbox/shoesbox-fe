@@ -4,13 +4,13 @@ import { getCookie } from '../shared/cookie';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const URL = 'http://13.125.161.17';
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     credentials: true,
+    'Content-Type': 'application/json;charset=UTF-8',
   },
 });
 
@@ -39,10 +39,10 @@ const apiJsonUTF = axios.create({
 });
 
 const auth = axios.create({
-  baseURL: URL,
+  baseURL: BASE_URL,
   headers: {
     credentials: true,
-    'Content-Type': 'application/json;charset=UTF-8',
+    'Content-Type': 'application/json;charset=utf-8',
   },
 });
 
@@ -104,9 +104,9 @@ apiForm.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 소셜 로그인
-  loginKakao: (token) => auth.post('/oauth2/authorization/kakao', {"accessToken" : token}),
-  loginGoogle: () => api.get('api/oauth2/authorization/google'),
-  loginNaver: () => api.get('https://nid.naver.com/oauth2.0/authorize'),
+  loginKakao: (code) => auth.get(`/oauth2/authorization/kakao?code=${code}`),
+  loginGoogle: (code) => auth.get(`oauth2/authorization/google?code=${code}`),
+  loginNaver: (code) => auth.get(`oauth2/authorization/naver?code=${code}`),
 
   // jwt 로그인, 회원가입
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
