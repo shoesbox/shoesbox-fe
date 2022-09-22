@@ -22,6 +22,8 @@ const ModalAddFriend = (props) => {
   );
   const addFriendRef = useRef();
 
+  // console.log(requestFriendList);
+
   const validateEmail = (email) => {
     // 주어온 strict 한 정규식
     // 현재는 테스트로 조건 걸어 놓지 않음
@@ -52,6 +54,7 @@ const ModalAddFriend = (props) => {
   };
 
   const onClickCancle = (toMemberId) => {
+    // console.log(toMemberId);
     dispatch(cancleFriendThunk(toMemberId));
   };
 

@@ -5,7 +5,6 @@ import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
 // const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
-// const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
 const KAKAO_AUTH_URL = "https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=http://54.180.118.248/oauth2/authorization/kakao&response_type=code";
 const ModalLogin = ({ login, handleCloseLogin }) => {
   const [state, setState] = useState({

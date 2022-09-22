@@ -16,7 +16,7 @@ import CommentsList from './CommentsList';
 // potal test
 import ReactDOM from 'react-dom';
 
-const ModalDetail = ({ postId, ...props }) => {
+const ModalDetail = ({ postId, postDate,...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const memberId = getCookie('memberId');
@@ -53,7 +53,7 @@ const ModalDetail = ({ postId, ...props }) => {
     }
   }, [postId]);
 
-  console.log(post);
+  console.log('Modal postDate', postDate);
 
   const ImageCarousel = () => {
     return (

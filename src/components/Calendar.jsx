@@ -21,6 +21,8 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
   const [isopen, setIsOpen] = useState(false);
   // postid 넘기기용 state
   const [postNumber, setPostNumber] = useState();
+  // postDates 넘기기용 state
+  const [postDate, setPostDate] = useState();
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -120,8 +122,9 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                         return null;
                       }
                     } else {
-                      setPostNumber(date.postId);
+                      setPostNumber(date.postId); 
                       setIsOpen(true);
+                      setPostDate({year:date.year, month: date.month, day:date.createdDay})
                     }
                   }}
                 >
@@ -141,6 +144,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
           setIsOpen(false);
         }}
         postId={postNumber}
+        postDate={postDate}
         backdrop="static"
         keyboard={false}
       />

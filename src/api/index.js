@@ -136,6 +136,8 @@ export const apis = {
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
+  cancleFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancle`),
+  
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),
