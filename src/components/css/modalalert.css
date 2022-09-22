@@ -1,0 +1,9 @@
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+.alert-list > div {
+  /* border: 1px solid red; */
+}
