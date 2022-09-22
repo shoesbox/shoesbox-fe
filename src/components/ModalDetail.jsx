@@ -14,7 +14,7 @@ import {
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
-const ModalDetail = ({ postId, postDate,...props }) => {
+const ModalDetail = ({ postId,...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const memberId = getCookie('memberId');
@@ -51,7 +51,6 @@ const ModalDetail = ({ postId, postDate,...props }) => {
     }
   }, [postId]);
 
-  console.log('Modal postDate', postDate);
 
   const ImageCarousel = () => {
     return (
