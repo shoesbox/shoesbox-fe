@@ -124,7 +124,6 @@ const ModalAddFriend = (props) => {
 
   return (
     <Modal
-      className="detail-modal"
       {...props}
       centered
       size="md"

@@ -29,7 +29,7 @@ const ModalProfileUpdate = (props) => {
   };
 
   return (
-    <Modal className="detail-modal" {...props} centered size="md">
+    <Modal {...props} centered size="md">
       <Modal.Header closeButton>
         <Modal.Title>
           <div>프로필 사진 변경</div>

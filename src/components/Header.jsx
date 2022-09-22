@@ -4,14 +4,16 @@ import { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
+import ModalAlert from './ModalAlret';
 import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
+import { BsBellFill } from 'react-icons/bs';
 
 function Header() {
   const [login, setLogin] = useState(false);
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => setLogin(false);
-  
+
   const navigate = useNavigate();
 
   const cookie = getCookie('refreshToken');
@@ -23,6 +25,11 @@ function Header() {
       setisLoggedIn(false);
     }
   }, [cookie]);
+
+  // 알림창 모달
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const handleLogout = () => {
     apis
@@ -60,6 +67,9 @@ function Header() {
           >
             SHOES 🍭 BOX
           </Navbar.Brand>
+          <Nav className="test">
+            <BsBellFill onClick={handleShow} />
+          </Nav>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -100,6 +110,14 @@ function Header() {
       </Navbar>
 
       <ModalLogin login={login} handleCloseLogin={handleCloseLogin} />
+      <ModalAlert
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        // memberId={memberId}
+        // state={state}
+        // setState={setState}
+      />
     </>
   );
 }
