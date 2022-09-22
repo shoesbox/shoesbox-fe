@@ -16,7 +16,8 @@ const Oauth2kakao = () => {
       console.log('쿼리 스트링', `/oauth2/authorization/kakao?code=${code}`)
 
       if (code) {
-        const res = await apis.loginKakao(code);
+        // const res = await apis.loginKakao(code);
+        const res = await axios.get(`http://13.125.161.17/oauth2/authorization/kakao?code=${code}`, )
 
         console.log('리스폰스 데이터', res);
 

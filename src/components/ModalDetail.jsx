@@ -13,8 +13,6 @@ import {
 } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
-// potal test
-import ReactDOM from 'react-dom';
 
 const ModalDetail = ({ postId, ...props }) => {
   const dispatch = useDispatch();
@@ -67,7 +65,7 @@ const ModalDetail = ({ postId, ...props }) => {
     );
   };
 
-  return ReactDOM.createPortal(
+  return (
     <>
       <Modal
         {...props}
@@ -114,8 +112,7 @@ const ModalDetail = ({ postId, ...props }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>,
-    document.getElementById('potal')
+    </>
   );
 };
 
