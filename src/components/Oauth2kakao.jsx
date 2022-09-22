@@ -17,15 +17,16 @@ const Oauth2kakao = () => {
       console.log('code', code);
 
       if (code) {
-        fetch(`http://13.125.161.17/oauth2/authorization/kakao?code=${code}`,{
+        fetch(`http://13.125.161.17/oauth2/authorization/kakao?code=${code}`, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'},
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+          },
         })
-          .then(res => res.json())
-          .then(data => {
-            if(data?.success) console.log('성공!', data?.success);
-          })
-
+          .then((res) => res.json())
+          .then((data) => {
+            if (data?.success) console.log('성공!', data?.success);
+          });
 
         // fetch(`https://kauth.kakao.com/oauth/token`,{
         //   method: 'POST',
@@ -70,7 +71,7 @@ const Oauth2kakao = () => {
 
   //   if(kakaoToken == null){
   //     return ;
-  //   } 
+  //   }
 
   //   apis.loginKakao(kakaoToken)
   //     .then(res => res.data?.data)

@@ -67,9 +67,11 @@ function Header() {
           >
             SHOES 🍭 BOX
           </Navbar.Brand>
-          <Nav className="test">
-            <BsBellFill onClick={handleShow} />
-          </Nav>
+          {isLoggedIn ? (
+            <Nav className="test">
+              <BsBellFill onClick={handleShow} />
+            </Nav>
+          ) : null}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
