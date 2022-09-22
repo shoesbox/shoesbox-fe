@@ -45,8 +45,8 @@ const Router = () => {
             )
           }
         />
-        <Route path="*" element={<NotFoundPage />} />
         <Route path="/oauth/callback/kakao" element={<Oauth2kakao />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
