@@ -62,10 +62,12 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
 
 
   return (
-    <div className="calender-container">
+    <>
       {loading ? (
-        <div className="loading">
-          <span>Loading...</span>
+        <div className="loading-container">
+          <div className="loading">
+            <span>Loading...</span>
+          </div>
         </div>
       ) : (
         <div className="calendar">
@@ -167,7 +169,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
         backdrop="static"
         keyboard={false}
       />
-    </div>
+    </>
   );
 };
 
