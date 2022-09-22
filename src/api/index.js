@@ -4,6 +4,7 @@ import { getCookie } from '../shared/cookie';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+const URL = 'http://13.125.161.17';
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
 const api = axios.create({
@@ -38,7 +39,11 @@ const apiJsonUTF = axios.create({
 });
 
 const auth = axios.create({
-  baseURL: BASE_URL,
+  baseURL: URL,
+  headers: {
+    credentials: true,
+    'Content-Type': 'application/json;charset=UTF-8',
+  },
 });
 
 // 2. request interceptor
@@ -99,7 +104,7 @@ apiForm.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 소셜 로그인
-  loginKakao: (code) => auth.get(`/oauth2/authorization/kakao?code=${code}`),
+  loginKakao: (token) => auth.post('/oauth2/authorization/kakao', {"accessToken" : token}),
   loginGoogle: () => api.get('api/oauth2/authorization/google'),
   loginNaver: () => api.get('https://nid.naver.com/oauth2.0/authorize'),
 
