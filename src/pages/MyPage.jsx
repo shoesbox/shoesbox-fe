@@ -55,7 +55,7 @@ const MyPage = ({ memberId }) => {
   useEffect(() => {
     showData();
     showFriends();
-  }, [state.profileImageUrl, friends]);
+  }, [state.profileImageUrl]);
 
   // 이미지 업로드 모달
   const [show, setShow] = useState(false);
@@ -111,13 +111,14 @@ const MyPage = ({ memberId }) => {
   };
 
   // 친구삭제 로직
-  const handleRemoveFriend = (memberId, nickname) => {
+  const handleRemoveFriend = (deleteMemberId, nickname) => {
     let result = window.confirm(`정말로 ${nickname}님을 삭제하시겠어요?`);
     if (result === true) {
-      apis.deleteFriend(memberId);
+      apis.deleteFriend(deleteMemberId)
+      
+      let newFriendsList = friends.filter(each => each.memberId !== deleteMemberId)
+      setFriends(newFriendsList)
     }
-    // .then((res) => console.log(res))
-    // .catch((err) => console.log(err));
   };
 
   // 회원탈퇴 로직

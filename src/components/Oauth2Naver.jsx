@@ -11,11 +11,8 @@ const Oauth2Naver = () => {
   let code = new URL(window.location.href).searchParams.get('code');
   console.log('code', code);
 
-
   useEffect(() => {
     const fetchUser = async () => {
-      let code = new URL(window.location.href).searchParams.get('code');
-      console.log('code', code);
 
       if (code) {
 

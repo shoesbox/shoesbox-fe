@@ -7,11 +7,11 @@ import { setCookie } from '../shared/cookie';
 
 const Oauth2kakao = () => {
   const navigate = useNavigate();
+  let code = new URL(window.location.href).searchParams.get('code');
+  console.log('code', code);
 
   useEffect(() => {
     const fetchUser = async () => {
-      let code = new URL(window.location.href).searchParams.get('code');
-      console.log('code', code);
 
       if (code) {
 
