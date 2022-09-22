@@ -27,7 +27,7 @@ const Oauth2Naver = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            if (data?.success) console.log('성공!', data?.success);
+            if (data?.success) console.log('성공!', data?.accessToken);
           });
 
         // fetch(`https://kauth.kakao.com/oauth/token`,{
@@ -63,9 +63,9 @@ const Oauth2Naver = () => {
     };
     fetchUser();
 
-    // setTimeout(() => {
-    //   navigate('/');
-    // }, 2000);
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   }, []);
 
   return (
