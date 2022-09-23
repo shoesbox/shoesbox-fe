@@ -1,16 +1,10 @@
 import './css/modaldetail.css';
-import { useRef, useState, useEffect } from 'react';
-import { Button, Carousel, Container, Modal } from 'react-bootstrap';
+import { useEffect } from 'react';
+import { Button, Carousel, Modal } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getDetailThunk,
-  getJsonCommentThunk,
-  getJsonDetailThunk,
-  getCommentThunk,
-  deleteDetailThunk,
-} from '../features/detailSlice';
+import { getDetailThunk, deleteDetailThunk } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
@@ -45,7 +39,6 @@ const ModalDetail = ({ postId, ...props }) => {
 
   useEffect(() => {
     if (postId !== (null || undefined)) {
-      // dispatch(getJsonDetailThunk(postId));
       dispatch(getDetailThunk(postId));
       // console.log('result', result);
     }

@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import { Button, Form, InputGroup, Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
-import { postDetailThunk, putDetailThunk } from '../features/writeSlice';
+import { putDetailThunk } from '../features/writeSlice';
 import './css/writepage.css';
 
 const EditPage = () => {
   const post = useSelector((state) => state.detail.post);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log('ReWritePg', post);
+
   // formdata
   let formData = new FormData();
   // text data
@@ -102,7 +102,6 @@ const EditPage = () => {
 
   useEffect(() => {
     if (formDataTxt !== undefined) {
-      // dispatch(postJsonDetailThunk(formDataTxt));
       formData.append('title', titleRef.current.value);
       formData.append('content', contentRef.current.value);
       Array.from(files).forEach((file) => {

@@ -9,31 +9,26 @@ import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
 import { BsBellFill } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsLogin } from '../features/loginSlice'
+import { setIsLogin } from '../features/loginSlice';
 
 function Header() {
-  const isLoggedIn = useSelector((state) => state.login.value)
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  //login창 모달 on/off
+  const dispatch = useDispatch();
+  const cookie = getCookie('refreshToken');
+  const isLoggedIn = useSelector((state) => state.login.value);
+  useEffect(() => {
+    if (cookie !== undefined) {
+      dispatch(setIsLogin(true));
+    } else {
+      dispatch(setIsLogin(false));
+    }
+  }, [cookie]);
+
+  // 로그인 모달
   const [login, setLogin] = useState(false);
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => setLogin(false);
-
-  const navigate = useNavigate();
-
-  const cookie = getCookie('refreshToken');
-  //
-  
-  useEffect(() => {
-    if (cookie !== undefined) {
-      dispatch(setIsLogin(true))
-      // setisLoggedIn(true);
-    } else {
-      dispatch(setIsLogin(false))
-      // setisLoggedIn(false);
-    }
-  }, [cookie]);
 
   // 알림창 모달
   const [show, setShow] = useState(false);

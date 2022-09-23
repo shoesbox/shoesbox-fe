@@ -1,15 +1,12 @@
 import React from 'react';
-import axios from 'axios';
 import { useEffect } from 'react';
-import { Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
-import { useState } from 'react';
 
 const Oauth2Google = () => {
   const navigate = useNavigate();
-  let code = new URL(window.location.href).searchParams.get('code');
+  const code = new URL(window.location.href).searchParams.get('code');
   console.log('code', code);
 
   useEffect(() => {

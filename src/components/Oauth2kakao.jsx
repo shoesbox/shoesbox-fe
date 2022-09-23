@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';

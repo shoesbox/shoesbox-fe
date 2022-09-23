@@ -34,7 +34,7 @@ const ModalAddFriend = (props) => {
   const onClickAddFriend = () => {
     if (addFriendRef.current.value.trim() !== '') {
       if (validateEmail(addFriendRef.current.value)) {
-        //  console.log(addFriendRef.current.value);
+        // console.log(addFriendRef.current.value);
         const email = addFriendRef.current.value;
         dispatch(addFriendThunk(email)).then((addFriendRef.current.value = ''));
       } else {
@@ -73,8 +73,6 @@ const ModalAddFriend = (props) => {
           requestedFriendList?.map((member, idx) => (
             <div key={idx} className="addfriend-list">
               <div>
-                {/* <span>{member.memberNickname}</span>
-                님이 친구 맺기를 요청하였습니다. */}
                 {member.memberNickname}
                 님이 친구 맺기를 요청하였습니다.
               </div>

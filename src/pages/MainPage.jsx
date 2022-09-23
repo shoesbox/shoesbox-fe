@@ -6,16 +6,18 @@ import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
 import { getCookie } from '../shared/cookie';
 import { apis } from '../api';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLogin } from '../features/loginSlice';
 
 const MainPage = () => {
+  const dispatch = useDispatch();
   const cookie = getCookie('refreshToken');
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state) => state.login.value);
   useEffect(() => {
     if (cookie !== undefined) {
-      setisLoggedIn(true);
+      dispatch(setIsLogin(true));
     } else {
-      setisLoggedIn(false);
+      dispatch(setIsLogin(false));
     }
   }, [cookie]);
 
