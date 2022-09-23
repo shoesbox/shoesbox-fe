@@ -114,10 +114,12 @@ const MyPage = ({ memberId }) => {
   const handleRemoveFriend = (deleteMemberId, nickname) => {
     let result = window.confirm(`정말로 ${nickname}님을 삭제하시겠어요?`);
     if (result === true) {
-      apis.deleteFriend(deleteMemberId)
-      
-      let newFriendsList = friends.filter(each => each.memberId !== deleteMemberId)
-      setFriends(newFriendsList)
+      apis.deleteFriend(deleteMemberId);
+
+      const newFriendsList = friends.filter(
+        (friend) => friend.memberId !== deleteMemberId
+      );
+      setFriends(newFriendsList);
     }
   };
 

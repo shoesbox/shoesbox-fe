@@ -2,7 +2,7 @@ import './css/friendslist.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { BsPlusLg } from 'react-icons/bs';
+import { BsPlusLg, BsPersonPlus } from 'react-icons/bs';
 import ModalAddFriend from './ModalAddFriend';
 import { getFriendListThunk, delFriendThunk } from '../features/friendSlice';
 
@@ -42,7 +42,7 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
           : null}
         <Button onClick={handleShow}>
           <span>
-            <BsPlusLg />
+            <BsPersonPlus style={{ fontSize: '20px' }} />
           </span>
         </Button>
       </div>
