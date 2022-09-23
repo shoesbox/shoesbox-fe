@@ -126,12 +126,7 @@ const ModalAddFriend = (props) => {
   }, []);
 
   return (
-    <Modal
-      {...props}
-      centered
-      size="md"
-      fullscreen="sm-down"
-    >
+    <Modal {...props} centered size="md" fullscreen="sm-down">
       <Modal.Header closeButton>
         <Modal.Title>
           <div>친구 추가</div>

@@ -6,14 +6,14 @@ import MainPage from '../pages/MainPage';
 import WritePage from '../pages/WritePage';
 import EditPage from '../pages/EditPage';
 import NotFoundPage from '../pages/NotFoundPage';
-import Oauth2kakao from '../components/Oauth2kakao';
 import MyPage from '../pages/MyPage';
+import Oauth2Kakao from '../components/Oauth2Kakao';
 import Oauth2Naver from '../components/Oauth2Naver';
 import Oauth2Google from '../components/Oauth2Google';
 
 const Router = () => {
-  const memberId = getCookie('memberId');
   // const cookie = getCookie('accessToken');
+  let memberId = getCookie('memberId');
 
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
@@ -46,8 +46,9 @@ const Router = () => {
               <Navigate replace to="/" />
             )
           }
+          // element={<MyPage memberId={memberId} />}
         />
-        <Route path="/oauth/callback/kakao" element={<Oauth2kakao />} />
+        <Route path="/oauth/callback/kakao" element={<Oauth2Kakao />} />
         <Route path="/oauth/callback/naver" element={<Oauth2Naver />} />
         <Route path="/oauth/callback/google" element={<Oauth2Google />} />
         <Route path="*" element={<NotFoundPage />} />

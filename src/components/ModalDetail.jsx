@@ -14,7 +14,7 @@ import {
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
-const ModalDetail = ({ postId,...props }) => {
+const ModalDetail = ({ postId, ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const memberId = getCookie('memberId');
@@ -50,7 +50,6 @@ const ModalDetail = ({ postId,...props }) => {
       // console.log('result', result);
     }
   }, [postId]);
-
 
   const ImageCarousel = () => {
     return (
@@ -91,10 +90,9 @@ const ModalDetail = ({ postId,...props }) => {
           <hr />
 
           {images?.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />}
-          {images?.length > 1 && <hr />}
+          {images?.length >= 1 && <hr />}
 
           <div className="detail-content">{content}</div>
-          {/* <hr /> */}
           <br />
           {parseInt(memberId) === parseInt(writeMemberId) && (
             <div className="detail-fix-del-btns">
