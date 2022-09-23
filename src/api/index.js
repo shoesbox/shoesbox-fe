@@ -106,7 +106,7 @@ apiForm.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 소셜 로그인
-  loginKakao: (code) => auth.get(`/oauth2/authorization/kakao?code=${code}`),
+  loginKakao: (code) => auth.get(`oauth2/authorization/kakao?code=${code}`),
   loginGoogle: (code) => auth.get(`oauth2/authorization/google?code=${code}`),
   loginNaver: (code) => auth.get(`oauth2/authorization/naver?code=${code}`),
 

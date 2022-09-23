@@ -8,8 +8,14 @@ import ModalAlert from './ModalAlret';
 import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
 import { BsBellFill } from 'react-icons/bs';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsLogin } from '../features/loginSlice'
 
 function Header() {
+  const isLoggedIn = useSelector((state) => state.login.value)
+  const dispatch = useDispatch();
+
+  //login창 모달 on/off
   const [login, setLogin] = useState(false);
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => setLogin(false);
@@ -17,12 +23,15 @@ function Header() {
   const navigate = useNavigate();
 
   const cookie = getCookie('refreshToken');
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  //
+  
   useEffect(() => {
     if (cookie !== undefined) {
-      setisLoggedIn(true);
+      dispatch(setIsLogin(true))
+      // setisLoggedIn(true);
     } else {
-      setisLoggedIn(false);
+      dispatch(setIsLogin(false))
+      // setisLoggedIn(false);
     }
   }, [cookie]);
 
