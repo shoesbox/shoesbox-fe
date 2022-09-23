@@ -13,14 +13,26 @@
   margin-bottom: 50px;
 }
 
+.text-profile > div {
+  height: 50px;
+  /* border: 1px solid red; */
+}
+
 @media (max-width: 450px) {
   .text-profile {
     margin: 20px;
-    /* border: 1px solid black; */
+    width: 100%;
     word-break: break-all;
   }
   .text-profile > div {
     font-size: 14px;
+  }
+  .text-profile > div:nth-child(1) > p {
+    font-size: 18px;
+    font-weight: 500;
+    height: 40px;
+    display: flex;
+    align-items: center;
   }
   .text-profile > p {
     /* border: 1px solid green; */
@@ -62,6 +74,13 @@
   .text-profile {
     margin: 20px 50px;
   }
+  .text-profile > div:nth-child(1) > p {
+    font-size: 20px;
+    font-weight: 500;
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
   .image-profile {
     display: flex;
     flex-direction: column;
@@ -93,17 +112,6 @@
   }
 }
 
-.text-profile > div {
-  height: 50px;
-  /* border: 1px solid red; */
-}
-.text-profile > div:nth-child(1) > p {
-  font-size: 20px;
-  font-weight: 500;
-  height: 40px;
-  display: flex;
-  align-items: center;
-}
 .nickname-edit {
   display: flex;
   color: #6b9080;
@@ -117,7 +125,7 @@
 .friends-box {
   /* border: 1px solid pink; */
   margin-bottom: 50px;
-  padding-right: 10px;
+  /* padding-right: 10px; */
 }
 .friends-box > p:nth-child(1) {
   font-size: 18px;
@@ -143,7 +151,7 @@
 .leave-box {
   /* border: 1px solid pink; */
   margin-bottom: 50px;
-  padding-right: 10px;
+  /* padding-right: 10px; */
 }
 .leave-box > div:nth-child(1) {
   display: flex;
