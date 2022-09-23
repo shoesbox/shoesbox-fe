@@ -1,15 +1,55 @@
 import './css/mainpage.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Calendar from '../components/Calendar';
 import { Calender2 } from '../components/Calendar2';
 import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
-import { getCookie } from '../shared/cookie';
+import { getCookie, setCookie, cookies } from '../shared/cookie';
 import { apis } from '../api';
 import { useSelector } from 'react-redux';
+import { useLocation, redirect, useNavigate } from 'react-router-dom';
 
 const MainPage = () => {
   const cookie = getCookie('refreshToken');
+  const location = useLocation();
+  const navigate = useNavigate();
+  let userInfo =  useRef(location.state);
+  // let userInfos =  useRef(new URL(window.location.href).searchParams.get('token'));
+  // let code = new URL(window.location.href).searchParams.get('code');
+  // console.log('code', code);
+  // const fetchUser = async () => {
+  //   if (code?.length>0) {
+  //     apis.loginGoogle(code)
+  //     .then((res) => res.data?.data)
+  //     .then((token) => {     
+  //       console.log(token);
+  //       let date = new Date();
+  //       date.setTime(token.accessTokenExpireDate);  
+  //       cookies.set('cookie', token.accessToken, { 
+  //         path: 'http//localhost:3000',
+  //         expires: date.toUTCString() }
+  //       );
+  //       setCookie(
+  //         'accessToken',
+  //         token.accessToken,
+  //         token.accessTokenExpireDate
+  //       );
+  //       setCookie(
+  //         'refreshToken',
+  //         token.refreshToken,
+  //         token.refreshTokenExpireDate
+  //       );
+  //       setCookie('memberId', token.memberId);
+  //       setCookie('email', token.email);
+  //       setCookie('nickname', token.nickname);
+  //       // window.location.replace('/')
+  //     })
+  //   }
+  // };
+
+
+
+  // let userInfo2 = window.localStorage.setItem
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (cookie !== undefined) {
@@ -18,6 +58,68 @@ const MainPage = () => {
       setisLoggedIn(false);
     }
   }, [cookie]);
+
+  useEffect(() => {
+    // console.log('Main userInfo useEffect', userInfos);
+  
+
+    if(userInfo.current!==null){
+      console.log('Main userInfo useEffect2', userInfo);
+    // location.replace('/');
+    // redirect('/');
+
+    // setTimeout(() => {
+  
+    // }, 500);
+
+    setCookie(
+      'accessToken',
+      userInfo.current.accessToken,
+      userInfo.current.accessTokenExpireDate
+    );
+    setCookie(
+      'refreshToken',
+      userInfo.current.refreshToken,
+      userInfo.current.refreshTokenExpireDate
+    );
+    setCookie('memberId', userInfo.current.memberId);
+    setCookie('email', userInfo.current.email);
+    setCookie('nickname', userInfo.current.nickname);
+
+    setTimeout(() => {
+      // location.replaceState('');
+      // location.replace('/');
+      // location.reload(true);
+      // location.replaceState({}, null, location.pathname);
+      // location.replaceState('');
+      location.replace('/');
+      redirect('/');
+      // navigate(location.pathname, { replace: true });
+      // navigate(location.pathname, {}); 
+      // location.replace('/');
+      // navigate(location.pathname, {}); 
+    }, 1000);
+
+    }
+
+
+    return () =>{
+      // userInfo.current = '';
+      // useLocation.state ='';
+      // location.replaceState({}, null, location.pathname);
+      // location.replaceState('');
+      // location.replace('/');
+      // console.log(location.pathname)
+      // redirect('/');
+      // navigate(location.pathname, {}); 
+
+    }
+
+  }, [userInfo]);
+
+  // useEffect(() => {
+  //  fetchUser()
+  // }, []);
 
   // 친구목록 리덕스에서 꺼내오든가
   const friendList = useSelector((state) => state.friend.friendList);

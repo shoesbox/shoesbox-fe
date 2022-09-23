@@ -44,7 +44,7 @@ const auth = axios.create({
   baseURL: BASE_URL,
   headers: {
     credentials: true,
-    'Content-Type': 'application/json;charset=utf-8',
+    // 'Content-Type': 'application/json;charset=utf-8',
   },
 });
 
@@ -107,8 +107,8 @@ apiForm.interceptors.response.use(
 export const apis = {
   // 소셜 로그인
   loginKakao: (code) => auth.get(`/oauth2/authorization/kakao?code=${code}`),
-  loginGoogle: (code) => auth.get(`oauth2/authorization/google?code=${code}`),
-  loginNaver: (code) => auth.get(`oauth2/authorization/naver?code=${code}`),
+  loginGoogle: (code) => auth.get(`/oauth2/authorization/google?code=${code}`),
+  loginNaver: (code) => auth.get(`/oauth2/authorization/naver?code=${code}`),
 
   // jwt 로그인, 회원가입
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),

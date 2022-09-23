@@ -10,7 +10,7 @@ const Oauth2Naver = () => {
   const navigate = useNavigate();
   let code = new URL(window.location.href).searchParams.get('code');
   console.log('code', code);
-
+  console.log('naver 실행')
   useEffect(() => {
     const fetchUser = async () => {
 

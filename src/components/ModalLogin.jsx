@@ -86,7 +86,9 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   const handleSocialGoogle = async (event) => {
     event.preventDefault();
-    window.location.href = GOOGLE_AUTH_URL;
+    window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&scope=email%20profile&redirect_uri=http://localhost:3000/oauth/callback/google';
+    // window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&scope=email%20profile&redirect_uri=http://localhost:3000/?company=google';
+    
   };
 
   const handleSocialKakao = async (event) => {

@@ -1,7 +1,7 @@
 import Cookies from 'universal-cookie';
 
 // 쿠키 객체 생성
-const cookies = new Cookies();
+export const cookies = new Cookies();
 
 // 쿠키에 저장할 때
 // export const setCookie = (name, value, exp = 5) => {
