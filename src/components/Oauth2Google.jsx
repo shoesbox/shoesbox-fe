@@ -45,9 +45,11 @@ const Oauth2Google = () => {
   }, []);
 
   return (
-    <>
-      <Spinner animation="border" />
-    </>
+    <div className="loading-container">
+      <div className="loading">
+        <span>Loading...</span>
+      </div>
+    </div>
   );
 };
 

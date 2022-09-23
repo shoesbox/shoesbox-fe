@@ -43,9 +43,11 @@ const Oauth2Kakao = () => {
   }, []);
 
   return (
-    <>
-      <Spinner animation="border" />
-    </>
+    <div className="loading-container">
+      <div className="loading">
+        <span>Loading...</span>
+      </div>
+    </div>
   );
 };
 
