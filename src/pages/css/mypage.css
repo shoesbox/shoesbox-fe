@@ -12,39 +12,87 @@
   /* border: 1px solid rebeccapurple; */
   margin-bottom: 50px;
 }
-.image-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 150px;
-  /* border: 1px solid brown; */
+
+@media (max-width: 450px) {
+  .text-profile {
+    margin: 20px;
+    /* border: 1px solid black; */
+    word-break: break-all;
+  }
+  .text-profile > div {
+    font-size: 14px;
+  }
+  .text-profile > p {
+    /* border: 1px solid green; */
+    word-break: break-all;
+    font-size: 14px;
+  }
+  .image-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    /* border: 1px solid brown; */
+  }
+  .image-profile > img {
+    width: 115px;
+    height: 115px;
+    border-radius: 100%;
+    margin-bottom: 5px;
+  }
+  .image-profile > button {
+    border: none;
+    border-radius: 5px;
+    margin: 5px 0;
+    width: 120px;
+    height: 30px;
+    color: #6b9080;
+    background: none;
+    font-size: 14px;
+  }
+  .image-profile > button:nth-child(2) {
+    background: #a4c3b2;
+    color: #fff;
+  }
+  .image-profile > button:nth-child(3):hover {
+    background: #eaf4f4;
+  }
 }
-.image-profile > img {
-  width: 145px;
-  height: 145px;
-  border-radius: 100%;
-  margin-bottom: 5px;
+@media (min-width: 450px) {
+  .text-profile {
+    margin: 20px 50px;
+  }
+  .image-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    /* border: 1px solid brown; */
+  }
+  .image-profile > img {
+    width: 145px;
+    height: 145px;
+    border-radius: 100%;
+    margin-bottom: 5px;
+  }
+  .image-profile > button {
+    border: none;
+    border-radius: 5px;
+    margin: 5px 0;
+    width: 140px;
+    height: 30px;
+    color: #6b9080;
+    background: none;
+  }
+  .image-profile > button:nth-child(2) {
+    background: #a4c3b2;
+    color: #fff;
+  }
+  .image-profile > button:nth-child(3):hover {
+    background: #eaf4f4;
+  }
 }
-.image-profile > button {
-  border: none;
-  border-radius: 5px;
-  margin: 5px 0;
-  width: 140px;
-  height: 30px;
-  color: #6b9080;
-  background: none;
-}
-.image-profile > button:nth-child(2) {
-  background: #a4c3b2;
-  color: #fff;
-}
-.image-profile > button:nth-child(3):hover {
-  background: #eaf4f4;
-}
-.text-profile {
-  margin: 20px 50px;
-  /* border: 1px solid black; */
-}
+
 .text-profile > div {
   height: 50px;
   /* border: 1px solid red; */
@@ -69,6 +117,7 @@
 .friends-box {
   /* border: 1px solid pink; */
   margin-bottom: 50px;
+  padding-right: 10px;
 }
 .friends-box > p:nth-child(1) {
   font-size: 18px;
@@ -94,6 +143,7 @@
 .leave-box {
   /* border: 1px solid pink; */
   margin-bottom: 50px;
+  padding-right: 10px;
 }
 .leave-box > div:nth-child(1) {
   display: flex;
