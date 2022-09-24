@@ -1,9 +1,9 @@
 #!/bin/bash
 
-REPOSITORY=/home/ec2-user/build
+# REPOSITORY=/home/ec2-user/build
 
-echo "> pm2 실행"
+# echo "> pm2 실행"
+# sudo /usr/bin/pm2 kill
+# cd $REPOSITORY
 
-cd $REPOSITORY
-
-pm2 list
+# pm2 list

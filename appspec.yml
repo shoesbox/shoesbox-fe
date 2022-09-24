@@ -2,11 +2,11 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/build
+    destination: /home/ec2-user/app
     overwrite: yes
 
 permissions:
-  - object: /home/ec2-user/build
+  - object: /
     owner: linux
     group: linux
     mode: 755
