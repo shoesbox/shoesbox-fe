@@ -2,16 +2,20 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/app/shoesbox-vanilla
+    destination: /home/ec2-user/build
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu/app/shoesbox-vanilla
+  - object: /home/ec2-user
     owner: ubuntu
     group: ubuntu
     mode: 755
 
 hooks:
+  BeforeInstall:
+    - location: before-deploy.sh
+      timeout: 180
+      runas: root
   AfterInstall:
     - location: after-deploy.sh
       timeout: 180
