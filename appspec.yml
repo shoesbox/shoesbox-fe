@@ -7,8 +7,8 @@ files:
 
 permissions:
   - object: /home/ec2-user/build
-    owner: pglibrary80
-    group: shoesbox
+    owner: linux
+    group: linux
     mode: 755
 
 hooks:
