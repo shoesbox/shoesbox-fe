@@ -6,7 +6,7 @@ files:
     overwrite: yes
 
 permissions:
-  - object: /home/ec2-user
+  - object: /home/ec2-user/build
     owner: pglibrary80
     group: shoesbox
     mode: 755
