@@ -2,21 +2,21 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/app
+    destination: /home/ubuntu/app
     overwrite: yes
 
 permissions:
   - object: /
-    owner: linux
-    group: linux
+    owner: ubuntu
+    group: ubuntu
     mode: 755
 
 hooks:
   BeforeInstall:
     - location: before-deploy.sh
       timeout: 180
-      runas: root
+      runas: ubuntu
   AfterInstall:
     - location: after-deploy.sh
       timeout: 180
-      runas: root
+      runas: ubuntu
