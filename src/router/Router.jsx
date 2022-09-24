@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getCookie } from '../shared/cookie';
 import Header from '../components/Header';
 import MainPage from '../pages/MainPage';
+import AboutUsPage from '../pages/AboutUsPage';
 import WritePage from '../pages/WritePage';
 import EditPage from '../pages/EditPage';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -32,6 +33,7 @@ const Router = () => {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/aboutus" element={<AboutUsPage />} />
         <Route
           path="/write"
           element={isLoggedIn ? <WritePage /> : <Navigate replace to="/" />}
