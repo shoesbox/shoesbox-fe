@@ -41,11 +41,11 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 shoesbox-fe.zip s3://shoes-s3-bucket/build
+        run: aws s3 cp --region ap-northeast-2 shoesbox-fe.zip s3://shoes-s3-bucket
 
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
           --application-name github-deploy-app
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name github-deploy-app-group
-          --s3-location bucket=shoes-s3-bucket,bundleType=zip,key=build/shoesbox-fe.zip
+          --s3-location bucket=shoes-s3-bucket,bundleType=zip,key=shoesbox-fe.zip
