@@ -6,8 +6,6 @@ name: deploy
 on:
   push:
     branches: [dev]
-  pull_request:
-    branches: [dev]
 
 jobs:
   build:
@@ -43,11 +41,11 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./shoesbox-fe.zip s3://shoesbox-aws-bucket/build/
+        run: aws s3 cp --region ap-northeast-2 ./shoesbox-fe.zip s3://myshoesbox-bucket/
 
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
           --application-name my-codedeploy-app
           --deployment-config-name CodeDeployDefault.AllAtOnce
           --deployment-group-name codedeployment-group
-          --s3-location bucket=shoesbox-aws-bucket,bundleType=zip,key=build/shoesbox-fe.zip
+          --s3-location bucket=myshoesbox-bucket,bundleType=zip,key=./shoesbox-fe.zip
