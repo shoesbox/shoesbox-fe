@@ -1,12 +1,9 @@
 #!/bin/bash
 
-REPOSITORY=/home/ubuntu/app/shoesbox-vanilla
+REPOSITORY=/home/ec2-user/build
 
-echo "> npm install"
+echo "> pm2 실행"
 
 cd $REPOSITORY
-npm install express --save
 
-echo "> node.js 배포"
-
-sudo nohup node server.js
+pm2 list
