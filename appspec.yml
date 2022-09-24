@@ -7,8 +7,8 @@ files:
 
 permissions:
   - object: /home/ec2-user
-    owner: ubuntu
-    group: ubuntu
+    owner: pglibrary80
+    group: shoesbox
     mode: 755
 
 hooks:
