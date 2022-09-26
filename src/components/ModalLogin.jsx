@@ -108,7 +108,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
         show={login}
         onHide={handleCloseLogin}
         backdrop="static"
-        fullscreen="sm-down"
+        // fullscreen="sm-down"
       >
         <Modal.Header closeButton>
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
@@ -145,7 +145,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
                 onChange={handleChangeState}
               />
               <div className="description">
-                영어 대소문자 및 숫자 어쩌구 조건식
+                영어 대소문자, 숫자, 특수문자 조합으로 8자 이상
               </div>
             </Form.Group>
             {!signup ? null : (

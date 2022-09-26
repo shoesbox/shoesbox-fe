@@ -124,7 +124,7 @@ const MyPage = ({ memberId }) => {
         .removeAccount(memberId)
         .then((res) => {
           // console.log(res);
-          alert('회원 탈퇴가 완료되었습니다.');
+          // alert('회원 탈퇴가 완료되었습니다.');
           // 회원탈퇴 후 쿠키도 날려주기
           deleteCookie('accessToken');
           deleteCookie('refreshToken');

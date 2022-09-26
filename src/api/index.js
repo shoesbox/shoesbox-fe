@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL;
-const BASE_URL = 'http://3.39.17.19:8080';
-// const BASE_URL = 'http://13.125.161.17';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+// const BASE_URL = 'http://3.39.17.19:8080'; // 찬호님 서버
+// const BASE_URL = 'http://13.125.161.17';  // 인영님 서버
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
