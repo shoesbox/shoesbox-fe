@@ -55,7 +55,7 @@ const MainPage = () => {
               calMemberNickname={calMemberNickname}
             />
           </div>
-
+          
           {/* <div className="wrap2">
             <Calender2 />
           </div> */}
