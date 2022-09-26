@@ -5,15 +5,18 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
 import ModalAlert from './ModalAlret';
-import { getCookie, deleteCookie } from '../shared/cookie';
+import { getCookie, deleteCookie, setCookie } from '../shared/cookie';
 import { apis } from '../api';
 import { BsBellFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 function Header() {
   const [login, setLogin] = useState(false);
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => setLogin(false);
-
+  const userInfos = useSelector(
+    (state) => state?.calender?.userInfo
+  );
   const navigate = useNavigate();
 
   const cookie = getCookie('refreshToken');
