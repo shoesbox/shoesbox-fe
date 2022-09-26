@@ -12,12 +12,13 @@ const ModalAlert = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="alert-list">
-        <div>
+        <div>알림 기능은 현재 준비중!</div>
+        {/* <div>
           <span>어쩌구</span>님이 새로운 일기를 등록했어요!
         </div>
         <div>
           <span>어쩌구</span>님이 일기에 댓글을 등록했어요!
-        </div>
+        </div> */}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={props.onHide}>
