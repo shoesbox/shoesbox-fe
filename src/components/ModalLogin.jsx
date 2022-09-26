@@ -5,8 +5,8 @@ import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
 const domain = 'http://localhost:3000';
-const firebase = 'https://shoesbox.web.app/';
-const ec2 = 'http://shoesbox.today/';
+const firebase = 'https://shoesbox.web.app';
+const ec2 = 'http://shoesbox.today';
 
 const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=${ec2}/oauth/callback/naver`;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=${ec2}/oauth/callback/kakao&response_type=code`;
