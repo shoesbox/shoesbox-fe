@@ -73,6 +73,9 @@
     font-size: 14px;
     color: gray;
   }
+  .friends-list > div {
+    font-size: 14px;
+  }
   .leave-box > p:nth-child(1) {
     font-weight: 500;
   }
