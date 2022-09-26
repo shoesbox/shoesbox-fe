@@ -5,9 +5,12 @@ import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
 const domain = 'http://localhost:3000';
-const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=${domain}/oauth/callback/naver`;
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=${domain}/oauth/callback/kakao&response_type=code`;
-const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&response_type=code&redirect_uri=${domain}/oauth/callback/google&scope=email%20profile`;
+const firebase = 'https://shoesbox.web.app/';
+const ec2 = 'http://shoesbox.today/';
+
+const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=${ec2}/oauth/callback/naver`;
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=${ec2}/oauth/callback/kakao&response_type=code`;
+const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&response_type=code&redirect_uri=${ec2}/oauth/callback/google&scope=email%20profile`;
 
 const ModalLogin = ({ login, handleCloseLogin }) => {
   const [state, setState] = useState({
