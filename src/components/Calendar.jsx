@@ -10,7 +10,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  // 날짜 계산용 state zzzzz
+  // 날짜 계산용 state zzzzzz
   const [date, setDate] = useState(new Date());
   // 달력에 그려주는 state zz
   const [dates, setDates] = useState([]);
@@ -57,9 +57,6 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
     setDates(calenderData);
     console.log('달력 전체 데이터', calenderData);
   }, [calenderData]);
-
-
-
 
   return (
     <>
@@ -118,37 +115,47 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                     let createdYear = date.createdYear;
                     let createdMonth = date.createdMonth;
                     let createdDay = date.createdDay;
-                    let postDate = new Date(createdYear, createdMonth-1, createdDay);
+                    let postDate = new Date(
+                      createdYear,
+                      createdMonth - 1,
+                      createdDay
+                    );
                     let maxDate = new Date();
-                    maxDate.setMonth(maxDate.getMonth()+1);
+                    maxDate.setMonth(maxDate.getMonth() + 1);
                     let minDate = new Date();
-                    minDate.setMonth(minDate.getMonth()-1);
+                    minDate.setMonth(minDate.getMonth() - 1);
                     // console.log(
                     //  minDate.toLocaleDateString(), postDate.toLocaleDateString(), new Date().toLocaleDateString(),
                     //  `minDate: ${postDate > minDate}`,
                     //  `maxDate: ${postDate < maxDate}`
                     // );
-                    if(postDate > minDate && postDate < new Date()){
-                    if (date.postId === 0) {
-                      if (memberId === calMemberId) {
-                        let result = window.confirm(
-                          '선택한 날짜의 일기를 작성하시겠습니까?'
-                        );
-                        if (result === true) {
-                            navigate('/write',{state:{year:createdYear, month: createdMonth, day:createdDay}});
+                    if (postDate > minDate && postDate < new Date()) {
+                      if (date.postId === 0) {
+                        if (memberId === calMemberId) {
+                          let result = window.confirm(
+                            '선택한 날짜의 일기를 작성하시겠습니까?'
+                          );
+                          if (result === true) {
+                            navigate('/write', {
+                              state: {
+                                year: createdYear,
+                                month: createdMonth,
+                                day: createdDay,
+                              },
+                            });
+                          }
+                        } else {
+                          return null;
                         }
                       } else {
-                        return null;
+                        setPostNumber(date.postId);
+                        setIsOpen(true);
                       }
                     } else {
-                      setPostNumber(date.postId); 
-                      setIsOpen(true);
+                      // alert('미래의 일기는 작성이 불가합니다.');
+                      return null;
                     }
-                  }else{
-                    alert('일기를 쓰실 수 없으세용')
-                  }
-                }
-                }
+                  }}
                 >
                   {/* {date.thumbnailUrl ? (
                   <img src={date.thumbnailUrl} alt={date} />

@@ -6,8 +6,6 @@ name: deploy
 on:
   push:
     branches: [dev]
-  pull_request:
-    branches: [dev]
 
 jobs:
   build:
@@ -15,13 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-      - name: Generate Environment Variables File for Production
-        run: |
-          echo "REACT_APP_KAKAO_AUTH_URL=$REACT_APP_KAKAO_AUTH_URL" >> .env
-          echo "REACT_APP_BASE_URL=$REACT_APP_BASE_URL" >> .env
-        env:
-          REACT_APP_KAKAO_AUTH_URL: ${{ secrets.REACT_APP_KAKAO_AUTH_URL }}
-          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+#       - name: Generate Environment Variables File for Production
+#         run: |
+#           echo "REACT_APP_KAKAO_AUTH_URL=$REACT_APP_KAKAO_AUTH_URL" >> .env
+#           echo "REACT_APP_BASE_URL=$REACT_APP_BASE_URL" >> .env
+#         env:
+#           REACT_APP_KAKAO_AUTH_URL: ${{ secrets.REACT_APP_KAKAO_AUTH_URL }}
+#           REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
         
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
@@ -43,11 +41,11 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./shoesbox-fe.zip s3://shoesbox-aws-bucket/build/
+        run: aws s3 cp --region ap-northeast-2 shoesbox-fe.zip s3://shoes-s3-bucket
 
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
-          --application-name my-codedeploy-app
+          --application-name github-deploy-app
           --deployment-config-name CodeDeployDefault.AllAtOnce
-          --deployment-group-name codedeployment-group
-          --s3-location bucket=shoesbox-aws-bucket,bundleType=zip,key=build/shoesbox-fe.zip
+          --deployment-group-name github-deploy-app-group
+          --s3-location bucket=shoes-s3-bucket,bundleType=zip,key=shoesbox-fe.zip

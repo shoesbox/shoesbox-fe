@@ -1,20 +1,14 @@
 import './css/modaldetail.css';
-import { useRef, useState, useEffect } from 'react';
-import { Button, Carousel, Container, Modal } from 'react-bootstrap';
+import { useEffect } from 'react';
+import { Button, Carousel, Modal } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getDetailThunk,
-  getJsonCommentThunk,
-  getJsonDetailThunk,
-  getCommentThunk,
-  deleteDetailThunk,
-} from '../features/detailSlice';
+import { getDetailThunk, deleteDetailThunk } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
-const ModalDetail = ({ postId,...props }) => {
+const ModalDetail = ({ postId, ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const memberId = getCookie('memberId');
@@ -45,12 +39,10 @@ const ModalDetail = ({ postId,...props }) => {
 
   useEffect(() => {
     if (postId !== (null || undefined)) {
-      // dispatch(getJsonDetailThunk(postId));
       dispatch(getDetailThunk(postId));
       // console.log('result', result);
     }
   }, [postId]);
-
 
   const ImageCarousel = () => {
     return (
@@ -91,10 +83,9 @@ const ModalDetail = ({ postId,...props }) => {
           <hr />
 
           {images?.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />}
-          {images?.length > 1 && <hr />}
+          {images?.length >= 1 && <hr />}
 
           <div className="detail-content">{content}</div>
-          {/* <hr /> */}
           <br />
           {parseInt(memberId) === parseInt(writeMemberId) && (
             <div className="detail-fix-del-btns">

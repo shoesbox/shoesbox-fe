@@ -1,0 +1,18 @@
+.about-wrap {
+  margin: 3%;
+}
+.personal-profile-box {
+  display: flex;
+  padding: 10px;
+  border: 1px solid red;
+}
+.personal-profile-box > img {
+  width: 25%;
+  max-width: 150px;
+  border-radius: 100%;
+  border: 1px solid blue;
+}
+.personal-profile-box > div {
+  display: flex;
+  flex-direction: column;
+}

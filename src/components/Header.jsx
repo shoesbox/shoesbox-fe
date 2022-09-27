@@ -8,26 +8,27 @@ import ModalAlert from './ModalAlret';
 import { getCookie, deleteCookie, setCookie } from '../shared/cookie';
 import { apis } from '../api';
 import { BsBellFill } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsLogin } from '../features/loginSlice';
 
 function Header() {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const cookie = getCookie('refreshToken');
+  const isLoggedIn = useSelector((state) => state.login.value);
+  useEffect(() => {
+    if (cookie !== undefined) {
+      dispatch(setIsLogin(true));
+    } else {
+      dispatch(setIsLogin(false));
+    }
+  }, [cookie]);
+
+  // 로그인 모달
   const [login, setLogin] = useState(false);
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => setLogin(false);
-  const userInfos = useSelector(
-    (state) => state?.calender?.userInfo
-  );
-  const navigate = useNavigate();
-
-  const cookie = getCookie('refreshToken');
-  const [isLoggedIn, setisLoggedIn] = useState(false);
-  useEffect(() => {
-    if (cookie !== undefined) {
-      setisLoggedIn(true);
-    } else {
-      setisLoggedIn(false);
-    }
-  }, [cookie]);
 
   // 알림창 모달
   const [show, setShow] = useState(false);

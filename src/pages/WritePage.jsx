@@ -109,9 +109,9 @@ const WritePage = () => {
   useEffect(() => {
     if (formDataTxt !== undefined) {
       // dispatch(postJsonDetailThunk(formDataTxt));
-      formData.append('year', postDate.year)
-      formData.append('month', postDate.month)
-      formData.append('day', postDate.day)
+      formData.append('year', postDate.year);
+      formData.append('month', postDate.month);
+      formData.append('day', postDate.day);
       formData.append('title', titleRef.current.value);
       formData.append('content', contentRef.current.value);
       Array.from(files).forEach((file) => {

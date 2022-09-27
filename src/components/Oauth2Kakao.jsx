@@ -4,14 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
-const Oauth2Naver = () => {
+const Oauth2Kakao = () => {
   const navigate = useNavigate();
+  const code = new URL(window.location.href).searchParams.get('code');
+  console.log('kakao', code);
+
   useEffect(() => {
     const fetchUser = async () => {
-      const code = new URL(window.location.href).searchParams.get('code');
-      console.log('naver', code);
       if (code) {
-        apis.loginNaver(code).then((res) => {
+        apis.loginKakao(code).then((res) => {
           const token = res.data?.data;
           console.log(token);
           setCookie(
@@ -29,7 +30,7 @@ const Oauth2Naver = () => {
           setCookie('nickname', token.nickname);
         });
       } else {
-        alert('네이버 로그인에 실패했습니다.');
+        alert('카카오 로그인에 실패했습니다.');
       }
     };
     fetchUser();
@@ -48,4 +49,4 @@ const Oauth2Naver = () => {
   );
 };
 
-export default Oauth2Naver;
+export default Oauth2Kakao;

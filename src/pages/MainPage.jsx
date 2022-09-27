@@ -1,68 +1,26 @@
-import "./css/mainpage.css";
-import { useState, useEffect, useRef } from "react";
-import Calendar from "../components/Calendar";
-import { Calender2 } from "../components/Calendar2";
-import WriteFixedBtn from "../components/WriteFixedBtn";
-import FriendsList from "../components/FriendsList";
-import { getCookie, setCookie, cookies } from "../shared/cookie";
-import { apis } from "../api";
-import { useSelector } from "react-redux";
-import { useLocation, redirect, useNavigate } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
+import './css/mainpage.css';
+import { useState, useEffect } from 'react';
+import Calendar from '../components/Calendar';
+import { Calender2 } from '../components/Calendar2';
+import WriteFixedBtn from '../components/WriteFixedBtn';
+import FriendsList from '../components/FriendsList';
+import { getCookie } from '../shared/cookie';
+import { apis } from '../api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLogin } from '../features/loginSlice';
 
 const MainPage = () => {
-  const cookie = getCookie("refreshToken");
-  // const standard = getCookie('standard');
-  let standard = window.sessionStorage.getItem("standard");
-  const location = useLocation();
-  let loading = new URL(window.location.href).searchParams.get("loading");
-  // console.log(loading);
-  const navigate = useNavigate();
-  const infos = useRef(location.state);
-  // const userInfos = useRef(useSelector((state) => state?.calender?.userInfo));
-  const [isLoggedIn, setisLoggedIn] = useState(false);
-  // let code = new URL(window.location.href).searchParams.get('code');
-  // console.log('code', code);
-  // useEffect(() => {
-  //  fetchUser();
-  // }, []);
-
+  const dispatch = useDispatch();
+  const cookie = getCookie('refreshToken');
+  const isLoggedIn = useSelector((state) => state.login.value);
   useEffect(() => {
     if (cookie !== undefined) {
-      setisLoggedIn(true);
+      dispatch(setIsLogin(true));
     } else {
-      setisLoggedIn(false);
+      dispatch(setIsLogin(false));
     }
   }, [cookie]);
 
-  useEffect(() => {
-    if (infos.current !== null) {
-      console.log(infos);
-      window.sessionStorage.setItem("standard", "true");
-      setCookie(
-        "accessToken",
-        infos.current.accessToken,
-        infos.current.accessTokenExpireDate
-      );
-      setCookie(
-        "refreshToken",
-        infos.current.refreshToken,
-        infos.current.refreshTokenExpireDate
-      );
-      setCookie("memberId", infos.current.memberId);
-      setCookie("email", infos.current.email);
-      setCookie("nickname", infos.current.nickname);
-
-      setTimeout(() => {
-        window.location.replace("/?loading=true");
-        if (cookie.length > 0 && standard === "true") {
-          window.sessionStorage.setItem("standard", "false");
-          window.location.replace("/?loading=false");
-          navigate(location.pathname, {});
-        }
-      }, 50);
-    }
-  }, [infos]);
 
   // 친구목록 리덕스에서 꺼내오든가
   const friendList = useSelector((state) => state.friend.friendList);
@@ -85,9 +43,7 @@ const MainPage = () => {
 
   return (
     <>
-      {loading === "true" ? (
-        <Spinner animation="border" />
-      ) : isLoggedIn ? (
+      {isLoggedIn ? (
         <>
           <FriendsList
             friendList={friendList}

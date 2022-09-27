@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
-
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
-const BASE_URL = 'http://13.125.161.17';
-const URL = 'http://13.125.161.17';
+const BASE_URL = 'http://3.39.17.19:8080';
+// const BASE_URL = 'http://13.125.161.17';
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -106,9 +105,9 @@ apiForm.interceptors.response.use(
 // 4. apis
 export const apis = {
   // 소셜 로그인
-  loginKakao: (code) => auth.get(`/oauth2/authorization/kakao?code=${code}`),
-  loginGoogle: (code) => auth.get(`/oauth2/authorization/google?code=${code}`),
-  loginNaver: (code) => auth.get(`/oauth2/authorization/naver?code=${code}`),
+  loginKakao: (code) => auth.get(`oauth2/authorization/kakao?code=${code}`),
+  loginGoogle: (code) => auth.get(`oauth2/authorization/google?code=${code}`),
+  loginNaver: (code) => auth.get(`oauth2/authorization/naver?code=${code}`),
 
   // jwt 로그인, 회원가입
   joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
@@ -124,7 +123,8 @@ export const apis = {
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
   writeDaily: (payload) => apiForm.post('/api/posts', payload),
   deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
-  reWriteDetail: (postId, payload) => api.patch(`/api/posts/${postId}`, payload),
+  reWriteDetail: (postId, payload) =>
+    api.patch(`/api/posts/${postId}`, payload),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
@@ -144,7 +144,6 @@ export const apis = {
     api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
   cancleFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancle`),
-  
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

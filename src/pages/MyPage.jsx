@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
 import ModalProfileUpdate from '../components/ModalProfileUpdate';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 const MyPage = ({ memberId }) => {
   // 여기서 멤버아이디 끌어다 쓰기랑 프롭으로 내려주기랑 차이?
@@ -42,16 +42,6 @@ const MyPage = ({ memberId }) => {
   };
 
   // // 화면 렌더링 시 통신하기 [1]
-  // useEffect(() => {
-  //   showData();
-  // }, [state.profileImageUrl]);
-
-  // // useEffect 분리해서 쓰면 잘 되는데
-  // useEffect(() => {
-  //   showFriends();
-  // }, [friends]);
-
-  // 이건 왜 안되냐 - 아니네 잘되네,,
   useEffect(() => {
     showData();
     showFriends();
@@ -114,10 +104,12 @@ const MyPage = ({ memberId }) => {
   const handleRemoveFriend = (deleteMemberId, nickname) => {
     let result = window.confirm(`정말로 ${nickname}님을 삭제하시겠어요?`);
     if (result === true) {
-      apis.deleteFriend(deleteMemberId)
-      
-      let newFriendsList = friends.filter(each => each.memberId !== deleteMemberId)
-      setFriends(newFriendsList)
+      apis.deleteFriend(deleteMemberId);
+
+      const newFriendsList = friends.filter(
+        (friend) => friend.memberId !== deleteMemberId
+      );
+      setFriends(newFriendsList);
     }
   };
 
@@ -203,9 +195,6 @@ const MyPage = ({ memberId }) => {
               {friend.memberNickname}
             </div>
           ))}
-          {/* <div>이름엄청긴친구1</div>
-          <div>이름엄청긴친구22222</div>
-          <div>이름엄청긴친구333</div> */}
         </div>
       </div>
       <div className="leave-box">
