@@ -130,6 +130,17 @@
   object-fit: cover;
 }
 /* 달력 숫자 포인트 */
+#today {
+  background-color: #6b90807c;
+  color: #fff;
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
 .date > div {
   background-color: #f6fff87e;
   border-radius: 100%;
