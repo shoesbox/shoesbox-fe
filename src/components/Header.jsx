@@ -39,7 +39,7 @@ function Header() {
     apis
       .logoutUser()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         deleteCookie('accessToken');
         deleteCookie('refreshToken');
         deleteCookie('memberId');
@@ -48,7 +48,7 @@ function Header() {
         window.location.replace('/');
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        // console.log(err.response.data.message);
         const errMessage = err.response.data.message;
         alert(errMessage);
         deleteCookie('accessToken');
@@ -56,6 +56,7 @@ function Header() {
         deleteCookie('memberId');
         deleteCookie('nickname');
         deleteCookie('email');
+        window.location.replace('/');
       });
   };
 

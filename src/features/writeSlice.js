@@ -27,7 +27,7 @@ export const putDetailThunk = createAsyncThunk(
   '/api/postdetailthunk',
   async ({ postId, payload }, thunkAPI) => {
     try {
-      const data = await apis.reWriteDetail(postId, payload);
+      const data = await apis.editDetail(postId, payload);
       const res = data.data.data;
       // console.log('writeDailythunk', postId, payload);
       if (res) {

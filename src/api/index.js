@@ -121,7 +121,7 @@ export const apis = {
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
   writeDaily: (payload) => apiForm.post('/api/posts', payload),
   deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
-  reWriteDetail: (postId, payload) =>
+  editDetail: (postId, payload) =>
     api.patch(`/api/posts/${postId}`, payload),
 
   // 게시글 상세 댓글 api - done

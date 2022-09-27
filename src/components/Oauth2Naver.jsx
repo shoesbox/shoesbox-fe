@@ -15,7 +15,7 @@ const Oauth2Naver = () => {
       if (code) {
         apis.loginNaver(code).then((res) => {
           const token = res.data?.data;
-          console.log(token);
+          // console.log(token);
           setCookie(
             'accessToken',
             token.accessToken,

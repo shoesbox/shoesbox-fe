@@ -21,7 +21,7 @@ const ModalProfileUpdate = (props) => {
     apis
       .updateUserData(props.memberId, formData)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         props.setState({ ...props.state, profileImageUrl: imgFile });
         props.onHide();
       })
