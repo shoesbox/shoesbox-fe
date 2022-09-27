@@ -1,6 +1,7 @@
 {
   "name": "shoesbox",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@fontsource/roboto": "^4.5.8",
@@ -12,6 +13,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "date-fns": "^2.29.3",
+    "express": "^4.18.1",
     "firebase-tools": "^11.9.0",
     "json-server": "^0.17.0",
     "react": "^18.2.0",

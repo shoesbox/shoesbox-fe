@@ -5,11 +5,11 @@
   margin: 30px auto;
   padding: 20px;
   max-width: 800px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .profile-box {
   display: flex;
-  border: 1px solid rebeccapurple;
+  /* border: 1px solid rebeccapurple; */
   margin-bottom: 50px;
 }
 
@@ -22,7 +22,7 @@
   .text-profile > div {
     height: 50px;
     font-size: 14px;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
   }
   .text-profile > div:nth-child(1) > p {
     font-size: 18px;
@@ -32,7 +32,7 @@
     align-items: center;
   }
   .text-profile > p {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     word-break: break-all;
     font-size: 14px;
   }
@@ -41,7 +41,7 @@
     flex-direction: column;
     align-items: center;
     width: 150px;
-    border: 1px solid brown;
+    /* border: 1px solid brown; */
   }
   .image-profile > img {
     width: 115px;
@@ -73,6 +73,9 @@
     font-size: 14px;
     color: gray;
   }
+  .friends-list > div {
+    font-size: 14px;
+  }
   .leave-box > p:nth-child(1) {
     font-weight: 500;
   }
@@ -98,7 +101,7 @@
   .text-profile > div {
     height: 50px;
     font-size: 16px;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
   }
   .text-profile > div:nth-child(1) > p {
     font-size: 20px;
@@ -172,7 +175,7 @@
 }
 
 .friends-box {
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
   margin-bottom: 50px;
 }
 .friends-list {
@@ -190,7 +193,7 @@
 }
 
 .leave-box {
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
   margin-bottom: 50px;
 }
 .leave-box > div:nth-child(1) {
