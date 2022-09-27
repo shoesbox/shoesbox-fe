@@ -51,6 +51,11 @@ function Header() {
         console.log(err.response.data.message);
         const errMessage = err.response.data.message;
         alert(errMessage);
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
+        deleteCookie('memberId');
+        deleteCookie('nickname');
+        deleteCookie('email');
       });
   };
 
