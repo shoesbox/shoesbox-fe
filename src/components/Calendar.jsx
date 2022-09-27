@@ -55,11 +55,12 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
 
   useEffect(() => {
     setDates(calenderData);
-    console.log('달력 전체 데이터', calenderData);
+    // console.log('달력 전체 데이터', calenderData);
   }, [calenderData]);
 
   // 오늘날짜 표시용 선언
-  const today = date.getDate();
+  const today = new Date().getDate();
+  const thisMonth = new Date().getMonth() + 1;
 
   return (
     <>
@@ -163,7 +164,8 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                   {/* {date.thumbnailUrl ? (
                   <img src={date.thumbnailUrl} alt={date} />
                 ) : null} */}
-                  {today === parseInt(date.createdDay) ? (
+                  {today === parseInt(date.createdDay) &&
+                  thisMonth === date.createdMonth ? (
                     <div id="today">{date.createdDay}</div>
                   ) : (
                     <div>{date.createdDay}</div>
