@@ -112,6 +112,9 @@ export const apis = {
   loginUser: (userData) => auth.post('/api/members/auth/login', userData),
   logoutUser: () => api.get('/api/members/logout'),
 
+  // guest 로그인
+  guestUser: ()=>api.post('/api/members/auth/login/guest'),
+
   // 메인페이지 일기 조회
   // getTodayMyPosts: () => api.get('/api/posts'),
   getTargetPosts: (memberId, year, month) =>

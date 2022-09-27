@@ -80,7 +80,7 @@ function Header() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               {isLoggedIn ? (
-                <Nav.Link onClick={() => navigate('/')} className="menu">
+                <Nav.Link onClick={() => window.location.replace('/')} className="menu">
                   My Moments
                 </Nav.Link>
               ) : null}

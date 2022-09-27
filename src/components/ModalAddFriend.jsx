@@ -121,7 +121,7 @@ const ModalAddFriend = (props) => {
     dispatch(getRequestedFriendListThunk());
     dispatch(getRequestFriendListThunk());
     // console.log(requestFriendList);
-  }, []);
+  }, [props]);
 
   return (
     <Modal {...props} centered size="md" fullscreen="sm-down">
