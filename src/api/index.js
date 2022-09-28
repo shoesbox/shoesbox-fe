@@ -4,8 +4,8 @@ import { getCookie } from '../shared/cookie';
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const ALARM_URL = 'http://15.164.250.22';
 // const BASE_URL ='http://15.164.250.22';
-// const BASE_URL ='http://13.125.161.17';
-const BASE_URL ='https://webstudy.shop';
+const BASE_URL ='http://13.125.161.17';
+// const BASE_URL ='https://webstudy.shop';
 
 
 // 1. Axios instance 생성
