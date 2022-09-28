@@ -14,6 +14,7 @@ const loginSlice = createSlice({
     },
     setAlarmList:(state, action) =>{
       // state.alarmList = action.payload;
+      console.log(action.payload);
       const alarmList = action.payload;
       let newList = alarmList.map((a)=>{
        let msg = '';
