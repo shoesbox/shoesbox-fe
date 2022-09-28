@@ -10,7 +10,7 @@ const ec2 = 'http://shoesbox.today';
 
 const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=${ec2}/oauth/callback/naver`;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=${ec2}/oauth/callback/kakao&response_type=code`;
-const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&response_type=code&redirect_uri=${ec2}/oauth/callback/google&scope=email%20profile`;
+const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&response_type=code&redirect_uri=${firebase}/oauth/callback/google&scope=email%20profile`;
 
 const ModalLogin = ({ login, handleCloseLogin }) => {
   const [state, setState] = useState({
@@ -119,8 +119,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   const handleSocialGoogle = async (event) => {
     event.preventDefault();
-    window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&scope=email%20profile&redirect_uri=http://localhost:3000/oauth/callback/google';
-    // window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&scope=email%20profile&redirect_uri=http://localhost:3000/?company=google';
+    window.location.href = GOOGLE_AUTH_URL;
     
   };
 
