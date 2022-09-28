@@ -63,7 +63,10 @@ const MyPage = ({ memberId }) => {
           profileImageUrl: 'https://i.ibb.co/N27FwdP/image.png',
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // console.log(err);
+        alert(err.response.data.errorDetails.apierror.message);
+      });
   };
 
   // 닉네임 수정/저장취소 토글 버튼
@@ -97,19 +100,28 @@ const MyPage = ({ memberId }) => {
         setState({ ...state, nickname: newNickname });
         toggleIsEdit();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // console.log(err);
+        alert(err.response.data.errorDetails.apierror.message);
+      });
   };
 
   // 친구삭제 로직
   const handleRemoveFriend = (deleteMemberId, nickname) => {
     let result = window.confirm(`정말로 ${nickname}님을 삭제하시겠어요?`);
     if (result === true) {
-      apis.deleteFriend(deleteMemberId);
-
-      const newFriendsList = friends.filter(
-        (friend) => friend.memberId !== deleteMemberId
-      );
-      setFriends(newFriendsList);
+      apis
+        .deleteFriend(deleteMemberId)
+        .then((res) => {
+          const newFriendsList = friends.filter(
+            (friend) => friend.memberId !== deleteMemberId
+          );
+          setFriends(newFriendsList);
+        })
+        .catch((err) => {
+          // console.log(err);
+          alert(err.response.data.errorDetails.apierror.message);
+        });
     }
   };
 
@@ -133,7 +145,7 @@ const MyPage = ({ memberId }) => {
           deleteCookie('email');
           window.location.replace('/');
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err.response.data.errorDetails.apierror.message));
     }
   };
 
