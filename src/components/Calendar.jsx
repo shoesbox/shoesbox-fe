@@ -58,6 +58,10 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
     // console.log('달력 전체 데이터', calenderData);
   }, [calenderData]);
 
+  // 오늘날짜 표시용 선언
+  const today = new Date().getDate();
+  const thisMonth = new Date().getMonth() + 1;
+
   return (
     <>
       {loading ? (
@@ -160,7 +164,13 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                   {/* {date.thumbnailUrl ? (
                   <img src={date.thumbnailUrl} alt={date} />
                 ) : null} */}
-                  <div>{date.createdDay}</div>
+                  {today === parseInt(date.createdDay) &&
+                  thisMonth === date.createdMonth ? (
+                    <div id="today">{date.createdDay}</div>
+                  ) : (
+                    <div>{date.createdDay}</div>
+                  )}
+                  {/* <div>{date.createdDay}</div> */}
                 </div>
               ))}
             </div>

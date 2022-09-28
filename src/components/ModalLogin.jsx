@@ -8,8 +8,8 @@ const domain = 'http://localhost:3000';
 const firebase = 'https://shoesbox.web.app';
 const ec2 = 'http://shoesbox.today';
 
-const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=${ec2}/oauth/callback/naver`;
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=${ec2}/oauth/callback/kakao&response_type=code`;
+const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=${firebase}/oauth/callback/naver`;
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=${firebase}/oauth/callback/kakao&response_type=code`;
 const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=485224332964-qu4rqe2munogvisuphhuljf4mc6fliuh.apps.googleusercontent.com&response_type=code&redirect_uri=${firebase}/oauth/callback/google&scope=email%20profile`;
 
 const ModalLogin = ({ login, handleCloseLogin }) => {
@@ -139,7 +139,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
         show={login}
         onHide={handleCloseLogin}
         backdrop="static"
-        // fullscreen="sm-down"
+        fullscreen="sm-down"
       >
         <Modal.Header closeButton>
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
@@ -195,30 +195,30 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
                 />
               </Form.Group>
             )}
-            <br />
-            <div className="social">
-              <button
-                className="social__button social__button--naver"
-                onClick={handleLoginNaver}
-              />
-              <button
-                className="social__button social__button--kakao"
-                onClick={handleSocialKakao}
-              />
-              <button
-                className="social__button social__button--google"
-                onClick={handleSocialGoogle}
-              />
-            </div>
-            <br />
-            <span>
-              {!signup ? '아직 회원이 아니신가요?' : '계정이 이미 있으신가요?'}
-            </span>
-            <span className="change-login" onClick={() => setSignup(!signup)}>
-              {!signup ? ' 회원가입' : ' 로그인'}
-            </span>
-            <br />
           </Form>
+          <br />
+          <div className="social">
+            <button
+              className="social__button social__button--naver"
+              onClick={handleLoginNaver}
+            />
+            <button
+              className="social__button social__button--kakao"
+              onClick={handleSocialKakao}
+            />
+            {/* <button
+              className="social__button social__button--google"
+              onClick={handleSocialGoogle}
+            /> */}
+          </div>
+          <br />
+          <span>
+            {!signup ? '아직 회원이 아니신가요?' : '계정이 이미 있으신가요?'}
+          </span>
+          <span className="change-login" onClick={() => setSignup(!signup)}>
+            {!signup ? ' 회원가입' : ' 로그인'}
+          </span>
+          <br />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseLogin}>

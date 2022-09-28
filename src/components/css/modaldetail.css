@@ -20,7 +20,8 @@ img {
 .detail-content {
   text-align: justify;
   padding: 0 5px;
-  white-space: pre;
+  white-space: pre-line;
+  word-break: break-all;
 }
 
 .detail-fix-del-btns {

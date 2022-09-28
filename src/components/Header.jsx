@@ -54,7 +54,7 @@ function Header() {
     apis
       .logoutUser()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         deleteCookie('accessToken');
         deleteCookie('refreshToken');
         deleteCookie('memberId');
@@ -63,9 +63,15 @@ function Header() {
         window.location.replace('/');
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        // console.log(err.response.data.message);
         const errMessage = err.response.data.message;
         alert(errMessage);
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
+        deleteCookie('memberId');
+        deleteCookie('nickname');
+        deleteCookie('email');
+        window.location.replace('/');
       });
   };
 
@@ -95,7 +101,10 @@ function Header() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               {isLoggedIn ? (
-                <Nav.Link onClick={() => window.location.replace('/')} className="menu">
+                <Nav.Link
+                  onClick={() => window.location.replace('/')}
+                  className="menu"
+                >
                   My Moments
                 </Nav.Link>
               ) : null}

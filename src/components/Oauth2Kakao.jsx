@@ -7,14 +7,14 @@ import { setCookie } from '../shared/cookie';
 const Oauth2Kakao = () => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get('code');
-  console.log('kakao', code);
+  // console.log('kakao', code);
 
   useEffect(() => {
     const fetchUser = async () => {
       if (code) {
         apis.loginKakao(code).then((res) => {
           const token = res.data?.data;
-          console.log(token);
+          // console.log(token);
           setCookie(
             'accessToken',
             token.accessToken,

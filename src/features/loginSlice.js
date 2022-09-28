@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = { 
   value: false,
@@ -36,4 +35,3 @@ const loginSlice = createSlice({
 
 export const { setIsLogin, setAlarmList } = loginSlice.actions;
 export default loginSlice.reducer;
-

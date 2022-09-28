@@ -74,7 +74,9 @@ const ModalDetail = ({ postId, ...props }) => {
           <div className="detail-titlebox">
             <span>
               <strong>{nickname}</strong>
-              <Button>
+              <Button
+                onClick={() => alert('친구에게 전화로 마음을 전해보세요!')}
+              >
                 <BsFillTelephoneForwardFill />
               </Button>
             </span>

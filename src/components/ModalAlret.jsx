@@ -54,7 +54,7 @@ const AlarmList =  ({alarmList}) =>{
     <Modal {...props} centered size="md">
       <Modal.Header closeButton>
         <Modal.Title>
-          <div>알림 🍧</div>
+          <div>알림 🧁</div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="alert-list">
