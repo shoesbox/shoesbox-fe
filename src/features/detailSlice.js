@@ -153,6 +153,7 @@ export const addCommentThunk = createAsyncThunk(
       const comments = data.data.data;
       return comments;
     } catch (err) {
+      alert(err.response.data.errorDetails.apierror.message);
       return thunkAPI.rejectWithValue('addCommentThunkErr', err.response.data);
     }
   }

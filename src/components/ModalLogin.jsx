@@ -88,9 +88,39 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
     }
   };
 
+  const handleGuest = async () =>{
+    apis.guestUser().then((res) => {
+      // console.log('res', res);
+      // console.log('res.data', res.data);
+      const token = res.data.data;
+      setCookie(
+        'accessToken',
+        token.accessToken,
+        token.accessTokenExpireDate
+      );
+      setCookie(
+        'refreshToken',
+        token.refreshToken,
+        token.refreshTokenExpireDate
+      );
+      setCookie('memberId', token.memberId);
+      setCookie('email', token.email);
+      setCookie('nickname', token.nickname);
+      // alert('로그인 성공');
+      window.location.reload(true);
+    })
+    .catch((err) => {
+      // console.log(err);
+      const errMessage = err.response?.data.errorDetails.apierror.message;
+      // console.log(errMessage);
+      alert(errMessage);
+    });
+  }
+
   const handleSocialGoogle = async (event) => {
     event.preventDefault();
     window.location.href = GOOGLE_AUTH_URL;
+    
   };
 
   const handleSocialKakao = async (event) => {
@@ -203,6 +233,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               Sign Up
             </Button>
           )}
+          <Button onClick={()=>handleGuest()}>Guest</Button>
         </Modal.Footer>
       </Modal>
     </>

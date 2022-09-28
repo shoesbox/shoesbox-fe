@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const ALARM_URL = 'http://15.164.250.22';
+// const BASE_URL ='http://15.164.250.22';
+// const BASE_URL ='http://13.125.161.17';
+const BASE_URL ='https://webstudy.shop';
+
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -41,7 +46,7 @@ const auth = axios.create({
   baseURL: BASE_URL,
   headers: {
     credentials: true,
-    'Content-Type': 'application/json;charset=utf-8',
+    // 'Content-Type': 'application/json;charset=utf-8',
   },
 });
 
@@ -112,6 +117,9 @@ export const apis = {
   loginUser: (userData) => auth.post('/api/members/auth/login', userData),
   logoutUser: () => api.get('/api/members/logout'),
 
+  // guest 로그인
+  guestUser: () => api.post('/api/members/auth/login/guest'),
+
   // 메인페이지 일기 조회
   // getTodayMyPosts: () => api.get('/api/posts'),
   getTargetPosts: (memberId, year, month) =>
@@ -142,6 +150,10 @@ export const apis = {
     api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
   cancleFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancle`),
+
+  // 알람 기능
+  getAlarmList: () => api.get('/api/alarm'),
+  deleteAlarm: (alarmId) => api.delete(`/api/alarm/${alarmId}`),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

@@ -6,7 +6,6 @@ import { setCookie } from '../shared/cookie';
 
 const Oauth2Naver = () => {
   const navigate = useNavigate();
-
   useEffect(() => {
     const fetchUser = async () => {
       const code = new URL(window.location.href).searchParams.get('code');
