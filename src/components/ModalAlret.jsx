@@ -3,7 +3,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useState, useEffect, useRef, memo, Fragment } from "react";
 import { apis } from "../api";
 import { useSelector } from "react-redux";
-import { BsCheckLg, BsCheckCircle, BsX } from "react-icons/bs";
+import { BsCheckLg, BsCheckCircle, BsX, BsCheckAll } from "react-icons/bs";
 import ModalDetail from "./ModalDetail";
 
 const ModalAlert = (props) => {
@@ -17,7 +17,7 @@ const ModalAlert = (props) => {
 
    const deleteOneAlarm = async (alarmId)=>{
     try{
-    const {data} = await apis.deletAlarm(alarmId);
+    const {data} = await apis.deleteAlarm(alarmId);
       console.log(data);
     }catch(err){
       console.log(err);
@@ -39,11 +39,10 @@ const ModalAlert = (props) => {
   }, [alarmList]);
 
   useEffect(() => {
-    if(alarmId!==undefined){
-    alert(`${alarmId} 삭제할꺼임`)
-    }
+    // if(alarmId!==undefined){
+    // alert(`${alarmId} 삭제할꺼임`)
+    // }
   }, [alarmId]);
-
 
   const AlarmList = ({ alarmList }) => {
     return alarmList?.map((alarm, idx) => (
@@ -60,10 +59,13 @@ const ModalAlert = (props) => {
         </span>
         <Button onClick={()=>{
             setAlarmId(alarm.alarmId)
-          
+  if(alarmId!==undefined){
+    alert(`${alarmId} 삭제할꺼임`)
+    }
             }}  >
           <BsX/>
           </Button>
+          <br/>
         </Fragment>
     ));
   };
@@ -73,7 +75,9 @@ const ModalAlert = (props) => {
     <Modal {...props} centered size="md">
       <Modal.Header closeButton>
         <Modal.Title>
-          <div>알림 🍧</div>
+          <div>알림 🍧
+          {alarmList.length>0 &&<Button>전체알림 삭제<BsCheckAll/></Button>}
+          </div> 
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="alert-list">
