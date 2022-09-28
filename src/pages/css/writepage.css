@@ -47,6 +47,11 @@
   color: red;
 }
 
+.write-file-alert {
+ font-size: smaller;
+ color: gray;
+}
+
 .write-content {
   width: 100%;
   height: 395px;

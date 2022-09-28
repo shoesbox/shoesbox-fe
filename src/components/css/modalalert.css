@@ -1,9 +1,13 @@
 .alert-list {
-  display: flex;
-  flex-direction: column;
+  display: flexbox;
+  /* flex-direction: column; */
   justify-content: center;
   gap: 5px;
 }
 .alert-list > div {
   /* border: 1px solid red; */
+}
+.alert-list > span:hover {
+  text-decoration : underline wavy paleturquoise;
+  /* text-decoration-style: wavy; */
 }

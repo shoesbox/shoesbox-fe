@@ -142,7 +142,7 @@ function Header() {
       <ModalAlert
         show={show}
         onHide={handleClose}
-        backdrop="static"
+        // backdrop="static"
         // alarmList={alarmList}
       />
       <Alarms/>

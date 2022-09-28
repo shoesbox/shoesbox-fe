@@ -26,38 +26,57 @@ const memberId = getCookie('memberId');
 }
 
   useEffect(() => {
-    // console.log("listening", listening);
-    // if (!listening && memberId!==undefined) {
     if (!!window.EventSource&& memberId!==undefined) {
-      eventSource.current = new EventSource(ALARM_URL+`/api/sub/?id=${memberId}`,{ withCredentials: true }); //구독
-    //   msetEventSource(eventSource);
-      //   console.log("eventSource", eventSource);
+        setTimeout(()=>{eventSource.current = new EventSource(ALARM_URL+`/api/sub/?id=${memberId}`,{ withCredentials: true });
+        eventSource.current.onopen = event => {
+            console.log("connection is opened");
+          };
+    
+          eventSource.current.onmessage = event => {
+            // console.log("event", event);
+            console.log("result", event.data);
+            toastConst(event.data);
+            setData(old => [...old, event.data]);
+            setValue(event.data);
+          };
+          
+          eventSource.current.addEventListener("test", function (event) { //
+            console.log(JSON.parse(event.data).sender);
+            console.log(JSON.parse(event.data));
+            })
+    
+         eventSource.current.addEventListener("addComment", function (event) {
+            let tmp = JSON.parse(event.data);
+            let msg = `${tmp.senderNickName}님이 ${tmp.month}/${tmp.day}일 일기에 댓글을 작성하였습니다.`
+            console.log(msg);
+            toastConst(msg);
+            console.log(JSON.parse(event.data));
+            })
+    
+        eventSource.current.addEventListener("addPost", function (event) { //
+            let tmp = JSON.parse(event.data);
+            let msg = `${tmp.senderNickName}님이 ${tmp.month}/${tmp.day}일 일기를 작성하였습니다. 구경 하러가세여`;
+            console.log(msg);
+            toastConst(msg);        
+            console.log(JSON.parse(event.data));
+            })
+    
+          eventSource.current.onerror = event => {
+            console.log(event.target.readyState);
+            if (event.target.readyState === EventSource.CLOSED) {
+              console.log("eventsource err closed (" + event.target.readyState + ")");
+            }
+            eventSource.current.close();
+          };
+    
+    
+    
+    
+    
+    },2000)
+        // eventSource.current = new EventSource(ALARM_URL+`/api/sub/?id=${memberId}`,{ withCredentials: true }); //구독
+      
 
-      eventSource.current.onopen = event => {
-        console.log("connection is opened");
-      };
-
-      eventSource.current.onmessage = event => {
-        // console.log("event", event);
-        console.log("result", event.data);
-        toastConst(event.data);
-        setData(old => [...old, event.data]);
-        setValue(event.data);
-      };
-    //   eventSource.addEventListener("test", function (event) { //
-    //     console.log(JSON.parse(event.data).sender);
-    //     console.log(JSON.parse(event.data));
-    //     })
-
-      eventSource.current.onerror = event => {
-        console.log(event.target.readyState);
-        if (event.target.readyState === EventSource.CLOSED) {
-          console.log("eventsource closed (" + event.target.readyState + ")");
-        }
-        eventSource.current.close();
-      };
-
-    //   setListening(true);
     }
 
     return () => {
