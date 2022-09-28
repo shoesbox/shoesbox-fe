@@ -69,10 +69,10 @@ const ModalAlert = (props) => {
           {alarm.text}
           {"  "}
         </span>
-        <Button onClick={()=>{
+        <Button className="alert-delete-btn" onClick={()=>{
           deleteOneAlarm(alarm.alarmId);
             }}  >
-          <BsX/>
+          X
           </Button>
           <br/>
         </Fragment>
@@ -92,25 +92,7 @@ const ModalAlert = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="alert-list">
-        {/* {
-          alarmList?.map((alert,idx)=>
-          <span key={idx}>
-            {alert.messageType==="POST"?
-            "post입니다"
-             :
-             "comment입니다"
-            }
-            {alert.messageType}
-          </span>
-          )
-        } */}
         <AlarmList alarmList={alarmList} />
-        {/* <div>
-          <span>어쩌구</span>님이 새로운 일기를 등록했어요!
-        </div>
-        <div>
-          <span>어쩌구</span>님이 일기에 댓글을 등록했어요!
-        </div> */}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={props.onHide}>

@@ -68,11 +68,6 @@ const memberId = getCookie('memberId');
             }
             eventSource.current.close();
           };
-    
-    
-    
-    
-    
     },2000)
         // eventSource.current = new EventSource(ALARM_URL+`/api/sub/?id=${memberId}`,{ withCredentials: true }); //구독
       
