@@ -1,10 +1,10 @@
 import './css/modaldetail.css';
 import { useEffect } from 'react';
-import { Button, Carousel, Modal } from 'react-bootstrap';
+import { Button, Carousel, Modal, Spinner } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetailThunk, deleteDetailThunk } from '../features/detailSlice';
+import { getDetailThunk, deleteDetailThunk, switchLoading } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
@@ -13,6 +13,7 @@ const ModalDetail = ({ postId, ...props }) => {
   const navigate = useNavigate();
   const memberId = getCookie('memberId');
   const post = useSelector((state) => state.detail.post);
+  const loading = useSelector((state) => state.detail.loading);
 
   const nickname = post?.nickname;
   const title = post?.title;
@@ -40,6 +41,7 @@ const ModalDetail = ({ postId, ...props }) => {
   useEffect(() => {
     if (postId !== (null || undefined)) {
       dispatch(getDetailThunk(postId));
+      dispatch(switchLoading(true));
       // console.log('result', result);
     }
   }, [postId]);
@@ -71,19 +73,24 @@ const ModalDetail = ({ postId, ...props }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        {loading ?
+        <div className='detail-img-spinner' >
+          <Spinner animation="grow" variant="info"/>
+          </div>
+          :
+          <>
           <div className="detail-titlebox">
             <span>
               <strong>{nickname}</strong>
-              <Button
+              {/* <Button
                 onClick={() => alert('친구에게 전화로 마음을 전해보세요!')}
               >
                 <BsFillTelephoneForwardFill />
-              </Button>
+              </Button> */}
             </span>
             <span>{date}</span>
           </div>
           <hr />
-
           {images?.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />}
           {images?.length >= 1 && <hr />}
 
@@ -97,6 +104,8 @@ const ModalDetail = ({ postId, ...props }) => {
           )}
           <hr />
           <CommentsList postId={postId} />
+          </>
+            }
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.onHide}>
