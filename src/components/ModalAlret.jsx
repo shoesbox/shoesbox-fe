@@ -24,6 +24,15 @@ const ModalAlert = (props) => {
      }
     }
 
+    const deleteAll = async (alarmId)=>{
+      try{
+      const {data} = await apis.deleteAlarmAll();
+        console.log(data);
+      }catch(err){
+        console.log(err);
+       }
+      }
+
   //  useEffect(() => {
   //   getAlertList();
   //   console.log(alertList);
@@ -44,6 +53,9 @@ const ModalAlert = (props) => {
     // }
   }, [alarmId]);
 
+  // if(alarmId!==undefined){
+  //   alert(`${alarmId} 삭제할꺼임`)
+  //   }
   const AlarmList = ({ alarmList }) => {
     return alarmList?.map((alarm, idx) => (
       <Fragment key={idx}>
@@ -58,10 +70,7 @@ const ModalAlert = (props) => {
           {"  "}
         </span>
         <Button onClick={()=>{
-            setAlarmId(alarm.alarmId)
-  if(alarmId!==undefined){
-    alert(`${alarmId} 삭제할꺼임`)
-    }
+          deleteOneAlarm(alarm.alarmId);
             }}  >
           <BsX/>
           </Button>
@@ -76,7 +85,9 @@ const ModalAlert = (props) => {
       <Modal.Header closeButton>
         <Modal.Title>
           <div>알림 🍧
-          {alarmList.length>0 &&<Button>전체알림 삭제<BsCheckAll/></Button>}
+          {alarmList.length>0 &&<Button
+          onClick={()=>deleteAll()}
+          >전체알림 삭제<BsCheckAll/></Button>}
           </div> 
         </Modal.Title>
       </Modal.Header>
