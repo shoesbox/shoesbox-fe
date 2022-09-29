@@ -23,7 +23,7 @@ const loginSlice = createSlice({
       let newList = alarmList.map((a) => {
         let msg = '';
         if (a.messageType === 'COMMENT') {
-          msg = `${a.senderMemberNickname}님이 ${a.month}/${a.day} 일기에 답글을 남기셨어요.`;
+          msg = `${a.senderMemberNickname}님이 ${a.month}/${a.day} 일기에 댓글을 남기셨어요.`;
         } else if (a.messageType === 'POST') {
           msg = `${a.senderMemberNickname}님이 ${a.month}/${a.day} 일기를 작성하셨습니다!`;
         }

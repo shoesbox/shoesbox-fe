@@ -153,7 +153,7 @@ function Header() {
         // backdrop="static"
         // alarmList={alarmList}
       />
-      <Alarms />
+      {/* <Alarms /> */}
     </>
   );
 }
