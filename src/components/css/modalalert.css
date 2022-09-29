@@ -11,3 +11,8 @@
   text-decoration: underline wavy #a4c3b2;
   cursor: pointer;
 }
+
+.alert-list-spinner{
+  display: flex;
+  justify-content: center;
+}

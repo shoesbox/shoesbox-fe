@@ -1,16 +1,19 @@
-import './css/modalalert.css';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { useState, useEffect, useRef, memo, Fragment } from 'react';
-import { apis } from '../api';
-import { useSelector } from 'react-redux';
-import { BsCheckLg, BsCheckCircle, BsX, BsCheckAll } from 'react-icons/bs';
-import ModalDetail from './ModalDetail';
+import "./css/modalalert.css";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import { useState, useEffect, useRef, memo, Fragment } from "react";
+import { apis } from "../api";
+import { useDispatch, useSelector } from "react-redux";
+import { BsCheckLg, BsCheckCircle, BsX, BsCheckAll } from "react-icons/bs";
+import ModalDetail from "./ModalDetail";
+import { deleteAlarm, deleteAllAlarms, switchLoadingAlarm } from "../features/loginSlice";
 
 const ModalAlert = (props) => {
   // const ModalAlert = ({alarmList,...props}) => {
   //  const [alarmList, setAlarmList] = useState();
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login.value);
   const alarmList = useSelector((state) => state.login.alarmList);
+  const loading = useSelector((state) => state.login.loading);
   const [isopen, setIsOpen] = useState(false);
   const [postId, setPostId] = useState();
   const [alarmId, setAlarmId] = useState();
@@ -18,33 +21,30 @@ const ModalAlert = (props) => {
   const deleteOneAlarm = async (alarmId) => {
     try {
       const { data } = await apis.deleteAlarm(alarmId);
-      console.log(data);
+      // console.log(data.data);
+      if(data.data){
+    dispatch(deleteAlarm(alarmId));
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const deleteAll = async (alarmId) => {
+  const deleteAll = async () => {
     try {
       const { data } = await apis.deleteAlarmAll();
-      console.log(data);
+      // console.log(data);
+      if(data.data){
+      dispatch(deleteAllAlarms());
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  //  useEffect(() => {
-  //   getAlertList();
-  //   console.log(alertList);
-  //   console.log('isLoggedIn', isLoggedIn);
-  // }, [props]);
-
   useEffect(() => {
-    //  if(isLoggedIn){
-    //   getAlarmList();
-    //  }
-    // setAlarmList('texteeee');
     console.log(alarmList);
+    dispatch(switchLoadingAlarm(false));
   }, [alarmList]);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const ModalAlert = (props) => {
 
   const AlarmList = ({ alarmList }) => {
     return alarmList?.map((alarm, idx) => (
-      <Fragment  className="alert-list" key={idx}>
+      <div className="alert-list" key={idx}>
         <span
           onClick={() => {
             setIsOpen(true);
@@ -72,8 +72,7 @@ const ModalAlert = (props) => {
         >
           X
         </Button>
-        <br />
-      </Fragment>
+      </div>
     ));
   };
 
@@ -94,11 +93,15 @@ const ModalAlert = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="alert-list">
-          {alarmList.length > 0 ? (
+          {loading ? (
+            <div className="alert-list-spinner">
+              <Spinner animation="grow" variant="info" />
+            </div>
+          ) : ( alarmList.length > 0 ? (
             <AlarmList alarmList={alarmList} />
           ) : (
             <div>새로운 알림이 없습니다.</div>
-          )}
+          ))}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.onHide}>

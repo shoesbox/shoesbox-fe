@@ -79,7 +79,7 @@ const ModalDetail = ({ postId, ...props }) => {
         <Modal.Body>
           {loading ? (
             <div className="detail-img-spinner">
-              <Spinner animation="border" variant="info" />
+              <Spinner animation="grow" variant="info" />
             </div>
           ) : (
             <>
