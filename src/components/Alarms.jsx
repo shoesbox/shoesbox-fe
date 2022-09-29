@@ -14,7 +14,8 @@ const Alarms = () => {
     toast('🧁 ' + msg, {
       position: 'top-right',
       autoClose: 5000,
-      // hideProgressBar: true,
+      hideProgressBar: true,
+      // progressStyle: { color: '#000' },
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,

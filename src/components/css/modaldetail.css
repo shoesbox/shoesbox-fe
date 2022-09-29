@@ -1,3 +1,6 @@
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
 .detail-container {
   margin-top: 50px;
 }
@@ -50,13 +53,13 @@ img {
   word-break: break-all;
 }
 
-.text-info {
-  --bs-text-opacity: 1;
-  color: #6b9080b7 !important;
-}
 .detail-img-spinner {
   display: flex;
   justify-content: center;
+}
+.text-info {
+  --bs-text-opacity: 1;
+  color: #a4c3b2 !important;
 }
 .spinner-border {
   --bs-spinner-width: 3rem;

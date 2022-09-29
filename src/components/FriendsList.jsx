@@ -24,7 +24,7 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
   };
 
   return (
-    <>
+    <div className="freinds-wrap">
       <div className="friends">
         {friendList?.length > 0
           ? friendList.map((friend, idx) => {
@@ -52,7 +52,7 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
         backdrop="static"
         keyboard={false}
       />
-    </>
+    </div>
   );
 };
 

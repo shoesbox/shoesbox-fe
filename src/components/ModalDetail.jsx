@@ -1,7 +1,6 @@
 import './css/modaldetail.css';
 import { useEffect } from 'react';
 import { Button, Carousel, Modal, Spinner } from 'react-bootstrap';
-import { BsFillTelephoneForwardFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -77,6 +76,9 @@ const ModalDetail = ({ postId, ...props }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {/* <div className="detail-img-spinner">
+            <Spinner animation="border" variant="info" />
+          </div> */}
           {loading ? (
             <div className="detail-img-spinner">
               <Spinner animation="grow" variant="info" />
