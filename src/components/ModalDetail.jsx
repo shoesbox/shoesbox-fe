@@ -84,7 +84,8 @@ const ModalDetail = ({ postId, ...props }) => {
           </div>
           <hr />
 
-          {images?.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />}
+          {images?.length >= 2 ? <ImageCarousel /> : null}
+          {images?.length === 1 ? <img src={images} alt="" /> : null}
           {images?.length >= 1 && <hr />}
 
           <div className="detail-content">{content}</div>

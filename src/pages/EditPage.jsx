@@ -149,6 +149,10 @@ const EditPage = () => {
               사진을 추가해주세요 :)
             </Form.Control.Feedback> */}
           </InputGroup>
+          <div className="write-file-alert">
+            파일 확장자 명은 jpg, jpeg, png, bmp 파일만 가능합니다. (파일 당
+            10MB, 최대 5장)
+          </div>
         </Form.Group>
         <br />
         <div className="write-preview-wrap">

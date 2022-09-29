@@ -15,8 +15,8 @@ import Alarms from './Alarms';
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-//  const [alarmList, setAlarmList] = useState();
-  const alarmList =  useSelector((state) => state.login.alarmList);
+  //  const [alarmList, setAlarmList] = useState();
+  const alarmList = useSelector((state) => state.login.alarmList);
   const cookie = getCookie('refreshToken');
   const isLoggedIn = useSelector((state) => state.login.value);
   useEffect(() => {
@@ -27,15 +27,15 @@ function Header() {
     }
   }, [cookie]);
 
-  const getAlarmList = async ()=>{
-    try{
-      const {data} = await apis.getAlarmList();
+  const getAlarmList = async () => {
+    try {
+      const { data } = await apis.getAlarmList();
       // setAlarmList(data.data);
-       dispatch(setAlarmList(data.data));
-    }catch(err){
-       console.log('alertError',err);   
+      dispatch(setAlarmList(data.data));
+    } catch (err) {
+      console.log('alertError', err);
     }
-   };
+  };
 
   // 로그인 모달
   const [login, setLogin] = useState(false);
@@ -47,7 +47,7 @@ function Header() {
   const handleShow = () => {
     setShow(true);
     getAlarmList();
-  }
+  };
   const handleClose = () => setShow(false);
 
   const handleLogout = () => {
@@ -92,7 +92,7 @@ function Header() {
           >
             SHOES 🍭 BOX
           </Navbar.Brand>
-          {isLoggedIn &&(
+          {isLoggedIn && (
             <Nav className="test">
               <BsBellFill onClick={handleShow} />
             </Nav>
@@ -145,7 +145,7 @@ function Header() {
         // backdrop="static"
         // alarmList={alarmList}
       />
-      <Alarms/>
+      <Alarms />
     </>
   );
 }
