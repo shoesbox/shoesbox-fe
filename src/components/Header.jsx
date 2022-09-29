@@ -7,7 +7,7 @@ import ModalLogin from './ModalLogin';
 import ModalAlert from './ModalAlret';
 import { getCookie, deleteCookie, setCookie } from '../shared/cookie';
 import { apis } from '../api';
-import { BsBellFill } from 'react-icons/bs';
+import { FaBell } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsLogin, setAlarmList } from '../features/loginSlice';
 import Alarms from './Alarms';
@@ -15,8 +15,8 @@ import Alarms from './Alarms';
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-//  const [alarmList, setAlarmList] = useState();
-  const alarmList =  useSelector((state) => state.login.alarmList);
+  //  const [alarmList, setAlarmList] = useState();
+  const alarmList = useSelector((state) => state.login.alarmList);
   const cookie = getCookie('refreshToken');
   const isLoggedIn = useSelector((state) => state.login.value);
   useEffect(() => {
@@ -27,15 +27,15 @@ function Header() {
     }
   }, [cookie]);
 
-  const getAlarmList = async ()=>{
-    try{
-      const {data} = await apis.getAlarmList();
+  const getAlarmList = async () => {
+    try {
+      const { data } = await apis.getAlarmList();
       // setAlarmList(data.data);
-       dispatch(setAlarmList(data.data));
-    }catch(err){
-       console.log('alertError',err);   
+      dispatch(setAlarmList(data.data));
+    } catch (err) {
+      console.log('alertError', err);
     }
-   };
+  };
 
   // 로그인 모달
   const [login, setLogin] = useState(false);
@@ -47,7 +47,7 @@ function Header() {
   const handleShow = () => {
     setShow(true);
     getAlarmList();
-  }
+  };
   const handleClose = () => setShow(false);
 
   const handleLogout = () => {
@@ -86,17 +86,20 @@ function Header() {
         }}
       >
         <Container>
-          <Navbar.Brand
-            onClick={() => window.location.replace('/')}
-            className="brand-logo"
-          >
-            SHOES 🍭 BOX
+          <Navbar.Brand className="brand-alert">
+            <span
+              className="brand-logo"
+              onClick={() => window.location.replace('/')}
+            >
+              SHOES 🍭 BOX
+            </span>
+            {isLoggedIn && (
+              <span className="test">
+                <FaBell onClick={handleShow} />
+              </span>
+            )}
           </Navbar.Brand>
-          {isLoggedIn &&(
-            <Nav className="test">
-              <BsBellFill onClick={handleShow} />
-            </Nav>
-          )}
+
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -145,7 +148,7 @@ function Header() {
         // backdrop="static"
         // alarmList={alarmList}
       />
-      <Alarms/>
+      <Alarms />
     </>
   );
 }

@@ -4,7 +4,11 @@ import { Button, Carousel, Modal, Spinner } from 'react-bootstrap';
 import { BsFillTelephoneForwardFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetailThunk, deleteDetailThunk, switchLoading } from '../features/detailSlice';
+import {
+  getDetailThunk,
+  deleteDetailThunk,
+  switchLoading,
+} from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
@@ -73,39 +77,36 @@ const ModalDetail = ({ postId, ...props }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        {loading ?
-        <div className='detail-img-spinner' >
-          <Spinner animation="grow" variant="info"/>
-          </div>
-          :
-          <>
-          <div className="detail-titlebox">
-            <span>
-              <strong>{nickname}</strong>
-              {/* <Button
-                onClick={() => alert('친구에게 전화로 마음을 전해보세요!')}
-              >
-                <BsFillTelephoneForwardFill />
-              </Button> */}
-            </span>
-            <span>{date}</span>
-          </div>
-          <hr />
-          {images?.length > 1 ? <ImageCarousel /> : <img src={images} alt="" />}
-          {images?.length >= 1 && <hr />}
-
-          <div className="detail-content">{content}</div>
-          <br />
-          {parseInt(memberId) === parseInt(writeMemberId) && (
-            <div className="detail-fix-del-btns">
-              <Button onClick={() => editPost(post)}>수정</Button>
-              <Button onClick={() => delPost()}>삭제</Button>
+          {loading ? (
+            <div className="detail-img-spinner">
+              <Spinner animation="border" variant="info" />
             </div>
+          ) : (
+            <>
+              <div className="detail-titlebox">
+                <span>
+                  <strong>{nickname}</strong>
+                </span>
+                <span>{date}</span>
+              </div>
+              <hr />
+
+              {images?.length >= 2 ? <ImageCarousel /> : null}
+              {images?.length === 1 ? <img src={images} alt="" /> : null}
+              {images?.length >= 1 && <hr />}
+
+              <div className="detail-content">{content}</div>
+              <br />
+              {parseInt(memberId) === parseInt(writeMemberId) && (
+                <div className="detail-fix-del-btns">
+                  <Button onClick={() => editPost(post)}>수정</Button>
+                  <Button onClick={() => delPost()}>삭제</Button>
+                </div>
+              )}
+              <hr />
+              <CommentsList postId={postId} />
+            </>
           )}
-          <hr />
-          <CommentsList postId={postId} />
-          </>
-            }
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.onHide}>

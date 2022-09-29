@@ -1,13 +1,11 @@
 import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL;
-export const ALARM_URL = 'http://43.201.31.170';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const ALARM_URL = 'http://15.164.250.22';
 // const BASE_URL ='http://15.164.250.22';
 // const BASE_URL ='http://13.125.161.17';
-const BASE_URL ='http://43.201.31.170';
 // const BASE_URL ='https://webstudy.shop';
-
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -130,8 +128,7 @@ export const apis = {
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
   writeDaily: (payload) => apiForm.post('/api/posts', payload),
   deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
-  editDetail: (postId, payload) =>
-    api.patch(`/api/posts/${postId}`, payload),
+  editDetail: (postId, payload) => api.patch(`/api/posts/${postId}`, payload),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
@@ -155,7 +152,7 @@ export const apis = {
   // 알람 기능
   getAlarmList: () => api.get('/api/alarm'),
   deleteAlarm: (alarmId) => api.delete(`/api/alarm/${alarmId}`),
-  deleteAlarmAll:()=>api.delete('/api/alarm'),
+  deleteAlarmAll: () => api.delete('/api/alarm'),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

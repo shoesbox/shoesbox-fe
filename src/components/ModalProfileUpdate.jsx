@@ -25,7 +25,10 @@ const ModalProfileUpdate = (props) => {
         props.setState({ ...props.state, profileImageUrl: imgFile });
         props.onHide();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // console.log(err);
+        alert(err.response.data.errorDetails.apierror.message);
+      });
   };
 
   return (

@@ -10,7 +10,7 @@ const Oauth2Naver = () => {
     const fetchUser = async () => {
       const code = new URL(window.location.href).searchParams.get('code');
       // console.log('naver', code);
-      
+
       if (code) {
         apis.loginNaver(code).then((res) => {
           const token = res.data?.data;

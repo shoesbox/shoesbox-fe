@@ -5,8 +5,8 @@ import { apis } from '../api';
 import { setCookie } from '../shared/cookie';
 
 const domain = 'http://localhost:3000';
-const firebase = 'https://shoesbox.web.app';
 const ec2 = 'http://shoesbox.today';
+const firebase = 'https://shoesbox.web.app';
 
 const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=tuIptgGLMJX69dUPmYxk&redirect_uri=${firebase}/oauth/callback/naver`;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=beaf923464e502569ef542beeb8b039a&redirect_uri=${firebase}/oauth/callback/kakao&response_type=code`;
@@ -88,39 +88,40 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
     }
   };
 
-  const handleGuest = async () =>{
-    apis.guestUser().then((res) => {
-      // console.log('res', res);
-      // console.log('res.data', res.data);
-      const token = res.data.data;
-      setCookie(
-        'accessToken',
-        token.accessToken,
-        token.accessTokenExpireDate
-      );
-      setCookie(
-        'refreshToken',
-        token.refreshToken,
-        token.refreshTokenExpireDate
-      );
-      setCookie('memberId', token.memberId);
-      setCookie('email', token.email);
-      setCookie('nickname', token.nickname);
-      // alert('로그인 성공');
-      window.location.reload(true);
-    })
-    .catch((err) => {
-      // console.log(err);
-      const errMessage = err.response?.data.errorDetails.apierror.message;
-      // console.log(errMessage);
-      alert(errMessage);
-    });
-  }
+  const handleGuest = async () => {
+    apis
+      .guestUser()
+      .then((res) => {
+        // console.log('res', res);
+        // console.log('res.data', res.data);
+        const token = res.data.data;
+        setCookie(
+          'accessToken',
+          token.accessToken,
+          token.accessTokenExpireDate
+        );
+        setCookie(
+          'refreshToken',
+          token.refreshToken,
+          token.refreshTokenExpireDate
+        );
+        setCookie('memberId', token.memberId);
+        setCookie('email', token.email);
+        setCookie('nickname', token.nickname);
+        // alert('로그인 성공');
+        window.location.reload(true);
+      })
+      .catch((err) => {
+        // console.log(err);
+        const errMessage = err.response?.data.errorDetails.apierror.message;
+        // console.log(errMessage);
+        alert(errMessage);
+      });
+  };
 
   const handleSocialGoogle = async (event) => {
     event.preventDefault();
     window.location.href = GOOGLE_AUTH_URL;
-    
   };
 
   const handleSocialKakao = async (event) => {
@@ -139,7 +140,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
         show={login}
         onHide={handleCloseLogin}
         backdrop="static"
-        fullscreen="sm-down"
+        // fullscreen="sm-down"
       >
         <Modal.Header closeButton>
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
@@ -196,7 +197,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               </Form.Group>
             )}
           </Form>
-          <br />
+          {/* <br /> */}
           <div className="social">
             <button
               className="social__button social__button--naver"
@@ -233,7 +234,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               Sign Up
             </Button>
           )}
-          <Button onClick={()=>handleGuest()}>Guest</Button>
+          <Button onClick={() => handleGuest()}>Guest</Button>
         </Modal.Footer>
       </Modal>
     </>

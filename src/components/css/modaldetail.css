@@ -50,16 +50,22 @@ img {
   word-break: break-all;
 }
 
+.text-info {
+  --bs-text-opacity: 1;
+  color: #6b9080b7 !important;
+}
 .detail-img-spinner {
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-
+.spinner-border {
+  --bs-spinner-width: 3rem;
+  --bs-spinner-height: 3rem;
+}
 .spinner-grow {
-  --bs-spinner-width: 10rem;
-  --bs-spinner-height: 10rem;
+  --bs-spinner-width: 5rem;
+  --bs-spinner-height: 5rem;
 }
-
 
 .detail-comment-contents {
   width: 100%;

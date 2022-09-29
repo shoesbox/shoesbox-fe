@@ -30,9 +30,9 @@ const EditPage = () => {
   // 첨부 파일 검증
   const fileValidation = (obj) => {
     const fileTypes = ['image/jpeg', 'image/png'];
-    let objExactType = obj.name.substring(obj.name.lastIndexOf(".") + 1);
+    let objExactType = obj.name.substring(obj.name.lastIndexOf('.') + 1);
     // console.log('objExactType', objExactType);
-    const fileTypesName = ['jpeg','jpg','png','bmp'];
+    const fileTypesName = ['jpeg', 'jpg', 'png', 'bmp'];
     if (obj.name.length > 100) {
       alert('파일명이 100자 이상인 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
@@ -93,23 +93,23 @@ const EditPage = () => {
   useEffect(() => {
     if (files) {
       setBase64s([]);
-      if(files.length<=5){
-      for (var i = 0; i < files.length; i++) {
-        // console.log(files[i].name);
-        if (fileValidation(files[i])) {
-          const reader = new FileReader();
-          reader.readAsDataURL(files[i]);
-          reader.onload = () => {
-            if (reader.readyState === 2) {
-              setBase64s((prev) => [...prev, reader.result]);
-            }
-          };
+      if (files.length <= 5) {
+        for (var i = 0; i < files.length; i++) {
+          // console.log(files[i].name);
+          if (fileValidation(files[i])) {
+            const reader = new FileReader();
+            reader.readAsDataURL(files[i]);
+            reader.onload = () => {
+              if (reader.readyState === 2) {
+                setBase64s((prev) => [...prev, reader.result]);
+              }
+            };
+          }
         }
+      } else {
+        imageRef.current.value = '';
+        alert('사진 첨부는 5장까지 가능합니다.');
       }
-    } else{
-      imageRef.current.value = '';
-      alert('사진 첨부는 5장까지 가능합니다.')
-    }
     }
   }, [files]);
 
@@ -162,7 +162,10 @@ const EditPage = () => {
               사진을 추가해주세요 :)
             </Form.Control.Feedback> */}
           </InputGroup>
-          <span className='write-file-alert'>파일 확장자 명은 jpg, jpeg, png, bmp 파일만 가능합니다.(파일당 10MB, 최대 5장)</span>
+          <div className="write-file-alert">
+            파일 확장자 명은 jpg, jpeg, png, bmp 파일만 가능합니다. (파일 당
+            10MB, 최대 5장)
+          </div>
         </Form.Group>
         <br />
         <div className="write-preview-wrap">

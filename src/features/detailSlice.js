@@ -224,7 +224,7 @@ const detailSlice = createSlice({
     builder.addCase(getDetailThunk.fulfilled, (state, action) => {
       state.post = action.payload;
       state.loading = false;
-      // setTimeout(()=>{ 
+      // setTimeout(()=>{
       //   console.log('false로 바뀜');
       // },5000)
     });

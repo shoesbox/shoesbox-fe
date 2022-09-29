@@ -18,9 +18,10 @@ export const getUserThunk = createAsyncThunk(
   '/api/posts/detail',
   async (code) => {
     const res = await apis.loginGoogle(code);
-    window.sessionStorage.setItem("userInfo", JSON.stringify(res.data.data));
+    window.sessionStorage.setItem('userInfo', JSON.stringify(res.data.data));
     return res.data.data;
-});
+  }
+);
 
 const calenderSlice = createSlice({
   name: 'calender',

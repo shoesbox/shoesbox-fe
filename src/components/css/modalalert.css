@@ -1,31 +1,13 @@
-.alert-list {
-  /* display: flexbox;
-  justify-content: center;
-  gap: 5px; */
-  /* flex-direction: column; */
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
 
-  display: flex;
-  /* align-items: center; */
-  /* justify-content: space-between; */
-}
-.alert-list > div {
+.alert-list {
+  display: flexbox;
+  justify-content: center;
+  /* gap: 5px; */
   /* border: 1px solid red; */
 }
 .alert-list > span:hover {
-  text-decoration : underline wavy paleturquoise;
-  /* text-decoration-style: wavy; */
+  text-decoration: underline wavy #a4c3b2;
+  cursor: pointer;
 }
-.alert-delete-btn{
-  /* width: 0.5em;
-  height: 1em;
-  background-color: red; */
-
-}
-
-.alert-list > div {
-  /* border: 1px solid green; */
-  justify-content: space-between;
-
-  /* flex-wrap: wrap; */
-}
-

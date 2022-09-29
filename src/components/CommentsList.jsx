@@ -145,7 +145,7 @@ const CommentsList = ({ postId }) => {
     }
     // dispatch(getJsonCommentThunk(postId));
     // console.log('comments', comments);
-  }, []);
+  }, [comments.length]);
 
   return (
     <div className="detail-comments-wrap">
