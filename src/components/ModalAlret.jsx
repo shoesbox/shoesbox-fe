@@ -1,9 +1,9 @@
 import './css/modalalert.css';
-import { Button, Form, Modal, Spinner } from 'react-bootstrap';
-import { useState, useEffect, useRef, memo, Fragment } from 'react';
+import { Button, Modal, Spinner } from 'react-bootstrap';
+import { useState, useEffect, memo } from 'react';
 import { apis } from '../api';
 import { useDispatch, useSelector } from 'react-redux';
-import { BsCheckLg, BsCheckCircle, BsX, BsCheckAll } from 'react-icons/bs';
+import { BsCheckAll } from 'react-icons/bs';
 import ModalDetail from './ModalDetail';
 import {
   deleteAlarm,
@@ -15,7 +15,6 @@ const ModalAlert = (props) => {
   // const ModalAlert = ({alarmList,...props}) => {
   //  const [alarmList, setAlarmList] = useState();
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.login.value);
   const alarmList = useSelector((state) => state.login.alarmList);
   const loading = useSelector((state) => state.login.loading);
   const [isopen, setIsOpen] = useState(false);
@@ -51,12 +50,6 @@ const ModalAlert = (props) => {
     dispatch(switchLoadingAlarm(false));
   }, [alarmList]);
 
-  useEffect(() => {
-    // if(alarmId!==undefined){
-    // alert(`${alarmId} 삭제할꺼임`)
-    // }
-  }, [alarmId]);
-
   const AlarmList = ({ alarmList }) => {
     return alarmList?.map((alarm, idx) => (
       <div className="alert-list" key={idx}>
@@ -64,18 +57,11 @@ const ModalAlert = (props) => {
           onClick={() => {
             setIsOpen(true);
             setPostId(alarm.postId);
+            deleteOneAlarm(alarm.alarmId);
           }}
         >
           {alarm.text}
         </span>
-        <Button
-          className="alert-delete-btn"
-          onClick={() => {
-            deleteOneAlarm(alarm.alarmId);
-          }}
-        >
-          X
-        </Button>
       </div>
     ));
   };
@@ -85,11 +71,11 @@ const ModalAlert = (props) => {
       <Modal {...props} centered size="md">
         <Modal.Header closeButton>
           <Modal.Title>
-            <div>
-              알림 🧁
+            <div className="alert-top">
+              <span>알림 🧁</span>
               {alarmList.length > 0 && (
-                <Button onClick={() => deleteAll()}>
-                  전체알림 삭제
+                <Button className="alert-all-del" onClick={() => deleteAll()}>
+                  <span>전체 삭제</span>
                   <BsCheckAll />
                 </Button>
               )}
