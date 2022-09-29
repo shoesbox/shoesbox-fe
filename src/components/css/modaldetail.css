@@ -1,3 +1,6 @@
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
 .detail-container {
   margin-top: 50px;
 }
@@ -52,7 +55,7 @@ img {
 
 .text-info {
   --bs-text-opacity: 1;
-  color: #6b9080b7 !important;
+  color: #A4C3B2 !important;
 }
 .detail-img-spinner {
   display: flex;

@@ -2,7 +2,8 @@ import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-export const ALARM_URL = 'http://15.164.250.22';
+export const ALARM_URL = 'http://43.201.31.170';
+// const BASE_URL ='http://43.201.31.170';
 // const BASE_URL ='http://15.164.250.22';
 // const BASE_URL ='http://13.125.161.17';
 // const BASE_URL ='https://webstudy.shop';

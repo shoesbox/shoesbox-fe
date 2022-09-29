@@ -1,8 +1,4 @@
-.addfriend-friend-icon.input-group-text {
-  /* background-color: white;
-  border: none; */
-}
-.addfriend-search-icon.input-group-text:hover {
+.addfriend-friend-icon.input-group-text:hover {
   background-color: #cce3de;
   cursor: pointer;
 }

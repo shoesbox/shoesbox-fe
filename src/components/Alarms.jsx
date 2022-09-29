@@ -17,7 +17,8 @@ const Alarms = () => {
     toast('🧁 ' + msg, {
       position: 'top-right',
       autoClose: 5000,
-      // hideProgressBar: true,
+      hideProgressBar: true,
+      // progressStyle: { color: '#000' },
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -98,7 +99,7 @@ const Alarms = () => {
     <div>
       {/* <button onClick={checkData}>확인</button>
       <header className="App-header">
-        <div style={{ backgroundColor: "white" }}>
+        <div style={{ backgroundColor: 'white' }}>
           Received Data
           {data.map((d, index) => (
             <span key={index}>{d}</span>
