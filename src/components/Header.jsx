@@ -9,7 +9,7 @@ import { getCookie, deleteCookie, setCookie } from '../shared/cookie';
 import { apis } from '../api';
 import { FaBell } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsLogin, setAlarmList } from '../features/loginSlice';
+import { setIsLogin, setAlarmList, switchLoadingAlarm } from '../features/loginSlice';
 import Alarms from './Alarms';
 
 function Header() {
@@ -32,6 +32,7 @@ function Header() {
       const { data } = await apis.getAlarmList();
       // setAlarmList(data.data);
       dispatch(setAlarmList(data.data));
+      dispatch(switchLoadingAlarm(true));
     } catch (err) {
       console.log('alertError', err);
     }
