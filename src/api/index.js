@@ -2,10 +2,10 @@ import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
 // export const BASE_URL = process.env.REACT_APP_BASE_URL;
-// export const BASE_URL ='http://43.201.31.170';
+export const BASE_URL ='http://43.201.31.170';
 // export const BASE_URL ='http://15.164.250.22';
 // const BASE_URL ='http://13.125.161.17';
-export const BASE_URL ='https://webstudy.shop';
+// export const BASE_URL ='https://webstudy.shop';
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐

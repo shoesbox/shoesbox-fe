@@ -6,6 +6,7 @@ import { getCookie } from '../shared/cookie';
 
 const Alarms = () => {
   const memberId = getCookie('memberId');
+  const jwt = getCookie('accessToken');
   const [data, setData] = useState([]);
   //   let eventSource = undefined;
   const eventSource = useRef();
@@ -27,7 +28,7 @@ const Alarms = () => {
     if (!!window.EventSource && memberId !== undefined) {
       setTimeout(() => {
         eventSource.current = new EventSource(
-          BASE_URL + `/api/sub/?id=${memberId}`,
+          BASE_URL + `/api/sub/?jwt=${jwt}`,
           { withCredentials: true }
         );
         eventSource.current.onopen = (event) => {
