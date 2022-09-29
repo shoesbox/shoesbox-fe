@@ -132,8 +132,8 @@ const ModalAddFriend = (props) => {
       </Modal.Header>
       <Modal.Body>
         <InputGroup>
-          <InputGroup.Text className="addfriend-friend-icon">
-            <BsPersonPlusFill />
+          <InputGroup.Text className="addfriend-search-icon">
+            <BsSearch />
           </InputGroup.Text>
           <Form.Control
             type="email"
@@ -142,11 +142,11 @@ const ModalAddFriend = (props) => {
             onKeyDown={(e) => onEnterdown(e)}
           />
           <InputGroup.Text
-            className="addfriend-search-icon"
+            className="addfriend-friend-icon"
             type="button"
             onClick={onClickAddFriend}
           >
-            <BsSearch />
+            <BsPersonPlusFill />
           </InputGroup.Text>
         </InputGroup>
         <br />

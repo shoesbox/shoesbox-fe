@@ -63,7 +63,6 @@ const ModalAlert = (props) => {
           }}
         >
           {alarm.text}
-          {'  '}
         </span>
         <Button
           className="alert-delete-btn"
@@ -84,7 +83,7 @@ const ModalAlert = (props) => {
         <Modal.Header closeButton>
           <Modal.Title>
             <div>
-              알림 🍧
+              알림 🧁
               {alarmList.length > 0 && (
                 <Button onClick={() => deleteAll()}>
                   전체알림 삭제
