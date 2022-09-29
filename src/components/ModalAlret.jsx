@@ -58,7 +58,8 @@ const ModalAlert = (props) => {
   //   }
   const AlarmList = ({ alarmList }) => {
     return alarmList?.map((alarm, idx) => (
-      <Fragment key={idx}>
+      <Fragment  className="alert-list" key={idx}>
+        <div>
         <span
         onClick={()=>{
           setIsOpen(true)
@@ -69,12 +70,14 @@ const ModalAlert = (props) => {
           {alarm.text}
           {"  "}
         </span>
+        </div>
+        <div>
         <Button className="alert-delete-btn" onClick={()=>{
           deleteOneAlarm(alarm.alarmId);
             }}  >
-          X
+          <BsX/>
           </Button>
-          <br/>
+          </div>
         </Fragment>
     ));
   };
@@ -91,7 +94,7 @@ const ModalAlert = (props) => {
           </div> 
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="alert-list">
+      <Modal.Body>
         <AlarmList alarmList={alarmList} />
       </Modal.Body>
       <Modal.Footer>

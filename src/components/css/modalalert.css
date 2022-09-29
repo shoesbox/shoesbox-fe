@@ -1,8 +1,12 @@
 .alert-list {
-  display: flexbox;
-  /* flex-direction: column; */
+  /* display: flexbox;
   justify-content: center;
-  gap: 5px;
+  gap: 5px; */
+  /* flex-direction: column; */
+
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: space-between; */
 }
 .alert-list > div {
   /* border: 1px solid red; */
@@ -16,5 +20,12 @@
   height: 1em;
   background-color: red; */
 
+}
+
+.alert-list > div {
+  /* border: 1px solid green; */
+  justify-content: space-between;
+
+  /* flex-wrap: wrap; */
 }
 
