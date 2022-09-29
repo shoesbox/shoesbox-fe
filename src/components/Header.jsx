@@ -9,7 +9,11 @@ import { getCookie, deleteCookie, setCookie } from '../shared/cookie';
 import { apis } from '../api';
 import { FaBell } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsLogin, setAlarmList, switchLoadingAlarm } from '../features/loginSlice';
+import {
+  setIsLogin,
+  setAlarmList,
+  switchLoadingAlarm,
+} from '../features/loginSlice';
 import Alarms from './Alarms';
 
 function Header() {

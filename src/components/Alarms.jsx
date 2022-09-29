@@ -42,7 +42,7 @@ const Alarms = () => {
         };
 
         // test 용
-         eventSource.current.addEventListener('test', function (event) {
+        eventSource.current.addEventListener('test', function (event) {
           console.log(JSON.parse(event.data).sender);
           console.log(JSON.parse(event.data));
         });
@@ -86,7 +86,6 @@ const Alarms = () => {
   // useEffect(() => {
   //   console.log('data: ', data);
   // }, [data]);
-
 
   return (
     <div>

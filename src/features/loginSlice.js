@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   value: false,
   alarmList: [],
-  loading: false
+  loading: false,
 };
 
 const loginSlice = createSlice({
@@ -13,7 +13,7 @@ const loginSlice = createSlice({
     setIsLogin: (state, action) => {
       state.value = action.payload;
     },
-    switchLoadingAlarm :(state, action) =>{
+    switchLoadingAlarm: (state, action) => {
       state.loading = action.payload;
     },
     setAlarmList: (state, action) => {
@@ -40,18 +40,26 @@ const loginSlice = createSlice({
       state.alarmList = newList;
       state.loading = false;
     },
-    deleteAlarm :(state, action) =>{
+    deleteAlarm: (state, action) => {
       // console.log(action.payload);
       const alarmId = action.payload;
       const alarmList = state.alarmList;
-      const newList = alarmList.filter((a)=>{return parseInt(a.alarmId)!==alarmId;});
+      const newList = alarmList.filter((a) => {
+        return parseInt(a.alarmId) !== alarmId;
+      });
       state.alarmList = newList;
     },
-    deleteAllAlarms :(state, action) =>{
+    deleteAllAlarms: (state, action) => {
       state.alarmList = [];
-    }
+    },
   },
 });
 
-export const { setIsLogin, setAlarmList, switchLoadingAlarm, deleteAlarm, deleteAllAlarms } = loginSlice.actions;
+export const {
+  setIsLogin,
+  setAlarmList,
+  switchLoadingAlarm,
+  deleteAlarm,
+  deleteAllAlarms,
+} = loginSlice.actions;
 export default loginSlice.reducer;
