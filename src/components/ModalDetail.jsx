@@ -77,7 +77,7 @@ const ModalDetail = ({ postId, ...props }) => {
         </Modal.Header>
         <Modal.Body>
           {/* <div className="detail-img-spinner">
-            <Spinner animation="border" variant="info" />
+            <Spinner animation="grow" variant="info" />
           </div> */}
           {loading ? (
             <div className="detail-img-spinner">
@@ -98,12 +98,15 @@ const ModalDetail = ({ postId, ...props }) => {
               {images?.length >= 1 && <hr />}
 
               <div className="detail-content">{content}</div>
-              <br />
+
               {parseInt(memberId) === parseInt(writeMemberId) && (
-                <div className="detail-fix-del-btns">
-                  <Button onClick={() => editPost(post)}>수정</Button>
-                  <Button onClick={() => delPost()}>삭제</Button>
-                </div>
+                <>
+                  <br />
+                  <div className="detail-fix-del-btns">
+                    <Button onClick={() => editPost(post)}>수정</Button>
+                    <Button onClick={() => delPost()}>삭제</Button>
+                  </div>
+                </>
               )}
               <hr />
               <CommentsList postId={postId} />
