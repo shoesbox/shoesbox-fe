@@ -8,6 +8,7 @@ const initialState = {
   userInfo: [],
   pickedCommentId: null,
   loading: false,
+  postStatus: false
 };
 
 export const getDetailThunk = createAsyncThunk(
@@ -19,12 +20,12 @@ export const getDetailThunk = createAsyncThunk(
       // console.log('showthunk', data.data.data);
       return postDetail;
     } catch (err) {
-      return {
-        errorCode: err.response.data.state,
-        errorMessage: err.response.data.errorDetails.apierror.message,
-      };
-      // alert(err.response.data.errorDetails.apierror.message);
-      // return thunkAPI.rejectWithValue('getDetailThunkErr', err.response.data);
+      if(err.response.data.errorDetails.apierror.httpStatusCode===404){
+        alert('해당 일기는 존재하지 않습니다.');
+      }else if(err.response.data.errorDetails.apierror.httpStatusCode===403){
+        alert('해당 유저와 더 이상 친구관계가 아닙니다.');
+      }
+      return thunkAPI.rejectWithValue(err.response.data.errorDetails.apierror.httpStatusCode);
     }
   }
 );
@@ -210,7 +211,7 @@ const detailSlice = createSlice({
   name: 'detail',
   initialState,
   reducers: {
-    loadPost: (state, action) => {
+    switchLoadPost: (state, action) => {
       state.post = action.payload;
     },
     updatePicked: (state, action) => {
@@ -223,10 +224,12 @@ const detailSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getDetailThunk.fulfilled, (state, action) => {
       state.post = action.payload;
+      state.postStatus = true;
       state.loading = false;
-      // setTimeout(()=>{
-      //   console.log('false로 바뀜');
-      // },5000)
+    });
+    builder.addCase(getDetailThunk.rejected, (state, action) => {
+    //  console.log('getDetailThunk ErrCode', action.payload);
+     state.postStatus = false;
     });
     builder.addCase(getJsonDetailThunk.fulfilled, (state, action) => {
       // console.log('extraReducers', action.payload);
@@ -291,5 +294,5 @@ const detailSlice = createSlice({
   },
 });
 
-export const { loadPost, updatePicked, switchLoading } = detailSlice.actions;
+export const { switchLoadPost, updatePicked, switchLoading } = detailSlice.actions;
 export default detailSlice.reducer;

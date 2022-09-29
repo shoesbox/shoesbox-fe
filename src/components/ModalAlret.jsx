@@ -20,7 +20,6 @@ const ModalAlert = (props) => {
   const loading = useSelector((state) => state.login.loading);
   const [isopen, setIsOpen] = useState(false);
   const [postId, setPostId] = useState();
-  const [alarmId, setAlarmId] = useState();
 
   const deleteOneAlarm = async (alarmId) => {
     try {
@@ -51,11 +50,6 @@ const ModalAlert = (props) => {
     dispatch(switchLoadingAlarm(false));
   }, [alarmList]);
 
-  useEffect(() => {
-    // if(alarmId!==undefined){
-    // alert(`${alarmId} 삭제할꺼임`)
-    // }
-  }, [alarmId]);
 
   const AlarmList = ({ alarmList }) => {
     return alarmList?.map((alarm, idx) => (
@@ -113,7 +107,7 @@ const ModalAlert = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ModalDetail
+        <ModalDetail
         show={isopen}
         onHide={() => {
           setIsOpen(false);

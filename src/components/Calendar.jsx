@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
 import ModalDetail from './ModalDetail';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDetailThunk, switchLoading } from '../features/detailSlice';
 
 const Calendar = ({ calMemberId, calMemberNickname }) => {
   let memberId = getCookie('memberId'); // 현재 달력이 로그인 유저인지 친구인지 비교하는 용
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   // 날짜 계산용 state zzzzzz
@@ -177,7 +180,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
           </div>
         </div>
       )}
-      <ModalDetail
+        <ModalDetail
         show={isopen}
         onHide={() => {
           setIsOpen(false);
