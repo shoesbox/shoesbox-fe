@@ -53,13 +53,13 @@ img {
   word-break: break-all;
 }
 
-.text-info {
-  --bs-text-opacity: 1;
-  color: #A4C3B2 !important;
-}
 .detail-img-spinner {
   display: flex;
   justify-content: center;
+}
+.text-info {
+  --bs-text-opacity: 1;
+  color: #a4c3b2 !important;
 }
 .spinner-border {
   --bs-spinner-width: 3rem;
