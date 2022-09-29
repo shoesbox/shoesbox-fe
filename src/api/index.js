@@ -152,6 +152,7 @@ export const apis = {
   // 알람 기능
   getAlarmList: () => api.get('/api/alarm'),
   deleteAlarm: (alarmId) => api.delete(`/api/alarm/${alarmId}`),
+  deleteAlarmAll: () => api.delete('/api/alarm'),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),

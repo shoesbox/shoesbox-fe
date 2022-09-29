@@ -8,6 +8,11 @@
   /* border: 1px solid red; */
 }
 .alert-list > span:hover {
-  text-decoration : underline wavy paleturquoise;
+  text-decoration: underline wavy paleturquoise;
   /* text-decoration-style: wavy; */
+}
+.alert-delete-btn {
+  /* width: 0.5em;
+  height: 1em;
+  background-color: red; */
 }

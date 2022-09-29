@@ -223,6 +223,10 @@ const detailSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getDetailThunk.fulfilled, (state, action) => {
       state.post = action.payload;
+      state.loading = false;
+      // setTimeout(()=>{
+      //   console.log('false로 바뀜');
+      // },5000)
     });
     builder.addCase(getJsonDetailThunk.fulfilled, (state, action) => {
       // console.log('extraReducers', action.payload);

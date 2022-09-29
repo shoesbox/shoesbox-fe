@@ -29,21 +29,28 @@ const EditPage = () => {
 
   // 첨부 파일 검증
   const fileValidation = (obj) => {
-    const fileTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    const fileTypes = ['image/jpeg', 'image/png'];
+    let objExactType = obj.name.substring(obj.name.lastIndexOf('.') + 1);
+    // console.log('objExactType', objExactType);
+    const fileTypesName = ['jpeg', 'jpg', 'png', 'bmp'];
     if (obj.name.length > 100) {
-      alert('파일명이 100자 이상인 파일은 등록할 수 없습니다.');
+      alert('파일명이 100자 이상인 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
-    } else if (obj.size > 30 * 1024 * 1024) {
-      alert('최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.');
+    } else if (obj.size > 10 * 1024 * 1024) {
+      alert('용량이 10MB를 초과한 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else if (obj.name.lastIndexOf('.') === -1) {
-      alert('확장자가 없는 파일은 등록할 수 없습니다.');
+      alert('확장자가 없는 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else if (!fileTypes.includes(obj.type)) {
-      alert('첨부가 불가능한 파일은 등록할 수 없습니다.');
+      alert('해당 파일은 첨부할 수 없습니다.');
+      imageRef.current.value = '';
+      return false;
+    } else if (!fileTypesName.includes(objExactType)) {
+      alert('해당 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else {
@@ -86,16 +93,22 @@ const EditPage = () => {
   useEffect(() => {
     if (files) {
       setBase64s([]);
-      for (var i = 0; i < files.length; i++) {
-        if (fileValidation(files[i])) {
-          const reader = new FileReader();
-          reader.readAsDataURL(files[i]);
-          reader.onload = () => {
-            if (reader.readyState === 2) {
-              setBase64s((prev) => [...prev, reader.result]);
-            }
-          };
+      if (files.length <= 5) {
+        for (var i = 0; i < files.length; i++) {
+          // console.log(files[i].name);
+          if (fileValidation(files[i])) {
+            const reader = new FileReader();
+            reader.readAsDataURL(files[i]);
+            reader.onload = () => {
+              if (reader.readyState === 2) {
+                setBase64s((prev) => [...prev, reader.result]);
+              }
+            };
+          }
         }
+      } else {
+        imageRef.current.value = '';
+        alert('사진 첨부는 5장까지 가능합니다.');
       }
     }
   }, [files]);
