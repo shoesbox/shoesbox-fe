@@ -45,6 +45,11 @@ const ModalDetail = ({ postId, ...props }) => {
   };
 
   useEffect(() => {
+    
+  }, [])
+  
+
+  useEffect(() => {
     if (postId !== (null || undefined)) {
       dispatch(getDetailThunk(postId));
       dispatch(switchLoading(true));
@@ -72,6 +77,7 @@ const ModalDetail = ({ postId, ...props }) => {
           centered
           size="md"
           fullscreen="sm-down"
+          keyboard
         >
           {loading ? (
             <div className="detail-img-spinner">
