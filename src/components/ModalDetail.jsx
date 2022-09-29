@@ -7,16 +7,19 @@ import {
   getDetailThunk,
   deleteDetailThunk,
   switchLoading,
+  switchLoadPost,
 } from '../features/detailSlice';
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
+// const ModalDetail = ({ postId, ...props }) => {
 const ModalDetail = ({ postId, ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const memberId = getCookie('memberId');
   const post = useSelector((state) => state.detail.post);
   const loading = useSelector((state) => state.detail.loading);
+  const postStatus = useSelector((state) => state.detail.postStatus);
 
   const nickname = post?.nickname;
   const title = post?.title;
@@ -40,6 +43,8 @@ const ModalDetail = ({ postId, ...props }) => {
     }
   };
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     if (postId !== (null || undefined)) {
       dispatch(getDetailThunk(postId));
@@ -61,60 +66,57 @@ const ModalDetail = ({ postId, ...props }) => {
 
   return (
     <>
-      <Modal
-        {...props}
-        className="detail-modal"
-        centered
-        size="md"
-        fullscreen="sm-down"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <div>{title}</div>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* <div className="detail-img-spinner">
-            <Spinner animation="grow" variant="info" />
-          </div> */}
+      {postStatus && (
+        <Modal
+          {...props}
+          className="detail-modal"
+          centered
+          size="md"
+          fullscreen="sm-down"
+          keyboard
+        >
           {loading ? (
             <div className="detail-img-spinner">
               <Spinner animation="grow" variant="info" />
             </div>
           ) : (
             <>
-              <div className="detail-titlebox">
-                {nickname}
-                {/* <span>{props.date}</span> */}
-              </div>
-              <hr />
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <div>{title}</div>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="detail-titlebox">{nickname}</div>
+                <hr />
 
-              {images?.length >= 2 ? <ImageCarousel /> : null}
-              {images?.length === 1 ? <img src={images} alt="" /> : null}
-              {images?.length >= 1 && <hr />}
+                {images?.length >= 2 ? <ImageCarousel /> : null}
+                {images?.length === 1 ? <img src={images} alt="" /> : null}
+                {images?.length >= 1 && <hr />}
 
-              <div className="detail-content">{content}</div>
+                <div className="detail-content">{content}</div>
 
-              {parseInt(memberId) === parseInt(writeMemberId) && (
-                <>
-                  <br />
-                  <div className="detail-fix-del-btns">
-                    <Button onClick={() => editPost(post)}>수정</Button>
-                    <Button onClick={() => delPost()}>삭제</Button>
-                  </div>
-                </>
-              )}
-              <hr />
-              <CommentsList postId={postId} />
+                {parseInt(memberId) === parseInt(writeMemberId) && (
+                  <>
+                    <br />
+                    <div className="detail-fix-del-btns">
+                      <Button onClick={() => editPost(post)}>수정</Button>
+                      <Button onClick={() => delPost()}>삭제</Button>
+                    </div>
+                  </>
+                )}
+                <hr />
+                <CommentsList postId={postId} />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={props.onHide}>
+                  Close
+                </Button>
+              </Modal.Footer>
             </>
           )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={props.onHide}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        </Modal>
+      )}
     </>
   );
 };
