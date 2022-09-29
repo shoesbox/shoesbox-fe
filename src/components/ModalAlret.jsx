@@ -94,7 +94,11 @@ const ModalAlert = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="alert-list">
-          <AlarmList alarmList={alarmList} />
+          {alarmList.length > 0 ? (
+            <AlarmList alarmList={alarmList} />
+          ) : (
+            <div>새로운 알림이 없습니다.</div>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.onHide}>
