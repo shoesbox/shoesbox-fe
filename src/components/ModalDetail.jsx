@@ -23,7 +23,7 @@ const ModalDetail = ({ postId, ...props }) => {
 
   const nickname = post?.nickname;
   const title = post?.title;
-  const date = post?.date;
+  const date = post?.modifiedAt;
   const images = post?.images;
   const content = post?.content;
   const writeMemberId = post?.memberId;
@@ -48,7 +48,6 @@ const ModalDetail = ({ postId, ...props }) => {
     if (postId !== (null || undefined)) {
       dispatch(getDetailThunk(postId));
       dispatch(switchLoading(true));
-      // console.log('result', result);
     }
   }, [postId]);
 
