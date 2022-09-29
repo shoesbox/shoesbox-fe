@@ -6,14 +6,13 @@
 }
 
 .detail-titlebox {
-  display: flex;
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: underline wavy #a4c3b2;
+  /* display: flex;
   justify-content: space-between;
   align-items: center;
-  text-align: center;
-}
-
-.detail-titlebox > span > strong {
-  margin-right: 10px;
+  text-align: center; */
 }
 
 img {
@@ -43,7 +42,9 @@ img {
 .detail-comments-wrap {
   width: 100%;
 }
-
+.pre-comments {
+  color: gray;
+}
 .detail-comments {
   display: flex;
   justify-content: space-between;

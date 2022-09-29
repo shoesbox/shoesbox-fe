@@ -20,7 +20,6 @@ const ModalDetail = ({ postId, ...props }) => {
 
   const nickname = post?.nickname;
   const title = post?.title;
-  const date = post?.modifiedAt;
   const images = post?.images;
   const content = post?.content;
   const writeMemberId = post?.memberId;
@@ -85,10 +84,8 @@ const ModalDetail = ({ postId, ...props }) => {
           ) : (
             <>
               <div className="detail-titlebox">
-                <span>
-                  <strong>{nickname}</strong>
-                </span>
-                <span>{date}</span>
+                {nickname}
+                {/* <span>{props.date}</span> */}
               </div>
               <hr />
 

@@ -189,7 +189,7 @@ const CommentsList = ({ postId }) => {
           </div>
         ))
       ) : (
-        <div>첫번째 댓글의 주인공이 되어보세요!</div>
+        <div className="pre-comments">첫번째 댓글의 주인공이 되어보세요!</div>
       )}
       <hr />
       <div>
