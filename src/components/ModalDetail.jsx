@@ -79,18 +79,13 @@ const ModalDetail = ({ postId, ...props }) => {
         <Modal.Body>
           {loading ? (
             <div className="detail-img-spinner">
-              <Spinner animation="grow" variant="info" />
+              <Spinner animation="border" variant="info" />
             </div>
           ) : (
             <>
               <div className="detail-titlebox">
                 <span>
                   <strong>{nickname}</strong>
-                  {/* <Button
-                onClick={() => alert('친구에게 전화로 마음을 전해보세요!')}
-              >
-                <BsFillTelephoneForwardFill />
-              </Button> */}
                 </span>
                 <span>{date}</span>
               </div>

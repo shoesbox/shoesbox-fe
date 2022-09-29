@@ -4,7 +4,6 @@
   "homepage": "./",
   "private": true,
   "dependencies": {
-    "@fontsource/roboto": "^4.5.8",
     "@iconify/react": "^4.0.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.14.1",

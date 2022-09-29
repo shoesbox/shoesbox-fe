@@ -7,7 +7,7 @@ import ModalLogin from './ModalLogin';
 import ModalAlert from './ModalAlret';
 import { getCookie, deleteCookie, setCookie } from '../shared/cookie';
 import { apis } from '../api';
-import { BsBellFill } from 'react-icons/bs';
+import { FaBell } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsLogin, setAlarmList } from '../features/loginSlice';
 import Alarms from './Alarms';
@@ -86,17 +86,20 @@ function Header() {
         }}
       >
         <Container>
-          <Navbar.Brand
-            onClick={() => window.location.replace('/')}
-            className="brand-logo"
-          >
-            SHOES 🍭 BOX
+          <Navbar.Brand className="brand-alert">
+            <span
+              className="brand-logo"
+              onClick={() => window.location.replace('/')}
+            >
+              SHOES 🍭 BOX
+            </span>
+            {isLoggedIn && (
+              <span className="test">
+                <FaBell onClick={handleShow} />
+              </span>
+            )}
           </Navbar.Brand>
-          {isLoggedIn && (
-            <Nav className="test">
-              <BsBellFill onClick={handleShow} />
-            </Nav>
-          )}
+
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

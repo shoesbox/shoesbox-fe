@@ -14,10 +14,10 @@ const Alarms = () => {
   const eventSource = useRef();
 
   const toastConst = (msg) => {
-    toast('🦄' + msg, {
+    toast('🧁 ' + msg, {
       position: 'top-right',
       autoClose: 5000,
-      hideProgressBar: false,
+      // hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
