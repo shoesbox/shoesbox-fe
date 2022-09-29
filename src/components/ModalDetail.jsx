@@ -12,7 +12,6 @@ import {
 import { getCookie } from '../shared/cookie';
 import CommentsList from './CommentsList';
 
-// const ModalDetail = ({ postId, ...props }) => {
 const ModalDetail = ({ postId, ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

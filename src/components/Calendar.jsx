@@ -180,14 +180,13 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
           </div>
         </div>
       )}
-        <ModalDetail
+      <ModalDetail
         show={isopen}
         onHide={() => {
           setIsOpen(false);
         }}
         postId={postNumber}
         backdrop="static"
-        keyboard={false}
       />
     </>
   );
