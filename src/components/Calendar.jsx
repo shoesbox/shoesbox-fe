@@ -186,7 +186,6 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
           setIsOpen(false);
         }}
         postId={postNumber}
-        backdrop="static"
       />
     </>
   );

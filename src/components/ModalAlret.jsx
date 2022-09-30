@@ -105,7 +105,6 @@ const ModalAlert = (props) => {
         }}
         postId={postId}
         backdrop="static"
-        keyboard={false}
       />
     </>
   );

@@ -49,8 +49,6 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
       <ModalAddFriend
         show={show}
         onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
       />
     </div>
   );

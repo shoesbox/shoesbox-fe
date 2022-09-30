@@ -28,7 +28,7 @@ const Alarms = () => {
     if (!!window.EventSource && memberId !== undefined) {
       setTimeout(() => {
         eventSource.current = new EventSource(
-          BASE_URL + `/api/sub/?jwt=${jwt}`,
+          BASE_URL + `/api/sub/?jwt=${jwt}`
           // { withCredentials: true }
         );
         eventSource.current.onopen = (event) => {

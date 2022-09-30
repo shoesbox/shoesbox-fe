@@ -139,7 +139,6 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
       <Modal
         show={login}
         onHide={handleCloseLogin}
-        backdrop="static"
         // fullscreen="sm-down"
       >
         <Modal.Header closeButton>
