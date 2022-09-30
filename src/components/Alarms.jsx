@@ -29,7 +29,7 @@ const Alarms = () => {
       setTimeout(() => {
         eventSource.current = new EventSource(
           BASE_URL + `/api/sub/?jwt=${jwt}`,
-          { withCredentials: true }
+          // { withCredentials: true }
         );
         eventSource.current.onopen = (event) => {
           console.log('connection is opened');

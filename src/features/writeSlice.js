@@ -14,10 +14,13 @@ export const postDetailThunk = createAsyncThunk(
       const res = data.data.data;
       // console.log('writeDailythunk',res)
       if (res) {
-        // alert('등록 완료 // 최종 완성 시 알림 삭제 예정');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       }
     } catch (err) {
-      alert(err.response.data.errorDetails.apierror.message);
+      console.log(err.response.data);
+      alert(err.response.data.error);
       return thunkAPI.rejectWithValue('writeDailyThunkErr', err.response.data);
     }
   }
@@ -31,10 +34,13 @@ export const putDetailThunk = createAsyncThunk(
       const res = data.data.data;
       // console.log('writeDailythunk', postId, payload);
       if (res) {
-        // alert('수정 완료 // 최종 완성 시 알림 삭제 예정');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       }
     } catch (err) {
-      alert(err.response.data.errorDetails.apierror.message);
+      console.log(err.response.data);
+      alert(err.response.data.error);
       return thunkAPI.rejectWithValue('writeDailyThunkErr', err.response.data);
     }
   }

@@ -140,7 +140,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                       if (date.postId === 0) {
                         if (memberId === calMemberId) {
                           let result = window.confirm(
-                            '선택한 날짜의 일기를 작성하시겠습니까?'
+                            `${createdMonth}월 ${createdDay}일 일기를 작성하시겠어요?`
                           );
                           if (result === true) {
                             navigate('/write', {

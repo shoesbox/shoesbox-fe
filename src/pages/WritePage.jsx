@@ -32,7 +32,16 @@ const WritePage = () => {
     const fileTypes = ['image/jpeg', 'image/png'];
     let objExactType = obj.name.substring(obj.name.lastIndexOf('.') + 1);
     // console.log('objExactType', objExactType);
-    const fileTypesName = ['jpeg', 'jpg', 'png', 'bmp'];
+    const fileTypesName = [
+      'jpeg',
+      'jpg',
+      'png',
+      'bmp',
+      'JPG',
+      'JPEG',
+      'PNG',
+      'BMP',
+    ];
     if (obj.name.length > 100) {
       alert('파일명이 100자 이상인 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
@@ -129,10 +138,6 @@ const WritePage = () => {
       });
 
       dispatch(postDetailThunk(formData));
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
     }
   }, [formDataTxt]);
 
