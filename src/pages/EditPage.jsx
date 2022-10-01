@@ -12,6 +12,9 @@ const EditPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // 기존에 가지고 있는 이미지
+  const images = post?.images;
+
   // formdata
   let formData = new FormData();
   // text data
@@ -94,6 +97,12 @@ const EditPage = () => {
     imageRef.current.files = dataTranster.files;
   };
 
+  const deleteExistingImage = (clickedImg) => {
+    let newArr = Array.from(images)
+      .filter((file) => file == clickedImg)
+    console.log("삭제용으로 선택된 이미지", newArr)
+  }
+
   const onChangePic = (e) => {
     setFiles(e.target.files);
   };
@@ -174,6 +183,31 @@ const EditPage = () => {
           </div>
         </Form.Group>
         <br />
+        // 기존에 존재하는 이미지
+        <div className="write-preview-wrap">
+          {images &&
+            images.map((image, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <Image
+                    thumbnail
+                    rounded
+                    className="write-preview-image"
+                    src={image}
+                  />
+                  <div className="write-preview-btn">
+                    <BsFillBackspaceFill
+                      onClick={
+                        // ()=>console.log((Object.entries(files))[idx][2])
+                        () => deleteExistingImage(images[idx])
+                      }
+                    />
+                  </div>
+                </Fragment>
+              );
+            })}
+        </div>
+
         <div className="write-preview-wrap">
           {base64s &&
             base64s.map((image, idx) => {

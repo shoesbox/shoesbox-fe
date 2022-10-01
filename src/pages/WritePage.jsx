@@ -18,6 +18,9 @@ const WritePage = () => {
   const [formDataTxt, setFormDataTxt] = useState();
   // input validation check
   const [validated, setValidated] = useState(false);
+  // button Status
+  const [btnStatus, setBtnStatus] = useState(false);
+
   // refs
   const titleRef = useRef();
   const contentRef = useRef();
@@ -138,6 +141,7 @@ const WritePage = () => {
       });
 
       dispatch(postDetailThunk(formData));
+      setBtnStatus(true);
     }
   }, [formDataTxt]);
 
@@ -227,7 +231,7 @@ const WritePage = () => {
         >
           뒤로 가기
         </Button>
-        <Button type="submit" className="submitBtn">
+        <Button type="submit" className="submitBtn" disabled={btnStatus}>
           등록
         </Button>
       </Form>

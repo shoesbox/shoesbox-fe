@@ -27,7 +27,6 @@ const ModalDetail = ({ postId, ...props }) => {
   const writeMemberId = post?.memberId;
 
   const editPost = (post) => {
-    // console.log(post);
     navigate('/edit');
   };
 
