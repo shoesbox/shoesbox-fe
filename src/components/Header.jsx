@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
+import ModalLogin2 from './ModalLogin2';
 import ModalAlert from './ModalAlret';
 import { getCookie, deleteCookie, setCookie } from '../shared/cookie';
 import { apis } from '../api';
@@ -147,13 +148,13 @@ function Header() {
         </Container>
       </Navbar>
       <ModalLogin login={login} handleCloseLogin={handleCloseLogin} />
+      {/* <ModalLogin2 login={login} handleCloseLogin={handleCloseLogin} /> */}
       <ModalAlert
         show={show}
         onHide={handleClose}
-        // backdrop="static"
         // alarmList={alarmList}
       />
-      <Alarms />
+      {/* <Alarms /> */}
     </>
   );
 }
