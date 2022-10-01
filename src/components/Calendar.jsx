@@ -138,6 +138,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                     // );
                     if (postDate > minDate && postDate < new Date()) {
                       if (date.postId === 0) {
+                        // 일기 주인과 로그인 유저가 같으면 일기 쓰기로 넘어가기
                         if (memberId === calMemberId) {
                           let result = window.confirm(
                             `${createdMonth}월 ${createdDay}일 일기를 작성하시겠어요?`
@@ -159,8 +160,15 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                         setIsOpen(true);
                       }
                     } else {
+                      // 한달 범위 바깥의 글에서 작동하는 부분
+                      if (date.postId === 0) { // 글이 없으면
+                        return null;
+                      } else { // 글이 있으면 보여주자
+                        setPostNumber(date.postId);
+                        setIsOpen(true);
+                      }
                       // alert('미래의 일기는 작성이 불가합니다.');
-                      return null;
+                      // return null;
                     }
                   }}
                 >
