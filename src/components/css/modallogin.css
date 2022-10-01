@@ -1,3 +1,13 @@
+.login-logo {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-logo > img {
+  /* border: 1px solid blue; */
+  width: 300px;
+}
 .social {
   display: flex;
   align-items: center;

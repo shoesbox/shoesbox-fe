@@ -14,9 +14,10 @@ export const postDetailThunk = createAsyncThunk(
       const res = data.data.data;
       // console.log('writeDailythunk',res)
       if (res) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        window.location.reload();
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 1000);
       }
     } catch (err) {
       console.log(err.response.data);
@@ -34,9 +35,10 @@ export const putDetailThunk = createAsyncThunk(
       const res = data.data.data;
       // console.log('writeDailythunk', postId, payload);
       if (res) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        window.location.reload();
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 1000);
       }
     } catch (err) {
       console.log(err.response.data);

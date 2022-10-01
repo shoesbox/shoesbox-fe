@@ -52,6 +52,7 @@ img {
   text-align: justify;
   margin-bottom: 10px;
   word-break: break-all;
+  /* word-break: keep-all; */
 }
 
 .detail-img-spinner {
