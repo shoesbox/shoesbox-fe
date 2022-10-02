@@ -59,7 +59,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
       })
       .catch((err) => {
         // console.log(err);
-        const errMessage = err.response?.data.errorDetails.apierror.message;
+        const errMessage = err.response?.data.errorDetails?.apierror.message;
         // console.log(errMessage);
         alert(errMessage);
       });
@@ -187,6 +187,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
                   placeholder="비밀번호를 한번 더 입력하세요"
                   autoFocus
                   name="password1"
+                  id="password1"
                   // aria-describedby="비밀번호는 8자 이상의 영어 소문자와 대문자, 숫자가 조합된 것이어야 합니다"
                   // title="비밀번호는 8자 이상의 영어 소문자와 대문자, 숫자가 조합된 것이어야 합니다"
                   // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"

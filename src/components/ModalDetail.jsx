@@ -22,7 +22,7 @@ const ModalDetail = ({ postId, ...props }) => {
 
   const nickname = post?.nickname;
   const title = post?.title;
-  const images = JSON.parse(post?.images);
+  const images = post?.images;
   const content = post?.content;
   const writeMemberId = post?.memberId;
 
@@ -51,6 +51,8 @@ const ModalDetail = ({ postId, ...props }) => {
   }, [postId]);
 
   const ImageCarousel = () => {
+    console.log("lengthproperty 있나?", Object.values(images))
+
     return (
       <Carousel>
         {/** 새로 이미지 뿌리는 법 */}
@@ -60,8 +62,8 @@ const ModalDetail = ({ postId, ...props }) => {
           </Carousel.Item>
         ))}
 
-        {/* 기존 이미지 뿌리는 법
-        {images?.map((image, idx) => (
+        {/* 기존 이미지 뿌리는 법 */}
+        {/* {images?.map((image, idx) => (
           <Carousel.Item key={idx}>
             <img className="d-block w-100" src={image} alt={idx} />
           </Carousel.Item>
@@ -95,10 +97,10 @@ const ModalDetail = ({ postId, ...props }) => {
               <Modal.Body>
                 <div className="detail-titlebox">{nickname}</div>
                 <hr />
-
-                {images?.length >= 2 ? <ImageCarousel /> : null}
-                {images?.length === 1 ? <img src={images} alt="" /> : null}
-                {images?.length >= 1 && <hr />}
+                
+                {Object.values(images)?.length >= 2 ? <ImageCarousel /> : null}
+                {Object.values(images)?.length === 1 ? <img src={images} alt="" /> : null}
+                {Object.values(images)?.length >= 1 && <hr />}
 
                 <div className="detail-content">{content}</div>
 
