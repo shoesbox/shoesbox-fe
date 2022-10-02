@@ -13,7 +13,7 @@ const EditPage = () => {
   const navigate = useNavigate();
 
   // 기존에 가지고 있는 이미지
-  const images = post?.images;
+  const images = JSON.parse(post?.images);
 
   // formdata
   let formData = new FormData();
@@ -98,9 +98,9 @@ const EditPage = () => {
   };
 
   const deleteExistingImage = (clickedImg) => {
-    let newArr = Array.from(images)
-      .filter((file) => file == clickedImg)
-    console.log("삭제용으로 선택된 이미지", newArr)
+    let newArr = Object.values(images)
+      .filter((file) => file != clickedImg)
+    console.log("삭제이미지를 배제한 url", newArr)
   }
 
   const onChangePic = (e) => {
@@ -186,7 +186,7 @@ const EditPage = () => {
         // 기존에 존재하는 이미지
         <div className="write-preview-wrap">
           {images &&
-            images.map((image, idx) => {
+            Object.values(images).map((image, idx) => {
               return (
                 <Fragment key={idx}>
                   <Image

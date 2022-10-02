@@ -22,7 +22,7 @@ const ModalDetail = ({ postId, ...props }) => {
 
   const nickname = post?.nickname;
   const title = post?.title;
-  const images = post?.images;
+  const images = JSON.parse(post?.images);
   const content = post?.content;
   const writeMemberId = post?.memberId;
 
@@ -53,11 +53,19 @@ const ModalDetail = ({ postId, ...props }) => {
   const ImageCarousel = () => {
     return (
       <Carousel>
-        {images?.map((image, idx) => (
+        {/** 새로 이미지 뿌리는 법 */}
+        {Object.values(images).map((image, idx) => (
           <Carousel.Item key={idx}>
             <img className="d-block w-100" src={image} alt={idx} />
           </Carousel.Item>
         ))}
+
+        {/* 기존 이미지 뿌리는 법
+        {images?.map((image, idx) => (
+          <Carousel.Item key={idx}>
+            <img className="d-block w-100" src={image} alt={idx} />
+          </Carousel.Item>
+        ))} */}
       </Carousel>
     );
   };
