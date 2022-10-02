@@ -41,7 +41,6 @@ const ModalDetail = ({ postId, ...props }) => {
     }
   };
 
-  useEffect(() => {}, []);
 
   useEffect(() => {
     if (postId !== (null || undefined)) {
@@ -51,8 +50,6 @@ const ModalDetail = ({ postId, ...props }) => {
   }, [postId]);
 
   const ImageCarousel = () => {
-    console.log("lengthproperty 있나?", Object.values(images))
-
     return (
       <Carousel>
         {/** 새로 이미지 뿌리는 법 */}
@@ -61,13 +58,6 @@ const ModalDetail = ({ postId, ...props }) => {
             <img className="d-block w-100" src={image} alt={idx} />
           </Carousel.Item>
         ))}
-
-        {/* 기존 이미지 뿌리는 법 */}
-        {/* {images?.map((image, idx) => (
-          <Carousel.Item key={idx}>
-            <img className="d-block w-100" src={image} alt={idx} />
-          </Carousel.Item>
-        ))} */}
       </Carousel>
     );
   };
@@ -99,7 +89,7 @@ const ModalDetail = ({ postId, ...props }) => {
                 <hr />
                 
                 {Object.values(images)?.length >= 2 ? <ImageCarousel /> : null}
-                {Object.values(images)?.length === 1 ? <img src={images} alt="" /> : null}
+                {Object.values(images)?.length === 1 ? <img src={Object.values(images)[0]} alt="" /> : null}
                 {Object.values(images)?.length >= 1 && <hr />}
 
                 <div className="detail-content">{content}</div>

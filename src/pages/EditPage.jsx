@@ -15,7 +15,8 @@ const EditPage = () => {
   // 기존에 가지고 있는 이미지
   const images = post?.images;
   const imageKeys = Object.keys(post?.images);
-  const imageValues = Object.values(post?.images);
+  // const imageValues = Object.values(post?.images);
+  const [imageValues, setImageValues] = useState(Object.values(post?.images));
 
   // formdata
   let formData = new FormData();
@@ -31,8 +32,7 @@ const EditPage = () => {
   const [files, setFiles] = useState([]); // files
   const [base64s, setBase64s] = useState([]); // base64s
   // delete image states
-  const [deleteImageTray, setDeleteImageTray] = useState([]);
-
+  const [deleteImgTray, setDeleteImgTray] = useState([]);
   // const previewImages = useSelector((state) => state.write.images);
 
   // 첨부 파일 검증
@@ -70,6 +70,10 @@ const EditPage = () => {
       alert('해당 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
+    } else if (imageKeys.length + files.length - deleteImgTray.length > 5) {
+      imageRef.current.value = '';
+      alert('사진은 총 5장까지 게시할 수 있습니다.')
+      return false;
     } else {
       return true;
     }
@@ -102,14 +106,18 @@ const EditPage = () => {
     imageRef.current.files = dataTranster.files;
   };
 
-  const deleteExistingImage = (clickedImgId) => {
-    if(prompt("정말로 삭제하시겠습니까?")){
+  const deleteExistingImage = (clickedImgValue) => {
+    if(window.confirm("정말로 삭제하시겠습니까?")){
       for (let i = 0; i < imageKeys.length; i++) {
-        if(imageKeys[i] == clickedImgId){
-          imageKeys.splice(i, 1)
-          i--;
+        if(images[imageKeys[i]] == clickedImgValue){
+          setDeleteImgTray([...deleteImgTray, imageKeys[i]])
         }
       }
+
+      let newArr = Array.from(imageValues)
+        .filter((image) => image !== clickedImgValue)
+
+      setImageValues(newArr);
     }
   }
 
@@ -149,7 +157,18 @@ const EditPage = () => {
         formData.append('imageFiles', file);
       });
       // 추가
-      formData.append('imagesToDelete', imageKeys)
+      console.log("폼데이터 추가 직전 딜리트 트레이", deleteImgTray)
+      formData.append('imagesToDelete', deleteImgTray)
+
+      // FormData의 key 확인
+      for (let key of formData.keys()) {
+        console.log("폼데이터 키", key);
+      }
+
+      // FormData의 value 확인
+      for (let value of formData.values()) {
+        console.log("폼데이터 밸류",value);
+      }
 
       dispatch(putDetailThunk({ postId: post.postId, payload: formData }));
     }
@@ -173,6 +192,31 @@ const EditPage = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <br />
+        <div className="subtitle">기존 이미지 📸</div>
+        <div className="write-preview-wrap">
+          {images &&
+            imageValues.map((image, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <Image
+                    thumbnail
+                    rounded
+                    className="write-preview-image"
+                    src={image}
+                  />
+                  <div className="write-preview-btn">
+                    <BsFillBackspaceFill
+                      onClick={
+                        // ()=>console.log((Object.entries(files))[idx][2])
+                        () => deleteExistingImage(imageValues[idx])
+                      }
+                    />
+                  </div>
+                </Fragment>
+              );
+            })}
+        </div>
+
         <br />
         <Form.Group>
           <Form.Label className="subtitle">오늘의 포토제닉 📸</Form.Label>
@@ -195,30 +239,6 @@ const EditPage = () => {
           </div>
         </Form.Group>
         <br />
-        // 기존에 존재하는 이미지
-        <div className="write-preview-wrap">
-          {images &&
-            imageValues.map((image, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <Image
-                    thumbnail
-                    rounded
-                    className="write-preview-image"
-                    src={image}
-                  />
-                  <div className="write-preview-btn">
-                    <BsFillBackspaceFill
-                      onClick={
-                        // ()=>console.log((Object.entries(files))[idx][2])
-                        () => deleteExistingImage(imageKeys[idx])
-                      }
-                    />
-                  </div>
-                </Fragment>
-              );
-            })}
-        </div>
 
         <div className="write-preview-wrap">
           {base64s &&
