@@ -13,7 +13,9 @@ const EditPage = () => {
   const navigate = useNavigate();
 
   // 기존에 가지고 있는 이미지
-  // const images = post?.images;
+  const images = post?.images;
+  const imageKeys = Object.keys(post?.images);
+  const imageValues = Object.values(post?.images);
 
   // formdata
   let formData = new FormData();
@@ -28,6 +30,9 @@ const EditPage = () => {
   // image states
   const [files, setFiles] = useState([]); // files
   const [base64s, setBase64s] = useState([]); // base64s
+  // delete image states
+  const [deleteImageTray, setDeleteImageTray] = useState([]);
+
   // const previewImages = useSelector((state) => state.write.images);
 
   // 첨부 파일 검증
@@ -97,10 +102,15 @@ const EditPage = () => {
     imageRef.current.files = dataTranster.files;
   };
 
-  const deleteExistingImage = (clickedImg) => {
-    // let newArr = Object.values(images)
-    //   .filter((file) => file != clickedImg)
-    // console.log("삭제이미지를 배제한 url", newArr)
+  const deleteExistingImage = (clickedImgId) => {
+    if(prompt("정말로 삭제하시겠습니까?")){
+      for (let i = 0; i < imageKeys.length; i++) {
+        if(imageKeys[i] == clickedImgId){
+          imageKeys.splice(i, 1)
+          i--;
+        }
+      }
+    }
   }
 
   const onChangePic = (e) => {
@@ -138,6 +148,8 @@ const EditPage = () => {
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
+      // 추가
+      formData.append('imagesToDelete', imageKeys)
 
       dispatch(putDetailThunk({ postId: post.postId, payload: formData }));
     }
@@ -184,9 +196,9 @@ const EditPage = () => {
         </Form.Group>
         <br />
         // 기존에 존재하는 이미지
-        {/* <div className="write-preview-wrap">
+        <div className="write-preview-wrap">
           {images &&
-            Object.values(images).map((image, idx) => {
+            imageValues.map((image, idx) => {
               return (
                 <Fragment key={idx}>
                   <Image
@@ -199,14 +211,14 @@ const EditPage = () => {
                     <BsFillBackspaceFill
                       onClick={
                         // ()=>console.log((Object.entries(files))[idx][2])
-                        () => deleteExistingImage(images[idx])
+                        () => deleteExistingImage(imageKeys[idx])
                       }
                     />
                   </div>
                 </Fragment>
               );
             })}
-        </div> */}
+        </div>
 
         <div className="write-preview-wrap">
           {base64s &&
