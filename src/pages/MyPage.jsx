@@ -1,6 +1,6 @@
 import './css/mypage.css';
 import { useState, useEffect, useRef } from 'react';
-import { getCookie, deleteCookie } from '../shared/cookie';
+import { setCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
 import ModalProfileUpdate from '../components/ModalProfileUpdate';
 import { Form } from 'react-bootstrap';
@@ -99,6 +99,7 @@ const MyPage = ({ memberId }) => {
         // console.log(res);
         setState({ ...state, nickname: newNickname });
         toggleIsEdit();
+        setCookie('nickname', newNickname);
       })
       .catch((err) => {
         // console.log(err);
