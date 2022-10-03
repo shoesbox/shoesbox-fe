@@ -35,7 +35,7 @@ export const putDetailThunk = createAsyncThunk(
       const res = data.data.data;
       // console.log('writeDailythunk', postId, payload);
       if (res) {
-        // window.location.reload();
+        window.location.reload();
         // setTimeout(() => {
         //   window.location.reload();
         // }, 1000);

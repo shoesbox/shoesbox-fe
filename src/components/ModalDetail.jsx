@@ -53,7 +53,7 @@ const ModalDetail = ({ postId, ...props }) => {
     return (
       <Carousel>
         {/** 새로 이미지 뿌리는 법 */}
-        {Object.values(images).map((image, idx) => (
+        {Object?.values(images)?.map((image, idx) => (
           <Carousel.Item key={idx}>
             <img className="d-block w-100" src={image} alt={idx} />
           </Carousel.Item>

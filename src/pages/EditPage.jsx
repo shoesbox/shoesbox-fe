@@ -15,6 +15,7 @@ const EditPage = () => {
   // 기존에 가지고 있는 이미지
   const images = post?.images;
   const imageKeys = Object.keys(post?.images);
+  // const [imageKeys, setImageKeys] = useState(Object?.keys(post?.images))
   // const imageValues = Object.values(post?.images);
   const [imageValues, setImageValues] = useState(Object.values(post?.images));
 
@@ -108,7 +109,7 @@ const EditPage = () => {
 
   const deleteExistingImage = (clickedImgValue) => {
     if(window.confirm("정말로 삭제하시겠습니까?")){
-      for (let i = 0; i < imageKeys.length; i++) {
+      for (let i = 0; i < imageKeys?.length; i++) {
         if(images[imageKeys[i]] == clickedImgValue){
           setDeleteImgTray([...deleteImgTray, imageKeys[i]])
         }
