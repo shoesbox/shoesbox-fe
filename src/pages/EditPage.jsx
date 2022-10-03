@@ -73,7 +73,7 @@ const EditPage = () => {
       return false;
     } else if (imageKeys.length + files.length - deleteImgTray.length > 5) {
       imageRef.current.value = '';
-      alert('사진은 총 5장까지 게시할 수 있습니다.')
+      alert('사진은 총 5장까지 게시할 수 있습니다.');
       return false;
     } else {
       return true;
@@ -108,19 +108,20 @@ const EditPage = () => {
   };
 
   const deleteExistingImage = (clickedImgValue) => {
-    if(window.confirm("정말로 삭제하시겠습니까?")){
+    if (window.confirm('정말로 삭제하시겠어요?')) {
       for (let i = 0; i < imageKeys?.length; i++) {
-        if(images[imageKeys[i]] == clickedImgValue){
-          setDeleteImgTray([...deleteImgTray, imageKeys[i]])
+        if (images[imageKeys[i]] === clickedImgValue) {
+          setDeleteImgTray([...deleteImgTray, imageKeys[i]]);
         }
       }
 
-      let newArr = Array.from(imageValues)
-        .filter((image) => image !== clickedImgValue)
+      let newArr = Array.from(imageValues).filter(
+        (image) => image !== clickedImgValue
+      );
 
       setImageValues(newArr);
     }
-  }
+  };
 
   const onChangePic = (e) => {
     setFiles(e.target.files);
@@ -158,17 +159,17 @@ const EditPage = () => {
         formData.append('imageFiles', file);
       });
       // 추가
-      console.log("폼데이터 추가 직전 딜리트 트레이", deleteImgTray)
-      formData.append('imagesToDelete', deleteImgTray)
+      console.log('폼데이터 추가 직전 딜리트 트레이', deleteImgTray);
+      formData.append('imagesToDelete', deleteImgTray);
 
       // FormData의 key 확인
       for (let key of formData.keys()) {
-        console.log("폼데이터 키", key);
+        console.log('폼데이터 키', key);
       }
 
       // FormData의 value 확인
       for (let value of formData.values()) {
-        console.log("폼데이터 밸류",value);
+        console.log('폼데이터 밸류', value);
       }
 
       dispatch(putDetailThunk({ postId: post.postId, payload: formData }));
@@ -193,7 +194,7 @@ const EditPage = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <br />
-        <div className="subtitle">기존 이미지 📸</div>
+        <div className="subtitle pre-img">기존 이미지 📌</div>
         <div className="write-preview-wrap">
           {images &&
             imageValues.map((image, idx) => {
@@ -217,7 +218,6 @@ const EditPage = () => {
               );
             })}
         </div>
-
         <br />
         <Form.Group>
           <Form.Label className="subtitle">오늘의 포토제닉 📸</Form.Label>
@@ -226,13 +226,9 @@ const EditPage = () => {
               type="file"
               accept="image/gif, image/jpeg, image/png"
               multiple
-              // required
               ref={imageRef}
               onChange={onChangePic}
             />
-            {/* <Form.Control.Feedback type="invalid">
-              사진을 추가해주세요 :)
-            </Form.Control.Feedback> */}
           </InputGroup>
           <div className="write-file-alert">
             파일 확장자 명은 jpg, jpeg, png, bmp 파일만 가능합니다. (파일 당

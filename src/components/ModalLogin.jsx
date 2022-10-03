@@ -145,7 +145,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          {/* <Form>
             <Form.Group className="mb-3" controlId="username">
               <Form.Label>아이디</Form.Label>
               <Form.Control
@@ -196,7 +196,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
                 />
               </Form.Group>
             )}
-          </Form>
+          </Form> */}
           <div className="login-logo">
             <img src="images/logo.jpg" alt="웰컴 이미지" />
           </div>
@@ -215,8 +215,8 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               onClick={handleSocialGoogle}
             /> */}
           </div>
-          <br />
-          {/* <span>
+          {/* <br />
+          <span>
             {!signup ? '아직 회원이 아니신가요?' : '계정이 이미 있으신가요?'}
           </span>
           <span className="change-login" onClick={() => setSignup(!signup)}>
@@ -228,7 +228,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
           <Button variant="secondary" onClick={handleCloseLogin}>
             Close
           </Button>
-          {!signup ? (
+          {/* {!signup ? (
             <Button type="submit" variant="primary" onClick={handleLogin}>
               Log In
             </Button>
@@ -246,7 +246,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
             >
               Sign Up
             </Button>
-          )}
+          )} */}
           <Button onClick={() => handleGuest()}>Guest</Button>
         </Modal.Footer>
       </Modal>

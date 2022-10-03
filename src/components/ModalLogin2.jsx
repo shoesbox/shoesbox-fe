@@ -198,8 +198,8 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
           </Form>
           {/* <div className="login-logo">
             <img src="images/logo.jpg" alt="웰컴 이미지" />
-          </div>
-          <br /> */}
+          </div> */}
+          <br />
           <div className="social">
             <button
               className="social__button social__button--naver"

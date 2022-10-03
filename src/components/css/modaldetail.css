@@ -5,14 +5,16 @@
   margin-top: 50px;
 }
 
-.detail-titlebox {
+.detail-title {
+  text-align: justify;
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.detail-nickname {
   font-weight: 500;
   font-size: 18px;
   text-decoration: underline wavy #a4c3b2;
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center; */
 }
 
 img {

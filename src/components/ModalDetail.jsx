@@ -41,7 +41,6 @@ const ModalDetail = ({ postId, ...props }) => {
     }
   };
 
-
   useEffect(() => {
     if (postId !== (null || undefined)) {
       dispatch(getDetailThunk(postId));
@@ -81,15 +80,17 @@ const ModalDetail = ({ postId, ...props }) => {
             <>
               <Modal.Header closeButton>
                 <Modal.Title>
-                  <div>{title}</div>
+                  <div className="detail-title">{title}</div>
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <div className="detail-titlebox">{nickname}</div>
+                <div className="detail-nickname">{nickname}</div>
                 <hr />
-                
+
                 {Object.values(images)?.length >= 2 ? <ImageCarousel /> : null}
-                {Object.values(images)?.length === 1 ? <img src={Object.values(images)[0]} alt="" /> : null}
+                {Object.values(images)?.length === 1 ? (
+                  <img src={Object.values(images)[0]} alt="" />
+                ) : null}
                 {Object.values(images)?.length >= 1 && <hr />}
 
                 <div className="detail-content">{content}</div>
