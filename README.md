@@ -29,7 +29,6 @@ A에게도 B에게도 C에게도 같은 얘기를 반복하기는 귀찮고, 나
 
 ### 사용 기술 👨‍🦱️
 - React
-- React-Redux
 - Redux Toolkit
 - React Bootstrap
 - axios
