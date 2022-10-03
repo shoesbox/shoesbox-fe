@@ -27,7 +27,6 @@ const ModalDetail = ({ postId, ...props }) => {
   const writeMemberId = post?.memberId;
 
   const editPost = (post) => {
-    // console.log(post);
     navigate('/edit');
   };
 
@@ -42,7 +41,6 @@ const ModalDetail = ({ postId, ...props }) => {
     }
   };
 
-  useEffect(() => {}, []);
 
   useEffect(() => {
     if (postId !== (null || undefined)) {
@@ -54,7 +52,8 @@ const ModalDetail = ({ postId, ...props }) => {
   const ImageCarousel = () => {
     return (
       <Carousel>
-        {images?.map((image, idx) => (
+        {/** 새로 이미지 뿌리는 법 */}
+        {Object?.values(images)?.map((image, idx) => (
           <Carousel.Item key={idx}>
             <img className="d-block w-100" src={image} alt={idx} />
           </Carousel.Item>
@@ -88,10 +87,10 @@ const ModalDetail = ({ postId, ...props }) => {
               <Modal.Body>
                 <div className="detail-titlebox">{nickname}</div>
                 <hr />
-
-                {images?.length >= 2 ? <ImageCarousel /> : null}
-                {images?.length === 1 ? <img src={images} alt="" /> : null}
-                {images?.length >= 1 && <hr />}
+                
+                {Object.values(images)?.length >= 2 ? <ImageCarousel /> : null}
+                {Object.values(images)?.length === 1 ? <img src={Object.values(images)[0]} alt="" /> : null}
+                {Object.values(images)?.length >= 1 && <hr />}
 
                 <div className="detail-content">{content}</div>
 
