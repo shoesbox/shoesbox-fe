@@ -35,7 +35,11 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
                     changeCalMember(friend.memberId, friend.memberNickname)
                   }
                 >
-                  <span>{friend.memberNickname}</span>
+                  <span>
+                    {friend.memberNickname.length > 3
+                      ? friend.memberNickname.slice(0, 3)
+                      : friend.memberNickname}
+                  </span>
                 </Button>
               );
             })
@@ -46,10 +50,7 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
           </span>
         </Button>
       </div>
-      <ModalAddFriend
-        show={show}
-        onHide={handleClose}
-      />
+      <ModalAddFriend show={show} onHide={handleClose} />
     </div>
   );
 };

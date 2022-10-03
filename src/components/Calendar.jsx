@@ -77,7 +77,12 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
         <div className="calendar">
           <div className="header">
             <div className="year">
-              <span>{calMemberNickname} ,</span>
+              <span>
+                {calMemberNickname.length > 4
+                  ? calMemberNickname.slice(0, 4) + '... '
+                  : calMemberNickname}
+                ,
+              </span>
               <span>{viewDate.year}</span>
             </div>
             <span className="month">{viewDate.month + 1}</span>
@@ -161,9 +166,11 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                       }
                     } else {
                       // 한달 범위 바깥의 글에서 작동하는 부분
-                      if (date.postId === 0) { // 글이 없으면
+                      if (date.postId === 0) {
+                        // 글이 없으면
                         return null;
-                      } else { // 글이 있으면 보여주자
+                      } else {
+                        // 글이 있으면 보여주자
                         setPostNumber(date.postId);
                         setIsOpen(true);
                       }
