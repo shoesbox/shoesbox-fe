@@ -59,7 +59,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
       })
       .catch((err) => {
         // console.log(err);
-        const errMessage = err.response?.data.errorDetails.apierror.message;
+        const errMessage = err.response?.data.errorDetails?.apierror.message;
         // console.log(errMessage);
         alert(errMessage);
       });
@@ -145,7 +145,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* <Form>
+          <Form>
             <Form.Group className="mb-3" controlId="username">
               <Form.Label>아이디</Form.Label>
               <Form.Control
@@ -187,6 +187,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
                   placeholder="비밀번호를 한번 더 입력하세요"
                   autoFocus
                   name="password1"
+                  id="password1"
                   // aria-describedby="비밀번호는 8자 이상의 영어 소문자와 대문자, 숫자가 조합된 것이어야 합니다"
                   // title="비밀번호는 8자 이상의 영어 소문자와 대문자, 숫자가 조합된 것이어야 합니다"
                   // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
@@ -195,7 +196,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
                 />
               </Form.Group>
             )}
-          </Form> */}
+          </Form>
           <div className="login-logo">
             <img src="images/logo.jpg" alt="웰컴 이미지" />
           </div>
@@ -214,8 +215,8 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               onClick={handleSocialGoogle}
             /> */}
           </div>
-          {/* <br />
-          <span>
+          <br />
+          {/* <span>
             {!signup ? '아직 회원이 아니신가요?' : '계정이 이미 있으신가요?'}
           </span>
           <span className="change-login" onClick={() => setSignup(!signup)}>
@@ -227,7 +228,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
           <Button variant="secondary" onClick={handleCloseLogin}>
             Close
           </Button>
-          {/* {!signup ? (
+          {!signup ? (
             <Button type="submit" variant="primary" onClick={handleLogin}>
               Log In
             </Button>
@@ -245,7 +246,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
             >
               Sign Up
             </Button>
-          )} */}
+          )}
           <Button onClick={() => handleGuest()}>Guest</Button>
         </Modal.Footer>
       </Modal>
