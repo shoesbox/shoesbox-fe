@@ -2,11 +2,10 @@
   /* border: 1px solid red; */
   display: flex;
   justify-content: center;
-  margin: 20px 15px -10px 15px;
+  margin: 20px 0 -10px 0;
 }
 
 .friends {
-  /* border: 1px solid green; */
   display: flex;
   align-items: center;
   width: fit-content;
