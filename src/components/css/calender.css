@@ -29,7 +29,6 @@
   font-weight: 500;
   font-style: oblique;
   color: #6b9080;
-  /* background-color: rgb(250, 250, 250); */
 }
 .year {
   font-size: 22px;
@@ -40,14 +39,8 @@
   flex-direction: column;
 }
 .year > div:nth-child(1) {
-  color: silver;
-  margin-right: 10px;
-}
-.year > div:nth-child(2) {
   font-size: 14px;
   font-weight: 400;
-  color: silver;
-  margin-right: 5px;
 }
 .month {
   width: 55px;
