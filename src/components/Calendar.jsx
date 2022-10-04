@@ -77,8 +77,8 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
         <div className="calendar">
           <div className="header">
             <div className="year">
-              <div>{calMemberNickname} ,</div>
-              <div>{viewDate.year}</div>
+              <div>{viewDate.year} ,</div>
+              <div>{calMemberNickname}</div>
             </div>
             <span className="month">{viewDate.month + 1}</span>
             <div className="nav">

@@ -8,13 +8,11 @@
   margin: 25px auto;
   padding: 10px;
   width: 100%;
-  /* border: 1px solid red; */
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid blue; */
 }
 .loading-container {
   width: 100%;
@@ -40,9 +38,12 @@
   color: silver;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 .year > div:nth-child(1) {
+  color: silver;
+  margin-right: 10px;
+}
+.year > div:nth-child(2) {
   font-size: 14px;
   font-weight: 400;
   color: silver;
