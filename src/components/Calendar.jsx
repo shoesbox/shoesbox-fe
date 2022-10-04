@@ -167,7 +167,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                   // }}
                 >
                   {date?.thumbnailUrl ? (
-                    <img src={date.thumbnailUrl} alt={`${date}일의 사진`} />
+                    <img src={date.thumbnailUrl} alt="업로드 사진" />
                   ) : null}
 
                   {today === parseInt(date.createdDay) &&

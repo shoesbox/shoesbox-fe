@@ -3,9 +3,11 @@
   display: flex;
   justify-content: center;
   margin: 20px 0 -10px 0;
+  overflow: auto;
 }
 
 .friends {
+  /* border: 1px solid pink; */
   display: flex;
   align-items: center;
   width: fit-content;
