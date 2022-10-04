@@ -77,13 +77,8 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
         <div className="calendar">
           <div className="header">
             <div className="year">
-              <span>
-                {calMemberNickname.length > 6
-                  ? calMemberNickname.slice(0, 5) + '... '
-                  : calMemberNickname}
-                ,
-              </span>
-              <span>{viewDate.year}</span>
+              <div>{calMemberNickname} ,</div>
+              <div>{viewDate.year}</div>
             </div>
             <span className="month">{viewDate.month + 1}</span>
             <div className="nav">

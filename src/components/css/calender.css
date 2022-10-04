@@ -14,6 +14,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* border: 1px solid blue; */
 }
 .loading-container {
   width: 100%;
@@ -38,9 +39,10 @@
   font-style: italic;
   color: silver;
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
-.year > span:nth-child(1) {
+.year > div:nth-child(1) {
   font-size: 14px;
   font-weight: 400;
   color: silver;

@@ -136,11 +136,7 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
 
   return (
     <>
-      <Modal
-        show={login}
-        onHide={handleCloseLogin}
-        // fullscreen="sm-down"
-      >
+      <Modal show={login} onHide={handleCloseLogin} fullscreen="sm-down">
         <Modal.Header closeButton>
           <Modal.Title>{!signup ? '로그인' : '회원가입'}</Modal.Title>
         </Modal.Header>
@@ -196,9 +192,6 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               </Form.Group>
             )}
           </Form>
-          {/* <div className="login-logo">
-            <img src="images/logo.jpg" alt="웰컴 이미지" />
-          </div> */}
           <br />
           <div className="social">
             <button

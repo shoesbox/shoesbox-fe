@@ -201,7 +201,7 @@ export const deleteDetailThunk = createAsyncThunk(
   async (postId, thunkAPI) => {
     try {
       const data = await apis.deleteDetail(postId);
-      console.log('deleteDetailThunk', data.data.data);
+      // console.log('deleteDetailThunk', data.data.data);
 
       // return ;
     } catch (err) {

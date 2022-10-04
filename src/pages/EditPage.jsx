@@ -159,18 +159,18 @@ const EditPage = () => {
         formData.append('imageFiles', file);
       });
       // 추가
-      console.log('폼데이터 추가 직전 딜리트 트레이', deleteImgTray);
+      // console.log('폼데이터 추가 직전 딜리트 트레이', deleteImgTray);
       formData.append('imagesToDelete', deleteImgTray);
 
       // FormData의 key 확인
-      for (let key of formData.keys()) {
-        console.log('폼데이터 키', key);
-      }
+      // for (let key of formData.keys()) {
+      //   // console.log('폼데이터 키', key);
+      // }
 
       // FormData의 value 확인
-      for (let value of formData.values()) {
-        console.log('폼데이터 밸류', value);
-      }
+      // for (let value of formData.values()) {
+      //   console.log('폼데이터 밸류', value);
+      // }
 
       dispatch(putDetailThunk({ postId: post.postId, payload: formData }));
     }
