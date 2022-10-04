@@ -111,12 +111,6 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                 <div
                   className="date"
                   key={idx}
-                  style={{
-                    background: `url(${date.thumbnailUrl})`,
-                    backgroundSize: 'cover',
-                    // border: '3px solid white',
-                    // backgroundColor: '#f0f0f0',
-                  }}
                   onClick={() => {
                     // 년, 월이 바뀔 때를 생각하여, date 객체로 비교
                     let createdYear = date.createdYear;
@@ -131,11 +125,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                     maxDate.setMonth(maxDate.getMonth() + 1);
                     let minDate = new Date();
                     minDate.setMonth(minDate.getMonth() - 1);
-                    // console.log(
-                    //  minDate.toLocaleDateString(), postDate.toLocaleDateString(), new Date().toLocaleDateString(),
-                    //  `minDate: ${postDate > minDate}`,
-                    //  `maxDate: ${postDate < maxDate}`
-                    // );
+
                     if (postDate > minDate && postDate < new Date()) {
                       if (date.postId === 0) {
                         // 일기 주인과 로그인 유저가 같으면 일기 쓰기로 넘어가기
@@ -169,21 +159,23 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
                         setPostNumber(date.postId);
                         setIsOpen(true);
                       }
-                      // alert('미래의 일기는 작성이 불가합니다.');
-                      // return null;
                     }
                   }}
+                  // style={{
+                  //   background: `url(${date.thumbnailUrl})`,
+                  //   backgroundSize: 'cover',
+                  // }}
                 >
-                  {/* {date.thumbnailUrl ? (
-                  <img src={date.thumbnailUrl} alt={date} />
-                ) : null} */}
+                  {date?.thumbnailUrl ? (
+                    <img src={date.thumbnailUrl} alt={`${date}일의 사진`} />
+                  ) : null}
+
                   {today === parseInt(date.createdDay) &&
                   thisMonth === date.createdMonth ? (
                     <div id="today">{date.createdDay}</div>
                   ) : (
                     <div>{date.createdDay}</div>
                   )}
-                  {/* <div>{date.createdDay}</div> */}
                 </div>
               ))}
             </div>
