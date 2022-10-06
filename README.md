@@ -8,10 +8,11 @@
 
 ***오늘 나 이런 일이 있었어!*** 친구들에게 알려주고 싶지만 바빠서 언제 만날 지 모르는 친구들!
 
-A에게도 B에게도 C에게도 같은 얘기를 반복하기는 귀찮고, 나의 소식을 알려주고는 싶을 땐?
+A에게도 B에게도 C에게도 같은 얘기를 반복하기는 번거롭고, 나의 소식을 알려주고는 싶을 땐?
 
-월간 달력처럼 보여지는 이미지 캘린더에서 일별 친구의 근황을 확인하세요!
+채우는 재미가 있는 이미지 캘린더에서 일별 친구의 근황을 확인하세요!
 
+![image](https://user-images.githubusercontent.com/97497201/193991047-96b5636f-b856-4063-8480-06d8b97cde56.png)
 
 ### 프로젝트 기간 및 구성원 🐱‍🚀
 - 기간 : 22년 8월 26일 ~ 9월 17일
@@ -28,31 +29,25 @@ A에게도 B에게도 C에게도 같은 얘기를 반복하기는 귀찮고, 나
 
 
 ### 사용 기술 👨‍🦱️
-- React
-- Redux Toolkit
-- React Bootstrap
-- axios
-- Spring Boot 2.7.3
-- JDK 11
-- AWS EC2, S3
-- RDS
+- React / Redux Toolkit / React Bootstrap / axios
+- Spring Boot 2.7.3 / JDK 11 / AWS EC2, S3 / RDS
 
 
-### 프로젝트 요구사항 분석🤔️
-* jwt 및 소셜 로그인/회원가입
-* 일기 및 댓글 CRUD
-* 일기 본문에 이미지 첨부 가능
-* 마이페이지 (회원정보 수정페이지) - 프로필 이미지, 닉네임, 자기소개 문구
+### 프로젝트 요구사항 분석 🤔️
+* jwt(소셜 완성 전까지 임시) 및 소셜 로그인/회원가입
+* 이미지 캘린더로 표현되는 게시글과 친구 맺기 기능, 친구 관계인 유저들의 액션 알림이 보이는 메인페이지
+* 사진 첨부가 가능한 일기 및 댓글 CRUD - 수정 시 기존 이미지 유지
+* 회원정보(프로필 이미지, 닉네임) 수정 및 탈퇴와 친구 삭제가 가능한 마이페이지
 
 
-### 와이어프레임🏛️
+### 와이어프레임 🏛️
 ![image](https://user-images.githubusercontent.com/97497201/193610404-76f4e2a1-f672-4b6e-a962-3e5e7f49f69b.png)
 
 
-### [API 리스트](https://documenter.getpostman.com/view/22269005/VV4tSxBy)📃️
+### [API 리스트](https://documenter.getpostman.com/view/22269005/VV4tSxBy) 📃️
 
 
-### 기술 아키텍쳐🧩️
+### 기술 아키텍쳐 🧩️
 ![shoesbox아키텍쳐 ](https://user-images.githubusercontent.com/106072839/193525118-b30b5be5-65ff-428b-8d93-67a95fea8387.png)
 
 
