@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
 import ModalLogin2 from './ModalLogin2';
 import ModalAlert from './ModalAlret';
-import { getCookie, deleteCookie, setCookie } from '../shared/cookie';
+import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
 import { FaBell } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';

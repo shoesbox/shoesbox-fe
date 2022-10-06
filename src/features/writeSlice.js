@@ -21,7 +21,7 @@ export const postDetailThunk = createAsyncThunk(
       }
     } catch (err) {
       console.log(err.response.data);
-      alert(err.response.data.error);
+      alert(err.response.data.errorDetails.apierror.message);
       return thunkAPI.rejectWithValue('writeDailyThunkErr', err.response.data);
     }
   }
@@ -41,8 +41,8 @@ export const putDetailThunk = createAsyncThunk(
         // }, 1000);
       }
     } catch (err) {
-      console.log(err.response.data);
-      alert(err.response.data.error);
+      // console.log(err.response.data);
+      alert(err.response.data.errorDetails.apierror.message);
       return thunkAPI.rejectWithValue('writeDailyThunkErr', err.response.data);
     }
   }

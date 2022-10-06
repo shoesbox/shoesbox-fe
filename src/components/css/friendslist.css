@@ -2,13 +2,14 @@
   /* border: 1px solid red; */
   display: flex;
   justify-content: center;
-  margin: 20px 0 -10px 0;
+  margin: 20px 0px -10px 0px;
   overflow: auto;
 }
 
 .friends {
   /* border: 1px solid pink; */
   display: flex;
+  /* justify-content: center; */
   align-items: center;
   width: fit-content;
   gap: 10px;
