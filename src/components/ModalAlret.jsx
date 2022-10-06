@@ -54,8 +54,10 @@ const ModalAlert = (props) => {
       <div className="alert-list" key={idx}>
         <span
           onClick={() => {
-            setIsOpen(true);
-            setPostId(alarm.postId);
+            if (alarm.postId !== 0) {
+              setIsOpen(true);
+              setPostId(alarm.postId);
+            }
             deleteOneAlarm(alarm.alarmId);
           }}
         >
