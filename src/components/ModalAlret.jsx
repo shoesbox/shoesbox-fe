@@ -10,6 +10,7 @@ import {
   deleteAllAlarms,
   switchLoadingAlarm,
 } from '../features/loginSlice';
+import ModalAddFriend from './ModalAddFriend';
 
 const ModalAlert = (props) => {
   // const ModalAlert = ({alarmList,...props}) => {
@@ -17,8 +18,15 @@ const ModalAlert = (props) => {
   const dispatch = useDispatch();
   const alarmList = useSelector((state) => state.login.alarmList);
   const loading = useSelector((state) => state.login.loading);
+
+  // 게시글 상세보기 모달 관련
   const [isopen, setIsOpen] = useState(false);
   const [postId, setPostId] = useState();
+
+  // 친구추가 모달
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const deleteOneAlarm = async (alarmId) => {
     try {
@@ -57,6 +65,8 @@ const ModalAlert = (props) => {
             if (alarm.postId !== 0) {
               setIsOpen(true);
               setPostId(alarm.postId);
+            } else {
+              handleShow()
             }
             deleteOneAlarm(alarm.alarmId);
           }}
@@ -108,6 +118,7 @@ const ModalAlert = (props) => {
         postId={postId}
         backdrop="static"
       />
+      <ModalAddFriend show={show} onHide={handleClose} />
     </>
   );
 };
