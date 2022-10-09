@@ -143,7 +143,7 @@ export const apis = {
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
   deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
-  cancleFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancle`),
+  cancelFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancel`),
 
   // 알람 기능
   getAlarmList: () => api.get('/api/alarm'),

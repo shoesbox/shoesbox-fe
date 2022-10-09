@@ -130,7 +130,7 @@ const MyPage = ({ memberId }) => {
   const handleRemoveAccout = (e) => {
     e.preventDefault();
     // console.log(memberId);
-    let result = window.confirm('정말로 슈슈박스를 떠나시겠어요? T_T');
+    let result = window.confirm('정말로 슈슈박스를 떠나시겠어요?');
     if (result === true) {
       console.log(memberId);
       apis

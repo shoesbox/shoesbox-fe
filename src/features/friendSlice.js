@@ -135,11 +135,11 @@ export const delFriendThunk = createAsyncThunk(
   }
 );
 
-export const cancleFriendThunk = createAsyncThunk(
+export const cancelFriendThunk = createAsyncThunk(
   '/api/canclefriendthunk',
   async (toMemberId, thunkAPI) => {
     try {
-      const data = await apis.cancleFriend(toMemberId);
+      const data = await apis.cancelFriend(toMemberId);
       const res = data.data.data;
       // console.log('cancleFriendthunk', res);
       const delFriend = res.toMemberNickname;
@@ -206,7 +206,7 @@ const friendSlice = createSlice({
       });
       state.friendList = newFriendList;
     });
-    builder.addCase(cancleFriendThunk.fulfilled, (state, action) => {
+    builder.addCase(cancelFriendThunk.fulfilled, (state, action) => {
       const requestList = state.requestFriendList;
       const memberId = action.payload;
       const newRqList = requestList.filter((l) => {

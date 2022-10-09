@@ -1,6 +1,6 @@
 import './css/modallogin.css';
 import './css/header.css';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
@@ -147,8 +147,8 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <ModalLogin login={login} handleCloseLogin={handleCloseLogin} />
-      {/* <ModalLogin2 login={login} handleCloseLogin={handleCloseLogin} /> */}
+      {/* <ModalLogin login={login} handleCloseLogin={handleCloseLogin} /> */}
+      <ModalLogin2 login={login} handleCloseLogin={handleCloseLogin} />
       <ModalAlert
         show={show}
         onHide={handleClose}
