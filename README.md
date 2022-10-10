@@ -48,7 +48,7 @@ A에게도 B에게도 C에게도 같은 얘기를 반복하기는 번거롭고, 
 
 
 ### 기술 아키텍쳐 🧩️
-![image](https://user-images.githubusercontent.com/97497201/194889938-ba9c3b6c-7b05-4b72-b4c0-618fe08a013b.png)
+![image](https://user-images.githubusercontent.com/97497201/194901348-af8c20d9-17d2-4cb4-9716-0f34bd5a9fcf.png)
 
 
 ### Trouble Shooting 💡️
