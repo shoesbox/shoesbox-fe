@@ -12,7 +12,7 @@ A에게도 B에게도 C에게도 같은 얘기를 반복하기는 번거롭고, 
 
 채우는 재미가 있는 이미지 캘린더에서 일별 친구의 근황을 확인하세요!
 
-![image](https://user-images.githubusercontent.com/97497201/193991047-96b5636f-b856-4063-8480-06d8b97cde56.png)
+![image](https://user-images.githubusercontent.com/97497201/194692221-57672f3e-cc16-42a8-b287-1cd0ba8aa737.png)
 
 ### 프로젝트 기간 및 구성원 🐱‍🚀
 - 기간 : 22년 8월 26일 ~ 9월 17일
@@ -48,7 +48,7 @@ A에게도 B에게도 C에게도 같은 얘기를 반복하기는 번거롭고, 
 
 
 ### 기술 아키텍쳐 🧩️
-![shoesbox아키텍쳐 ](https://user-images.githubusercontent.com/106072839/193525118-b30b5be5-65ff-428b-8d93-67a95fea8387.png)
+![image](https://user-images.githubusercontent.com/97497201/194901348-af8c20d9-17d2-4cb4-9716-0f34bd5a9fcf.png)
 
 
 ### Trouble Shooting 💡️
@@ -67,4 +67,3 @@ A에게도 B에게도 C에게도 같은 얘기를 반복하기는 번거롭고, 
 * 문제상황 : 배포 중 소셜로그인 기능을 구현하기 위해 빈번하게 redirect URL을 수정했으나 수동으로 배포하면 불필요하게 많은 시간을 소요함
 * 의견조율 : aws codepipeline 혹은 github actions등을 비교해보고 빌드 및 EC2배포과정을 자동화하기로 결정
 * 수정결과 : 이미 remote repository로 github을 이용하고 있기 때문에 불필요한 추가과정을 생략하기 위해 github actions를 활용하여 CI/CD자동화. 서버비용때문에 최종적으로는 firebase로 이전했으나 소셜로그인 기능을 테스트하는 과정에서 수동배포를 반복해야하는 시간을 단축함
-
