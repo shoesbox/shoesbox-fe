@@ -6,7 +6,12 @@ import { BsPersonPlus } from 'react-icons/bs';
 import ModalAddFriend from './ModalAddFriend';
 import { getFriendListThunk, delFriendThunk } from '../features/friendSlice';
 
-const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
+const FriendsList = ({
+  nickname,
+  friendList,
+  setCalMemberId,
+  setCalMemberNickname,
+}) => {
   const dispatch = useDispatch();
   // const friendList = useSelector((state) => state.friend.friendList);
 
@@ -26,6 +31,9 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
   return (
     <div className="freinds-wrap">
       <div className="friends">
+        <Button id="point">
+          <span>{nickname}</span>
+        </Button>
         {friendList?.length > 0
           ? friendList.map((friend, idx) => {
               return (
@@ -44,7 +52,7 @@ const FriendsList = ({ friendList, setCalMemberId, setCalMemberNickname }) => {
               );
             })
           : null}
-        <Button onClick={handleShow}>
+        <Button id="point" onClick={handleShow}>
           <span>
             <BsPersonPlus style={{ fontSize: '20px' }} />
           </span>

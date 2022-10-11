@@ -109,14 +109,14 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              {isLoggedIn ? (
+              {/* {isLoggedIn ? (
                 <Nav.Link
                   onClick={() => window.location.replace('/')}
                   className="menu"
                 >
                   My Moments
                 </Nav.Link>
-              ) : null}
+              ) : null} */}
               <Nav.Link onClick={() => navigate('/aboutus')} className="menu">
                 About us
               </Nav.Link>

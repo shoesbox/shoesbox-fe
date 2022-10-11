@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getCookie } from '../shared/cookie';
+import { setIsLogin } from '../features/loginSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import Header from '../components/Header';
 import MainPage from '../pages/MainPage';
 import AboutUsPage from '../pages/AboutUsPage';
@@ -11,8 +13,6 @@ import MyPage from '../pages/MyPage';
 import Oauth2Kakao from '../components/Oauth2Kakao';
 import Oauth2Naver from '../components/Oauth2Naver';
 import Oauth2Google from '../components/Oauth2Google';
-import { setIsLogin } from '../features/loginSlice';
-import { useSelector, useDispatch } from 'react-redux';
 
 const Router = () => {
   let memberId = getCookie('memberId');

@@ -41,13 +41,6 @@ const ModalDetail = ({ postId, ...props }) => {
     }
   };
 
-  useEffect(() => {
-    if (postId !== (null || undefined)) {
-      dispatch(getDetailThunk(postId));
-      dispatch(switchLoading(true));
-    }
-  }, [postId]);
-
   const ImageCarousel = () => {
     return (
       <Carousel>
@@ -60,6 +53,13 @@ const ModalDetail = ({ postId, ...props }) => {
       </Carousel>
     );
   };
+
+  useEffect(() => {
+    if (postId !== (null || undefined)) {
+      dispatch(getDetailThunk(postId));
+      dispatch(switchLoading(true));
+    }
+  }, [postId]);
 
   return (
     <>
