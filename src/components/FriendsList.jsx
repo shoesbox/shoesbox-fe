@@ -7,6 +7,7 @@ import ModalAddFriend from './ModalAddFriend';
 import { getFriendListThunk, delFriendThunk } from '../features/friendSlice';
 
 const FriendsList = ({
+  memberId,
   nickname,
   friendList,
   setCalMemberId,
@@ -31,7 +32,7 @@ const FriendsList = ({
   return (
     <div className="freinds-wrap">
       <div className="friends">
-        <Button id="point">
+        <Button onClick={() => changeCalMember(memberId, nickname)}>
           <span>{nickname}</span>
         </Button>
         {friendList?.length > 0
@@ -52,7 +53,7 @@ const FriendsList = ({
               );
             })
           : null}
-        <Button id="point" onClick={handleShow}>
+        <Button onClick={handleShow}>
           <span>
             <BsPersonPlus style={{ fontSize: '20px' }} />
           </span>

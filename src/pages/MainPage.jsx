@@ -47,6 +47,7 @@ const MainPage = () => {
       {isLoggedIn ? (
         <>
           <FriendsList
+            memberId={memberId}
             nickname={nickname}
             friendList={friendList}
             setCalMemberId={setCalMemberId}
