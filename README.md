@@ -38,7 +38,7 @@ A에게도 B에게도 C에게도 같은 얘기를 반복하기는 번거롭고, 
 
 
 ### 와이어프레임 🏛️
-![image](https://user-images.githubusercontent.com/97497201/193610404-76f4e2a1-f672-4b6e-a962-3e5e7f49f69b.png)
+![diagram-export-2022  8  28  오후 1_25_31](https://user-images.githubusercontent.com/97497201/195592157-ce92770d-a00c-4eff-aa3e-13785aeba314.png)
 
 
 ### [API 리스트](https://documenter.getpostman.com/view/22269005/VV4tSxBy) 📃️
