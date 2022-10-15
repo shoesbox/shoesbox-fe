@@ -60,7 +60,6 @@ function Header() {
     try {
       const res = await apis.logoutUser();
       return res;
-      // console.log(res);
     } catch (err) {
       const errMessage = err.response.data.message;
       return alert(errMessage);
