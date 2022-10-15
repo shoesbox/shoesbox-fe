@@ -56,29 +56,44 @@ function Header() {
   };
   const handleClose = () => setShow(false);
 
-  const handleLogout = () => {
-    apis
-      .logoutUser()
-      .then((res) => {
-        // console.log(res);
-        deleteCookie('accessToken');
-        deleteCookie('refreshToken');
-        deleteCookie('memberId');
-        deleteCookie('nickname');
-        deleteCookie('email');
-        window.location.replace('/');
-      })
-      .catch((err) => {
-        // console.log(err.response.data.message);
-        const errMessage = err.response.data.message;
-        alert(errMessage);
-        deleteCookie('accessToken');
-        deleteCookie('refreshToken');
-        deleteCookie('memberId');
-        deleteCookie('nickname');
-        deleteCookie('email');
-        window.location.replace('/');
-      });
+  const handleLogout = async () => {
+    try {
+      const res = await apis.logoutUser();
+      return res;
+      // console.log(res);
+    } catch (err) {
+      const errMessage = err.response.data.message;
+      return alert(errMessage);
+    } finally {
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      deleteCookie('memberId');
+      deleteCookie('nickname');
+      deleteCookie('email');
+      window.location.replace('/');
+    }
+
+    // apis
+    //   .logoutUser()
+    //   .then((res) => {
+    //     // console.log(res);
+    //     deleteCookie('accessToken');
+    //     deleteCookie('refreshToken');
+    //     deleteCookie('memberId');
+    //     deleteCookie('nickname');
+    //     deleteCookie('email');
+    //     window.location.replace('/');
+    //   })
+    //   .catch((err) => {
+    //     const errMessage = err.response.data.message;
+    //     alert(errMessage);
+    //     deleteCookie('accessToken');
+    //     deleteCookie('refreshToken');
+    //     deleteCookie('memberId');
+    //     deleteCookie('nickname');
+    //     deleteCookie('email');
+    //     window.location.replace('/');
+    //   });
   };
 
   return (
