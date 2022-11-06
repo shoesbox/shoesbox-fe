@@ -33,7 +33,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
