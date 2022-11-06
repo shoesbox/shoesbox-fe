@@ -14,7 +14,6 @@ const FriendsList = ({
   setCalMemberNickname,
 }) => {
   const dispatch = useDispatch();
-  // const friendList = useSelector((state) => state.friend.friendList);
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
