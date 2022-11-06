@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
-import ModalLogin2 from './ModalLogin2';
 import ModalAlert from './ModalAlret';
 import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
@@ -15,12 +14,10 @@ import {
   setAlarmList,
   switchLoadingAlarm,
 } from '../features/loginSlice';
-import Alarms from './Alarms';
 
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  //  const [alarmList, setAlarmList] = useState();
   const alarmList = useSelector((state) => state.login.alarmList);
   const cookie = getCookie('refreshToken');
   const isLoggedIn = useSelector((state) => state.login.value);
@@ -35,7 +32,6 @@ function Header() {
   const getAlarmList = async () => {
     try {
       const { data } = await apis.getAlarmList();
-      // setAlarmList(data.data);
       dispatch(setAlarmList(data.data));
       dispatch(switchLoadingAlarm(true));
     } catch (err) {
@@ -71,28 +67,6 @@ function Header() {
       deleteCookie('email');
       window.location.replace('/');
     }
-
-    // apis
-    //   .logoutUser()
-    //   .then((res) => {
-    //     // console.log(res);
-    //     deleteCookie('accessToken');
-    //     deleteCookie('refreshToken');
-    //     deleteCookie('memberId');
-    //     deleteCookie('nickname');
-    //     deleteCookie('email');
-    //     window.location.replace('/');
-    //   })
-    //   .catch((err) => {
-    //     const errMessage = err.response.data.message;
-    //     alert(errMessage);
-    //     deleteCookie('accessToken');
-    //     deleteCookie('refreshToken');
-    //     deleteCookie('memberId');
-    //     deleteCookie('nickname');
-    //     deleteCookie('email');
-    //     window.location.replace('/');
-    //   });
   };
 
   return (
@@ -123,14 +97,6 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              {/* {isLoggedIn ? (
-                <Nav.Link
-                  onClick={() => window.location.replace('/')}
-                  className="menu"
-                >
-                  My Moments
-                </Nav.Link>
-              ) : null} */}
               <Nav.Link onClick={() => navigate('/aboutus')} className="menu">
                 About us
               </Nav.Link>
@@ -162,13 +128,10 @@ function Header() {
         </Container>
       </Navbar>
       <ModalLogin login={login} handleCloseLogin={handleCloseLogin} />
-      {/* <ModalLogin2 login={login} handleCloseLogin={handleCloseLogin} /> */}
       <ModalAlert
         show={show}
         onHide={handleClose}
-        // alarmList={alarmList}
       />
-      {/* <Alarms /> */}
     </>
   );
 }

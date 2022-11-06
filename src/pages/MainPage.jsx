@@ -1,7 +1,6 @@
 import './css/mainpage.css';
 import { useState, useEffect } from 'react';
 import Calendar from '../components/Calendar';
-import { Calender2 } from '../components/Calendar2';
 import WriteFixedBtn from '../components/WriteFixedBtn';
 import FriendsList from '../components/FriendsList';
 import { getCookie } from '../shared/cookie';
@@ -59,12 +58,6 @@ const MainPage = () => {
               calMemberNickname={calMemberNickname}
             />
           </div>
-
-          {/* <div className="wrap2">
-            <Calender2 />
-          </div> */}
-
-          {/* <WriteFixedBtn /> */}
         </>
       ) : (
         <div className="welcome">

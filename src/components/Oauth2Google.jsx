@@ -7,7 +7,6 @@ import { setCookie } from '../shared/cookie';
 const Oauth2Google = () => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get('code');
-  // console.log('google', code);
 
   useEffect(() => {
     const fetchUser = async () => {

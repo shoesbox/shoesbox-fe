@@ -20,8 +20,6 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
   });
 
   const handleChangeState = (event) => {
-    // console.log(event.target.name);
-    // console.log(event.target.value);
     setState({
       ...state,
       [event.target.name]: event.target.value,
@@ -38,8 +36,6 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
     apis
       .loginUser(state, { withCredentials: true })
       .then((res) => {
-        // console.log('res', res);
-        // console.log('res.data', res.data);
         const token = res.data.data;
         setCookie(
           'accessToken',
@@ -54,13 +50,10 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
         setCookie('memberId', token.memberId);
         setCookie('email', token.email);
         setCookie('nickname', token.nickname);
-        // alert('로그인 성공');
         window.location.reload(true);
       })
       .catch((err) => {
-        // console.log(err);
         const errMessage = err.response?.data.errorDetails.apierror.message;
-        // console.log(errMessage);
         alert(errMessage);
       });
   };
@@ -78,7 +71,6 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
           window.location.reload(true);
         })
         .catch((err) => {
-          // console.log(err.response.data.errorDetails.apierror.message);
           const errMessage = err.response.data.errorDetails.apierror.message;
           alert(errMessage);
           setState({ email: '', password: '', password1: '' });
@@ -92,8 +84,6 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
     apis
       .guestUser()
       .then((res) => {
-        // console.log('res', res);
-        // console.log('res.data', res.data);
         const token = res.data.data;
         setCookie(
           'accessToken',
@@ -108,13 +98,10 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
         setCookie('memberId', token.memberId);
         setCookie('email', token.email);
         setCookie('nickname', token.nickname);
-        // alert('로그인 성공');
         window.location.reload(true);
       })
       .catch((err) => {
-        // console.log(err);
         const errMessage = err.response?.data.errorDetails.apierror.message;
-        // console.log(errMessage);
         alert(errMessage);
       });
   };
@@ -202,10 +189,6 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               className="social__button social__button--kakao"
               onClick={handleSocialKakao}
             />
-            {/* <button
-              className="social__button social__button--google"
-              onClick={handleSocialGoogle}
-            /> */}
           </div>
           <br />
           <span>
@@ -229,12 +212,6 @@ const ModalLogin = ({ login, handleCloseLogin }) => {
               type="submit"
               variant="primary"
               onClick={handleSignup}
-//               onClick={() =>
-//                 alert(
-//                   `jwt 로그인/회원가입은 삭제 예정인 기능입니다.
-// 소셜 로그인을 이용해주세요.`
-//                 )
-//               }
             >
               Sign Up
             </Button>

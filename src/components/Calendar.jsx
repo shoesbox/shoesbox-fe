@@ -4,13 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
 import ModalDetail from './ModalDetail';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDetailThunk, switchLoading } from '../features/detailSlice';
 
 const Calendar = ({ calMemberId, calMemberNickname }) => {
   let memberId = getCookie('memberId'); // 현재 달력이 로그인 유저인지 친구인지 비교하는 용
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   // 날짜 계산용 state zzzzzz
@@ -23,8 +20,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
   const [isopen, setIsOpen] = useState(false);
   // postid 넘기기용 state
   const [postNumber, setPostNumber] = useState();
-  // postDates 넘기기용 state
-  const [postDate, setPostDate] = useState();
+
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -54,7 +50,7 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
         setCalenderData(data);
         setLoading(false);
       });
-  }, [calMemberId, date]);
+  }, [calMemberId, date, viewDate]);
 
   useEffect(() => {
     setDates(calenderData);

@@ -23,14 +23,13 @@ const ModalAddFriend = (props) => {
   );
   const addFriendRef = useRef();
 
-  // console.log(requestFriendList);
-
   const validateEmail = (email) => {
     // 현재는 테스트로 조건 걸어 놓지 않음
-    // var emailReg = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-    var emailReg = new RegExp();
+    // let emailReg = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    let emailReg = new RegExp();
     return emailReg.test(email);
   };
+
   const onClickAddFriend = () => {
     if (addFriendRef.current.value.trim() !== '') {
       if (validateEmail(addFriendRef.current.value)) {
@@ -54,7 +53,6 @@ const ModalAddFriend = (props) => {
   };
 
   const onClickCancle = (toMemberId) => {
-    // console.log(toMemberId);
     dispatch(cancelFriendThunk(toMemberId));
   };
 
@@ -124,7 +122,6 @@ const ModalAddFriend = (props) => {
       dispatch(getRequestedFriendListThunk());
       dispatch(getRequestFriendListThunk());
     }
-    // console.log(requestFriendList);
   }, []);
 
   return (

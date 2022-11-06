@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect, Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import { Button, Form, InputGroup, Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
-import { postJsonDetailThunk, postDetailThunk } from '../features/writeSlice';
+import { postDetailThunk } from '../features/writeSlice';
 import './css/writepage.css';
 
 const WritePage = () => {
@@ -110,7 +110,6 @@ const WritePage = () => {
       setBase64s([]);
       if (files.length <= 5) {
         for (var i = 0; i < files.length; i++) {
-          // console.log(files[i].name);
           if (fileValidation(files[i])) {
             const reader = new FileReader();
             reader.readAsDataURL(files[i]);
@@ -130,7 +129,6 @@ const WritePage = () => {
 
   useEffect(() => {
     if (formDataTxt !== undefined) {
-      // dispatch(postJsonDetailThunk(formDataTxt));
       formData.append('year', postDate.year);
       formData.append('month', postDate.month);
       formData.append('day', postDate.day);
@@ -174,9 +172,6 @@ const WritePage = () => {
               ref={imageRef}
               onChange={onChangePic}
             />
-            {/* <Form.Control.Feedback type="invalid">
-              사진을 추가해주세요 :)
-            </Form.Control.Feedback> */}
           </InputGroup>
           <div className="write-file-alert">
             파일 확장자 명은 jpg, jpeg, png, bmp 파일만 가능합니다. (파일 당
@@ -198,7 +193,6 @@ const WritePage = () => {
                   <div className="write-preview-btn">
                     <BsFillBackspaceFill
                       onClick={
-                        // ()=>console.log((Object.entries(files))[idx][2])
                         () => deleteImage(files[idx])
                       }
                     />

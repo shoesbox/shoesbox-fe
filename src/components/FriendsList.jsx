@@ -1,10 +1,10 @@
 import './css/friendslist.css';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { BsPersonPlus } from 'react-icons/bs';
 import ModalAddFriend from './ModalAddFriend';
-import { getFriendListThunk, delFriendThunk } from '../features/friendSlice';
+import { getFriendListThunk } from '../features/friendSlice';
 
 const FriendsList = ({
   memberId,

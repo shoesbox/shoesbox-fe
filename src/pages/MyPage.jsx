@@ -57,14 +57,12 @@ const MyPage = ({ memberId }) => {
     apis
       .resetProfileImg()
       .then((res) => {
-        // console.log(res);
         setState({
           ...state,
           profileImageUrl: 'https://i.ibb.co/N27FwdP/image.png',
         });
       })
       .catch((err) => {
-        // console.log(err);
         alert(err.response.data.errorDetails.apierror.message);
       });
   };
@@ -96,13 +94,11 @@ const MyPage = ({ memberId }) => {
     apis
       .updateUserData(memberId, formData)
       .then((res) => {
-        // console.log(res);
         setState({ ...state, nickname: newNickname });
         toggleIsEdit();
         setCookie('nickname', newNickname);
       })
       .catch((err) => {
-        // console.log(err);
         alert(err.response.data.errorDetails.apierror.message);
       });
   };
