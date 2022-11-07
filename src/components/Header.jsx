@@ -87,11 +87,11 @@ function Header() {
             >
               SHOES 🍭 BOX
             </span>
-            {isLoggedIn && (
+            {isLoggedIn ? (
               <span className="test">
                 <FaBell onClick={handleShow} />
               </span>
-            )}
+            ) : null}
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
