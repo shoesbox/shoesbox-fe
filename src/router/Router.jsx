@@ -33,14 +33,15 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
-          <Route
-            path="/write"
-            element={isLoggedIn ? <WritePage /> : <Navigate replace to="/" />}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Route
+              path="/write"
+              element={isLoggedIn ? <WritePage /> : <Navigate replace to="/" />}
+            />
+          </Suspense>
           <Route
             path="/edit"
             element={isLoggedIn ? <EditPage /> : <Navigate replace to="/" />}
@@ -61,7 +62,6 @@ const Router = () => {
           <Route path="/oauth/callback/google" element={<Oauth2Google />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </Suspense>
     </BrowserRouter>
   );
 };

@@ -10,9 +10,9 @@ const Calendar = ({ calMemberId, calMemberNickname }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  // 날짜 계산용 state zzzzzz
+  // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
-  // 달력에 그려주는 state zz
+  // 달력에 그려주는 state 
   const [dates, setDates] = useState([]);
   // axios 통신용 state //
   const [calenderData, setCalenderData] = useState([]);
