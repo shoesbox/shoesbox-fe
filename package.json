@@ -27,6 +27,7 @@
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
+    "cra-bundle-analyzer": "^0.1.1",
     "react-scripts": "5.0.1"
   },
   "scripts": {
