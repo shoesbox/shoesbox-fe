@@ -11,7 +11,6 @@ import {
   getRequestedFriendListThunk,
 } from '../features/friendSlice';
 import './css/modaladdfriend.css';
-import { getCookie } from '../shared/cookie';
 
 const ModalAddFriend = (props) => {
   const dispatch = useDispatch();
@@ -112,13 +111,10 @@ const ModalAddFriend = (props) => {
     );
   };
 
-  const cookie = getCookie('accessToken');
-  // 이 컴포넌트가 그려지지 않아도 호출되길래 임시 땜빵한 조건문,,
   useEffect(() => {
-    if (cookie) {
-      dispatch(getRequestedFriendListThunk());
-      dispatch(getRequestFriendListThunk());
-    }
+    dispatch(getRequestedFriendListThunk());
+    dispatch(getRequestFriendListThunk());
+    // console.log(requestFriendList);
   }, []);
 
   return (
