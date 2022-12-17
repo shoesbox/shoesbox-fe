@@ -1,16 +1,15 @@
 import { useState, useRef, useEffect, Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { Image } from 'react-bootstrap';
+import { Button, Form, InputGroup, Image } from 'react-bootstrap';
 import { BsFillBackspaceFill } from 'react-icons/bs';
-import { postJsonDetailThunk, postDetailThunk } from '../features/writeSlice';
+import { postDetailThunk } from '../features/writeSlice';
 import './css/writepage.css';
 
 const WritePage = () => {
+  const postDate = useLocation().state;
+  // console.log('postDate', postDate);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // formdata
@@ -19,6 +18,9 @@ const WritePage = () => {
   const [formDataTxt, setFormDataTxt] = useState();
   // input validation check
   const [validated, setValidated] = useState(false);
+  // button Status
+  const [btnStatus, setBtnStatus] = useState(false);
+
   // refs
   const titleRef = useRef();
   const contentRef = useRef();
@@ -30,21 +32,37 @@ const WritePage = () => {
 
   // 첨부 파일 검증
   const fileValidation = (obj) => {
-    const fileTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    const fileTypes = ['image/jpeg', 'image/png'];
+    let objExactType = obj.name.substring(obj.name.lastIndexOf('.') + 1);
+    // console.log('objExactType', objExactType);
+    const fileTypesName = [
+      'jpeg',
+      'jpg',
+      'png',
+      'bmp',
+      'JPG',
+      'JPEG',
+      'PNG',
+      'BMP',
+    ];
     if (obj.name.length > 100) {
-      alert('파일명이 100자 이상인 파일은 등록할 수 없습니다.');
+      alert('파일명이 100자 이상인 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
-    } else if (obj.size > 30 * 1024 * 1024) {
-      alert('최대 파일 용량인 30MB를 초과한 파일은 등록할 수 없습니다.');
+    } else if (obj.size > 10 * 1024 * 1024) {
+      alert('용량이 10MB를 초과한 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else if (obj.name.lastIndexOf('.') === -1) {
-      alert('확장자가 없는 파일은 등록할 수 없습니다.');
+      alert('확장자가 없는 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else if (!fileTypes.includes(obj.type)) {
-      alert('첨부가 불가능한 파일은 등록할 수 없습니다.');
+      alert('해당 파일은 첨부할 수 없습니다.');
+      imageRef.current.value = '';
+      return false;
+    } else if (!fileTypesName.includes(objExactType)) {
+      alert('해당 파일은 첨부할 수 없습니다.');
       imageRef.current.value = '';
       return false;
     } else {
@@ -60,13 +78,10 @@ const WritePage = () => {
     } else {
       event.preventDefault();
       setFormDataTxt({
-        // id: new Date(),
-        // postId: Math.round(Math.random() * 99 + 1),
-        // nickname: 'Sunny',
         title: titleRef.current.value,
+        content: contentRef.current.value,
         // images : imageRef.current.files,
         images: base64s,
-        content: contentRef.current.value,
       });
       // console.log(formDataTxt);
 
@@ -93,29 +108,38 @@ const WritePage = () => {
   useEffect(() => {
     if (files) {
       setBase64s([]);
-      for (var i = 0; i < files.length; i++) {
-        if (fileValidation(files[i])) {
-          const reader = new FileReader();
-          reader.readAsDataURL(files[i]);
-          reader.onload = () => {
-            if (reader.readyState === 2) {
-              setBase64s((prev) => [...prev, reader.result]);
-            }
-          };
+      if (files.length <= 5) {
+        for (var i = 0; i < files.length; i++) {
+          if (fileValidation(files[i])) {
+            const reader = new FileReader();
+            reader.readAsDataURL(files[i]);
+            reader.onload = () => {
+              if (reader.readyState === 2) {
+                setBase64s((prev) => [...prev, reader.result]);
+              }
+            };
+          }
         }
+      } else {
+        imageRef.current.value = '';
+        alert('사진 첨부는 5장까지 가능합니다.');
       }
     }
   }, [files]);
 
   useEffect(() => {
     if (formDataTxt !== undefined) {
-      // dispatch(postJsonDetailThunk(formDataTxt));
+      formData.append('year', postDate.year);
+      formData.append('month', postDate.month);
+      formData.append('day', postDate.day);
       formData.append('title', titleRef.current.value);
       formData.append('content', contentRef.current.value);
       Array.from(files).forEach((file) => {
         formData.append('imageFiles', file);
       });
-      dispatch(postDetailThunk(formData)).then(navigate('/detail'));
+
+      dispatch(postDetailThunk(formData));
+      setBtnStatus(true);
     }
   }, [formDataTxt]);
 
@@ -132,7 +156,7 @@ const WritePage = () => {
             ref={titleRef}
           />
           <Form.Control.Feedback type="invalid">
-            일기주제를 적어주세요.
+            일기 주제를 적어주세요.
           </Form.Control.Feedback>
         </Form.Group>
         <br />
@@ -142,16 +166,17 @@ const WritePage = () => {
           <InputGroup hasValidation>
             <Form.Control
               type="file"
-              accept="image/gif, image/jpeg, image/png"
+              accept="image/jpeg, image/png"
               multiple
-              required
+              // required
               ref={imageRef}
               onChange={onChangePic}
             />
-            <Form.Control.Feedback type="invalid">
-              사진을 추가해주세요 :)
-            </Form.Control.Feedback>
           </InputGroup>
+          <div className="write-file-alert">
+            파일 확장자 명은 jpg, jpeg, png, bmp 파일만 가능합니다. (파일 당
+            10MB, 최대 5장)
+          </div>
         </Form.Group>
         <br />
         <div className="write-preview-wrap">
@@ -168,7 +193,6 @@ const WritePage = () => {
                   <div className="write-preview-btn">
                     <BsFillBackspaceFill
                       onClick={
-                        // ()=>console.log((Object.entries(files))[idx][2])
                         () => deleteImage(files[idx])
                       }
                     />
@@ -201,7 +225,7 @@ const WritePage = () => {
         >
           뒤로 가기
         </Button>
-        <Button type="submit" className="submitBtn">
+        <Button type="submit" className="submitBtn" disabled={btnStatus}>
           등록
         </Button>
       </Form>

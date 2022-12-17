@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { useRef, useState, useEffect, memo, useMemo } from 'react';
+import React from 'react';
+import { useRef, useState, useEffect, memo } from 'react';
 import { Button, Form, InputGroup, Spinner } from 'react-bootstrap';
 import {
   BsFillEraserFill,
@@ -11,11 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addCommentThunk,
   delCommentThunk,
-  delJsonCommentThunk,
   getCommentThunk,
-  getJsonCommentThunk,
-  patchJsonCommentThunk,
-  postJsonCommentThunk,
   putCommentThunk,
   switchLoading,
 } from '../features/detailSlice';
@@ -31,13 +27,10 @@ const CommentsList = ({ postId }) => {
   const [pick, setPick] = useState();
   const [onEdit, setEdit] = useState(false);
   var tmp = '';
- 
-  // console.log(memberId);
-  // console.log(comments);
+
   // 댓글 등록 버튼 눌렀을 때 실행되는 함수
   const onClickComment = () => {
     if (commentRef.current.value.trim() !== '') {
-      // console.log(commentRef.current.value);
       const content = commentRef.current?.value;
       // dispatch(postJsonCommentThunk({ postId, content }));
       dispatch(addCommentThunk({ postId, content }));
@@ -48,7 +41,6 @@ const CommentsList = ({ postId }) => {
 
   // 댓글 삭제 버튼 눌렀을 때
   const onClickDelBtn = (commentId) => {
-    // console.log(commentId);
     // dispatch(delJsonCommentThunk(commentId))
     dispatch(delCommentThunk(commentId));
   };
@@ -57,7 +49,6 @@ const CommentsList = ({ postId }) => {
   const onClickFixBtn = (commentId, content) => {
     setPick(commentId);
     setEdit(true);
-    // console.log(pick, commentId, content);
   };
 
   // 댓글 수정 모드 눌렀을 때의 버튼, 수정 입력 가능
@@ -65,20 +56,20 @@ const CommentsList = ({ postId }) => {
   const onClickFixSubmitBtn = (commentId) => {
     // console.log('변경될 값:', tmp, commentId);
     if (tmp === '') {
-      alert('내용이 그전과 일치합니다. 댓글 수정을 해주세요!');
+      alert('내용이 이전과 일치합니다. 댓글을 수정해주세요!');
       return null;
     } else {
       dispatch(switchLoading(true));
       // dispatch(patchJsonCommentThunk({ commentId, content: tmp })).then(
-      dispatch(putCommentThunk({ commentId, content: tmp})).then(
+      dispatch(putCommentThunk({ commentId, content: tmp })).then(
         setEdit(false)
       );
-      setEdit(false)
+      setEdit(false);
     }
     //  dispatch(updatePicked(commentId))
   };
 
-  // 입력 댓글에 아무것도 입력되지 않으면, 버튼 작동하지 않음
+  // 댓글에 아무것도 입력되지 않으면, 버튼 작동하지 않음
   const onChangeCommentStatus = (e) => {
     if (e.target.value.trim() !== '') {
       setComment(false);
@@ -102,7 +93,6 @@ const CommentsList = ({ postId }) => {
     if (onEdit && pick === commentId) {
       return (
         <Form.Control
-          className="detail-comment-update"
           type="text"
           defaultValue={content}
           autoFocus
@@ -113,7 +103,7 @@ const CommentsList = ({ postId }) => {
   };
 
   // 수정 버튼을 클릭하기전, 클릭 후가 나뉨 - 수정버튼
-  const FixButton = ({commentId}) => {
+  const FixButton = ({ commentId }) => {
     return !(onEdit && pick === commentId) ? (
       <Button onClick={() => onClickFixBtn(commentId)}>
         <BsFillEraserFill />
@@ -143,8 +133,7 @@ const CommentsList = ({ postId }) => {
     if (postId !== (null || undefined)) {
       dispatch(getCommentThunk(postId));
     }
-    // dispatch(getJsonCommentThunk(postId));
-  }, []);
+  }, [comments.length, postId]);
 
   return (
     <div className="detail-comments-wrap">
@@ -152,12 +141,13 @@ const CommentsList = ({ postId }) => {
         comments?.map((comment, idx) => (
           <div key={idx} className="detail-comments">
             <div className="detail-comment-contents">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu1h9GZH18sUSO-8P_coFOJehZ1KkPo-CUJ2816jM_kaQoascDIj3vWzaBt2wx3X1Wwz8&usqp=CAU"
-                alt="프로필 사진"
-              />
-              <span>{comment?.nickname}</span>
-              {loading && pick=== comment.commentId ? (
+              {!(onEdit && pick === comment?.commentId) && (
+                <>
+                  <img src={comment?.profileImageUrl} alt="프로필 사진" />
+                  <span>{comment?.nickname}</span>
+                </>
+              )}
+              {loading && pick === comment.commentId ? (
                 <Spinner
                   as="span"
                   animation="border"
@@ -178,19 +168,16 @@ const CommentsList = ({ postId }) => {
                 </>
               )}
             </div>
-            { 
-            (parseInt(memberId) === parseInt(comment.memberId)) &&
-            <div className="detail-comment-btns">
-              <FixButton
-                commentId={comment?.commentId}
-              />
-              <DelButton commentId={comment?.commentId} />
-            </div>
-              }
+            {parseInt(memberId) === parseInt(comment.memberId) && (
+              <div className="detail-comment-btns">
+                <FixButton commentId={comment?.commentId} />
+                <DelButton commentId={comment?.commentId} />
+              </div>
+            )}
           </div>
         ))
       ) : (
-        <div>첫번째 댓글의 주인공이 되어보세요!</div>
+        <div className="pre-comments">첫번째 댓글의 주인공이 되어보세요!</div>
       )}
       <hr />
       <div>
@@ -206,7 +193,7 @@ const CommentsList = ({ postId }) => {
             }}
           />
           <Button
-            variant="outline-secondary"
+            variant="primary"
             disabled={commentStatus}
             onClick={onClickComment}
           >

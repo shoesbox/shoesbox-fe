@@ -1,19 +1,26 @@
 import './css/calender.css';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../api';
 import { getCookie } from '../shared/cookie';
+import ModalDetail from './ModalDetail';
 
-const Calendar = () => {
-  let memberId = getCookie('memberId');
+const Calendar = ({ calMemberId, calMemberNickname }) => {
+  let memberId = getCookie('memberId'); // 현재 달력이 로그인 유저인지 친구인지 비교하는 용
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   // 날짜 계산용 state
   const [date, setDate] = useState(new Date());
-  // 달력에 그려주는 state
+  // 달력에 그려주는 state 
   const [dates, setDates] = useState([]);
-  // axios 통신용 state
+  // axios 통신용 state //
   const [calenderData, setCalenderData] = useState([]);
+  // modal 표시용 state //
+  const [isopen, setIsOpen] = useState(false);
+  // postid 넘기기용 state
+  const [postNumber, setPostNumber] = useState();
+
 
   // 계산할 때 사용되지 않음, 연, 월 표시용
   const viewDate = useMemo(() => {
@@ -23,152 +30,162 @@ const Calendar = () => {
     };
   }, [date]);
 
-  // 달력에 쓸 월, 일 계산용
-  const calcDate = () => {
-    // 지난 달 마지막 Date, 이번 달 마지막 Date
-    const prevLast = new Date(date.getFullYear(), date.getMonth(), 0);
-    const thisLast = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
-    const prevLastDate = prevLast.getDate();
-    const prevLastDay = prevLast.getDay();
-
-    const thisLastDate = thisLast.getDate();
-    const thisLastDay = thisLast.getDay();
-
-    // Dates 기본 배열들
-    const prevDates = [];
-    // Array(n)로는 0부터 n-1까지의 배열이 생성되므로 1부터 n까지로 밀어주기
-    const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
-    const nextDates = [];
-
-    // prevDates 계산
-    if (prevLastDay !== 6) {
-      for (let i = 0; i < prevLastDay + 1; i++) {
-        prevDates.unshift(prevLastDate - i);
-      }
-    }
-
-    // nextDates 계산
-    for (let i = 1; i < 7 - thisLastDay; i++) {
-      nextDates.push(i);
-    }
-
-    // Tray 작성
-    let newPrevDates = prevDates.reduce((arr, v) => {
-      arr.push({ day: v, url: '' });
-      return arr;
-    }, []);
-
-    let newThisDates = [];
-
-    for (let i = 0; i < thisDates.length; i++) {
-      for (let j = 0; j < calenderData.length; j++) {
-        // console.log('newThisDates', newThisDates);
-        if (thisDates[i] === calenderData[j]?.createdDay) {
-          newThisDates.push({
-            day: thisDates[i],
-            url: calenderData[j]?.thumbnailUrl,
-          });
-        } else {
-          newThisDates.push({ day: thisDates[i], url: '' });
-        }
-      }
-    }
-
-    let newNextDates = nextDates.reduce((arr, v) => {
-      arr.push({ day: v, url: '' });
-      return arr;
-    }, []);
-
-    // console.log('전체 배열', newPrevDates.concat(newThisDates, newNextDates));
-
-
-
-    return newPrevDates.concat(newThisDates, newNextDates);
-  };
-
   const changeMonth = (addMonth) => {
     if (addMonth !== 0) {
       date.setDate(1);
       date.setMonth(date.getMonth() + addMonth);
       setDate(new Date(date));
-      setDates(calcDate());
+      setDates(calenderData);
     } else {
       setDate(new Date());
-      setDates(calcDate());
+      setDates(calenderData);
     }
   };
 
   useEffect(() => {
     apis
-      .getTargetPosts(memberId, viewDate.year, viewDate.month + 1)
-      .then((res) => res.data?.data.content)
+      .getTargetPosts(calMemberId, viewDate.year, viewDate.month + 1)
+      .then((res) => res.data?.data)
       .then((data) => {
         setCalenderData(data);
+        setLoading(false);
       });
-
-    apis
-    .getTargetPosts(memberId, viewDate.year, (viewDate.month+1))
-    .then(res => console.log("받는 값 수정하기", res.data?.data));
-
-    console.log('데이터 잘 집어넣었나?', calenderData);
-  }, []);
+  }, [calMemberId, date, viewDate]);
 
   useEffect(() => {
-    setDates(calcDate());
+    setDates(calenderData);
+    // console.log('달력 전체 데이터', calenderData);
   }, [calenderData]);
 
+  // 오늘날짜 표시용 선언
+  const today = new Date().getDate();
+  const thisMonth = new Date().getMonth() + 1;
+
   return (
-    <div className="calender-container">
-      <div className="calendar">
-        <div className="header">
-          <div className="year">{viewDate.year}</div>
-          <span className="month">{viewDate.month + 1}</span>
-          <div className="nav">
-            <button className="nav-btn" onClick={() => changeMonth(-1)}>
-              &lt;
-            </button>
-            <button className="nav-btn go-today" onClick={() => changeMonth(0)}>
-              Today
-            </button>
-            <button className="nav-btn" onClick={() => changeMonth(+1)}>
-              &gt;
-            </button>
+    <>
+      {loading ? (
+        <div className="loading-container">
+          <div className="loading">
+            <span>Loading...</span>
           </div>
         </div>
-        <div className="main">
-          <div className="days">
-            <div className="day">일</div>
-            <div className="day">월</div>
-            <div className="day">화</div>
-            <div className="day">수</div>
-            <div className="day">목</div>
-            <div className="day">금</div>
-            <div className="day">토</div>
+      ) : (
+        <div className="calendar">
+          <div className="header">
+            <div className="year">
+              <div>{calMemberNickname} ,</div>
+              <div>{viewDate.year}</div>
+            </div>
+            <span className="month">{viewDate.month + 1}</span>
+            <div className="nav">
+              <button className="nav-btn" onClick={() => changeMonth(-1)}>
+                &lt;
+              </button>
+              <button
+                className="nav-btn go-today"
+                onClick={() => changeMonth(0)}
+              >
+                Today
+              </button>
+              <button className="nav-btn" onClick={() => changeMonth(+1)}>
+                &gt;
+              </button>
+            </div>
           </div>
-          <div className="dates">
-            {dates.map((date, idx) => (
-              <>
+          <div className="main">
+            <div className="days">
+              <div className="day">일</div>
+              <div className="day">월</div>
+              <div className="day">화</div>
+              <div className="day">수</div>
+              <div className="day">목</div>
+              <div className="day">금</div>
+              <div className="day">토</div>
+            </div>
+            <div className="dates">
+              {dates.map((date, idx) => (
                 <div
                   className="date"
                   key={idx}
-                  style={{
-                    background: `url(${date.url})`,
-                    backgroundSize: 'cover',
+                  onClick={() => {
+                    // 년, 월이 바뀔 때를 생각하여, date 객체로 비교
+                    let createdYear = date.createdYear;
+                    let createdMonth = date.createdMonth;
+                    let createdDay = date.createdDay;
+                    let postDate = new Date(
+                      createdYear,
+                      createdMonth - 1,
+                      createdDay
+                    );
+                    let maxDate = new Date();
+                    maxDate.setMonth(maxDate.getMonth() + 1);
+                    let minDate = new Date();
+                    minDate.setMonth(minDate.getMonth() - 1);
+
+                    if (postDate > minDate && postDate < new Date()) {
+                      if (date.postId === 0) {
+                        // 일기 주인과 로그인 유저가 같으면 일기 쓰기로 넘어가기
+                        if (memberId === calMemberId) {
+                          let result = window.confirm(
+                            `${createdMonth}월 ${createdDay}일 일기를 작성하시겠어요?`
+                          );
+                          if (result === true) {
+                            navigate('/write', {
+                              state: {
+                                year: createdYear,
+                                month: createdMonth,
+                                day: createdDay,
+                              },
+                            });
+                          }
+                        } else {
+                          return null;
+                        }
+                      } else {
+                        setPostNumber(date.postId);
+                        setIsOpen(true);
+                      }
+                    } else {
+                      // 한달 범위 바깥의 글에서 작동하는 부분
+                      if (date.postId === 0) {
+                        // 글이 없으면
+                        return null;
+                      } else {
+                        // 글이 있으면 보여주자
+                        setPostNumber(date.postId);
+                        setIsOpen(true);
+                      }
+                    }
                   }}
-                  onClick={() => navigate('/detail')}
+                  // style={{
+                  //   background: `url(${date.thumbnailUrl})`,
+                  //   backgroundSize: 'cover',
+                  // }}
                 >
-                  {/* {date.url ? (
-                    <img key={idx} src={date.url} alt={date} />
-                  ) : null} */}
-                  <div>{date.day}</div>
+                  {date?.thumbnailUrl ? (
+                    <img src={date.thumbnailUrl} alt="업로드 사진" />
+                  ) : null}
+
+                  {today === parseInt(date.createdDay) &&
+                  thisMonth === date.createdMonth ? (
+                    <div id="today">{date.createdDay}</div>
+                  ) : (
+                    <div>{date.createdDay}</div>
+                  )}
                 </div>
-              </>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+      <ModalDetail
+        show={isopen}
+        onHide={() => {
+          setIsOpen(false);
+        }}
+        postId={postNumber}
+      />
+    </>
   );
 };
 

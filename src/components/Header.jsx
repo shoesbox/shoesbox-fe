@@ -4,85 +4,101 @@ import { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
+import ModalAlert from './ModalAlret';
 import { getCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
+import { FaBell } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setIsLogin,
+  setAlarmList,
+  switchLoadingAlarm,
+} from '../features/loginSlice';
 
 function Header() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const alarmList = useSelector((state) => state.login.alarmList);
+  const cookie = getCookie('refreshToken');
+  const isLoggedIn = useSelector((state) => state.login.value);
+  useEffect(() => {
+    if (cookie !== undefined) {
+      dispatch(setIsLogin(true));
+    } else {
+      dispatch(setIsLogin(false));
+    }
+  }, [cookie]);
+
+  const getAlarmList = async () => {
+    try {
+      const { data } = await apis.getAlarmList();
+      dispatch(setAlarmList(data.data));
+      dispatch(switchLoadingAlarm(true));
+    } catch (err) {
+      console.log('alertError', err);
+    }
+  };
+
+  // 로그인 모달
   const [login, setLogin] = useState(false);
   const handleShowLogin = () => setLogin(true);
   const handleCloseLogin = () => setLogin(false);
-  //
-  const navigate = useNavigate();
 
-  const nickname = getCookie('nickname');
-  const [isLoggedIn, setisLoggedIn] = useState(false);
-  useEffect(() => {
-    if (nickname !== undefined) {
-      setisLoggedIn(true);
-    } else {
-      setisLoggedIn(false);
+  // 알림창 모달
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true);
+    getAlarmList();
+  };
+  const handleClose = () => setShow(false);
+
+  const handleLogout = async () => {
+    try {
+      const res = await apis.logoutUser();
+      return res;
+      // console.log(res);
+    } catch (err) {
+      const errMessage = err.response.data.message;
+      return alert(errMessage);
+    } finally {
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      deleteCookie('memberId');
+      deleteCookie('nickname');
+      deleteCookie('email');
+      window.location.replace('/');
     }
-  }, [nickname]);
-
-  const handleLogout = () => {
-    apis
-      .logoutUser()
-      .then((res) => {
-        console.log(res);
-        deleteCookie('accessToken');
-        deleteCookie('refreshToken');
-        deleteCookie('memberId');
-        deleteCookie('nickname');
-        deleteCookie('email');
-        // alert('로그아웃 성공');
-        window.location.replace('/');
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-        const errMessage = err.response.data.message;
-        alert(errMessage);
-      });
   };
 
   return (
     <>
       <Navbar
         collapseOnSelect
-        expand="lg"
+        expand="md"
         style={{
           backgroundColor: '#cce3de',
           fontWeight: '600',
         }}
-        // variant='dark'
       >
         <Container>
-          <Navbar.Brand
-            onClick={() => {
-              navigate('/');
-            }}
-            className="brand-logo"
-          >
-            SHOES 🍭 BOX
+          <Navbar.Brand className="brand-alert">
+            <span
+              className="brand-logo"
+              onClick={() => window.location.replace('/')}
+            >
+              SHOES 🍭 BOX
+            </span>
+            {isLoggedIn ? (
+              <span className="test">
+                <FaBell onClick={handleShow} />
+              </span>
+            ) : null}
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              {isLoggedIn ? (
-                <Nav.Link
-                  onClick={() => {
-                    navigate('/');
-                  }}
-                  className="menu"
-                >
-                  My Moments
-                </Nav.Link>
-              ) : null}
-              <Nav.Link
-                onClick={() => {
-                  navigate('/aboutus');
-                }}
-                className="menu"
-              >
+              <Nav.Link onClick={() => navigate('/aboutus')} className="menu">
                 About us
               </Nav.Link>
             </Nav>
@@ -91,9 +107,7 @@ function Header() {
                 <>
                   {/* 로그인시 */}
                   <Nav.Link
-                    onClick={() => {
-                      navigate('/mypage');
-                    }}
+                    onClick={() => navigate('/mypage')}
                     className="menu"
                   >
                     My Page
@@ -114,8 +128,11 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
       <ModalLogin login={login} handleCloseLogin={handleCloseLogin} />
+      <ModalAlert
+        show={show}
+        onHide={handleClose}
+      />
     </>
   );
 }

@@ -1,11 +1,22 @@
 version: 0.0
 os: linux
-
 files:
   - source: /
-    destination: /home/linux/deploy
+    destination: /home/ubuntu/app
+    overwrite: yes
+
 permissions:
-  - object: /home/linux/deploy
+  - object: /
     owner: ubuntu
     group: ubuntu
     mode: 755
+
+hooks:
+  BeforeInstall:
+    - location: before-deploy.sh
+      timeout: 180
+      runas: ubuntu
+  AfterInstall:
+    - location: after-deploy.sh
+      timeout: 180
+      runas: ubuntu

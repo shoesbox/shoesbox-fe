@@ -1,12 +1,10 @@
 import './css/modaladdfriend.css';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { apis } from '../api';
 
 const ModalProfileUpdate = (props) => {
-  // console.log(props);
 
-  // const imgRef = useRef();
   const [imgFile, setImgFile] = useState();
   const onFileChange = (e) => {
     setImgFile(e.target.files[0]);
@@ -14,26 +12,22 @@ const ModalProfileUpdate = (props) => {
 
   // 회원정보 - 프사 수정 로직
   const handleUpdateProfile = () => {
-    // const newProfile = imgRef.current.value;
-    // console.log('newProfile', newProfile);
-    console.log('imgFile', imgFile);
-
     const formData = new FormData();
-    // formData.append('imageFile', newProfile);
     formData.append('imageFile', imgFile);
 
     apis
       .updateUserData(props.memberId, formData)
       .then((res) => {
-        console.log(res);
         props.setState({ ...props.state, profileImageUrl: imgFile });
-        props.onHide()
+        props.onHide();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert(err.response.data.errorDetails.apierror.message);
+      });
   };
 
   return (
-    <Modal className="detail-modal" {...props} centered size="md">
+    <Modal {...props} centered size="md">
       <Modal.Header closeButton>
         <Modal.Title>
           <div>프로필 사진 변경</div>
@@ -46,7 +40,6 @@ const ModalProfileUpdate = (props) => {
             type="file"
             accept="image/*"
             encType="multipart/form-data"
-            // ref={imgRef}
             onChange={(e) => onFileChange(e)}
           />
         </Form.Group>

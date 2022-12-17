@@ -1,24 +1,46 @@
 /* 색상표 */
 /* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
 
-.calender-container {
-  display: flex;
+.calendar {
+  /* display: flex; */
   justify-content: center;
   align-items: center;
-  margin: 10px auto;
-  /* border: 3px solid green; */
+  margin: 25px auto;
+  padding: 10px;
+  width: 100%;
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid green; */
+}
+.loading-container {
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+}
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 500;
+  font-style: oblique;
+  color: #6b9080;
 }
 .year {
   font-size: 22px;
   font-weight: 600;
   font-style: italic;
   color: silver;
+  display: flex;
+  flex-direction: column;
+}
+.year > div:nth-child(1) {
+  font-size: 14px;
+  font-weight: 400;
 }
 .month {
   width: 55px;
@@ -29,7 +51,6 @@
   align-items: center;
   font-size: 26px;
   font-weight: 500;
-  margin-left: 9%;
   color: #6b9080;
   background-color: #eaf4f4;
 }
@@ -37,9 +58,11 @@
   display: flex;
   border-radius: 5px;
   background-color: #eaf3ec;
+  flex-wrap: nowrap;
+  max-width: 150px;
 }
 .nav-btn {
-  width: 30px;
+  width: 25%;
   height: 30px;
   border: none;
   font-size: 16px;
@@ -52,8 +75,6 @@
 }
 .go-today {
   width: 85px;
-  /* border-left: 1px solid #6B9080; */
-  /* border-right: 1px solid #6B9080; */
   background-color: #fff;
 }
 .days {
@@ -79,21 +100,52 @@
   width: calc(100% / 7);
   height: calc(100vw / 7);
   max-height: 140px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   border-bottom: 3px solid #fff;
   border-left: 3px solid #fff;
   cursor: pointer;
   font-weight: 500;
   display: flex;
   justify-content: end;
-  padding: 5px;
-  /* overflow: hidden; */
+  /* border: 1px solid red; */
 }
 .date > img {
-  border: 1px solid blue;
+  border-radius: 10px;
+}
+
+@media (max-width: 450px) {
+  .date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .date > div {
+    position: absolute;
+  }
+}
+@media (min-width: 450px) {
+  .date > div {
+    margin: 5px;
+    position: absolute;
+  }
+}
+.date > img {
+  /* border: 1px solid blue; */
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* 달력 숫자 포인트 */
+#today {
+  background-color: #6b90807c;
+  color: #fff;
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }
 .date > div {
   background-color: #f6fff87e;
@@ -103,9 +155,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
+  /* position: absolute; */
 }
 .date:hover > div {
-  font-weight: 700;
   background-color: #f6fff8;
 }
 .day:nth-child(7n + 1),

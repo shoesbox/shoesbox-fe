@@ -1,22 +1,32 @@
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
 .detail-container {
   margin-top: 50px;
 }
 
-.detail-titlebox {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
+.detail-title {
+  text-align: justify;
+  white-space: pre-line;
+  word-break: break-all;
+  margin-right: 10px;
 }
 
-.detail-titlebox > span > strong {
-  margin-right: 10px;
+.detail-nickname {
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: underline wavy #a4c3b2;
+}
+
+img {
+  width: 100%;
 }
 
 .detail-content {
   text-align: justify;
   padding: 0 5px;
-  white-space: pre;
+  white-space: pre-line;
+  word-break: break-all;
 }
 
 .detail-fix-del-btns {
@@ -35,21 +45,41 @@
 .detail-comments-wrap {
   width: 100%;
 }
-
+.pre-comments {
+  color: gray;
+}
 .detail-comments {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* white-space: pre-wrap; */
   text-align: justify;
-  /* border: 1px solid rebeccapurple; */
   margin-bottom: 10px;
   word-break: break-all;
+  /* word-break: keep-all; */
+}
+
+.detail-img-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.text-info {
+  --bs-text-opacity: 1;
+  color: #a4c3b2 !important;
+}
+.spinner-border {
+  --bs-spinner-width: 3rem;
+  --bs-spinner-height: 3rem;
+}
+.spinner-grow {
+  --bs-spinner-width: 5rem;
+  --bs-spinner-height: 5rem;
 }
 
 .detail-comment-contents {
   width: 100%;
-  /* border: 1px solid red; */
+  /* border: 1px solid rebeccapurple; */
 }
 
 .detail-comment-contents > img {
@@ -62,12 +92,6 @@
 .detail-comment-contents > span:nth-child(2) {
   margin-right: 7px;
   font-weight: 500;
-}
-
-.detail-comment-update {
-  display: inline;
-  margin-top: 10px;
-  /* border: 1px solid red; */
 }
 
 .detail-comment-time {

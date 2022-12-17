@@ -1,24 +1,59 @@
+/* 색상표 */
+/* #6B9080, #A4C3B2, #CCE3DE, #EAF4F4, #F6FFF8 */
+
+.freinds-wrap {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px -10px 0px;
+  /* overflow: auto; */
+}
+
 .friends {
-  /* border: 1px solid green; */
+  /* border: 1px solid pink; */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  width: fit-content;
   gap: 10px;
-  position: fixed;
-  bottom: 20%;
-  right: 18%;
+  padding: 10px;
+  overflow: auto;
 }
-.friends > button {
-  border: none;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70px;
-  height: 70px;
+
+@media (max-width: 1050px) {
+  .friends > button {
+    border: none;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    /* border: 1px solid blue; */
+  }
 }
+@media (min-width: 1050px) {
+  .friends > button {
+    border: none;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 65px;
+    /* border: 1px solid blue; */
+  }
+}
+
 .friends > button > span {
   /* border: 1px solid pink; */
-  /* width: 50px; */
+  font-size: 14px;
+  width: 50px;
+  overflow: hidden;
+  word-break: keep-all;
+}
+
+#point {
+  background-color: #f6fff8;
+  font-style: oblique;
 }

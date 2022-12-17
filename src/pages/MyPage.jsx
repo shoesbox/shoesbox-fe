@@ -1,9 +1,9 @@
 import './css/mypage.css';
 import { useState, useEffect, useRef } from 'react';
-import { getCookie, deleteCookie } from '../shared/cookie';
+import { setCookie, deleteCookie } from '../shared/cookie';
 import { apis } from '../api';
 import ModalProfileUpdate from '../components/ModalProfileUpdate';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 const MyPage = ({ memberId }) => {
   // 여기서 멤버아이디 끌어다 쓰기랑 프롭으로 내려주기랑 차이?
@@ -17,6 +17,9 @@ const MyPage = ({ memberId }) => {
     profileImageUrl: '',
   });
 
+  // 친구 목록 담을 state
+  const [friends, setFriends] = useState([]);
+
   // 회원정보조회 api 통해 데이터 가져오기 [2]
   const showData = async () => {
     const { data } = await apis.getUserData(memberId, {
@@ -24,16 +27,24 @@ const MyPage = ({ memberId }) => {
     });
     try {
       const userData = data?.data;
-      console.log('userData', userData);
+      // console.log('userData', userData);
       setState(userData);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // 화면 렌더링 시 통신하기 [1]
+  // 친구 조회 api로 데이터 가져오기 [3]
+  const showFriends = async () => {
+    const raw = await apis.getFriendList();
+    const friendsList = raw.data.data;
+    setFriends(friendsList);
+  };
+
+  // // 화면 렌더링 시 통신하기 [1]
   useEffect(() => {
     showData();
+    showFriends();
   }, [state.profileImageUrl]);
 
   // 이미지 업로드 모달
@@ -44,19 +55,16 @@ const MyPage = ({ memberId }) => {
   // 이미지 제거 함수
   const deleteProfileImg = () => {
     apis
-      .updateUserData(
-        memberId,
-        {
-          nickname: state.nickname,
-          profileImageUrl: 'https://i.ibb.co/N27FwdP/image.png',
-        },
-        { withCredentials: true }
-      )
+      .resetProfileImg()
       .then((res) => {
-        console.log(res);
-        // toggleIsEdit();
+        setState({
+          ...state,
+          profileImageUrl: 'https://i.ibb.co/N27FwdP/image.png',
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert(err.response.data.errorDetails.apierror.message);
+      });
   };
 
   // 닉네임 수정/저장취소 토글 버튼
@@ -73,39 +81,59 @@ const MyPage = ({ memberId }) => {
 
   // 회원정보 - 닉네임 수정 로직
   const nicknameRef = useRef();
-  const handleNicknameEdit = (event) => {
+  const handleNicknameEdit = () => {
     const newNickname = nicknameRef.current.value;
     // 닉네임 설정 유효성 검사
-    if (newNickname.length < 2) {
-      alert('닉네임은 한 글자 이상으로 수정해주세요.');
+    if (newNickname.length < 1 || newNickname.length > 6) {
+      alert('닉네임은 한 글자 이상 여섯 글자 이하여야 합니다.');
       nicknameRef.current.focus();
       return;
     }
     const formData = new FormData();
     formData.append('nickname', newNickname);
-
     apis
       .updateUserData(memberId, formData)
       .then((res) => {
-        // console.log(res);
         setState({ ...state, nickname: newNickname });
         toggleIsEdit();
+        setCookie('nickname', newNickname);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert(err.response.data.errorDetails.apierror.message);
+      });
+  };
+
+  // 친구삭제 로직
+  const handleRemoveFriend = (deleteMemberId, nickname) => {
+    let result = window.confirm(`정말로 ${nickname}님을 삭제하시겠어요?`);
+    if (result === true) {
+      apis
+        .deleteFriend(deleteMemberId)
+        .then((res) => {
+          const newFriendsList = friends.filter(
+            (friend) => friend.memberId !== deleteMemberId
+          );
+          setFriends(newFriendsList);
+        })
+        .catch((err) => {
+          // console.log(err);
+          alert(err.response.data.errorDetails.apierror.message);
+        });
+    }
   };
 
   // 회원탈퇴 로직
   const handleRemoveAccout = (e) => {
     e.preventDefault();
     // console.log(memberId);
-    let result = window.confirm('정말로 탈퇴하시겠습니까?');
+    let result = window.confirm('정말로 슈슈박스를 떠나시겠어요?');
     if (result === true) {
       console.log(memberId);
       apis
         .removeAccount(memberId)
         .then((res) => {
-          console.log(res);
-          alert('회원 탈퇴가 완료되었습니다.');
+          // console.log(res);
+          // alert('회원 탈퇴가 완료되었습니다.');
           // 회원탈퇴 후 쿠키도 날려주기
           deleteCookie('accessToken');
           deleteCookie('refreshToken');
@@ -114,7 +142,7 @@ const MyPage = ({ memberId }) => {
           deleteCookie('email');
           window.location.replace('/');
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err.response.data.errorDetails.apierror.message));
     }
   };
 
@@ -162,12 +190,26 @@ const MyPage = ({ memberId }) => {
           </div>
         </div>
       </div>
-      <div className="leave-box">
-        <div>
-          <p>회원 탈퇴</p>
-          <button onClick={handleRemoveAccout}>회원 탈퇴</button>
+      <div className="friends-box">
+        <p>친구 끊기 ⛔</p>
+        <p>친구의 이름을 클릭하면 목록에서 삭제됩니다.</p>
+        <div className="friends-list">
+          {friends.map((friend) => (
+            <div
+              key={friend.memberId}
+              onClick={() =>
+                handleRemoveFriend(friend.memberId, friend.memberNickname)
+              }
+            >
+              {friend.memberNickname}
+            </div>
+          ))}
         </div>
+      </div>
+      <div className="leave-box">
+        <p>회원 탈퇴 😢</p>
         <p>탈퇴 시 작성하신 일기 및 댓글이 모두 삭제되며 복구되지 않습니다.</p>
+        <button onClick={handleRemoveAccout}>회원 탈퇴</button>
       </div>
     </div>
   );

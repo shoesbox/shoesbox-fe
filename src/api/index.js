@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { getCookie } from '../shared/cookie';
 
-// 백엔드 연결 시 수정
-// const BASE_URL = "http://localhost:3000";
-const BASE_URL = 'http://13.209.77.207';
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // 1. Axios instance 생성
 // default, 보내지는 형식에 따라 알아서 content-type이 정해짐
@@ -11,6 +9,7 @@ const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     credentials: true,
+    'Content-Type': 'application/json;charset=UTF-8',
   },
 });
 
@@ -40,6 +39,10 @@ const apiJsonUTF = axios.create({
 
 const auth = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    credentials: true,
+    // 'Content-Type': 'application/json;charset=utf-8',
+  },
 });
 
 // 2. request interceptor
@@ -99,21 +102,30 @@ apiForm.interceptors.response.use(
 
 // 4. apis
 export const apis = {
-  // 로그인, 회원가입 api
-  loginGoogle: () => api.get("/oauth2/authorization/google"),
-  loginNaver: () => {},
-  loginKakao: (code) => api.get(`/oauth2/authorization/kakao?code=${code}`),
-  joinUser: (userData) => auth.post("/api/members/auth/signup", userData),
-  loginUser: (userData) => auth.post("/api/members/auth/login", userData),
+  // 소셜 로그인
+  loginKakao: (code) => auth.get(`oauth2/authorization/kakao?code=${code}`),
+  loginGoogle: (code) => auth.get(`oauth2/authorization/google?code=${code}`),
+  loginNaver: (code) => auth.get(`oauth2/authorization/naver?code=${code}`),
+
+  // jwt 로그인, 회원가입
+  joinUser: (userData) => auth.post('/api/members/auth/signup', userData),
+  loginUser: (userData) => auth.post('/api/members/auth/login', userData),
+  logoutUser: () => api.get('/api/members/logout'),
+
+
+  // guest 로그인
+  guestUser: () => api.post('/api/members/auth/login/guest'),
 
   // 메인페이지 일기 조회
-  getTodayMyPosts: () => api.get('/api/posts'),
+  // getTodayMyPosts: () => api.get('/api/posts'),
   getTargetPosts: (memberId, year, month) =>
     api.get(`/api/posts?id=${memberId}&y=${year}&m=${month}`),
 
-  // 게시글 상세 api
+  // 게시글 상세 api - done
   showDetail: (postId) => api.get(`/api/posts/${postId}`),
+  writeDaily: (payload) => apiForm.post('/api/posts', payload),
   deleteDetail: (postId) => api.delete(`/api/posts/${postId}`),
+  editDetail: (postId, payload) => api.patch(`/api/posts/${postId}`, payload),
 
   // 게시글 상세 댓글 api - done
   showComment: (postId) => api.get(`/api/comments/${postId}`),
@@ -122,23 +134,27 @@ export const apis = {
   putComment: (commentId, payload) =>
     api.put(`/api/comments/${commentId}`, payload),
 
-  // 글 작성 api
-  writeDaily: (payload) => apiForm.post('/api/posts', payload),
-
-  // 친구 관련 api 
+  // 친구 관련 api - done
   getFriendList: () => api.get('/api/friends'),
+  getRequestedFriendList: () => api.get('/api/friends/requested'),
   getRequestFriendList: () => api.get('/api/friends/request'),
   addFriend: (payload) => api.post('/api/friends', payload),
   acceptFriend: (fromMemberId) =>
     api.put(`/api/friends/${fromMemberId}/accept`),
   refuseFriend: (fromMemberId) =>
     api.delete(`/api/friends/${fromMemberId}/refuse`),
-  deleteFriend: (fromMemberId, payload) =>
-    api.delete(`/api/friends/${fromMemberId}`, payload),
+  deleteFriend: (memberId) => api.delete(`/api/friends/${memberId}`),
+  cancelFriend: (toMemberId) => api.delete(`/api/friends/${toMemberId}/cancel`),
+
+  // 알람 기능
+  getAlarmList: () => api.get('/api/alarm'),
+  deleteAlarm: (alarmId) => api.delete(`/api/alarm/${alarmId}`),
+  deleteAlarmAll: () => api.delete('/api/alarm'),
 
   // 마이페이지
   getUserData: (memberId) => api.get(`/api/members/info?m=${memberId}`),
   updateUserData: (memberId, payload) =>
     apiForm.patch(`/api/members/info?m=${memberId}`, payload),
+  resetProfileImg: () => api.get(`/api/members/reset`),
   removeAccount: (memberId) => api.delete(`/api/members/delete?m=${memberId}`),
 };
